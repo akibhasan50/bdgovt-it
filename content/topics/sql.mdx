@@ -1,0 +1,54 @@
+---
+title_en: "SQL"
+title_bn: "এসকিউএল"
+summary_en: "Joins, aggregates, subqueries and the clause-order questions exams never skip."
+summary_bn: "জয়েন, অ্যাগ্রিগেট, সাবকোয়েরি আর ক্লজ-অর্ডারের প্রশ্ন — পরীক্ষা কখনো বাদ দেয় না।"
+---
+
+## Execution order (memorise this)
+
+```text
+FROM / JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
+```
+
+That's why `WHERE` can't see aliases and `HAVING` can filter aggregates — they run at different stages.
+
+## Join types
+
+- **INNER** — only matching rows from both sides.
+- **LEFT/RIGHT** — all rows from one side + matches.
+- **FULL OUTER** — all rows from both, NULL where unmatched.
+- **CROSS** — Cartesian product (n × m rows).
+
+<Callout type="tip">
+`INNER JOIN` and `WHERE col = value` filtering look identical in simple cases; the MCQ difference appears when NULLs or outer joins are involved.
+</Callout>
+
+## Subquery operators
+
+```sql
+WHERE sal > ALL (SELECT ...)   -- greater than the maximum
+WHERE sal > ANY (SELECT ...)   -- greater than the minimum
+WHERE sal IN  (SELECT ...)     -- equals any member
+```
+
+`EXISTS` checks row existence, not value equality — it short-circuits and is often faster.
+
+## Aggregate rules
+
+- `COUNT(*)` counts rows; `COUNT(col)` skips NULLs.
+- `AVG(col)`, `SUM(col)` ignore NULLs entirely.
+- `DISTINCT` inside `COUNT` collapses duplicates first.
+
+## DDL vs DML vs DCL
+
+| Category | Commands |
+| --- | --- |
+| DDL | CREATE, ALTER, DROP, TRUNCATE |
+| DML | SELECT, INSERT, UPDATE, DELETE |
+| DCL | GRANT, REVOKE |
+| TCL | COMMIT, ROLLBACK, SAVEPOINT |
+
+<Callout type="warning">
+TRUNCATE is DDL (structure-level, minimal logging). DELETE is DDL-logged-per-row DML. The category of TRUNCATE is a favourite exam gotcha.
+</Callout>

@@ -1,0 +1,58 @@
+---
+title_en: "Linux Commands"
+title_bn: "লিনাক্স কমান্ড"
+summary_en: "Permissions, pipes, process management — the shell questions every IT interviewer asks."
+summary_bn: "পারমিশন, পাইপ, প্রসেস ম্যানেজমেন্ট — প্রতিটি আইটি ইন্টারভিউয়ারের প্রশ্ন।"
+---
+
+## File & directory essentials
+
+```bash
+ls -la          # long listing + hidden
+cd /var/log     # absolute path
+pwd             # print working directory
+find / -name "*.conf" 2>/dev/null
+grep -rn "error" .     # recursive with line numbers
+tail -f app.log        # live log following
+```
+
+## Permissions decoded
+
+`-rwxr-xr--` → owner rwx (7), group r-x (5), others r-- (4) → **755**.
+
+```bash
+chmod 644 file.txt   # rw- r-- r--
+chown user:group file
+chgrp devs file
+umask 022            # default mask for new files
+```
+
+<Callout type="tip">
+7 = read+write+execute, 5 = read+execute, 4 = read. Three octal digits = owner/group/other. Convert once, answer all permutation questions.
+</Callout>
+
+## Pipes, redirection, processes
+
+```bash
+command > out.txt     # stdout redirect (overwrite)
+command >> out.txt    # append
+command 2>&1          # stderr → stdout
+ls | grep conf        # pipe stdout → next stdin
+ps aux                # snapshot
+top / htop            # live view
+kill -9 <pid>         # SIGKILL
+```
+
+## Package managers & system
+
+| Distro family | Manager |
+| --- | --- |
+| Debian/Ubuntu | `apt` |
+| RHEL/CentOS/Fedora | `dnf` / `yum` |
+| Arch | `pacman` |
+
+`df -h` = disk space, `du -sh` = directory usage, `free -h` = RAM, `uname -a` = kernel info.
+
+<Callout type="info">
+Shebang `#!/bin/bash` marks an executable script. Cron (`crontab -e`) schedules recurring jobs — both appear in viva transcripts constantly.
+</Callout>

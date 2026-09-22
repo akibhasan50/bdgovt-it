@@ -1,0 +1,50 @@
+---
+title_en: "Design & Analysis of Algorithms"
+title_bn: "অ্যালগরিদম ডিজাইন ও বিশ্লেষণ"
+summary_en: "Sorting, greedy, DP, graph algorithms — the complexity table you must own cold."
+summary_bn: "সর্টিং, গ্রিডি, ডিপি, গ্রাফ অ্যালগরিদম — মুখস্থ করতেই হবে সেই জটিলতা টেবিল।"
+---
+
+## Sorting complexity table
+
+| Algorithm | Best | Average | Worst | Stable? |
+| --- | --- | --- | --- | --- |
+| Quick sort | O(n log n) | O(n log n) | O(n²) | No |
+| Merge sort | O(n log n) | O(n log n) | O(n log n) | Yes |
+| Heap sort | O(n log n) | O(n log n) | O(n log n) | No |
+| Insertion | O(n) | O(n²) | O(n²) | Yes |
+
+<Callout type="tip">
+"Stable *and* O(n log n) worst case" → merge sort. That exact phrasing has appeared in BPSC and power-sector papers.
+</Callout>
+
+## Paradigm → example mapping
+
+- **Greedy**: fractional knapsack, Huffman coding, Kruskal/Prim, Dijkstra.
+- **Divide & conquer**: merge sort, quick sort, binary search, Strassen.
+- **Dynamic programming**: 0/1 knapsack, LCS, matrix chain, coin change.
+- **Backtracking**: N-queens, graph colouring, Hamiltonian cycle.
+
+## Greedy vs DP — the classic trap
+
+Fractional knapsack is greedy (take by value/weight ratio). **0/1 knapsack** is not — greedy fails, DP is required. One word changes the correct paradigm.
+
+## Graph algorithms
+
+```text
+BFS / DFS .............. O(V + E)
+Dijkstra (binary heap) . O((V + E) log V)
+Bellman–Ford ........... O(V · E)
+Kruskal / Prim ......... O(E log V)
+Topological sort ....... O(V + E)
+```
+
+<Callout type="warning">
+Dijkstra + negative weights = wrong answers. If a question mentions negative edges, the intended algorithm is Bellman–Ford.
+</Callout>
+
+## Recurrence intuition
+
+- T(n) = 2T(n/2) + n → O(n log n) (merge sort).
+- T(n) = T(n−1) + n → O(n²) (naive recursive loops).
+- Master theorem cases map directly onto divide-and-conquer heights.

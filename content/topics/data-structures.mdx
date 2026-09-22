@@ -1,0 +1,46 @@
+---
+title_en: "Data Structures"
+title_bn: "ডেটা স্ট্রাকচার"
+summary_en: "Arrays to graphs — complexities, traversals and the exact questions BPSC/Bank papers repeat."
+summary_bn: "অ্যারে থেকে গ্রাফ — জটিলতা, ট্রাভারসাল আর বিপিএসসি/ব্যাংক পেপারে যে প্রশ্ন বারবার আসে।"
+---
+
+## Complexity is the whole game
+
+Almost every data-structure MCQ is an operations-vs-structure lookup:
+
+| Structure | Access | Search | Insert (avg) | Delete (avg) |
+| --- | --- | --- | --- | --- |
+| Array | O(1) | O(n) | O(n) | O(n) |
+| Linked list | O(n) | O(n) | O(1)* | O(1)* |
+| Hash table | — | O(1) | O(1) | O(1) |
+| Balanced BST | O(log n) | O(log n) | O(log n) | O(log n) |
+| Heap (min) | O(1) min | O(n) | O(log n) | O(log n) |
+
+\* when the position is already known.
+
+## Trees
+
+- **BST in-order** → keys come out sorted ascending. Pre-order gives the insertion order of construction questions.
+- **Heap property**: parent ≤ children (min-heap). Extract-min swaps the last node to the root and sifts down → O(log n).
+- **AVL / height-balanced**: balance factor ∈ {−1, 0, 1}.
+
+<Callout type="tip">
+"Which traversal prints a BST sorted?" is practically an annual question. Answer: in-order.
+</Callout>
+
+## Graphs
+
+BFS uses a **queue** (level-order, shortest path in unweighted graphs). DFS uses a **stack or recursion**. Both are O(V + E) with adjacency lists.
+
+<Callout type="info">
+Dijkstra fails on negative weights; Bellman–Ford handles them. This pairing shows up constantly.
+</Callout>
+
+## Hashing
+
+Load factor α = n / table_size. Average probe count grows with α; rehashing when α > threshold keeps operations near O(1). Collision resolution: chaining (buckets) vs open addressing (linear/quadratic probing, double hashing).
+
+## Stacks & queues
+
+Function call frames, expression evaluation, undo buffers → stack. Scheduling, BFS, printer spools → queue. Deque sits in the middle; priority queue is a heap underneath.

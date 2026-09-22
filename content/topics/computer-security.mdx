@@ -1,0 +1,44 @@
+---
+title_en: "Computer Security"
+title_bn: "কম্পিউটার সিকিউরিটি"
+summary_en: "Symmetric vs asymmetric crypto, hashing, network defenses and the BD cyber-law basics."
+summary_bn: "সিমেট্রিক বনাম অ্যাসিমেট্রিক ক্রিপ্টো, হ্যাশিং, নেটওয়ার্ক সুরক্ষা আর বিডি সাইবার আইনের বেসিক।"
+---
+
+## Cryptography
+
+| Property | Symmetric | Asymmetric |
+| --- | --- | --- |
+| Keys | one shared | public + private pair |
+| Examples | AES, DES, 3DES | RSA, ECC, Diffie–Hellman |
+| Speed | fast | slower |
+| Use | bulk encryption | key exchange, signatures |
+
+<Callout type="tip">
+"AES vs RSA" questions are almost always about symmetric vs asymmetric classification. AES = symmetric — memorise that pairing.
+</Callout>
+
+## Hashing
+
+- **MD5** — 128-bit, broken.
+- **SHA-1** — 160-bit, deprecated.
+- **SHA-256** — 256-bit, SHA-2 family, current standard.
+- **bcrypt** — password hashing with cost factor (not encryption).
+
+Hashes verify integrity; digital signatures (hash + private key) also authenticate the sender.
+
+## Threats & defenses
+
+| Threat | Counter |
+| --- | --- |
+| Phishing | user awareness, MFA, URL filtering |
+| DDoS | rate limiting, CDN scrubbing |
+| Ransomware | offline backups, patching |
+| Man-in-the-middle | TLS, certificate pinning |
+| SQL injection | parameterised queries |
+
+Firewall filters traffic by rules; **IDS** alerts, **IPS** drops; DMZ isolates public services.
+
+## PKI & legal basics
+
+Certificate Authority issues TLS certs chaining to a trusted root. Bangladesh's **Digital Security Act 2018** (now succeeded by the Cyber Security Act 2023) criminalises unauthorised access and cyber offences — know the year the current act was enacted.

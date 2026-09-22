@@ -1,0 +1,55 @@
+---
+title_en: "Programming Questions"
+title_bn: "প্রোগ্রামিং প্রশ্ন"
+summary_en: "Output prediction, pointers, recursion and the undefined-behaviour traps C papers love."
+summary_bn: "আউটপুট অনুমান, পয়েন্টার, রিকারশন আর সি পেপারের প্রিয় undefined behaviour ফাঁদ।"
+---
+
+## The output-prediction method
+
+Don't trace in your head — write the state table:
+
+```text
+x = 5
+x++ + ++x
+ ^      ^
+ |      └─ left-to-right? NOT GUARANTEED in C
+ └─ modifying x twice without a sequence point = undefined
+```
+
+Whenever an expression modifies the same variable twice with no sequence point between, the standard says *undefined behaviour*. Exams sometimes expect you to pick "undefined" — and sometimes print what a specific compiler does. Read the options: "Undefined behaviour" present ⇒ choose it.
+
+## Pointer essentials
+
+```c
+int a = 10;
+int *p = &a;
+int **q = &p;   // pointer to pointer
+
+*p  == 10
+**q == 10
+sizeof(p) == sizeof(void*)   // platform address width
+```
+
+- `*` → dereference, `&` → address-of.
+- Array name decays to a pointer to its first element (except with `sizeof` and `&`).
+- `p + 1` advances by `sizeof(*p)` bytes, not one byte.
+
+## Recurrence of common patterns
+
+```c
+int fact(int n) { return n <= 1 ? 1 : n * fact(n - 1); }
+int fib(int n)  { return n < 2 ? n : fib(n-1) + fib(n-2); }  // O(2^n)
+```
+
+Count recursive calls to get complexity: naive fib is O(2ⁿ); memoised is O(n).
+
+## Python gotchas that show up
+
+- `b = a` aliases; `b = a.copy()`, `list(a)`, `[*a]` are shallow; `copy.deepcopy` is deep.
+- Strings are immutable — every "concatenation" creates a new object.
+- Integer division `//` vs `/` (true division returns float).
+
+<Callout type="tip">
+For linked-list questions, draw three boxes and move pointers literally. Visual tracing beats mental tracing on 90% of these problems.
+</Callout>

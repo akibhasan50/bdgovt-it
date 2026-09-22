@@ -1,0 +1,44 @@
+---
+title_en: "Theory of Computation"
+title_bn: "কম্পিউটেশনের তত্ত্ব"
+summary_en: "Automata, the Chomsky hierarchy, decidability — the chapter most candidates skip and regret."
+summary_bn: "অটোমেটা, চমস্কি হাইরার্কি, ডিসিডেবিলিটি — যে অধ্যায় বাদ দিয়ে সবাই অনুশোচনা করে।"
+---
+
+## The Chomsky hierarchy
+
+```text
+Type 0  Recursively enumerable   — Turing machine
+Type 1  Context-sensitive        — LBA
+Type 2  Context-free             — PDA / CFG
+Type 3  Regular                  — DFA, NFA, regex
+```
+
+Each level is a strict subset of the one above: regular ⊂ CFL ⊂ CSL ⊂ RE.
+
+## Recognisers
+
+- **DFA/NFA** — finite state, no memory beyond state → regular languages.
+- **PDA** — one stack → context-free languages.
+- **Turing machine** — infinite tape → anything computable (and the halting problem isn't).
+
+<Callout type="tip">
+"If a PDA can't but a TM can" → context-sensitive or beyond. The one-stack limit is the whole trick.
+</Callout>
+
+## Pumping lemma intuition
+
+Used to prove a language is *not* in a class: {aⁿbⁿcⁿ} fails the CFL pumping lemma but is context-sensitive. Pumping lemma for regular languages handles {0ⁿ1ⁿ}.
+
+## Decidability
+
+- **Decidable** — TM always halts with yes/no (emptiness for regular/CFL, equivalence for regular).
+- **Undecidable** — no TM decides it: **halting problem**, equivalence for CFLs, emptiness for CSL.
+
+<Callout type="warning">
+Halting problem = undecidable. Rice's theorem generalises: any non-trivial semantic property of RE languages is undecidable.
+</Callout>
+
+## GNF/CNF
+
+Any CFG can be converted to Greibach or Chomsky normal form. CNF: only `A→BC` and `A→a`. Conversion steps themselves occasionally appear as multi-part questions.

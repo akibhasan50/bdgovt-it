@@ -1,0 +1,51 @@
+---
+title_en: "Computer Networks"
+title_bn: "কম্পিউটার নেটওয়ার্ক"
+summary_en: "OSI vs TCP/IP, subnetting arithmetic, protocol roles — the highest-frequency chapter overall."
+summary_bn: "ওএসআই বনাম টিসিপি/আইপি, সাবনেটিং হিসাব, প্রোটোকলের ভূমিকা — সামগ্রিকভাবে সবচেয়ে বেশি আসে।"
+---
+
+## OSI vs TCP/IP
+
+| OSI (7) | TCP/IP |
+| --- | --- |
+| Application + Presentation + Session | Application |
+| Transport | Transport |
+| Network | Internet |
+| Data Link + Physical | Network Access |
+
+Routing lives at OSI **network** layer (IP). Switching at data link. Cabling/signal at physical.
+
+## Protocol cheat sheet
+
+| Protocol | Job |
+| --- | --- |
+| HTTP/HTTPS | web transfer (80/443) |
+| DNS | hostname → IP (53) |
+| DHCP | automatic IP assignment |
+| ARP | IP → MAC (link layer) |
+| FTP | file transfer (20/21) |
+| SMTP/POP3/IMAP | mail send / receive |
+| TCP / UDP | reliable / fast transport |
+
+## Subnetting in 30 seconds
+
+Total addresses = 2^(32−prefix). Usable hosts = total − 2 (network + broadcast).
+
+```text
+/26 → 2^6 = 64 addresses → 62 usable hosts
+/30 → 4 addresses → 2 usable (point-to-point link)
+/24 → 256 → 254 usable
+```
+
+<Callout type="tip">
+For BD exam subnetting, the pattern is always: find the block size (256 − last octet of mask), then divide. Practise ten and the arithmetic becomes automatic.
+</Callout>
+
+## TCP vs UDP
+
+TCP: connection-oriented (3-way handshake), ordered, reliable, heavier. UDP: connectionless, no ordering guarantees, lighter — DNS, video streaming, VoIP ride on it.
+
+## Wireless & security
+
+Wi-Fi standards (802.11a/b/g/n/ac/ax), WPA3 replacing WPA2, and the classic "which is most secure" MCQ. Firewalls filter by rules; IDS detects, IPS prevents; VPN encrypts transit.

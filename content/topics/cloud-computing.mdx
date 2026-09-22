@@ -1,0 +1,47 @@
+---
+title_en: "Cloud Computing"
+title_bn: "ক্লাউড কম্পিউটিং"
+summary_en: "Service models, deployment models, shared responsibility — plus the AWS/Azure vocabulary exams borrow."
+summary_bn: "সার্ভিস ও ডিপ্লয়মেন্ট মডেল, শেয়ারড দায়িত্ব — পাশাপাশি এডব্লিউএস/অ্যাজিউরের শব্দভান্ডার।"
+---
+
+## Service models
+
+```text
+SaaS — you use the app           (Gmail, Office 365)
+PaaS — you deploy your code      (Heroku, App Engine)
+IaaS — you manage OS + runtime   (EC2, Azure VMs)
+FaaS — you write a function      (Lambda, Cloud Functions)
+```
+
+Ownership of everything below your layer belongs to the provider.
+
+## Deployment models
+
+- **Public** — shared infrastructure, multi-tenant.
+- **Private** — single organisation, more control.
+- **Hybrid** — public + private tied together.
+- **Community** — shared by several organisations with common concerns.
+
+## Shared responsibility (classic MCQ)
+
+| Layer | Who patches |
+| --- | --- |
+| Data, app config | Customer |
+| Guest OS in your VM | Customer |
+| Hypervisor | **Provider** |
+| Physical hosts, network, facilities | **Provider** |
+
+<Callout type="warning">
+"Who patches the hypervisor?" — always the cloud provider, never the customer. This exact question has appeared in multiple BD circulars.
+</Callout>
+
+## Elasticity & scaling
+
+- **Vertical** scaling = bigger instance; **horizontal** = more instances.
+- Auto-scaling tracks load → cost efficiency + spike absorption.
+- Pay-as-you-go converts capex to opex.
+
+## Well-architected pillars
+
+Cost optimisation, security, reliability, performance efficiency, operational excellence, and sustainability — AWS's six pillars, echoed by Azure's well-architected framework.

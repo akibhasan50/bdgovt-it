@@ -1,0 +1,42 @@
+---
+title_en: "DBMS"
+title_bn: "ডিবিএমএস"
+summary_en: "ER models, normal forms, transactions and indexing — the theory behind every SQL question."
+summary_bn: "ইআর মডেল, নরমাল ফর্ম, ট্রানজেকশন ও ইনডেক্সিং — প্রতিটি এসকিউএল প্রশ্নের পেছনের তত্ত্ব।"
+---
+
+## ER model essentials
+
+Entities, attributes, relationships (1:1, 1:N, M:N). Weak entity → dependent on a key of another entity, identified by partial key + owner. A **ternary relationship** connects three entity sets — cardinality questions hinge on reading the notation correctly.
+
+## Normal forms in one breath
+
+1. **1NF** — atomic values, no repeating groups.
+2. **2NF** — 1NF + no partial dependency on a composite key.
+3. **3NF** — 2NF + no transitive dependency of non-key attributes on the key.
+4. **BCNF** — every determinant is a candidate key.
+
+<Callout type="tip">
+TwoNF removes *partial*; threeNF removes *transitive*. One word each — learn them as pairs.
+</Callout>
+
+## ACID
+
+- **Atomicity** — all or nothing (rollback).
+- **Consistency** — constraints hold before and after.
+- **Isolation** — concurrent transactions don't interfere.
+- **Durability** — committed data survives crashes (WAL/force policy).
+
+## Indexing
+
+- **Primary index** on ordered file, dense/sparse.
+- **Secondary index** on non-key or unordered attribute — extra indirection level.
+- **B+ tree** keeps data only at leaves → more keys per node, better range scans.
+
+<Callout type="info">
+"Which index is best for range queries on a sorted key?" → primary/B+ tree ordered index. Equality queries also do well with hashing.
+</Callout>
+
+## Concurrency
+
+Conflict serializability via precedence graph; two-phase locking (2PL) guarantees it but can deadlock. Timestamp ordering and MVCC are the alternatives name-dropped in harder papers.

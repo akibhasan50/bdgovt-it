@@ -1,0 +1,45 @@
+---
+title_en: "Discrete Mathematics"
+title_bn: "ডিসক্রিট ম্যাথমেটিক্স"
+summary_en: "Sets, logic, combinatorics and graph theory — the mathematical floor under every CS chapter."
+summary_bn: "সেট, লজিক, কম্বিনেটরিক্স ও গ্রাফ তত্ত্ব — প্রতিটি সিএস অধ্যায়ের গাণিতিক ভিত্তি।"
+---
+
+## Sets & relations
+
+- Power set of n elements → **2ⁿ** subsets.
+- |A ∪ B| = |A| + |B| − |A ∩ B|.
+- Relation properties: reflexive, symmetric, antisymmetric, transitive → equivalence relation needs all-but-antisymmetric (reflexive + symmetric + transitive).
+
+## Logic & proofs
+
+De Morgan, contrapositive (`p → q` ≡ `¬q → ¬p`), and the difference between converse and inverse. Proof by induction: base case + inductive step — appears in algorithm correctness questions.
+
+<Callout type="tip">
+P(A ∪ B) = P(A) + P(B) holds **only** for mutually exclusive events. Independent events use P(A)P(B) for the intersection.
+</Callout>
+
+## Combinatorics
+
+```text
+Permutation of n things taken r:  nPr = n! / (n−r)!
+Combination:                      nCr = n! / (r!(n−r)!)
+Sum of geometric series:          a(rⁿ − 1)/(r − 1)
+```
+
+Binomial theorem coefficient of xᵏ in (a+b)ⁿ is C(n,k)·aⁿ⁻ᵏ·bᵏ.
+
+## Graph theory
+
+- **Handshaking lemma**: sum of degrees = 2|E| (so any graph with an odd number of odd-degree vertices... wait — the sum is always even; odd-degree vertices always come in pairs).
+- Complete graph Kₙ has n(n−1)/2 edges.
+- Tree with n vertices has exactly n−1 edges.
+- Euler path needs 0 or 2 odd-degree vertices; Euler **circuit** needs all even.
+
+<Callout type="info">
+"6 vertices, every degree 3 → edges?" → (6×3)/2 = 9. Handshaking is one line and shows up yearly.
+</Callout>
+
+## Number theory
+
+GCD via Euclid's algorithm, LCM × GCD = product of numbers (two-number case), modular arithmetic for cryptography chapters (RSA relies on it).

@@ -1,0 +1,48 @@
+---
+title_en: "Object-Oriented Programming"
+title_bn: "অবজেক্ট-ওরিয়েন্টেড প্রোগ্রামিং"
+summary_en: "The four pillars, overloading vs overriding, and the C++/Java details BD exams love to test."
+summary_bn: "চারটি স্তম্ভ, ওভারলোডিং বনাম ওভাররাইডিং, আর সি++/জাভার সেই ডিটেইল যা বিডি পরীক্ষায় পছন্দ করে।"
+---
+
+## The four pillars
+
+| Pillar | One-line exam answer |
+| --- | --- |
+| Encapsulation | Bundle data + methods, hide internals behind access modifiers |
+| Abstraction | Expose only the necessary interface |
+| Inheritance | Derive new classes from existing ones (code reuse, "is-a") |
+| Polymorphism | Same message, different behaviour (compile-time or runtime) |
+
+## Overloading vs overriding
+
+**Overloading** = same method name, different parameter list, resolved at **compile time**. **Overriding** = child redefines a parent method, resolved at **runtime** via the vtable.
+
+<Callout type="tip">
+A single question often tests both: "Overloading is an example of…?" → compile-time polymorphism. "Overriding is…?" → runtime polymorphism.
+</Callout>
+
+## Java modifiers worth memorising
+
+```java
+final class A {}      // cannot be extended
+final void m() {}     // cannot be overridden
+abstract void m();    // must be overridden, class must be abstract
+static void m() {}    // belongs to class, no overriding (hides instead)
+```
+
+## Constructors & memory
+
+Constructors run top-down during `super()` chaining. Objects live on the heap; the reference lives on the stack. In C++, the destructor runs bottom-up — opposite direction, common MCQ.
+
+<Callout type="warning">
+"Method hiding" (static) is not "method overriding" (virtual). Exams bank on you conflating the two.
+</Callout>
+
+## Design patterns that appear
+
+- **Singleton** — one instance, private constructor, global access point.
+- **Factory** — delegating instantiation to a creator method.
+- **Observer** — one-to-many dependency notification.
+
+You rarely implement these in MCQs; you identify them from a two-line description.

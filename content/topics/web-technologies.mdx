@@ -1,0 +1,49 @@
+---
+title_en: "Web Technologies"
+title_bn: "ওয়েব টেকনোলজি"
+summary_en: "HTTP lifecycle, status codes, REST verbs, cookies/sessions — plus the front-end basics examiners assume you know."
+summary_bn: "এইচটিটিপি লাইফসাইকেল, স্ট্যাটাস কোড, রেস্ট ভার্ব, কুকি/সেশন — পাশাপাশি ফ্রন্ট-এন্ড বেসিক।"
+---
+
+## HTTP status codes you must not confuse
+
+| Code | Meaning |
+| --- | --- |
+| 200 | OK |
+| 201 | Created |
+| 301 | Moved permanently |
+| 302 | Found (temporary) |
+| 400 | Bad request |
+| 401 | Unauthorised (no/invalid credentials) |
+| 403 | Forbidden (authenticated but not allowed) |
+| 404 | Not found |
+| 500 | Internal server error |
+| 503 | Service unavailable |
+
+<Callout type="tip">
+401 vs 403 is a standard interview pair: 401 = "who are you?", 403 = "I know who you are — no."
+</Callout>
+
+## Ports & protocols
+
+HTTP 80, HTTPS 443, FTP 21, SSH 22, DNS 53, SMTP 25/587, MySQL 3306, PostgreSQL 5432. Port-number MCQs are free marks if you've seen the list twice.
+
+## REST design
+
+| Verb | Idempotent? | Safe? | Use |
+| --- | --- | --- | --- |
+| GET | yes | yes | read |
+| POST | no | no | create |
+| PUT | yes | no | full update |
+| PATCH | varies | no | partial update |
+| DELETE | yes | no | remove |
+
+Resources are nouns (`/users/42`); state lives in the request — HTTP itself is stateless.
+
+## State management
+
+Cookies (server-readable, 4KB-ish, domain-scoped), localStorage (client-only, ~5MB), sessionStorage (per tab), JWT (self-contained claims, stateless auth).
+
+## Rendering & performance
+
+Critical rendering path: parse HTML → DOM, CSS → CSSOM, combine → layout → paint → composite. Lazy loading, code splitting, CDN caching and HTTP/2 multiplexing are the usual "how do you make it faster" answers.

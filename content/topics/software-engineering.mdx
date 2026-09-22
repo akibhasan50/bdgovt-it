@@ -1,0 +1,49 @@
+---
+title_en: "Software Engineering"
+title_bn: "সফটওয়্যার ইঞ্জিনিয়ারিং"
+summary_en: "SDLC models, testing taxonomy, Agile ceremonies and the Git commands every office uses."
+summary_bn: "এসডিএলসি মডেল, টেস্টিং শ্রেণিবিন্যাস, অ্যাজাইল রীতি আর প্রতিটি অফিসে ব্যবহৃত গিট কমান্ড।"
+---
+
+## Lifecycle models
+
+- **Waterfall** — sequential, rigid, suits stable requirements.
+- **Spiral** — risk-driven, iterative, heavier documentation.
+- **Agile/Scrum** — iterations (sprints) of 1–4 weeks, daily standup ≤ 15 min, demo + retrospective each sprint.
+- **Prototype** — build to clarify requirements.
+
+## Testing taxonomy
+
+| Level | Target |
+| --- | --- |
+| Unit | individual functions/classes |
+| Integration | module interactions |
+| System | end-to-end workflows |
+| Acceptance | customer requirements |
+
+By technique: **black-box** (spec-based: equivalence partitioning, boundary value) vs **white-box** (structural: statement/branch coverage). Sanity vs smoke: smoke = broad shallow "does it start?"; sanity = targeted "does this fix work?".
+
+<Callout type="tip">
+"Testing without knowing internal code" → black-box. That one sentence answers most testing MCQs.
+</Callout>
+
+## Estimation & metrics
+
+Function points and COCOMO for effort; use-case points for OO. Cyclomatic complexity = E − N + 2P — independent paths through code.
+
+## Version control in practice
+
+```bash
+git clone / init / status
+git add . && git commit -m "msg"
+git push origin feature-x     # upload
+git pull                      # fetch + merge
+git merge main                # bring main INTO your branch
+git rebase main               # replay your commits on top
+```
+
+Branch-per-feature, PR review, `.gitignore`, semantic commits — expected knowledge in any BD IT interview.
+
+<Callout type="info">
+CI runs builds/tests on every merge; CD deploys automatically. "What does CI/CD stand for" still appears in screening exams.
+</Callout>

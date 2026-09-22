@@ -1,0 +1,53 @@
+---
+title_en: "Digital Logic Design"
+title_bn: "ডিজিটাল লজিক ডিজাইন"
+summary_en: "Number systems, Boolean algebra, gates, K-maps and the sequential circuits that show up in every govt IT paper."
+summary_bn: "সংখ্যা পদ্ধতি, বুলিয়ান অ্যালজেব্রা, গেট, কে-ম্যাপ ও সিকোয়েনশিয়াল সার্কিট — প্রায় প্রতিটি সরকারি আইটি পেপারে আসে।"
+---
+
+## Why this chapter carries weight
+
+Digital logic is the cheapest marks in a govt IT MCQ paper. Questions are formulaic: convert a number system, simplify an expression, count gates, identify a flip-flop behaviour. With one focused sitting you can lock 80% of whatever this chapter throws at you.
+
+## Number systems
+
+Conversions between binary, octal, decimal and hexadecimal are arithmetic, not memory:
+
+- Divide by the base repeatedly for decimal → other bases.
+- Group bits in 3s (octal) or 4s (hex) for binary → base-8/16.
+- Fractional parts multiply by the base and read the integer column.
+
+<Callout type="tip">
+For exam speed, memorise the 4-bit hex table (0–F) once. Most conversion questions collapse into two lookups.
+</Callout>
+
+## Boolean algebra & K-maps
+
+Start from De Morgan's laws — every "simplify" question is an excuse to use them:
+
+```text
+(A + B)' = A' · B'
+(A · B)' = A' + B'
+```
+
+A K-map for n variables has 2ⁿ cells. Group 1s in powers of two (1, 2, 4, 8…), wrap around edges, and you'll have the minimal sum-of-products without touching algebra.
+
+## Combinational vs sequential
+
+- **Combinational**: output depends only on present input — multiplexers, decoders, adders, comparators.
+- **Sequential**: output depends on history — flip-flops, counters, registers, finite state machines.
+
+<Callout type="info">
+Flip-flop preference questions are frequent: SR (invalid state), JK (race-around → master-slave), D (storage), T (toggle). Know all four in one line each.
+</Callout>
+
+<Callout type="warning">
+In half-adder vs full-adder traps: a half-adder has 2 inputs and no carry-in; everything else follows from that single fact.
+</Callout>
+
+## What the papers actually ask
+
+1. Complement of a Boolean expression (De Morgan drill).
+2. Number of select lines / gates for a given circuit.
+3. Flip-flop that avoids race-around (answer: master–slave JK).
+4. Counter modulus — sequence length equals the number of states the counter cycles through.

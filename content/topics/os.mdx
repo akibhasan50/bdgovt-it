@@ -1,0 +1,45 @@
+---
+title_en: "Operating Systems"
+title_bn: "অপারেটিং সিস্টেম"
+summary_en: "Scheduling, deadlocks, memory management — where the diagrams and the starvations live."
+summary_bn: "স্কিউডিং, ডেডলক, মেমরি ম্যানেজমেন্ট — ডায়াগ্রাম আর স্টারভেশনের ঘর।"
+---
+
+## CPU scheduling
+
+- **FCFS** — simple, convoy effect possible.
+- **SJF** — optimal average waiting time, needs burst prediction; can starve.
+- **Round Robin** — time quantum; too small = context-switch overhead, too large = degenerates to FCFS.
+- **Priority** — starvation unless aging applied.
+
+<Callout type="tip">
+"Which algorithm can starve long jobs?" — anything without aging (SJF, pure priority). Round Robin guarantees fairness and never starves.
+</Callout>
+
+## Deadlock — the four Coffman conditions
+
+1. Mutual exclusion
+2. Hold and wait
+3. **No** preemption
+4. Circular wait
+
+All four must hold. Allow preemption or break the cycle (impose ordering) and deadlock disappears.
+
+## Memory management
+
+| Technique | Idea |
+| --- | --- |
+| Partitioning | fixed/variable holes; fragmentation issues |
+| Paging | fixed-size pages ↔ frames, no external fragmentation |
+| Segmentation | variable-size logical units |
+| Virtual memory | demand paging, page fault handling |
+
+**Belady's anomaly**: with FIFO, more frames → *more* page faults. LRU and optimal are stack algorithms and don't suffer from it.
+
+## Threads & concurrency
+
+Process = isolated address space; thread = shares process memory, own stack. Race conditions are fixed with mutexes/semaphores. Classic synchronisation problems: producer–consumer, readers–writers, dining philosophers.
+
+<Callout type="info">
+Thrashing = too little memory for the working set → constant paging. The OS responds by reducing multiprogramming degree.
+</Callout>

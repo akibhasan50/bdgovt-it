@@ -1,0 +1,41 @@
+---
+title_en: "ML, AI & Big Data"
+title_bn: "এমএল, এআই ও বিগ ডেটা"
+summary_en: "Learning types, classic algorithms and the Hadoop/Spark vocabulary showing up in newer papers."
+summary_bn: "লার্নিংয়ের ধরন, ক্লাসিক অ্যালগরিদম আর নতুন পেপারে আসা হাডুপ/স্পার্ক শব্দ।"
+---
+
+## Learning types
+
+- **Supervised** — labelled data. Subtasks: classification (discrete), regression (continuous).
+- **Unsupervised** — no labels. Clustering (K-means, DBSCAN), dimensionality reduction (PCA).
+- **Reinforcement** — agent, environment, reward, policy (Q-learning, policy gradient).
+
+<Callout type="tip">
+"Which uses labelled data?" → supervised. "Which groups without labels?" → unsupervised. These two fill a whole slide of any AI module MCQ set.
+</Callout>
+
+## Algorithms worth knowing by category
+
+| Category | Algorithms |
+| --- | --- |
+| Classification | Decision tree, Naive Bayes, KNN, SVM, logistic regression |
+| Regression | Linear, polynomial, ridge/lasso |
+| Clustering | K-means, hierarchical, DBSCAN |
+| Dimensionality | PCA, t-SNE |
+
+Bias–variance tradeoff: underfit = high bias, overfit = high variance; more data and regularisation push variance down.
+
+## Neural nets basics
+
+Perceptron → multi-layer network → backpropagation. Activation functions: sigmoid, ReLU (default), softmax for output layers. CNNs for images, RNN/LSTM/Transformers for sequences.
+
+## Big data stack
+
+- **Hadoop** = HDFS (storage) + MapReduce (batch compute) + YARN (resource manager).
+- **Spark** = in-memory compute, ~100× faster for iterative jobs; supports SQL (Spark SQL), streaming.
+- **V's of big data**: Volume, Velocity, Variety (+ Veracity, Value).
+
+<Callout type="info">
+MapReduce ↔ Hadoop is the single most repeated big-data pairing in recent BD IT papers.
+</Callout>

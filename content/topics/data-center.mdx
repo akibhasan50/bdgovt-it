@@ -1,0 +1,42 @@
+---
+title_en: "Data Center & Virtualization"
+title_bn: "ডেটা সেন্টার ও ভার্চুয়ালাইজেশন"
+summary_en: "Hypervisors, containers, PUE and the infrastructure questions Bangladesh's data-center posts ask."
+summary_bn: "হাইপারভাইজর, কনটেইনার, PUE আর বাংলাদেশের ডেটা সেন্টার পদের প্রশ্ন।"
+---
+
+## Hypervisor types
+
+- **Type 1 (bare-metal)** — runs directly on hardware: VMware ESXi, Microsoft Hyper-V, Xen, KVM.
+- **Type 2 (hosted)** — runs on a host OS: VirtualBox, VMware Workstation.
+
+Type 1 is what production data centers use — better performance and isolation.
+
+<Callout type="tip">
+"Which is a Type 1 hypervisor?" Choose the bare-metal one. VirtualBox/Workstation are the canonical Type 2 answers.
+</Callout>
+
+## Containers vs VMs
+
+```text
+VM:       App → Guest OS → Hypervisor → Hardware
+Container: App → Binaries/libs → Host kernel → Hardware
+```
+
+Containers share the host kernel → lighter, start in seconds, higher density. VMs give stronger isolation and can run different OSes.
+
+## Rack, cooling, power
+
+- Standard rack: 42U; density measured in kW/rack.
+- **PUE = total facility energy ÷ IT equipment energy** — closer to 1.0 is better; legacy sites run 1.8+, modern designs aim < 1.3.
+- Hot-aisle/cold-aisle containment; N+1 redundancy for power and cooling.
+
+## Availability concepts
+
+- **RAID 1** = mirroring (survives one disk failure).
+- **RAID 5** = striping + distributed parity (needs ≥3 disks).
+- HA clusters fail over nodes; uptime tiers (Tier I–IV) map to concurrent maintainability and fault tolerance.
+
+<Callout type="info">
+High availability ≠ disaster recovery. HA keeps you running through component failure; DR restores you after a site-level catastrophe.
+</Callout>

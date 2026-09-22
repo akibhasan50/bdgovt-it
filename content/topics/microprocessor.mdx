@@ -1,0 +1,47 @@
+---
+title_en: "Microprocessor & Architecture"
+title_bn: "মাইক্রোপ্রসেসর ও আর্কিটেকচার"
+summary_en: "8086/8085, addressing modes, interrupts, pipelining and the memory hierarchy."
+summary_bn: "৮০৮৬/৮০৮৫, অ্যাড্রেসিং মোড, ইন্টারাপ্ট, পাইপলাইনিং ও মেমরি হাইরার্কি।"
+---
+
+## 8086 in numbers
+
+- 16-bit data bus registers (AX, BX, CX, DX — split into AH/AL…).
+- **20 address lines → 1 MB** address space.
+- Segmented memory: `physical = segment × 16 + offset`.
+- prefetch queue: 6 bytes.
+
+<Callout type="tip">
+"Address lines of 8086" = 20. "Data lines" = 16. Mixing these two is the most common wrong answer in BD papers.
+</Callout>
+
+## Addressing modes
+
+| Mode | Example | Idea |
+| --- | --- | --- |
+| Immediate | `MOV AX, 5` | operand in instruction |
+| Direct | `MOV AX, [2000H]` | address in instruction |
+| Register | `MOV AX, BX` | operand in register |
+| Register indirect | `MOV AX, [BX]` | address in register |
+| Based-indexed | `[BX + SI + disp]` | base + index + displacement |
+
+## Interrupts (8085/8086 family)
+
+INTR (maskable, needs INTA), TRAP (non-maskable, highest priority in 8085), RST 7.5/6.5/5.5 priority order — TRAP > RST 7.5 > 6.5 > 5.5 > INTR.
+
+## Pipelining
+
+Stages overlap → throughput ↑, latency per instruction unchanged. Hazards stall the pipeline:
+
+- **Data hazard** — instruction needs a result not yet written (solve: forwarding/bypassing).
+- **Control hazard** — branch target unknown (solve: branch prediction, delayed branch).
+- **Structural hazard** — two instructions need the same unit at once.
+
+## Memory hierarchy
+
+Registers → cache → main memory → secondary storage. Each step up is faster, smaller and costlier per byte. Cache uses **associative/parallel** access (fully, set-associative, direct mapping) — different from sequential tape access.
+
+<Callout type="info">
+Virtual memory sits between RAM and disk logically: demand paging maps virtual pages to frames; only resident pages need physical memory.
+</Callout>
