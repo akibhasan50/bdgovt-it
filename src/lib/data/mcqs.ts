@@ -875,6 +875,805 @@ export const mcqs: MCQ[] = [
     },
     difficulty: "medium",
   },
+  // ── Networks: IP / subnetting / routing / OSPF drill (Q1–Q40) ──
+  {
+    id: "net-06",
+    topic: "computer-networks",
+    question: {
+      en: "IPv4 address is how many bits?",
+      bn: "IPv4 ঠিকানা কত বিটের?",
+    },
+    options: [
+      { en: "16", bn: "16" },
+      { en: "32", bn: "32" },
+      { en: "64", bn: "64" },
+      { en: "128", bn: "128" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "IPv4 uses a 32-bit address (four octets of 8 bits each).",
+      bn: "IPv4 ঠিকানা ৩২ বিট (৪টি অক্টেট, প্রতিটি ৮ বিট)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-07",
+    topic: "computer-networks",
+    question: {
+      en: "IPv6 address is how many bits?",
+      bn: "IPv6 ঠিকানা কত বিটের?",
+    },
+    options: [
+      { en: "32", bn: "32" },
+      { en: "64", bn: "64" },
+      { en: "128", bn: "128" },
+      { en: "256", bn: "256" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "IPv6 expands the address space to 128 bits.",
+      bn: "IPv6 ঠিকানা স্পেস ১২৮ বিট।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-08",
+    topic: "computer-networks",
+    question: {
+      en: "How many bits are there in one IPv4 octet?",
+      bn: "একটি IPv4 অক্টেটে কতটি বিট থাকে?",
+    },
+    options: [
+      { en: "4", bn: "4" },
+      { en: "8", bn: "8" },
+      { en: "16", bn: "16" },
+      { en: "32", bn: "32" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "An octet is exactly 8 bits (0–255).",
+      bn: "একটি অক্টেট ঠিক ৮ বিট (০–২৫৫)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-09",
+    topic: "computer-networks",
+    question: {
+      en: "What is the maximum value of an IPv4 octet?",
+      bn: "IPv4 অক্টেটের সর্বোচ্চ মান কত?",
+    },
+    options: [
+      { en: "127", bn: "127" },
+      { en: "128", bn: "128" },
+      { en: "255", bn: "255" },
+      { en: "256", bn: "256" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "2^8 = 256 values from 0 to 255, so the maximum is 255.",
+      bn: "২^৮ = ২৫৬ মান (০ থেকে ২৫৫), তাই সর্বোচ্চ ২৫৫।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-10",
+    topic: "computer-networks",
+    question: {
+      en: "Which is a valid IPv4 address?",
+      bn: "কোনটি বৈধ IPv4 ঠিকানা?",
+    },
+    options: [
+      { en: "192.168.1.300", bn: "192.168.1.300" },
+      { en: "192.168.1.10", bn: "192.168.1.10" },
+      { en: "192.168.500.1", bn: "192.168.500.1" },
+      { en: "192.168.1.999", bn: "192.168.1.999" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "Each octet must be 0–255. 300, 500 and 999 are out of range; 192.168.1.10 is valid.",
+      bn: "প্রতিটি অক্টেট ০–২৫৫ হতে হবে। ৩০০, ৫০০, ৯৯৯ সীমার বাইরে; 192.168.1.10 বৈধ।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-11",
+    topic: "computer-networks",
+    question: {
+      en: "What does /24 mean in IPv4 CIDR notation?",
+      bn: "IPv4 CIDR নোটেশনে /24 এর অর্থ কী?",
+    },
+    options: [
+      { en: "24 host bits", bn: "২৪ হোস্ট বিট" },
+      { en: "24 network bits", bn: "২৪ নেটওয়ার্ক বিট" },
+      { en: "24 bytes", bn: "২৪ বাইট" },
+      { en: "24 octets", bn: "২৪ অক্টেট" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "The prefix length is the number of network bits; host bits = 32 − 24 = 8.",
+      bn: "প্রিফিক্স দৈর্ঘ্য = নেটওয়ার্ক বিট; হোস্ট বিট = ৩২ − ২৪ = ৮।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-12",
+    topic: "computer-networks",
+    question: {
+      en: "The subnet mask for /24 is:",
+      bn: "/24-এর সাবনেট মাস্ক কোনটি?",
+    },
+    options: [
+      { en: "255.0.0.0", bn: "255.0.0.0" },
+      { en: "255.255.0.0", bn: "255.255.0.0" },
+      { en: "255.255.255.0", bn: "255.255.255.0" },
+      { en: "255.255.255.255", bn: "255.255.255.255" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "/24 = first 24 bits on → 255.255.255.0.",
+      bn: "/২৪ = প্রথম ২৪ বিট অন → 255.255.255.0।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-13",
+    topic: "computer-networks",
+    question: {
+      en: "How many host bits are available in a /24 IPv4 network?",
+      bn: "/24 IPv4 নেটওয়ার্কে কতটি হোস্ট বিট থাকে?",
+    },
+    options: [
+      { en: "4", bn: "4" },
+      { en: "8", bn: "8" },
+      { en: "16", bn: "16" },
+      { en: "24", bn: "24" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "Host bits = 32 − prefix = 32 − 24 = 8.",
+      bn: "হোস্ট বিট = ৩২ − প্রিফিক্স = ৩২ − ২৪ = ৮।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-14",
+    topic: "computer-networks",
+    question: {
+      en: "How many usable host addresses are available in a /24 network?",
+      bn: "/24 নেটওয়ার্কে কতটি ব্যবহারযোগ্য হোস্ট ঠিকানা থাকে?",
+    },
+    options: [
+      { en: "256", bn: "256" },
+      { en: "255", bn: "255" },
+      { en: "254", bn: "254" },
+      { en: "252", bn: "252" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "2^8 − 2 = 254 (minus network and broadcast).",
+      bn: "২^৮ − ২ = ২৫৪ (নেটওয়ার্ক ও ব্রডকাস্ট বাদ)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-15",
+    topic: "computer-networks",
+    question: {
+      en: "How many usable hosts are available in a /30 subnet?",
+      bn: "/30 সাবনেটে কতটি ব্যবহারযোগ্য হোস্ট থাকে?",
+    },
+    options: [
+      { en: "2", bn: "2" },
+      { en: "4", bn: "4" },
+      { en: "6", bn: "6" },
+      { en: "8", bn: "8" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "32 − 30 = 2 host bits → 2^2 − 2 = 2 usable (point-to-point link).",
+      bn: "৩২ − ৩০ = ২ হোস্ট বিট → ২^২ − ২ = ২টি ব্যবহারযোগ্য।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-16",
+    topic: "computer-networks",
+    question: {
+      en: "How many usable hosts does /26 provide?",
+      bn: "/26 কতটি ব্যবহারযোগ্য হোস্ট দেয়?",
+    },
+    options: [
+      { en: "30", bn: "30" },
+      { en: "62", bn: "62" },
+      { en: "64", bn: "64" },
+      { en: "126", bn: "126" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "32 − 26 = 6 → 2^6 − 2 = 62 usable hosts.",
+      bn: "৩২ − ২৬ = ৬ → ২^৬ − ২ = ৬২টি ব্যবহারযোগ্য হোস্ট।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-17",
+    topic: "computer-networks",
+    question: {
+      en: "How many usable hosts does /27 provide?",
+      bn: "/27 কতটি ব্যবহারযোগ্য হোস্ট দেয়?",
+    },
+    options: [
+      { en: "14", bn: "14" },
+      { en: "30", bn: "30" },
+      { en: "32", bn: "32" },
+      { en: "62", bn: "62" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "2^(32−27) − 2 = 2^5 − 2 = 30.",
+      bn: "২^(৩২−২৭) − ২ = ২^৫ − ২ = ৩০।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-18",
+    topic: "computer-networks",
+    question: {
+      en: "How many usable hosts does /28 provide?",
+      bn: "/28 কতটি ব্যবহারযোগ্য হোস্ট দেয়?",
+    },
+    options: [
+      { en: "14", bn: "14" },
+      { en: "16", bn: "16" },
+      { en: "30", bn: "30" },
+      { en: "62", bn: "62" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "2^4 − 2 = 14 usable hosts.",
+      bn: "২^৪ − ২ = ১৪টি ব্যবহারযোগ্য হোস্ট।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-19",
+    topic: "computer-networks",
+    question: {
+      en: "Which subnet provides 62 usable hosts?",
+      bn: "কোন সাবনেট ৬২টি ব্যবহারযোগ্য হোস্ট দেয়?",
+    },
+    options: [
+      { en: "/24", bn: "/24" },
+      { en: "/25", bn: "/25" },
+      { en: "/26", bn: "/26" },
+      { en: "/27", bn: "/27" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "/26 → 6 host bits → 64 − 2 = 62.",
+      bn: "/২৬ → ৬ হোস্ট বিট → ৬৪ − ২ = ৬২।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-20",
+    topic: "computer-networks",
+    question: {
+      en: "Which subnet provides 30 usable hosts?",
+      bn: "কোন সাবনেট ৩০টি ব্যবহারযোগ্য হোস্ট দেয়?",
+    },
+    options: [
+      { en: "/26", bn: "/26" },
+      { en: "/27", bn: "/27" },
+      { en: "/28", bn: "/28" },
+      { en: "/29", bn: "/29" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "/27 → 5 host bits → 32 − 2 = 30.",
+      bn: "/২৭ → ৫ হোস্ট বিট → ৩২ − ২ = ৩০।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-21",
+    topic: "computer-networks",
+    question: {
+      en: "Which CIDR prefix provides the largest number of hosts?",
+      bn: "কোন CIDR প্রিফিক্স সর্বাধিক হোস্ট দেয়?",
+    },
+    options: [
+      { en: "/24", bn: "/24" },
+      { en: "/25", bn: "/25" },
+      { en: "/26", bn: "/26" },
+      { en: "/28", bn: "/28" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "Smaller prefix → more host bits. /24 has 8 host bits → 254 usable hosts.",
+      bn: "ছোট প্রিফিক্স → বেশি হোস্ট বিট। /২৪-এ ৮ হোস্ট বিট → ২৫৪ ব্যবহারযোগ্য।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-22",
+    topic: "computer-networks",
+    question: {
+      en: "What is the primary purpose of a router?",
+      bn: "রাউটারের প্রধান কাজ কী?",
+    },
+    options: [
+      { en: "Store files", bn: "ফাইল সংরক্ষণ" },
+      { en: "Forward packets between networks", bn: "নেটওয়ার্কের মধ্যে প্যাকেট ফরোয়ার্ড" },
+      { en: "Encrypt passwords", bn: "পাসওয়ার্ড এনক্রিপ্ট" },
+      { en: "Manage databases", bn: "ডেটাবেস পরিচালনা" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "A router forwards packets between different networks using IP (Layer 3).",
+      bn: "রাউটার আইপি (লেয়ার ৩) ব্যবহার করে ভিন্ন নেটওয়ার্কের মধ্যে প্যাকেট ফরোয়ার্ড করে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-23",
+    topic: "computer-networks",
+    question: {
+      en: "Which device operates primarily at the Network Layer (Layer 3)?",
+      bn: "কোন ডিভাইস মূলত নেটওয়ার্ক লেয়ারে (লেয়ার ৩) কাজ করে?",
+    },
+    options: [
+      { en: "Hub", bn: "হাব" },
+      { en: "Switch", bn: "সুইচ" },
+      { en: "Router", bn: "রাউটার" },
+      { en: "Repeater", bn: "রিপিটার" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "Routers are Layer 3 devices; hubs/repeaters are Layer 1; switches are Layer 2.",
+      bn: "রাউটার লেয়ার ৩; হাব/রিপিটার লেয়ার ১; সুইচ লেয়ার ২।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-24",
+    topic: "computer-networks",
+    question: {
+      en: "Which information does a router primarily use to forward an IP packet?",
+      bn: "রাউটার IP প্যাকেট ফরোয়ার্ড করতে মূলত কোন তথ্য ব্যবহার করে?",
+    },
+    options: [
+      { en: "Destination IP address", bn: "ডেস্টিনেশন IP ঠিকানা" },
+      { en: "Source MAC address only", bn: "শুধু সোর্স MAC ঠিকানা" },
+      { en: "HTTP header", bn: "HTTP হেডার" },
+      { en: "File name", bn: "ফাইলের নাম" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "Routers look up the destination IP in the routing table (longest prefix match).",
+      bn: "রাউটার রুটিং টেবিলে ডেস্টিনেশন আইপি দেখে (লংগেস্ট প্রিফিক্স ম্যাচ)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-25",
+    topic: "computer-networks",
+    question: {
+      en: "What is a routing table?",
+      bn: "রুটিং টেবিল কী?",
+    },
+    options: [
+      { en: "Table containing user passwords", bn: "ব্যবহারকারীর পাসওয়ার্ডের টেবিল" },
+      { en: "Table containing paths/routes to destinations", bn: "ডেস্টিনেশনের পথ/রুটের টেবিল" },
+      { en: "Table containing MAC addresses only", bn: "শুধু MAC ঠিকানার টেবিল" },
+      { en: "Table containing DNS names only", bn: "শুধু DNS নামের টেবিল" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "A routing table maps destination networks/prefixes to next-hop interfaces.",
+      bn: "রুটিং টেবিল ডেস্টিনেশন নেটওয়ার্ক/প্রিফিক্সকে নেক্সট-হপ ইন্টারফেসে ম্যাপ করে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-26",
+    topic: "computer-networks",
+    question: {
+      en: "Which is an example of a dynamic routing protocol?",
+      bn: "কোনটি ডায়নামিক রুটিং প্রোটোকলের উদাহরণ?",
+    },
+    options: [
+      { en: "OSPF", bn: "OSPF" },
+      { en: "HTTP", bn: "HTTP" },
+      { en: "FTP", bn: "FTP" },
+      { en: "SMTP", bn: "SMTP" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "OSPF is a dynamic (link-state) routing protocol; HTTP/FTP/SMTP are application protocols.",
+      bn: "OSPF ডায়নামিক (লিংক-স্টেট) রুটিং প্রোটোকল; HTTP/FTP/SMTP অ্যাপ্লিকেশন প্রোটোকল।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-27",
+    topic: "computer-networks",
+    question: {
+      en: "Which of the following is NOT a routing protocol?",
+      bn: "নিচের কোনটি রুটিং প্রোটোকল নয়?",
+    },
+    options: [
+      { en: "OSPF", bn: "OSPF" },
+      { en: "RIP", bn: "RIP" },
+      { en: "BGP", bn: "BGP" },
+      { en: "HTTP", bn: "HTTP" },
+    ],
+    answer: 3,
+    explanation: {
+      en: "HTTP is a web application protocol; OSPF, RIP and BGP route packets.",
+      bn: "HTTP ওয়েব অ্যাপ্লিকেশন প্রোটোকল; OSPF, RIP, BGP প্যাকেট রুট করে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-28",
+    topic: "computer-networks",
+    question: {
+      en: "OSPF stands for:",
+      bn: "OSPF-এর পূর্ণরূপ কী?",
+    },
+    options: [
+      { en: "Open Shortest Path First", bn: "Open Shortest Path First" },
+      { en: "Open Simple Path Forwarding", bn: "Open Simple Path Forwarding" },
+      { en: "Optimal Shortest Path Forwarding", bn: "Optimal Shortest Path Forwarding" },
+      { en: "Open Secure Path Framework", bn: "Open Secure Path Framework" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "OSPF = Open Shortest Path First.",
+      bn: "OSPF = ওপেন শর্টেস্ট পাথ ফার্স্ট।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-29",
+    topic: "computer-networks",
+    question: {
+      en: "OSPF is a:",
+      bn: "OSPF কী ধরনের প্রোটোকল?",
+    },
+    options: [
+      { en: "Distance-vector protocol", bn: "ডিস্ট্যান্স-ভেক্টর প্রোটোকল" },
+      { en: "Link-state protocol", bn: "লিংক-স্টেট প্রোটোকল" },
+      { en: "Transport protocol", bn: "ট্রান্সপোর্ট প্রোটোকল" },
+      { en: "Application protocol", bn: "অ্যাপ্লিকেশন প্রোটোকল" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF is link-state: each router floods LSAs and runs Dijkstra on a shared LSDB.",
+      bn: "OSPF লিংক-স্টেট: প্রতিটি রাউটার LSA ফ্লাড করে ও শেয়ার্ড LSDB-তে ডিজেকস্ট্রা চালায়।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-30",
+    topic: "computer-networks",
+    question: {
+      en: "Which algorithm is associated with OSPF?",
+      bn: "OSPF-এর সাথে কোন অ্যালগরিদম যুক্ত?",
+    },
+    options: [
+      { en: "Dijkstra", bn: "Dijkstra" },
+      { en: "Kruskal", bn: "Kruskal" },
+      { en: "Prim", bn: "Prim" },
+      { en: "Floyd-Warshall", bn: "Floyd-Warshall" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "OSPF runs Dijkstra's Shortest Path First (SPF) on the LSDB.",
+      bn: "OSPF LSDB-তে ডিজেকস্ট্রার শর্টেস্ট পাথ ফার্স্ট (SPF) চালায়।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-31",
+    topic: "computer-networks",
+    question: {
+      en: "What does OSPF use as its routing metric?",
+      bn: "OSPF রুটিং মেট্রিক হিসেবে কী ব্যবহার করে?",
+    },
+    options: [
+      { en: "Hop count", bn: "হপ কাউন্ট" },
+      { en: "Cost", bn: "কস্ট" },
+      { en: "Bandwidth only", bn: "শুধু ব্যান্ডউইথ" },
+      { en: "Delay only", bn: "শুধু ডিলে" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF metric is cost (derived from bandwidth); RIP uses hop count.",
+      bn: "OSPF মেট্রিক কস্ট (ব্যান্ডউইথ থেকে); RIP হপ কাউন্ট ব্যবহার করে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-32",
+    topic: "computer-networks",
+    question: {
+      en: "Which OSPF area is the backbone area?",
+      bn: "কোন OSPF এরিয়া ব্যাকবোন এরিয়া?",
+    },
+    options: [
+      { en: "Area 0", bn: "এরিয়া ০" },
+      { en: "Area 1", bn: "এরিয়া ১" },
+      { en: "Area 10", bn: "এরিয়া ১০" },
+      { en: "Area 100", bn: "এরিয়া ১০০" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "Area 0 is the OSPF backbone; all other areas connect through it.",
+      bn: "এরিয়া ০ OSPF ব্যাকবোন; বাকি সব এরিয়া এর মধ্য দিয়ে যুক্ত হয়।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-33",
+    topic: "computer-networks",
+    question: {
+      en: "OSPF routers maintain information about the network topology in:",
+      bn: "OSPF রাউটার নেটওয়ার্ক টোপোলজির তথ্য কোথায় রাখে?",
+    },
+    options: [
+      { en: "DNS table", bn: "DNS টেবিল" },
+      { en: "ARP cache", bn: "ARP ক্যাশ" },
+      { en: "Link-State Database", bn: "লিংক-স্টেট ডেটাবেস" },
+      { en: "MAC table", bn: "MAC টেবিল" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "Every router in an area holds an identical Link-State Database (LSDB).",
+      bn: "এরিয়ার প্রতিটি রাউটার একই লিংক-স্টেট ডেটাবেস (LSDB) রাখে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-34",
+    topic: "computer-networks",
+    question: {
+      en: "OSPF uses SPF, which stands for:",
+      bn: "OSPF-এর SPF এর পূর্ণরূপ কী?",
+    },
+    options: [
+      { en: "Shortest Path First", bn: "Shortest Path First" },
+      { en: "Secure Packet Forwarding", bn: "Secure Packet Forwarding" },
+      { en: "Simple Path Forwarding", bn: "Simple Path Forwarding" },
+      { en: "Source Packet Filter", bn: "Source Packet Filter" },
+    ],
+    answer: 0,
+    explanation: {
+      en: "SPF = Shortest Path First (Dijkstra's algorithm in OSPF).",
+      bn: "SPF = শর্টেস্ট পাথ ফার্স্ট (OSPF-এ ডিজেকস্ট্রা অ্যালগরিদম)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-35",
+    topic: "computer-networks",
+    question: {
+      en: "Which statement about OSPF is TRUE?",
+      bn: "OSPF সম্পর্কে কোন বিবৃতি সত্য?",
+    },
+    options: [
+      { en: "It uses hop count as its primary metric", bn: "এর প্রধান মেট্রিক হপ কাউন্ট" },
+      { en: "It is a link-state routing protocol", bn: "এটি লিংক-স্টেট রুটিং প্রোটোকল" },
+      { en: "It is an application-layer protocol", bn: "এটি অ্যাপ্লিকেশন-লেয়ার প্রোটোকল" },
+      { en: "It has a maximum hop count of 15", bn: "এর সর্বোচ্চ হপ কাউন্ট ১৫" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF is link-state with cost metric; hop count / max 15 describes RIP.",
+      bn: "OSPF লিংক-স্টেট ও কস্ট মেট্রিক; হপ কাউন্ট / সর্বোচ্চ ১৫ হলো RIP।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-36",
+    topic: "computer-networks",
+    question: {
+      en: "Which routing protocol uses hop count as its metric?",
+      bn: "কোন রুটিং প্রোটোকল মেট্রিক হিসেবে হপ কাউন্ট ব্যবহার করে?",
+    },
+    options: [
+      { en: "OSPF", bn: "OSPF" },
+      { en: "RIP", bn: "RIP" },
+      { en: "BGP", bn: "BGP" },
+      { en: "ICMP", bn: "ICMP" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "RIP counts hops (max 15); OSPF uses cost.",
+      bn: "RIP হপ গুনে (সর্বোচ্চ ১৫); OSPF কস্ট ব্যবহার করে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-37",
+    topic: "computer-networks",
+    question: {
+      en: "RIP considers a route unreachable when its hop count exceeds:",
+      bn: "RIP কখন রুটকে অরাজ্য ধরে যখন হপ কাউন্ট অতিক্রম করে?",
+    },
+    options: [
+      { en: "10", bn: "10" },
+      { en: "15", bn: "15" },
+      { en: "16", bn: "16" },
+      { en: "255", bn: "255" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "15 = max reachable hop count in RIP; 16 = unreachable (poisoned).",
+      bn: "RIP-এ ১৫ = সর্বোচ্চ পৌঁছনো যোগ্য হপ; ১৬ = অরাজ্য (unreachable)।",
+    },
+    difficulty: "medium",
+  },
+  {
+    id: "net-38",
+    topic: "computer-networks",
+    question: {
+      en: "Which generally scales better for large enterprise networks?",
+      bn: "বড় এন্টারপ্রাইজ নেটওয়ার্কে কোনটি ভালো স্কেল করে?",
+    },
+    options: [
+      { en: "RIP", bn: "RIP" },
+      { en: "OSPF", bn: "OSPF" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF converges faster, uses cost, and scales with areas; RIP is hop-limited and slow.",
+      bn: "OSPF দ্রুত কনভার্জ করে, কস্ট ব্যবহার করে, এরিয়ায় স্কেল করে; RIP হপ-সীমিত ও ধীর।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-39",
+    topic: "computer-networks",
+    question: {
+      en: "Which one is a distance-vector routing protocol?",
+      bn: "কোনটি ডিস্ট্যান্স-ভেক্টর রুটিং প্রোটোকল?",
+    },
+    options: [
+      { en: "OSPF", bn: "OSPF" },
+      { en: "RIP", bn: "RIP" },
+      { en: "Ethernet", bn: "Ethernet" },
+      { en: "DNS", bn: "DNS" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "RIP is distance-vector (Bellman-Ford); OSPF is link-state.",
+      bn: "RIP ডিস্ট্যান্স-ভেক্টর (বেলম্যান-ফোর্ড); OSPF লিংক-স্টেট।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-40",
+    topic: "computer-networks",
+    question: {
+      en: "Which one is a link-state routing protocol?",
+      bn: "কোনটি লিংক-স্টেট রুটিং প্রোটোকল?",
+    },
+    options: [
+      { en: "RIP", bn: "RIP" },
+      { en: "OSPF", bn: "OSPF" },
+      { en: "FTP", bn: "FTP" },
+      { en: "DHCP", bn: "DHCP" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF is link-state; RIP is distance-vector; FTP/DHCP are not routing protocols.",
+      bn: "OSPF লিংক-স্টেট; RIP ডিস্ট্যান্স-ভেক্টর; FTP/DHCP রুটিং প্রোটোকল নয়।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-41",
+    topic: "computer-networks",
+    question: {
+      en: "A network is 192.168.1.0/26. What is the total number of addresses?",
+      bn: "একটি নেটওয়ার্ক 192.168.1.0/26। মোট ঠিকানা সংখ্যা কত?",
+    },
+    options: [
+      { en: "32", bn: "32" },
+      { en: "62", bn: "62" },
+      { en: "64", bn: "64" },
+      { en: "128", bn: "128" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "2^(32−26) = 2^6 = 64 total; usable = 64 − 2 = 62.",
+      bn: "২^(৩২−২৬) = ২^৬ = ৬৪ মোট; ব্যবহারযোগ্য = ৬৪ − ২ = ৬২।",
+    },
+    difficulty: "medium",
+  },
+  {
+    id: "net-42",
+    topic: "computer-networks",
+    question: {
+      en: "What is the broadcast address of 192.168.1.0/24?",
+      bn: "192.168.1.0/24-এর ব্রডকাস্ট ঠিকানা কী?",
+    },
+    options: [
+      { en: "192.168.1.0", bn: "192.168.1.0" },
+      { en: "192.168.1.1", bn: "192.168.1.1" },
+      { en: "192.168.1.254", bn: "192.168.1.254" },
+      { en: "192.168.1.255", bn: "192.168.1.255" },
+    ],
+    answer: 3,
+    explanation: {
+      en: "Network 192.168.1.0, hosts .1–.254, broadcast 192.168.1.255.",
+      bn: "নেটওয়ার্ক 192.168.1.0, হোস্ট .১–.২৫৪, ব্রডকাস্ট 192.168.1.255।",
+    },
+    difficulty: "medium",
+  },
+  {
+    id: "net-43",
+    topic: "computer-networks",
+    question: {
+      en: "For 10.0.0.0/8, how many host bits are available?",
+      bn: "10.0.0.0/8-এ কতটি হোস্ট বিট আছে?",
+    },
+    options: [
+      { en: "8", bn: "8" },
+      { en: "16", bn: "16" },
+      { en: "24", bn: "24" },
+      { en: "32", bn: "32" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "Host bits = 32 − 8 = 24.",
+      bn: "হোস্ট বিট = ৩২ − ৮ = ২৪।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "net-44",
+    topic: "computer-networks",
+    question: {
+      en: "For 10.0.0.0/8, how many usable host addresses are available?",
+      bn: "10.0.0.0/8-এ কতটি ব্যবহারযোগ্য হোস্ট ঠিকানা আছে?",
+    },
+    options: [
+      { en: "2^8 − 2", bn: "2^8 − 2" },
+      { en: "2^16 − 2", bn: "2^16 − 2" },
+      { en: "2^24 − 2", bn: "2^24 − 2" },
+      { en: "2^32 − 2", bn: "2^32 − 2" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "24 host bits → 2^24 − 2 usable hosts.",
+      bn: "২৪ হোস্ট বিট → ২^২৪ − ২ ব্যবহারযোগ্য হোস্ট।",
+    },
+    difficulty: "medium",
+  },
+  {
+    id: "net-45",
+    topic: "computer-networks",
+    question: {
+      en: "OSPF has two routes to the same destination: Route A cost 10+20=30 (via R2), Route B cost 5+10=15 (via R3). Which will OSPF prefer?",
+      bn: "একই ডেস্টিনেশনে OSPF-এর দুটি রুট: রুট A কস্ট ১০+২০=৩০ (R2 হয়ে), রুট B কস্ট ৫+১০=১৫ (R3 হয়ে)। OSPF কোনটি পছন্দ করবে?",
+    },
+    options: [
+      { en: "Route A", bn: "রুট A" },
+      { en: "Route B", bn: "রুট B" },
+      { en: "Both always equally", bn: "সবসময় সমান" },
+      { en: "Neither", bn: "কোনটিই নয়" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "OSPF prefers the lower total cost path → Route B (cost 15).",
+      bn: "OSPF কম মোট কস্টের পথ বেছে নেয় → রুট B (কস্ট ১৫)।",
+    },
+    difficulty: "medium",
+  },
   // ── OS ──────────────────────────────────────────────────────
   {
     id: "os-01",

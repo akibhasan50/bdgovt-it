@@ -148,7 +148,7 @@ export const topics: Topic[] = [
     },
     icon: "Globe2",
     color: "cyan",
-    questionCount: 360,
+    questionCount: 400,
     chapters: 10,
     difficulty: "medium",
     examWeight: 93,
