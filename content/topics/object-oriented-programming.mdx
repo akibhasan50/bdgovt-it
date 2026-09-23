@@ -5,7 +5,11 @@ summary_en: "The four pillars, overloading vs overriding, and the C++/Java detai
 summary_bn: "চারটি স্তম্ভ, ওভারলোডিং বনাম ওভাররাইডিং, আর সি++/জাভার সেই ডিটেইল যা বিডি পরীক্ষায় পছন্দ করে।"
 ---
 
-## The four pillars
+## What OOP is — and why exams ask it
+
+[NTRCA-2014, BOF-2018] Object-oriented programming models software on real-world entities: a **class** is the blueprint (data members + member functions), an **object** is one instance of it. An application divides into packages → classes → objects. Languages tagged as OOP in papers: Python, C++, Java, Visual C, Visual Basic.
+
+The four pillars, as a one-line exam answer each:
 
 | Pillar | One-line exam answer |
 | --- | --- |
@@ -14,13 +18,199 @@ summary_bn: "চারটি স্তম্ভ, ওভারলোডিং ব
 | Inheritance | Derive new classes from existing ones (code reuse, "is-a") |
 | Polymorphism | Same message, different behaviour (compile-time or runtime) |
 
-## Overloading vs overriding
+Nine standard advantages over procedural style — memorise the headline words:
 
-**Overloading** = same method name, different parameter list, resolved at **compile time**. **Overriding** = child redefines a parent method, resolved at **runtime** via the vtable.
+| Advantage | One-line reason |
+| --- | --- |
+| Modularity & reusability | program split into small reusable objects |
+| Encapsulation | data + methods bundled; internals hidden |
+| Abstraction | only essential features exposed |
+| Inheritance | new classes reuse old properties |
+| Polymorphism | same function, different behaviour |
+| Flexibility & scalability | large systems stay manageable |
+| Easy maintenance | change one class without ripple effects |
+| Team development | developers own different classes |
+| Real-world modeling | objects mirror real entities |
 
 <Callout type="tip">
-A single question often tests both: "Overloading is an example of…?" → compile-time polymorphism. "Overriding is…?" → runtime polymorphism.
+"Write the advantages of OOP over structured programming" is a recurring written question (CB Officer IT 2023). Lead with modularity, reusability, encapsulation, abstraction, maintainability, scalability, real-world modeling.
 </Callout>
+
+## Structured vs object-oriented [45 BCS]
+
+| Structured | Object-oriented |
+| --- | --- |
+| Focus on functions/procedures | Focus on objects and classes |
+| Data and functions separate | Data + functions combined |
+| No inheritance / polymorphism | Both supported |
+| Less data hiding | Data hiding & security |
+| Small programs | Large, complex systems |
+| Example: C | Example: C++, Java |
+
+Class vs structure is the same contrast one level down: a structure groups plain data (default public, no polymorphism), a class bundles data **with** methods, enforces access control, and participates in inheritance.
+
+## The six properties [BPDB-2004, BOF-2018, NTRCA-14/16/19/20, Uttara Bank-2019]
+
+1. **Class** — user-defined type; blueprint with data members and member functions (Car: wheels, speed, mileage shared by all cars).
+2. **Object** — instance with **identity** (name), **state** (data), **behavior** (methods). Dog: state color/breed; behavior bark/eat.
+3. **Abstraction** — essential features only; driving uses accelerator/brake without engine knowledge.
+4. **Encapsulation** — data + methods in one unit, access restricted — also called **data hiding**; bank data reachable only through methods.
+5. **Inheritance** — child acquires parent properties; code reuse (Animal → Dog inherits eat, sleep).
+6. **Polymorphism** — many forms; **compile-time → overloading, run-time → overriding**. Same person as father/employee/husband.
+
+## Encapsulation in code
+
+Data stays `private`, touched only through `public` methods:
+
+```cpp
+class BankAccount {
+private:
+  double balance;
+public:
+  void deposit(double amount)  { balance += amount; }
+  void withdraw(double amount) { if (balance >= amount) balance -= amount; }
+  double getBalance()          { return balance; }
+};
+```
+
+[Combined Bank O(IT) 2024] Advantages of encapsulation: data security, easy maintenance, better flexibility, less complexity, easier debugging. Advantages of inheritance: code reusability, clear structure, easy expansion, simpler management.
+
+## Access specifiers
+
+| Specifier | Visible where |
+| --- | --- |
+| `public` | anywhere |
+| `private` | only inside the class |
+| `protected` | class + derived classes (inheritance) |
+
+Skeleton: `class ClassName { private: ... public: ... protected: ... };` — sensitive data private, general members public, members meant for subclasses protected. That is data hiding implemented.
+
+## Inheritance & its vocabulary [NTRCA-14, PSC-17, ICB-17 MCQ]
+
+A **derived/child/subclass** acquires members of a **super/parent/base class**:
+
+```cpp
+class A { public: int x = 10; void print() { cout << "Hello" << endl; } };
+class B : public A {};   // B b; b.print(); uses inherited members
+```
+
+ICB-17 tests the synonyms directly: Super = Parent = Base; Derived = Child = Subclass.
+
+### Types of inheritance
+
+| Type | Shape | C++ sketch |
+| --- | --- | --- |
+| Single | one parent | `class B : public A {}` |
+| Multiple | two+ parents | `class C : public A, public B {}` |
+| Multilevel | chain | `class C : public B {}` with `B : public A` |
+| Hierarchical | one parent, many children | `Dog`, `Cat`, `Pig` all `: public Animal` |
+| Hybrid | mix of the above | needs virtual inheritance |
+
+Constructor order = chain order: Animal → Dog → Pug prints parent lines first; hierarchical children each fire the shared Animal constructor.
+
+### Diamond problem & Java's answer
+
+```text
+        Parent
+        /   \
+   Child1  Child2
+        \   /
+      GrandChild
+```
+
+Both paths carry `Parent::sum()` — GrandChild's call is ambiguous. **Java refuses multiple inheritance with classes** for exactly this reason; use **interfaces** instead. **C++ fixes it with virtual inheritance.**
+
+<Callout type="warning">
+Ambiguity, not performance, is the stated reason Java bans multiple class inheritance. Exam phrasing: "Why multiple inheritance is not supported in Java?" → answer = ambiguity problem, solved by interfaces.
+</Callout>
+
+## Polymorphism [CB-24, PSC-25, NTRCA-14, BB-14, PSC-17]
+
+"Poly" many + "morph" forms. The operator `+` adds `10 + 32 → 42` and concatenates `"poly" + "morphism"` — one operator, multiple behaviours.
+
+| | Compile-time (static) | Run-time (dynamic) |
+| --- | --- | --- |
+| Also called | early binding | late binding |
+| Mechanism | function & operator overloading | virtual functions & overriding |
+| Inheritance needed | no | yes |
+| Speed | faster | slightly slower |
+| Flexibility | less | more |
+
+### Function overloading [BB-2014, 17, BPSC-2019]
+
+Same name, different parameter **count or type** — never return type alone:
+
+```cpp
+class Temp {
+  int x = 10; double x1 = 10.1;
+public:
+  void add(int y)        { cout << x + y << endl; }
+  void add(double d)     { cout << x1 + d << endl; }
+  void add(int y, int z) { cout << x + y + z << endl; }
+};
+// t.add(10); t.add(11.1); t.add(12, 13);  → 20, 21.2, 35
+```
+
+### Operator overloading [NTRCA-2014, IP-2014]
+
+Redefine operators for user-defined types. Rules:
+
+- At least one operand must be a user-defined type.
+- **Cannot overload:** `.` , `::` , `?:` , `sizeof` , `typeid`.
+- Overloadable: arithmetic `+ - * / %`, relational `== != > < >= <=`, logical `&& ||`, bitwise `& | ^ << >>`, `new`, `delete`.
+
+## Overriding, virtual, pure virtual [BB-2014]
+
+Overriding = child redefines a parent method with the **same signature**. Without `virtual`, calls bind at compile time — a `Polygon*` pointing at a Rectangle still prints the **base** area (0, 0, 0). With `virtual`, the same pointers print 200 / 100 / 0: correct dispatch at runtime.
+
+```cpp
+class Base { public: virtual void func() = 0; };  // pure virtual → abstract class
+```
+
+Derived **must** implement `func()`, else compilation fails.
+
+<Callout type="tip">
+A single MCQ often tests the pair: overloading → compile-time polymorphism; overriding → runtime polymorphism. "Method hiding" (static) is neither — statics hide, they do not override.
+</Callout>
+
+### Overloading vs overriding [ABL-17, NTRCA-2011]
+
+| Overloading | Overriding |
+| --- | --- |
+| Redefine by changing signature | Redefine base method in derived class |
+| Compile-time | Runtime |
+| Parameters must differ | Signature must match |
+| Same scope | Different scopes (parent/child) |
+| No inheritance required | Requires inheritance |
+| Can overload many times | Overridden once |
+
+BB-2013 style: identify all three — **overloading** (same class, different params, non-static), **overriding** (subclass non-static same signature, runtime), **hiding** (subclass `static` same signature, compile-time).
+
+## Constructors & destructors
+
+Constructor: same name as class, **no return type**, runs automatically on creation, initialises members. Three kinds:
+
+| Type | Signature idea | Note |
+| --- | --- | --- |
+| Default | no parameters | compiler generates one if you write none |
+| Parameterized | takes arguments | define only this → must always pass arguments |
+| Copy | `ClassName(ClassName &obj)` | copies from a same-class object; compiler supplies implicit version |
+
+```cpp
+class Example { public: int a, b; Example() { a = 10; b = 20; } };
+// Example obj; → prints 10 20
+```
+
+Destructor `~ClassName()`: no parameters, no return type, cannot be overloaded, runs **LIFO** — reverse of constructor order. Use it to free memory, close files, release resources.
+
+| Constructor | Destructor |
+| --- | --- |
+| Initialises object | Cleans up on destruction |
+| `ClassName()` | `~ClassName()` |
+| May take parameters | Never takes parameters |
+| Overloadable, many allowed | Exactly one, not overloadable |
+
+In C++ destructors run bottom-up during `super()`-style chains; objects live on the heap while references live on the stack.
 
 ## Java modifiers worth memorising
 
@@ -31,14 +221,6 @@ abstract void m();    // must be overridden, class must be abstract
 static void m() {}    // belongs to class, no overriding (hides instead)
 ```
 
-## Constructors & memory
-
-Constructors run top-down during `super()` chaining. Objects live on the heap; the reference lives on the stack. In C++, the destructor runs bottom-up — opposite direction, common MCQ.
-
-<Callout type="warning">
-"Method hiding" (static) is not "method overriding" (virtual). Exams bank on you conflating the two.
-</Callout>
-
 ## Design patterns that appear
 
 - **Singleton** — one instance, private constructor, global access point.
@@ -46,3 +228,12 @@ Constructors run top-down during `super()` chaining. Objects live on the heap; t
 - **Observer** — one-to-many dependency notification.
 
 You rarely implement these in MCQs; you identify them from a two-line description.
+
+## Past-paper drills
+
+1. **Recursive Fibonacci in C++** [BPSC AP-2026] — base cases `n==0 → 0`, `n==1 → 1`, else `fibonacci(n-1) + fibonacci(n-2)`; input 10 → `0 1 1 2 3 5 8 13 21 34`.
+2. **Method overloading vs overriding, short notes** [CB AE(IT) 2021] — overloading: same class, params differ, return type alone insufficient, compile-time; overriding: parent→child same signature, dynamic method dispatch, runtime.
+3. **Name three inheritance types with trees** [Combined Bank AP-2022] — Single (Animal→Dog), Multiple (Printer+Scanner→AllInOne), Multilevel (Vehicle→Car→ElectricCar).
+4. **Compile-time vs runtime error** [RAKUB ANSE-2026] — compile-time: syntax/type errors, no executable; runtime: compiles fine, fails during execution (`10 / 0`, index out of range).
+5. **Abstract `Player` with `Batsman`/`Bowler`** [Janata ASA-2021] — abstract `average()`; Batsman returns `(double) runs / matches` (500/10 → 50.0); class stays abstract while any method is pure.
+6. **What is programming? Structured vs OOP** [Sonali Bank ADA-2026] — programming = writing instructions the computer follows; examples C, Java, Python, C++; structured is function-based, OOP is object-based with encapsulation and inheritance.

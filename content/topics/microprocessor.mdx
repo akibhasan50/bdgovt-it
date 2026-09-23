@@ -5,43 +5,166 @@ summary_en: "8086/8085, addressing modes, interrupts, pipelining and the memory 
 summary_bn: "৮০৮৬/৮০৮৫, অ্যাড্রেসিং মোড, ইন্টারাপ্ট, পাইপলাইনিং ও মেমরি হাইরার্কি।"
 ---
 
+## Microprocessor vs microcomputer vs microcontroller
+
+| | Microprocessor (μP) | Microcomputer | Microcontroller (μC) |
+| --- | --- | --- | --- |
+| What it is | CPU on one chip: ALU + control unit + register array | complete system built **around** a μP | CPU + RAM/ROM + I/O peripherals on **one** chip |
+| Needs external | memory and I/O circuits | has its own memory + I/O devices | almost nothing external |
+| Typical use | desktops, laptops | small computer systems | washing machines, airbags, remotes, IoT, medical devices |
+
 ## 8086 in numbers
 
 - 16-bit data bus registers (AX, BX, CX, DX — split into AH/AL…).
 - **20 address lines → 1 MB** address space.
 - Segmented memory: `physical = segment × 16 + offset`.
 - prefetch queue: 6 bytes.
+- 8085 for contrast: 8-bit data bus, 16 address lines → **64 KB**.
 
 <Callout type="tip">
 "Address lines of 8086" = 20. "Data lines" = 16. Mixing these two is the most common wrong answer in BD papers.
 </Callout>
 
+## Five generations of x86
+
+| Gen | Years | Flagship | The jump |
+| --- | --- | --- | --- |
+| 1 | 1971–78 | Intel 4004 (4-bit, calculators), then 8008 | first commercial μP |
+| 2 | 1978–80 | 8085, Zilog Z80 | better-integrated 8-bit |
+| 3 | 1979–85 | **8086**, Motorola 68000 | 16-bit, multitasking, segmented memory |
+| 4 | 1985–2000 | 80386, PowerPC | full 32-bit, virtual memory, on-chip L1 |
+| 5 | 2000– | Pentium 4, x86-64 | 64-bit, multi-core, integrated graphics |
+
+## CISC vs RISC
+
+CISC grew up when memory was expensive: fewer, heavier instructions so compilers stayed simple. One `MULT 1:2, 2:3` internally **fetches, loads registers, multiplies, stores** — compact code, complex hardware, more heat.
+
+RISC began when profiling found **20% of instructions ran 80% of the time**: keep only the simple, common ones and let the compiler combine them.
+
+```text
+Load A, 1:2     Load B, 2:1     Prod A, B     Store 1:2, A
+```
+
+| | CISC | RISC |
+| --- | --- | --- |
+| Instruction set | large, complex | small, simple |
+| Clock per instruction | often more than one | usually **one cycle** |
+| Registers | fewer, more memory traffic | more general registers |
+| Code size | compact | larger |
+| Hardware | complex, power-hungry | simpler, power-efficient |
+| Examples | x86 | ARM, MIPS |
+
+[Combined Bank ADA-2023] Cloud data-center answer: **ARM** — performance per watt, higher core density, cheaper to run; keep x86 for legacy enterprise software and single-thread-heavy workloads (AWS Graviton vs classic Xeon is the real-world citation).
+
+## System bus
+
+| Bus | Direction | Carries | Width means |
+| --- | --- | --- | --- |
+| Address | **unidirectional** CPU → memory/I/O | memory addresses | 16 bits → 64 KB, 20 bits → 1 MB |
+| Data | **bidirectional** | data + instructions | 8/16/32 bits per transfer |
+| Control | **bidirectional** | read/write strobes, acknowledgements | timing and coordination |
+
+Address-bus width = maximum addressable memory — derive it as `2^width`, don't memorise the pairs.
+
+## Registers
+
+Inside the CPU: flip-flop storage, typically 8–64 bits; three jobs — intermediate results, fast ALU working memory, I/O buffer.
+
+**Universal roles** to name in written answers: accumulator (ALU results), program counter (next instruction address), instruction register (current instruction), MAR (address to access), MDR (data in transit), stack pointer (top of stack), general-purpose, floating-point.
+
+**8086 register file:**
+
+- General (EU): `AX BX CX DX`, each pairable as AH/AL etc. AX = accumulator, BX = base address, CX = loop/shift counter, DX = high half of multiply results + I/O addresses.
+- Segment (BIU): `CS` code, `DS` data, `SS` stack, `ES` extra — each holds a 16-bit base.
+- Pointer/index: `SP` top of stack, `BP` base of frame, `SI` source offset, `DI` destination offset, `IP` next instruction — combined with segment bases they generate the 20-bit physical address.
+- Flags (16-bit, nine useful): **conditional** `CF` (MSB carry), `AF` (carry from bit 3, for BCD), `PF` (even parity), `ZF` (zero result), `SF` (sign/negative), `OF` (signed overflow); **control** `TF` (single-step), `IF` (maskable interrupts), `DF` (string direction high→low vs low→high).
+
+**8085:** six 8-bit GPRs `B C D E H L` (pairs BC/DE/HL), accumulator `A`, flag register with only **five active flags** — S (bit 7), Z (bit 6), AC (bit 4, the flag software cannot directly read), P (bit 2), CY (bit 0).
+
 ## Addressing modes
 
-| Mode | Example | Idea |
+The CPU uses addressing modes to locate the operand named by an instruction (opcode = the operation; operands = the data it acts on).
+
+| Mode | Where the operand is | 8086 example |
 | --- | --- | --- |
-| Immediate | `MOV AX, 5` | operand in instruction |
-| Direct | `MOV AX, [2000H]` | address in instruction |
-| Register | `MOV AX, BX` | operand in register |
-| Register indirect | `MOV AX, [BX]` | address in register |
-| Based-indexed | `[BX + SI + disp]` | base + index + displacement |
+| Immediate | inside the instruction | `MOV CX, 4929H` |
+| Register | CPU register | `MOV CX, AX` |
+| Direct | full 16-bit address in the instruction | `MOV AX, [1592H]` (default segment DS) |
+| Register indirect | address in BX/BP/DI/SI | `MOV AX, [BX]` |
+| Based | BX/BP + displacement | `MOV DX, [BX+04]` |
+| Indexed | SI/DI + displacement | `MOV BX, [SI+16]` |
+| Based-index | base + index register | `ADD CX, [BX+SI]` |
+| Based-index + disp | base + index + displacement | `MOV AX, [BX+DI+08]` |
+| Stack | implicit from top of stack | `PUSH`, `POP` |
 
-## Interrupts (8085/8086 family)
+8085's five: immediate (`MVI K, 20H`), register (`MOV K, B`), direct (`LDA 5000H`), indirect (`MOV K, M` through HL), implied (`CMA`, `STC` — the opcode itself names the operand).
 
-INTR (maskable, needs INTA), TRAP (non-maskable, highest priority in 8085), RST 7.5/6.5/5.5 priority order — TRAP > RST 7.5 > 6.5 > 5.5 > INTR.
+<Callout type="warning">
+BPSC AP-2026 asks exactly this pair: `MOV AX, A534H` is **immediate** (the constant travels in the instruction); `MOV AX, [A534H]` is **direct** (brackets mean "fetch from that address").
+</Callout>
 
 ## Pipelining
 
-Stages overlap → throughput ↑, latency per instruction unchanged. Hazards stall the pipeline:
+Stages overlap → throughput ↑, latency per instruction unchanged. Classic five: **IF → ID → EX → MEM → WB**. Hazards stall the pipeline:
 
 - **Data hazard** — instruction needs a result not yet written (solve: forwarding/bypassing).
 - **Control hazard** — branch target unknown (solve: branch prediction, delayed branch).
 - **Structural hazard** — two instructions need the same unit at once.
 
+Why multi-stage beats single-cycle [Combined Bank SO(IT) 2024 & AE 2026]: each stage does a small job → shorter clock; many instructions in flight → higher throughput; units stay busy. Single-cycle instead needs one long clock sized for the slowest instruction.
+
+**Amdahl's Law** [RAKUB ANSE-2026]:
+
+```text
+Speedup = 1 / [(1 − P) + (P / N)]
+```
+
+P = parallel fraction, N = cores. Infinite cores still cap at `1 / (1 − P)`: P=0.9 → 10×, P=0.5 → 2×. P=0.7 with 8 cores gives only **2.58×** — the sequential 30% rules everything.
+
+**Multiprocessor vs multicomputer** [CB AE 2024]: shared memory, tightly coupled vs distributed memory over a network, loosely coupled, message passing.
+
 ## Memory hierarchy
 
 Registers → cache → main memory → secondary storage. Each step up is faster, smaller and costlier per byte. Cache uses **associative/parallel** access (fully, set-associative, direct mapping) — different from sequential tape access.
 
+Parameters that grade memory [CB SO(IT) 2020]: access time, cycle time, transfer rate, capacity, cost per bit, bandwidth.
+
+The ladder works because of **temporal locality** (recent items reused) and **spatial locality** (neighbours fetched together) — cache absorbs both so the CPU rarely waits on RAM. Speed order to quote: cache → RAM → ROM → secondary.
+
 <Callout type="info">
 Virtual memory sits between RAM and disk logically: demand paging maps virtual pages to frames; only resident pages need physical memory.
 </Callout>
+
+### Cache miss types [Combined Bank SO(IT) 2024]
+
+| Compulsory (cold) | Capacity |
+| --- | --- |
+| first access ever to the block | cache too small for the working set |
+| happens even with an empty cache | happens because old lines keep being evicted |
+| unavoidable | shrinks if you grow the cache |
+| "cold start miss" | "cache capacity miss" |
+
+### Worked numerical drills
+
+**Paging** [DWASA AME-2025]: 16-bit logical address, 1 KB pages → `2¹⁶ / 2¹⁰ = 64` pages → page number **6 bits**, offset **10 bits** (6 + 10 = 16).
+
+**Direct-mapped cache** [BB AME-2023]: 16 KB cache, 4-word blocks, 32-bit addresses. Word = 4 B → block = 16 B → **offset 4 bits**; lines = `16 KB / 16 B = 1024` → **index 10 bits**; **tag = 32 − 10 − 4 = 18 bits**.
+
+**Disk capacity** [CB SO(IT) 2022]: sector 512 B × 50 sectors × 2000 tracks = **25,600 B per track**; 5 double-sided platters = 10 surfaces → **512,000,000 B**.
+
+**Hit ratio** [CB AE 2021]: 75% hit, RAM 10 ns, SSD 10 ms → `0.75×10 ns + 0.25×10 ms ≈ 2.5 ms` — the miss penalty dominates.
+
+**CPU speed factors** [Rupali ANE-2023]: clock speed, core count, cache size, word length, bus speed, architecture (pipelining/ILP). **2.40 GHz** = 2.40 billion cycles per second.
+
+## Interrupts (8085/8086 family)
+
+INTR (maskable, needs INTA), TRAP (non-maskable, highest priority in 8085), RST 7.5/6.5/5.5 priority order — TRAP > RST 7.5 > 6.5 > 5.5 > INTR.
+
+## Past-paper quick hits
+
+1. SSD organisation [CB SO(IT) 2020] — **page** = smallest read/write unit (a few KB); **block** = group of pages, and **erase happens at block level**.
+2. Why an I/O-bound box feels slow despite fast CPU + big RAM [ICB AP-2026] — the disk path is the bottleneck; upgrade to SSD/NVMe and fix I/O scheduling.
+3. Register vs cache vs RAM vs secondary [CB SO(IT) 2023] — registers live in the CPU; cache is tiny and fastest; RAM is volatile working memory; secondary must be loaded into RAM before the CPU touches it.
+4. 32- vs 64-bit [CB SO(IT) 2023] — 32-bit caps RAM at 4 GB; 64-bit uses terabyte-scale address space; i3 (2–4 cores, no turbo) < i5 (4–6, turbo) < i7 (6–8+, hyper-threading).
+5. Heterogeneous multicore [CB SO(IT) 2020] — big cores for heavy tasks, efficiency cores for light ones → performance **and** battery/thermal balance.
+6. Why pipelining exists — one instruction per cycle once full; without it, every instruction pays the full multi-step latency alone.

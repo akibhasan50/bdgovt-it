@@ -5,21 +5,57 @@ summary_en: "Number systems, Boolean algebra, gates, K-maps and the sequential c
 summary_bn: "সংখ্যা পদ্ধতি, বুলিয়ান অ্যালজেব্রা, গেট, কে-ম্যাপ ও সিকোয়েনশিয়াল সার্কিট — প্রায় প্রতিটি সরকারি আইটি পেপারে আসে।"
 ---
 
-## Why this chapter carries weight
-
 Digital logic is the cheapest marks in a govt IT MCQ paper. Questions are formulaic: convert a number system, simplify an expression, count gates, identify a flip-flop behaviour. With one focused sitting you can lock 80% of whatever this chapter throws at you.
 
 ## Number systems
 
-Conversions between binary, octal, decimal and hexadecimal are arithmetic, not memory:
+| System | Base | Digits |
+| --- | --- | --- |
+| Decimal | 10 | 0–9 |
+| Binary | 2 | 0, 1 |
+| Octal | 8 | 0–7 |
+| Hexadecimal | 16 | 0–9, A–F (= 10–15) |
 
-- Divide by the base repeatedly for decimal → other bases.
-- Group bits in 3s (octal) or 4s (hex) for binary → base-8/16.
-- Fractional parts multiply by the base and read the integer column.
+Conversions are arithmetic, not memory:
+
+- Divide by the base repeatedly for decimal → other bases; read remainders bottom-up.
+- Fractional parts multiply by the base; read the integer column top-down.
+- Group bits in 3s (octal) or 4s (hex) for binary ↔ base-8/16; pad with 0s either side of the radix point.
+
+Worked set worth re-doing once: `(10.25)₁₀ = (1010.01)₂`, `(4215)₁₀ = (1077)₁₆`, `(1101.101)₂ = (13.625)₁₀`, `(11010110)₂ = (326)₈`.
 
 <Callout type="tip">
 For exam speed, memorise the 4-bit hex table (0–F) once. Most conversion questions collapse into two lookups.
 </Callout>
+
+## Complements & subtraction
+
+**Binary:** 1's complement = flip every bit; 2's complement = 1's complement + 1.
+
+- 1's-complement subtract: complement the subtrahend, add, **add any end-around carry back**; no carry → result is negative (take 1's complement of the sum).
+- 2's-complement subtract: complement (+1), add, **discard the carry**; no carry → take the 2's complement of the sum.
+
+Example: `(111011)₂ − (101100)₂` → 2's comp of `101100` is `010100`, sum `1001111`, drop carry → `001111`.
+
+**Decimal:** 9's complement = digitwise `999… − n`; 10's complement = 9's complement + 1.
+
+- Carry → add end-around (9's) or discard (10's); no carry → complement the sum (negative result).
+- `678 − 234`: 9's comp of 234 = 765 → 678 + 765 = 1443 → 443 + 1 = **444**.
+- `1234 − 3000`: 10's comp of 3000 = 7000 → 8234, no carry → 10000 − 8234 = **−1766**.
+
+## Logic gates & universal gates
+
+A gate is a circuit that performs a logical operation on one or more inputs and outputs 1 or 0. Basic: AND, OR, NOT. **Universal: NAND, NOR** — either alone can build every Boolean function.
+
+| Target | From NAND | From NOR |
+| --- | --- | --- |
+| NOT | `Y = (A·A)'` | `Y = (A+A)'` |
+| AND | invert the NAND: `[(A·B)']'` | `(A' + B')'` by De Morgan |
+| OR | `(A' · B')'` by De Morgan | invert the NOR: `[(A+B)']'` |
+
+XOR needs **4 NAND gates**; XNOR is XOR inverted. Classic exam proof [Combined Bank AP-2022 / O(IT) 2023]: show NOT, AND, OR from NAND (or NOR), then "any Boolean function follows."
+
+Drill set on the page: draw `(A+B)C + DE` and `(A+B+CD)E` using NAND only; `AB + BC + CA` using NOR only.
 
 ## Boolean algebra & K-maps
 
@@ -30,19 +66,80 @@ Start from De Morgan's laws — every "simplify" question is an excuse to use th
 (A · B)' = A' + B'
 ```
 
+**SOP** = AND terms OR-ed (`ABC + A'BC + ABC'`); **POS** = OR terms AND-ed. A **minterm** uses every variable and evaluates to 1 (input 1 → uncomplemented, 0 → primed); a **maxterm** uses every variable and evaluates to 0 (0 → uncomplemented, 1 → primed).
+
+Three-variable rows to memorise: `m0 = X'Y'Z'` … `m7 = XYZ`; `M0 = X+Y+Z` … `M7 = X'+Y'+Z'`.
+
+Algebraic drills (fully worked on the page):
+
+- `A'BC + ABC' + ABC → B(A + C)`
+- `A(B'+C) + AB + B'(C+A') → A + B'`
+
 A K-map for n variables has 2ⁿ cells. Group 1s in powers of two (1, 2, 4, 8…), wrap around edges, and you'll have the minimal sum-of-products without touching algebra.
+
+<Callout type="warning">
+One function recurs across three papers — Ministry of Food 2025, BB AME/AE 2026, CB AME/AE 2026: `F(A,B,C,D) = ∑(0,3,5,7,8,10,11,12,13,14,15)`. Solve it once, own three questions.
+</Callout>
+
+Contingency drill [ICB AP-2026]: truth table of `(P→Q) → (P'→Q')` ends T, T, F, T → true in some rows, false in one → **contingency**.
 
 ## Combinational vs sequential
 
-- **Combinational**: output depends only on present input — multiplexers, decoders, adders, comparators.
-- **Sequential**: output depends on history — flip-flops, counters, registers, finite state machines.
+- **Combinational**: output depends only on present input — multiplexers, decoders, adders, comparators; no memory, no feedback, faster response (no clock delay).
+- **Sequential**: output depends on history — combinational logic + flip-flops + a **feedback path**; used in digital clocks, CPUs, control systems.
 
 <Callout type="info">
-Flip-flop preference questions are frequent: SR (invalid state), JK (race-around → master-slave), D (storage), T (toggle). Know all four in one line each.
+Synchronous sequential circuits share one clock (stable, predictable — counters, registers); asynchronous ones have no clock (faster, harder to design — ripple counter is the classic example).
 </Callout>
+
+## Adders & subtractors
+
+| Circuit | Output equations |
+| --- | --- |
+| Half adder | `S = A ⊕ B`, `C = A·B` |
+| Full adder | `S = (A ⊕ B) ⊕ Cin`, `Cout = AB + Cin(A ⊕ B)` |
+| Half subtractor | `d = A ⊕ B`, `b = A'B` (B = subtrahend, A = minuend) |
+| Full subtractor | `d = A ⊕ B ⊕ bin`, `b = A'B + (A ⊕ B)'bin` |
 
 <Callout type="warning">
 In half-adder vs full-adder traps: a half-adder has 2 inputs and no carry-in; everything else follows from that single fact.
+</Callout>
+
+**Full adder from two half adders** [CB SO(IT) 2020]: HA1 gives `S₁ = A⊕B` and `C₁ = AB`; HA2 combines `S₁` with Cin; **Cout = C₁ + C₂ = AB + (A⊕B)Cin**.
+
+**Serial vs parallel adder** [NTMC AME(CSE) 2022]: serial = one full adder + shift registers + a carry flip-flop, one bit per clock (less hardware, slower); parallel = chain of full adders, all bits at once (faster, costlier). Both compute `1011 + 1101 = 11000`.
+
+## Encoders, decoders, MUX & DEMUX
+
+Encoder: many inputs → fewer codes — `2ⁿ inputs → n outputs`. 4-to-2: `Y0 = I1+I3`, `Y1 = I2+I3`. 8-to-3: `Y0 = I1+I3+I5+I7`, `Y1 = I2+I3+I6+I7`, `Y2 = I4+I5+I6+I7`. Decimal→BCD: 10 inputs, 4 outputs.
+
+Decoder: N bits → exactly one of `2ⁿ` lines active. 2-to-4 with enable: `Y0 = E·A'B'` through `Y3 = E·AB`. Cascades worth memorising:
+
+- 3-to-8 from **two** 2-to-4 — MSB `X2` drives the enables (inverted into one of them).
+- 4-to-16 from **two** 3-to-8 — `X3` drives the enables.
+- 4-to-16 from **five** 2-to-4 decoders.
+
+Full adder from a 3-to-8 decoder + OR gates: `Sum = ∑(1,2,4,7)`, `Carry = ∑(3,5,6,7)` — OR the matching minterm outputs. **Half adder from 2×4 decoder** [BTCL JAM-2024]: `Sum = D1 + D2` (one OR gate), `Carry = D3`.
+
+MUX = data **selector** (many→one); DEMUX = data **distributor** (one→many) [CB O(IT) 2024 — add one application each: MUX ships many signals over one channel; DEMUX routes the arriving stream to the right destination].
+
+4×1 selection: `Y = S1'S0'I0 + S1'S0I1 + S1S0'I2 + S1S0I3`. 16×1 = two 8×1 (stage 1) + one 2×1 (stage 2), the top select bit picks the pair. As a function generator on a 4×1: copy the minterm column of `F(A,B) = ∑m(0,1,3)` into `I0…I3` → `I0=1, I1=1, I2=0, I3=1`.
+
+## Latches & flip-flops
+
+**Latch** = clockless 1-bit bistable multivibrator (Set/Reset): SR (11 = forbidden), JK (11 = toggle — fixes SR), D (Q follows D when enabled), T (T=1 toggles).
+
+**Flip-flop** = clocked 1-bit store. Characteristic equations — pure MCQ fuel:
+
+| Flip-flop | Q(t+1) | One-line behaviour |
+| --- | --- | --- |
+| SR | `S + R'Q` | 11 invalid |
+| JK | `J·Q' + K'·Q` | 11 toggles |
+| D | `D` | copies D at the clock edge |
+| T | `T ⊕ Q` | T=1 toggles; used for frequency division |
+
+<Callout type="info">
+Race-around in plain JK (J=K=1 while the clock stays high, output toggles endlessly) is cured by the **master–slave** pair: master active on clock=1, slave on clock=0, so the output changes **once per cycle**. Flip-flop preference questions are frequent: SR (invalid state), JK (race-around → master-slave), D (storage), T (toggle). Know all four in one line each.
 </Callout>
 
 ## What the papers actually ask
@@ -51,3 +148,8 @@ In half-adder vs full-adder traps: a half-adder has 2 inputs and no carry-in; ev
 2. Number of select lines / gates for a given circuit.
 3. Flip-flop that avoids race-around (answer: master–slave JK).
 4. Counter modulus — sequence length equals the number of states the counter cycles through.
+5. XOR with only universal NAND gates [CB O(IT) 2024] — four NANDs; also tagged a previous BUET pattern.
+6. Convert `(10010.101)₂ = 18.625₁₀` and `(543)₁₀ = (21F)₁₆` [CB O(IT) 2020].
+7. Alarm truth table: `A = (M ∧ N) ∨ P` — fires on rows 001, 011, 101, 111 [Combined Bank O(IT) 2022].
+8. Digital IC characteristics: binary representation, Boolean logic, integration, low power, noise immunity, speed, reliability [CB AME/AHE 2023].
+9. Three-input XOR `A⊕B⊕C` from 2:1 multiplexers [DWASA AME-2025] — output is 1 on odd-weight rows; chain two 2:1 MUXes with A as the outer select.

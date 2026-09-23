@@ -5,31 +5,96 @@ summary_en: "Permissions, pipes, process management — the shell questions ever
 summary_bn: "পারমিশন, পাইপ, প্রসেস ম্যানেজমেন্ট — প্রতিটি আইটি ইন্টারভিউয়ারের প্রশ্ন।"
 ---
 
+## Shell & scripting
+
+A shell script is a file of commands executed together as a program — the automation answer for every "repetitive task" question. The shebang picks the interpreter:
+
+```bash
+#!/bin/bash
+echo "Hello, Linux!"
+```
+
+| Shell | File name | Note |
+| --- | --- | --- |
+| Bourne | `sh` | traditional Unix shell |
+| Bourne Again | `bash` | the common default on Linux |
+| C Shell | `csh` | C-like syntax features |
+| Korn | `ksh` | Unix shell with scripting features |
+
 ## File & directory essentials
 
 ```bash
 ls -la          # long listing + hidden
 cd /var/log     # absolute path
 pwd             # print working directory
+mkdir -p a/b/c  # create parent dirs too
+rmdir old       # empty dirs only; rm -r for the rest
+cp -r src dst   # recursive copy
+mv old new      # move doubles as rename
 find / -name "*.conf" 2>/dev/null
 grep -rn "error" .     # recursive with line numbers
 tail -f app.log        # live log following
 ```
 
+Viewers, defaults worth memorising:
+
+- `cat` whole file · `more`/`less` paged — in `less`: Space next page, `b` previous, `q` quit · `head`/`tail` show **10 lines** by default (`-n 5` for five).
+- `touch` creates an empty file or refreshes timestamps; `echo text > file` overwrites, `>>` appends.
+- `find` walks the filesystem by name/type/size; `locate` hits a prebuilt database (may lag for brand-new files).
+
+<Callout type="tip">
+grep searches **inside** files; find searches **for** files. Mixing them is the classic one-mark trap.
+</Callout>
+
 ## Permissions decoded
 
 `-rwxr-xr--` → owner rwx (7), group r-x (5), others r-- (4) → **755**.
 
+| Digit | Bits | Meaning |
+| --- | --- | --- |
+| 0 | `---` | no permission |
+| 1 | `--x` | execute only |
+| 2 | `-w-` | write only |
+| 3 | `-wx` | write + execute |
+| 4 | `r--` | read only |
+| 5 | `r-x` | read + execute |
+| 6 | `rw-` | read + write |
+| 7 | `rwx` | read + write + execute |
+
 ```bash
 chmod 644 file.txt   # rw- r-- r--
+chmod u+x script.sh  # symbolic: u/g/o/a with + - =
 chown user:group file
-chgrp devs file
-umask 022            # default mask for new files
+chgrp devs file      # group only
+umask 022            # default mask: strips group/other write
 ```
+
+Permission classes: `u` user/owner, `g` group, `o` others, `a` all three.
 
 <Callout type="tip">
 7 = read+write+execute, 5 = read+execute, 4 = read. Three octal digits = owner/group/other. Convert once, answer all permutation questions.
 </Callout>
+
+`chmod 755 script.sh` [RAKUB ANSE-2026] states exactly: owner **rwx**, group **r-x**, others **r-x**. Folder read-only for its owner only [Janata ASA-2021]: `mkdir A` then `chmod 400 A`.
+
+## Search, filter, compare
+
+```bash
+sort names.txt | uniq   # uniq only kills ADJACENT duplicates
+wc -l file.txt          # lines; -w words; -m characters
+which python            # path of the executable
+diff a.txt b.txt        # line-by-line
+cmp a.bin b.bin         # byte-by-byte, first difference
+echo "hi" | tr 'a-z' 'A-Z'   # HI
+```
+
+DWASA AME-2025 drill — characters **and** words in the first 10 lines of `wasacustomers.txt`:
+
+```bash
+head -10 wasacustomers.txt | wc -mw
+```
+
+Because `uniq` only compares neighbours, the usual full-dedupe pipeline is `sort file | uniq`.
 
 ## Pipes, redirection, processes
 
@@ -38,10 +103,16 @@ command > out.txt     # stdout redirect (overwrite)
 command >> out.txt    # append
 command 2>&1          # stderr → stdout
 ls | grep conf        # pipe stdout → next stdin
-ps aux                # snapshot
-top / htop            # live view
-kill -9 <pid>         # SIGKILL
+ps aux                # snapshot; ps -ef full listing
+top / htop            # live view; q exits top
+kill <pid>            # default TERM, clean exit
+kill -9 <pid>         # SIGKILL — force, cannot be caught
+nice -n 10 ./job.sh   # higher nice = LOWER priority
+renice 10 -p 2450     # retune a running process
+jobs; bg %1; fg %1    # background / foreground control
 ```
+
+`kill` vs `kill -9` [high-yield pair]: normal kill asks nicely (TERM, cleanup happens); `-9` is SIGKILL for a wedged process and gives it no chance to handle anything.
 
 ## Package managers & system
 
@@ -51,8 +122,33 @@ kill -9 <pid>         # SIGKILL
 | RHEL/CentOS/Fedora | `dnf` / `yum` |
 | Arch | `pacman` |
 
-`df -h` = disk space, `du -sh` = directory usage, `free -h` = RAM, `uname -a` = kernel info.
+Disk and info commands:
+
+- `df -h` filesystem free space · `du -sh dir` space used by a directory · `lsblk` block devices · `fdisk -l` partition tables.
+- `uname -a` kernel info · `uptime` load averages · `who` / `whoami` · `date` / `cal` · `free -m` RAM in MiB · `lscpu` · `lsusb` · `history` · `exit`.
 
 <Callout type="info">
 Shebang `#!/bin/bash` marks an executable script. Cron (`crontab -e`) schedules recurring jobs — both appear in viva transcripts constantly.
 </Callout>
+
+## Exam difference pairs
+
+| Ask | Answer in one line |
+| --- | --- |
+| pwd vs cd | pwd **shows** the directory; cd **changes** it |
+| cp vs mv | cp duplicates; mv moves or renames |
+| cat vs head/tail | whole file vs first/last 10 lines |
+| find vs locate | live filesystem walk vs prebuilt filename database |
+| grep vs find | pattern **inside** text vs filesystem objects |
+| diff vs cmp | lines vs bytes |
+| ps vs top | one snapshot vs continuous monitor |
+| df vs du | free space per filesystem vs usage per file/dir |
+| kill vs kill -9 | polite TERM vs unstoppable SIGKILL |
+
+## Past-paper drills
+
+1. Copy folder `A` into sibling `P` [Janata ASA-2021] → `cp -r A P` (same parent, hence recursive).
+2. Ownership & group management [Pubali HE-2023] → `chown user:group file`, recursive `chown -R … dir`; `chgrp` changes **only the group**.
+3. Directory listing including hidden files [SB & JB ADA-2022] → `ls -al`.
+4. Permissions in one paragraph: classes `u`/`g`/`o`/`a`, symbols r/w/x, numeric r=4 w=2 x=1; `umask` defines defaults for new files.
+5. Mini-lab sequence to rehearse aloud: `pwd` → `mkdir` → `cd` → `touch` → `echo >` → `cat` → `cp` → `ls -l` → `grep` → `chmod` → `head` → `cd ..` → `pwd`.
