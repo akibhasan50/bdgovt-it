@@ -266,6 +266,106 @@ export const mcqs: MCQ[] = [
     },
     difficulty: "easy",
   },
+  {
+    id: "ds-06",
+    topic: "data-structures",
+    question: {
+      en: "Binary Search requires:",
+      bn: "বাইনারি সার্চের জন্য কী প্রয়োজন?",
+    },
+    options: [
+      { en: "Unsorted data", bn: "অসাজানো ডেটা" },
+      { en: "Sorted data", bn: "সাজানো ডেটা" },
+      { en: "Random data", bn: "র‍্যান্ডম ডেটা" },
+      { en: "Hashed data", bn: "হ্যাশ করা ডেটা" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "Binary Search only works on a sorted array — at each step it discards half based on order. Exam tip: binary search = sorted array + compare with middle + discard half + O(log n).",
+      bn: "বাইনারি সার্চ শুধু সাজানো অ্যারেতে কাজ করে — প্রতি ধাপে ক্রম অনুযায়ী অর্ধেক বাতিল করে। পরীক্ষার কৌশল: বাইনারি সার্চ = সাজানো অ্যারে + মাঝখানের সাথে তুলনা + অর্ধেক বাদ + O(log n)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "ds-07",
+    topic: "data-structures",
+    question: {
+      en: "Worst-case complexity of Binary Search is:",
+      bn: "বাইনারি সার্চের সবচেয়ে খারাপ কেসের জটিলতা কত?",
+    },
+    options: [
+      { en: "O(1)", bn: "O(১)" },
+      { en: "O(n)", bn: "O(n)" },
+      { en: "O(log n)", bn: "O(log n)" },
+      { en: "O(n²)", bn: "O(n²)" },
+    ],
+    answer: 2,
+    explanation: {
+      en: "Each comparison halves the search space, so at most log₂ n steps are needed → O(log n).",
+      bn: "প্রতিটি তুলনা অনুসন্ধানের ক্ষেত্র অর্ধেক করে, তাই সর্বোচ্চ log₂ n ধাপ লাগে → O(log n)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "ds-08",
+    topic: "data-structures",
+    question: {
+      en: "Binary Search works by:",
+      bn: "বাইনারি সার্চ কীভাবে কাজ করে?",
+    },
+    options: [
+      { en: "Checking every element", bn: "প্রতিটি উপাদান পরীক্ষা করা" },
+      { en: "Dividing the search space into halves", bn: "অনুসন্ধানের ক্ষেত্র অর্ধেক করে ভাগ করা" },
+      { en: "Sorting after every comparison", bn: "প্রতিটি তুলনার পরে সাজানো" },
+      { en: "Using hashing", bn: "হ্যাশিং ব্যবহার করা" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "Compare with the middle element, then discard half of the remaining array each step (divide and conquer).",
+      bn: "মাঝখানের উপাদানের সাথে তুলনা করে প্রতি ধাপে বাকি অ্যারের অর্ধেক বাতিল হয় (ডিভাইড অ্যান্ড কনকার)।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "ds-09",
+    topic: "data-structures",
+    question: {
+      en: "Binary Search on 1024 elements requires approximately how many halving steps?",
+      bn: "১০২৪টি উপাদানে বাইনারি সার্চে প্রায় কতটি হালভিং ধাপ লাগে?",
+    },
+    options: [
+      { en: "5", bn: "৫" },
+      { en: "10", bn: "১০" },
+      { en: "100", bn: "১০০" },
+      { en: "512", bn: "৫১২" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "Because 2¹⁰ = 1024, you need about log₂(1024) = 10 halving steps to reach a single element.",
+      bn: "কারণ ২¹⁰ = ১০২৪, একটি উপাদানে পৌঁছাতে প্রায় log₂(1024) = ১০টি হালভিং ধাপ লাগে।",
+    },
+    difficulty: "easy",
+  },
+  {
+    id: "ds-10",
+    topic: "data-structures",
+    question: {
+      en: "In Binary Search on a sorted ascending array, if mid = 50 and target = 70, where do we search next?",
+      bn: "ক্রমানুসার অ্যারেতে বাইনারি সার্চে mid = 50 এবং target = 70 হলে পরের ধাপে কোথায় খুঁজবেন?",
+    },
+    options: [
+      { en: "Left", bn: "বামে" },
+      { en: "Right", bn: "ডানে" },
+      { en: "Both", bn: "দুই দিকেই" },
+      { en: "Nowhere", bn: "কোথাও নয়" },
+    ],
+    answer: 1,
+    explanation: {
+      en: "70 > 50, so the target must be in the right half — discard the left half and continue.",
+      bn: "৭০ > ৫০, তাই টার্গেট ডান অর্ধেকেই থাকবে — বাম অর্ধেক বাতিল করে এগোন।",
+    },
+    difficulty: "easy",
+  },
   // ── DAA ─────────────────────────────────────────────────────
   {
     id: "daa-01",

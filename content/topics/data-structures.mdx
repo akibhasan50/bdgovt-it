@@ -151,7 +151,54 @@ Applications: CPU/disk scheduling, IO buffers & pipes, interrupt handling, print
 
 ### Queue using two stacks (past paper: CB, AP, 2026)
 
-`S1` receives enqueues. To dequeue: if `S2` is empty, pop **everything** from `S1` into `S2` (this reverses order — oldest lands on top), then pop `S2`. Why it works: the transfer flips LIFO into FIFO.
+**Simple answer:** keep two stacks — `inStack` for enqueues, `outStack` for dequeues. Enqueue just pushes onto `inStack`. Dequeue pops from `outStack`; if `outStack` is empty, first dump everything from `inStack` into `outStack` (that transfer reverses order, so the oldest item ends up on top). One stack reverses order once; two stacks reverse it twice — back to normal FIFO.
+
+**Why it works (the core trick):** a single stack is LIFO — push `1, 2, 3`, pop gives `3, 2, 1` (backwards). Push that reversed output into a second stack and it flips again → `1, 2, 3` — exactly FIFO. Double-reversal is the whole idea.
+
+**Enqueue(x):** always push onto `inStack` — O(1).
+
+**Dequeue():**
+
+- If `outStack` is empty, pop *everything* from `inStack` onto `outStack` (oldest lands on top).
+- Pop the top of `outStack` and return it.
+
+**Step-by-step trace:**
+
+| Operation | inStack (bottom→top) | outStack | Returns |
+| --- | --- | --- | --- |
+| Enqueue 1, 2, 3 | `[1, 2, 3]` | `[]` | — |
+| Dequeue (transfer) | `[]` | `[3, 2]` after pop | **1** ✓ |
+| Enqueue 4 | `[4]` | `[3, 2]` | — |
+| Dequeue (no transfer) | `[4]` | `[3]` | **2** ✓ |
+| Dequeue (no transfer) | `[4]` | `[]` | **3** ✓ |
+| Dequeue (transfer) | `[]` | `[]` | **4** ✓ |
+
+Order returned: **1, 2, 3, 4** — same as enqueue order. FIFO preserved. Transfer only runs when `outStack` is fully empty, so expensive transfers never happen back-to-back.
+
+```python
+class QueueUsingStacks:
+    def __init__(self):
+        self.inStack = []
+        self.outStack = []
+
+    def enqueue(self, x):
+        self.inStack.append(x)          # O(1)
+
+    def dequeue(self):
+        if not self.outStack:           # only transfer when outStack is empty
+            while self.inStack:
+                self.outStack.append(self.inStack.pop())
+        if not self.outStack:
+            raise IndexError("Queue is empty")
+        return self.outStack.pop()      # O(1) amortized
+```
+
+**Why it's amortized O(1), not O(n) every time:** each element moves at most twice in its whole life — once into `inStack`, once transferred to `outStack`. A transfer only happens when `outStack` runs dry (meaning every queued element was sitting untouched in `inStack`). You can't have two expensive transfers in a row without cheap enqueues refilling `inStack` in between. Over **n** enqueues + **n** dequeues, total work is O(n) overall — not O(n) per dequeue. Some single dequeue calls cost O(n) (a transfer after a batch of enqueues); most are O(1) (just pop `outStack`). Spread evenly, each operation averages **O(1)**.
+
+| | Time (per call) | Time (amortized) |
+| --- | --- | --- |
+| Enqueue | O(1) always | O(1) |
+| Dequeue | O(1) if `outStack` non-empty; O(n) if a transfer is triggered | O(1) |
 
 ## Trees
 
@@ -343,7 +390,7 @@ Sorted array → binary search O(log n). Unsorted → linear O(n). No order at a
 
 **1. Stack vs queue** (`BPSC (AME)-24; CB (AP)-24`) — answer with the five-row table above: LIFO/FIFO, one end/two ends, one pointer/two pointers, undo vs printer.
 
-**2. Queue from two stacks** (`CB, AP, 2026`) — describe the S1→S2 transfer and *why* the reversal produces FIFO.
+**2. Queue from two stacks** (`CB, AP, 2026`) — simple answer: two stacks, transfer only when `outStack` is empty. Explain the double-reversal (LIFO→LIFO = FIFO), walk the 1,2,3,4 trace, then say both ops are **amortized O(1)** (each element moves at most twice).
 
 **3. Build a tree** — inorder `D B E A F C` + preorder `A B D E C F`: root A → recurse. Then give all three traversals of your tree.
 
