@@ -273,7 +273,7 @@ export function PracticeSetup() {
             </div>
             <p className="mt-2 text-xs text-muted-foreground">
               {poolSize > 0
-                ? `Available: ${Math.min(poolSize, 100)} in selection`
+                ? `Available: ${poolSize} in selection`
                 : "Pick at least one topic"}
             </p>
           </div>

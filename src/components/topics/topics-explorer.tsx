@@ -8,7 +8,7 @@ import { Search, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { difficultyStyles, colorChip } from "@/components/content/accents";
-import { topics } from "@/lib/data/topics";
+import { topics, getTotalMCQCount } from "@/lib/data/topics";
 import { cn } from "@/lib/utils";
 import { ExamWeightRing } from "./exam-weight-ring";
 import { TopicIcon } from "./topic-icons";
@@ -34,7 +34,7 @@ export function TopicsExplorer() {
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:py-16">
       <div className="max-w-2xl">
         <Badge className="border-primary/30 bg-primary/10 text-primary">
-          {topics.length} · {t("common.questions")}
+          {getTotalMCQCount()} {t("common.questions")}
         </Badge>
         <h1 className="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
           <span className="text-gradient">{t("topics.title")}</span>

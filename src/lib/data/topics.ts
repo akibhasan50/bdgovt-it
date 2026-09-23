@@ -1,6 +1,12 @@
 import type { Topic } from "@/lib/types";
+import { mcqs } from "@/lib/data/mcqs";
 
-export const topics: Topic[] = [
+const mcqCountByTopic = new Map<string, number>();
+for (const q of mcqs) {
+  mcqCountByTopic.set(q.topic, (mcqCountByTopic.get(q.topic) ?? 0) + 1);
+}
+
+const baseTopics: Omit<Topic, "questionCount">[] = [
   {
     slug: "digital-logic-design",
     title: {
@@ -13,7 +19,6 @@ export const topics: Topic[] = [
     },
     icon: "Cpu",
     color: "lime",
-    questionCount: 340,
     chapters: 9,
     difficulty: "medium",
     examWeight: 92,
@@ -28,7 +33,6 @@ export const topics: Topic[] = [
     },
     icon: "Boxes",
     color: "violet",
-    questionCount: 410,
     chapters: 10,
     difficulty: "medium",
     examWeight: 95,
@@ -43,7 +47,6 @@ export const topics: Topic[] = [
     },
     icon: "Network",
     color: "cyan",
-    questionCount: 385,
     chapters: 11,
     difficulty: "hard",
     examWeight: 90,
@@ -58,7 +61,6 @@ export const topics: Topic[] = [
     },
     icon: "GitBranch",
     color: "warning",
-    questionCount: 260,
     chapters: 8,
     difficulty: "hard",
     examWeight: 78,
@@ -73,7 +75,6 @@ export const topics: Topic[] = [
     },
     icon: "Database",
     color: "success",
-    questionCount: 350,
     chapters: 9,
     difficulty: "medium",
     examWeight: 88,
@@ -88,7 +89,6 @@ export const topics: Topic[] = [
     },
     icon: "FileCode2",
     color: "cyan",
-    questionCount: 295,
     chapters: 7,
     difficulty: "easy",
     examWeight: 85,
@@ -103,7 +103,6 @@ export const topics: Topic[] = [
     },
     icon: "Code2",
     color: "violet",
-    questionCount: 520,
     chapters: 12,
     difficulty: "hard",
     examWeight: 97,
@@ -118,7 +117,6 @@ export const topics: Topic[] = [
     },
     icon: "Microchip",
     color: "lime",
-    questionCount: 300,
     chapters: 8,
     difficulty: "medium",
     examWeight: 86,
@@ -133,7 +131,6 @@ export const topics: Topic[] = [
     },
     icon: "Terminal",
     color: "success",
-    questionCount: 240,
     chapters: 6,
     difficulty: "easy",
     examWeight: 80,
@@ -148,7 +145,6 @@ export const topics: Topic[] = [
     },
     icon: "Globe2",
     color: "cyan",
-    questionCount: 400,
     chapters: 10,
     difficulty: "medium",
     examWeight: 93,
@@ -163,7 +159,6 @@ export const topics: Topic[] = [
     },
     icon: "MonitorCog",
     color: "warning",
-    questionCount: 330,
     chapters: 9,
     difficulty: "medium",
     examWeight: 89,
@@ -178,7 +173,6 @@ export const topics: Topic[] = [
     },
     icon: "Server",
     color: "violet",
-    questionCount: 180,
     chapters: 6,
     difficulty: "medium",
     examWeight: 70,
@@ -193,7 +187,6 @@ export const topics: Topic[] = [
     },
     icon: "Workflow",
     color: "success",
-    questionCount: 220,
     chapters: 7,
     difficulty: "easy",
     examWeight: 75,
@@ -208,7 +201,6 @@ export const topics: Topic[] = [
     },
     icon: "ShieldCheck",
     color: "danger",
-    questionCount: 210,
     chapters: 7,
     difficulty: "medium",
     examWeight: 82,
@@ -223,7 +215,6 @@ export const topics: Topic[] = [
     },
     icon: "Cloud",
     color: "cyan",
-    questionCount: 195,
     chapters: 6,
     difficulty: "easy",
     examWeight: 74,
@@ -238,7 +229,6 @@ export const topics: Topic[] = [
     },
     icon: "BrainCircuit",
     color: "violet",
-    questionCount: 160,
     chapters: 6,
     difficulty: "hard",
     examWeight: 65,
@@ -253,7 +243,6 @@ export const topics: Topic[] = [
     },
     icon: "Globe",
     color: "warning",
-    questionCount: 230,
     chapters: 7,
     difficulty: "easy",
     examWeight: 79,
@@ -268,7 +257,6 @@ export const topics: Topic[] = [
     },
     icon: "Infinity",
     color: "lime",
-    questionCount: 145,
     chapters: 6,
     difficulty: "hard",
     examWeight: 58,
@@ -283,7 +271,6 @@ export const topics: Topic[] = [
     },
     icon: "Sigma",
     color: "success",
-    questionCount: 175,
     chapters: 7,
     difficulty: "medium",
     examWeight: 62,
@@ -291,8 +278,21 @@ export const topics: Topic[] = [
   },
 ];
 
+export const topics: Topic[] = baseTopics.map((t) => ({
+  ...t,
+  questionCount: mcqCountByTopic.get(t.slug) ?? 0,
+}));
+
 export function getTopic(slug: string) {
   return topics.find((t) => t.slug === slug);
+}
+
+export function getMCQCountByTopic(slug: string) {
+  return mcqCountByTopic.get(slug) ?? 0;
+}
+
+export function getTotalMCQCount() {
+  return mcqs.length;
 }
 
 export function getRelatedTopics(slug: string) {
