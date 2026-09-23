@@ -5,6 +5,45 @@ summary_en: "Hypervisors, containers, PUE and the infrastructure questions Bangl
 summary_bn: "হাইপারভাইজর, কনটেইনার, PUE আর বাংলাদেশের ডেটা সেন্টার পদের প্রশ্ন।"
 ---
 
+## What a data center is
+
+A **centralized physical facility** where an organization's servers, storage and networking collect, process, store and distribute data — kept secure, cooled, powered and highly available. Components in one breath: servers, storage, network gear, power supply, cooling, security.
+
+A **modern** data center spans on-premises, edge and cloud, driven by virtualization and software-defined tech rather than one static room — dynamic, scalable, distributed workloads.
+
+**Why businesses need one** [Agrani Bank ICT-2017 components question]: hosts email, file sharing, CRM and productivity tools; runs ERP, databases, big data/AI/ML workloads; delivers virtual desktops and collaboration for hybrid work; backbone of reliability, security and continuous availability.
+
+### Components [Agrani Bank, ICT(17)]
+
+1. **Servers & IT equipment** — servers, storage (HDD/SSD), routers, switches, firewalls; plus OS, virtualization tools, Hadoop/MapReduce software.
+2. **Facility systems** — biometric access, alarms, security doors; UPS, generators; chillers, fans, air handlers.
+3. **Support infrastructure** — power distribution units, backup/switching, cooling, redundant network connectivity.
+4. **Enterprise data storage** — subsystems, cabling, firewalls protecting confidentiality, integrity, availability.
+5. **Operational staff** — monitor, manage, fix, secure.
+
+## Tier classification (Uptime Institute)
+
+| Tier | Name | Redundancy | Uptime | Downtime/year |
+| --- | --- | --- | --- | --- |
+| 1 | Basic capacity | none; shutdown for maintenance | 99.671% | ~28.8 hours |
+| 2 | Redundant capacity | partial power/cooling | 99.749% | ~22 hours |
+| 3 | Concurrently maintainable | N+1; maintain without shutdown | 99.982% | ~1.6 hours |
+| 4 | Fault tolerant | 2N+1, fully independent | 99.995% | ~26 minutes |
+
+<Callout type="tip">
+Tier numbers climb with redundancy: none → partial → N+1 → 2N+1. The downtime figures (28.8 h / 22 h / 1.6 h / 26 min) are the MCQ payload — memorise the ladder.
+</Callout>
+
+## Types of data centers
+
+| Type | Who runs it | Defining trait |
+| --- | --- | --- |
+| Colocation | provider owns building | you rent space; they do power/cooling/net |
+| Enterprise | your company | full control, high capital cost |
+| Hyperscale | cloud giants | thousands of servers, fiber fabric |
+| Cloud | third-party | rent compute, no hardware ownership |
+| Managed services | external operator | fully outsourced ops, lease model |
+
 ## Hypervisor types
 
 - **Type 1 (bare-metal)** — runs directly on hardware: VMware ESXi, Microsoft Hyper-V, Xen, KVM.
@@ -14,6 +53,16 @@ Type 1 is what production data centers use — better performance and isolation.
 
 <Callout type="tip">
 "Which is a Type 1 hypervisor?" Choose the bare-metal one. VirtualBox/Workstation are the canonical Type 2 answers.
+</Callout>
+
+## Data center virtualization [BB AME-2023, Pubali-2023]
+
+Converts physical servers into **virtual machines** so many isolated VMs — each with its own OS and applications — share one host. The **hypervisor** allocates CPU, RAM and network among them.
+
+Benefits: better resource utilization; dynamic scalability (new VMs in minutes); faster deployment; centralized management; easy copy/migrate/restore for backup; high availability via live migration; VM isolation contains failures and attacks.
+
+<Callout type="info">
+Type 1 vs Type 2 and "what does a hypervisor do" are the two virtualization questions this chapter keeps recycling across BB and Pubali papers.
 </Callout>
 
 ## Containers vs VMs
@@ -30,6 +79,10 @@ Containers share the host kernel → lighter, start in seconds, higher density. 
 - Standard rack: 42U; density measured in kW/rack.
 - **PUE = total facility energy ÷ IT equipment energy** — closer to 1.0 is better; legacy sites run 1.8+, modern designs aim < 1.3.
 - Hot-aisle/cold-aisle containment; N+1 redundancy for power and cooling.
+
+### Energy-efficiency best practice [BB AME-2023]
+
+Advanced cooling (hot/cold aisle containment, liquid/immersion, free cooling) · high-efficiency UPS (95–98%) and proper sizing · virtualization & consolidation to raise server utilization · airflow management (blanking panels) · DCIM monitoring of PUE plus regular audits · renewables (solar, wind, microgrids) · efficient IT hardware and dynamic power scaling · raise set-point temperature within safe limits · smart siting in cool climates, modular design, waste-heat reuse · continuous improvement culture.
 
 ## RAID levels
 
@@ -54,9 +107,18 @@ RAID combines multiple physical disks into one logical unit to improve **perform
 RAID 0 → speed, NO redundancy. RAID 1 → redundancy, no write boost. RAID 5 → most popular in business. RAID 6 → survives two failures. RAID 10 → best performance + redundancy, expensive.
 </Callout>
 
+## Operations & selection
+
+**Manage well:** standardize processes and track hardware/software/license assets · control facility (power, cooling, access, staff) · deploy DCIM tooling · drive energy efficiency (green data center) · fire protection, secure layout, restricted access.
+
+**When choosing a site:** low disaster risk + good connectivity · reliable power with UPS/generator · efficient cooling · physical & network security (biometric, CCTV, firewalls) · scalability headroom · redundant high-speed network · compliance (ISO, tier certification) · total cost of setup/maintenance/operations.
+
+**Modern challenges → solutions:** energy/AI power draw → DCIM, PUE tracking, liquid cooling · unpredictable AI/edge demand → predictive capacity planning, modular "capacity on demand" · ransomware & supply-chain threats → Zero Trust, MFA, AI anomaly detection · skills gap → training and automation · hybrid/multi-cloud sprawl → single-dashboard monitoring, API integration · GDPR-style compliance → automated audit and data-location tracking · legacy modernization → phased upgrades · disaster risk → failover, backups, resilience testing.
+
 ## Availability concepts
 
 - HA clusters fail over nodes; uptime tiers (Tier I–IV) map to concurrent maintainability and fault tolerance.
+- Load balancing spreads work across servers; failover switches to backups automatically.
 
 <Callout type="info">
 High availability ≠ disaster recovery. HA keeps you running through component failure; DR restores you after a site-level catastrophe.
