@@ -5,6 +5,12 @@ summary_en: "Scheduling, deadlocks, memory management — where the diagrams and
 summary_bn: "স্কিউডিং, ডেডলক, মেমরি ম্যানেজমেন্ট — ডায়াগ্রাম আর স্টারভেশনের ঘর।"
 ---
 
+An operating system is system software that manages hardware and software resources while providing common services for programs — the interface between users and computer hardware.
+
+<Callout type="tip">
+Jobqns exam anchors: NOS advantages *(CB AE'21)* · characteristics of a good OS *(CB ME'23)* · program variables *(CB CE'23, 6 marks)*.
+</Callout>
+
 ## OS basics — what it is and does
 
 An **operating system** is system software that acts as the interface between users/applications and computer hardware, managing CPU, memory, storage and I/O.
@@ -27,6 +33,8 @@ User → Application programs (Word, Chrome, games)
 | Resource allocation / job accounting | who gets what, usage tracking | CPU scheduling, billing |
 
 **Goals of an OS:** convenience for users, efficiency (utilisation of hardware) and extensibility (ability to evolve).
+
+**Objectives (exam wording):** execute user programs and make problem-solving easier · allocate CPU, memory, and devices efficiently · provide convenient tools (CLI/GUI) · detect errors and recover from failures.
 
 **Boot process:** firmware (BIOS/UEFI) → POST → boot loader (GRUB) → kernel loaded into memory → init/systemd starts services → login.
 
@@ -51,6 +59,24 @@ One-line definition examiners want: "The OS is the interface between the user an
 **Multitasking vs multiprocessing:** one CPU switching fast (appears simultaneous) vs many CPUs (actually simultaneous).
 
 **Batch vs time-sharing:** batch groups jobs with no user interaction and optimises throughput; time-sharing gives each user a CPU slice and optimises response time.
+
+### Advantages & disadvantages of major OS types
+
+| Type | Advantages | Disadvantages |
+| --- | --- | --- |
+| **Batch** | Groups similar jobs → less idle CPU | One job at a time; hard to estimate completion; no dynamic sharing |
+| **Time-sharing** | Many users share CPU; fast response | Less reliable; security risks; heavy users slow others |
+| **Real-time** | Strict deadline guarantees (robots, air traffic, defence) | Highly complex; limited tasks; hard error detection |
+| **Distributed** | Faster computation; load spread across nodes | Complex; expensive; one node failure can affect the network |
+| **Network (NOS)** | Shared LAN resources; central user management | Server bottleneck/failure risk; vulnerable under high traffic |
+
+### Distributed vs Network OS
+
+| Distributed OS | Network OS |
+| --- | --- |
+| Appears as **one** system to users | Shared files/printers over a LAN |
+| Jobs split across machines | Central **broadcast table** maps resource names → locations |
+| Tight node integration | Clients use a subset of the server's tools |
 
 <Callout type="tip">
 "Missing the deadline causes total failure" → hard real-time. "Many computers appear as one system" → distributed OS. "Server manages users/groups/shares" → NOS.
@@ -125,6 +151,28 @@ New → Ready → Running → Terminated
 Running --interrupt/time slice--> Ready
 Waiting --I/O done--> Ready
 ```
+
+| State | Meaning |
+| --- | --- |
+| **New** | Being created |
+| **Ready** | Waiting in memory for the CPU |
+| **Running** | Instructions executing |
+| **Waiting / Blocked** | Waiting for an event (I/O, signal) |
+| **Terminated** | Finished execution |
+
+A running process moves to *waiting* on I/O; when I/O completes it returns to *ready* (not straight to running). A time-slice expiry also returns it to *ready*.
+
+### Scheduling queues
+
+The OS tracks waiting processes in queues:
+
+| Queue | Role |
+| --- | --- |
+| **Job queue** | All processes currently on the system |
+| **Ready queue** | Processes in main memory waiting for CPU time |
+| **Device queue** | Processes waiting for a particular I/O device |
+
+**PCB (process control block)** stores: process ID and state, program counter and registers, scheduling priority, memory maps, and I/O/open-file status.
 
 **Context switch** = save state of the current process/PCB and load the next — pure overhead (no useful work done).
 
@@ -371,3 +419,25 @@ The OS hides device details behind **device drivers** and standard APIs.
 <Callout type="info">
 Protection vs security exam line: protection is about *rogue processes inside the system*; security is about *unauthorised outsiders and malware*. Rings protect against faults inside; firewalls protect the boundary.
 </Callout>
+
+## Past Exam Questions (jobqns)
+
+**Q1:** What are the advantages of a Network Operating System (NOS)? *(CB AE'21)*
+
+**A:** Shared files, folders, and printers across the LAN · centralised user and security management · a broadcast table maps resource names so clients find servers easily · applications run on clients while data is centrally stored and backed up · easier administration of updates and access rights.
+
+**Q2:** What are the characteristics of a good operating system? *(CB ME'23)*
+
+**A:** (1) **Convenience** — easy GUI/CLI for users; (2) **Efficiency** — optimal CPU, memory, and device utilisation; (3) **Reliability** — consistent operation with error handling; (4) **Scalability** — grows with workload; (5) **Security** — protection and access control; (6) **Maintainability** — easy to update and debug.
+
+**Q3:** What are the different variables of a program? *(CB CE'23, 6 marks)*
+
+**A:** By **scope/lifetime**: **local** (inside a function, exists only while it runs) · **global** (outside all functions, file-wide) · **formal parameters** (names in the definition header) · **actual arguments** (values passed at the call) · **static** (retain value between calls, one shared instance) · **instance/class variables** (per-object vs shared). By **data type**: integer, float, character, string, boolean.
+
+**Q4:** Differentiate monolithic and microkernel OS.
+
+**A:** Monolithic keeps all OS services in kernel space — faster, but a single fault can crash the system. Microkernel keeps only core services (scheduling, IPC) in the kernel; file and device drivers run as user-space servers — more secure and fault-tolerant, with some IPC overhead.
+
+**Q5:** What is a process? List its five states.
+
+**A:** A process is a program in execution, tracked by a PCB. States: **new**, **ready**, **running**, **waiting/blocked**, **terminated**.

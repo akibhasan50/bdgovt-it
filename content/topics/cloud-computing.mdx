@@ -1,110 +1,106 @@
 ---
-title_en: "Cloud Computing"
-title_bn: "ক্লাউড কম্পিউটিং"
-summary_en: "Service models, deployment models, shared responsibility — plus the AWS/Azure vocabulary exams borrow."
-summary_bn: "সার্ভিস ও ডিপ্লয়মেন্ট মডেল, শেয়ারড দায়িত্ব — পাশাপাশি এডব্লিউএস/অ্যাজিউরের শব্দভান্ডার।"
+title_en: "Cloud Computing MCQ & Written Notes"
+title_bn: "ক্লাউড কম্পিউটিং এমসিকিউ ও লিখিত নোট"
+summary_en: "Learn Cloud Computing characteristics, deployment models, IaaS/PaaS/SaaS, advantages, and enabling technologies with real CB exam questions."
+summary_bn: "ক্লাউড কম্পিউটিংয়ের বৈশিষ্ট্য, ডিপ্লয়মেন্ট মডেল, IaaS/PaaS/SaaS, সুবিধা ও এনেবলিং টেকনোলজি শিখুন — প্রকৃত সিবি পরীক্ষার প্রশ্ন ও মডেল উত্তর সহ।"
 ---
 
-## What is cloud computing?
-
-On-demand delivery of computing services (servers, storage, databases, networking, software, analytics) over the internet with pay-as-you-go pricing — no owning physical hardware.
-
-### NIST essential characteristics
-
-| Characteristic | Meaning |
-| --- | --- |
-| On-demand self-service | provision resources automatically, no human interaction |
-| Broad network access | available over the network from standard devices |
-| Resource pooling | multi-tenant — one pool serves many customers |
-| Rapid elasticity | scale up/down quickly (auto-scaling) |
-| Measured service | usage monitored, billed on consumption |
-
-**Memory trick:** On-demand, Broad access, Resource pooling, Elasticity, Measured → **O-B-R-E-M**.
-
-## Service models
-
-```text
-SaaS — you use the app           (Gmail, Office 365)
-PaaS — you deploy your code      (Heroku, App Engine)
-IaaS — you manage OS + runtime   (EC2, Azure VMs)
-FaaS — you write a function      (Lambda, Cloud Functions)
-```
-
-Ownership of everything below your layer belongs to the provider.
-
-| Layer | You manage | Provider manages |
-| --- | --- | --- |
-| On-premises | everything | nothing |
-| **IaaS** | app, data, runtime, OS | servers, storage, networking, virtualisation |
-| **PaaS** | app, data | runtime, OS, servers, storage, networking, virtualisation |
-| **SaaS** | nothing (just your data/usage) | everything |
-
-- **IaaS examples:** Amazon EC2, Azure Virtual Machines, Google Compute Engine — rent VMs, install your own OS.
-- **PaaS examples:** Google App Engine, Azure App Service, Heroku — push code, platform handles OS/scaling.
-- **SaaS examples:** Gmail, Dropbox, Zoom, Salesforce — ready-to-use software.
+**Cloud Computing** is on-demand access to shared computing resources over the Internet — servers, storage, databases, networking, and software — that can be rapidly provisioned with minimal management effort.
 
 <Callout type="tip">
-Pizza analogy: on-prem = cook at home · IaaS = rent the kitchen · PaaS = get a pizza kit · SaaS = delivery. Exam order of control: IaaS most → SaaS least.
+Primary exam anchors: deployment + service models *(CB O(IT) 26)* · enabling technologies *(CB AME 2026)*.
 </Callout>
 
-## Deployment models
+## What is Cloud Computing
 
-- **Public** — shared infrastructure, multi-tenant (AWS, Azure, GCP).
-- **Private** — single organisation, more control (a bank's internal cloud).
-- **Hybrid** — public + private tied together (sensitive data private, burst capacity public).
-- **Community** — shared by several organisations with common concerns (govt agencies for compliance).
+Instead of owning physical hardware, users and organisations **rent** computing power and storage from a cloud provider and pay for what they use. Resources live in remote data centres and are reached over the Internet.
 
-Public = lowest cost / least control; private = highest cost / most control; hybrid sits in between.
+## Key Characteristics
 
-## Shared responsibility (classic MCQ)
+The five defining characteristics of cloud computing:
 
-| Layer | Who patches |
-| --- | --- |
-| Data, app config | Customer |
-| Guest OS in your VM | Customer |
-| Hypervisor | **Provider** |
-| Physical hosts, network, facilities | **Provider** |
+| Characteristic | Meaning |
+|----------------|---------|
+| **On-demand self-service** | Users provision resources automatically without talking to the provider |
+| **Broad network access** | Available over the network from any device (laptop, phone, tablet) |
+| **Resource pooling** | One provider's resources serve many users (multi-tenancy) |
+| **Rapid elasticity** | Capacity scales up or down quickly with demand |
+| **Measured service** | Usage is metered — you pay for what you consume |
+
+## Deployment Models
+
+*Question tagged: CB O(IT) 26*
+
+| Model | Who uses it | Traits |
+|-------|-------------|--------|
+| **Public** | Open to any user/organisation over the Internet | Owned by third-party providers (AWS, Azure, GCP); pay-as-you-go; shared infrastructure |
+| **Private** | Single organisation only | More control and security; hosted in-house or by a provider; higher cost |
+| **Hybrid** | Mix of public and private | Sensitive data stays private; burst capacity goes to public; flexibility + compliance |
+| **Community** | Organisations with shared goals | Shared infrastructure for groups with common requirements (e.g. government agencies) |
+
+## Service Models: IaaS, PaaS, SaaS
+
+*Question tagged: CB O(IT) 26*
+
+| Model | What you get | Who maintains | Example tasks |
+|-------|--------------|---------------|---------------|
+| **IaaS** (Infrastructure as a Service) | Rent IT infrastructure — servers, storage, networks | Provider runs the hardware; **users install OS and applications** | Virtual machines, block/file storage |
+| **PaaS** (Platform as a Service) | Ready platform for developers to **build and deploy** applications | Provider manages OS, runtime, middleware; you manage code | App platforms, databases-as-a-service |
+| **SaaS** (Software as a Service) | **Ready-to-use applications** delivered over the Internet | Provider maintains everything; **no hardware or software maintenance** by the user | Webmail, online office suites |
 
 <Callout type="warning">
-"Who patches the hypervisor?" — always the cloud provider, never the customer. This exact question has appeared in multiple BD circulars.
+Exam trap: IaaS = *infrastructure only* (you install OS/apps). PaaS = *build on the platform*. SaaS = *use the app* — the user does **not** maintain hardware or software.
 </Callout>
 
-## Elasticity & scaling
+## Advantages of Cloud Computing
 
-- **Vertical** scaling = bigger instance; **horizontal** = more instances.
-- **Scalability** = handle increased load by adding resources (planned); **elasticity** = automatic scale up *and* down with real-time demand.
-- Auto-scaling tracks load → cost efficiency + spike absorption.
-- Pay-as-you-go converts capex to opex.
+| Advantage | What it means |
+|-----------|---------------|
+| **Lower cost** | No big upfront hardware purchase; pay only for usage |
+| **High performance & security** | Provider data centres offer robust hardware and security controls |
+| **Data backup & recovery** | Built-in backup and disaster-recovery options |
+| **Access anywhere** | Data and apps reachable from any location with Internet |
+| **Flexible capacity** | Scale up or down on demand (rapid elasticity in practice) |
+| **Productivity & innovation** | Teams ship faster without managing infrastructure |
 
-## Virtualisation & containers
+## Disadvantages of Cloud Computing
 
-One physical machine → multiple VMs via a **hypervisor**:
+| Disadvantage | Risk |
+|--------------|------|
+| **Internet dependence** | No connection → no access to resources |
+| **Limited control** | Users have little say over the underlying infrastructure |
+| **Security concerns** | Data leaves the organisation's premises; shared-tenant risks |
 
-- **Type 1 (bare-metal)** — runs directly on hardware: VMware ESXi, Hyper-V (what data centers use).
-- **Type 2 (hosted)** — runs on a host OS: VirtualBox, VMware Workstation.
+## Enabling Technologies
 
-| | VM | Container |
-| --- | --- | --- |
-| Virtualises | whole machine incl. guest OS | just the app layer (shares host kernel) |
-| Size / boot | large (GBs), slower | small (MBs), seconds |
-| Tools | VMware, VirtualBox | Docker, Kubernetes |
+*Question tagged: CB AME 2026*
 
-**Multi-tenancy** = many customers on shared infra, logically isolated. **Serverless** (AWS Lambda) = provider allocates servers for your event-driven functions; you pay only for execution time.
+Cloud computing is made possible by:
 
-## Advantages & challenges
+1. **Virtualization** — one physical machine runs many isolated virtual machines
+2. **Service-Oriented Architecture (SOA)** — software delivered as reusable services
+3. **Grid & utility computing** — many machines pooled as one; metered like a utility
+4. **Broadband networks** — high-speed Internet makes remote access practical
+5. **The Internet** — the universal transport between user and data centre
 
-| Advantages | Challenges |
-| --- | --- |
-| Cost savings (no hardware) | internet dependency |
-| Scale up/down easily | security & privacy of third-party storage |
-| Access from anywhere | downtime risk on provider outages |
-| Disaster recovery across sites | vendor lock-in |
-| Provider-handled updates | limited control (especially SaaS/PaaS) |
+## Past Exam Questions
 
-## Well-architected pillars
+**Q1:** What are the different deployment models of cloud computing? *(CB O(IT) 26)*
 
-Cost optimisation, security, reliability, performance efficiency, operational excellence, and sustainability — AWS's six pillars, echoed by Azure's well-architected framework.
+**A:** Four models — **Public** (open to any user over the Internet, third-party provider), **Private** (one organisation, more control/security), **Hybrid** (mix of public and private for flexibility + compliance), **Community** (shared by organisations with common goals).
 
-<Callout type="info">
-One-liners: IaaS = most control/most management · PaaS = write code, provider does the rest · SaaS = least control, easiest · Virtualisation makes the cloud possible · Docker = containers, AWS Lambda = serverless.
-</Callout>
+**Q2:** Explain IaaS, PaaS, and SaaS with examples. *(CB O(IT) 26)*
+
+**A:** **IaaS** — rent IT infrastructure (servers, storage, networks); users install their own OS and applications. **PaaS** — a platform where developers build and deploy applications; the provider manages the runtime. **SaaS** — ready-to-use software over the Internet; the user maintains no hardware or software.
+
+**Q3:** What are the enabling technologies of cloud computing? *(CB AME 2026)*
+
+**A:** Virtualization, service-oriented architecture, grid and utility computing, broadband networks, and the Internet.
+
+**Q4:** State four advantages and two disadvantages of cloud computing.
+
+**A:** *Advantages:* lower cost, high performance/security, data backup and recovery, access from anywhere (also flexible capacity, productivity). *Disadvantages:* dependence on the Internet, limited user control, security concerns.
+
+**Q5:** What is cloud computing? List its key characteristics.
+
+**A:** On-demand access to shared computing resources (servers, storage, databases, networking, software) over the Internet with minimal management effort. Characteristics: on-demand self-service, broad network access, resource pooling, rapid elasticity, measured service.

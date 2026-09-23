@@ -1,154 +1,313 @@
 ---
-title_en: "Programming Questions"
-title_bn: "প্রোগ্রামিং প্রশ্ন"
-summary_en: "Output prediction, pointers, recursion and the undefined-behaviour traps C papers love."
-summary_bn: "আউটপুট অনুমান, পয়েন্টার, রিকারশন আর সি পেপারের প্রিয় undefined behaviour ফাঁদ।"
+title_en: "Programming Questions: MCQ & Written Practice"
+title_bn: "প্রোগ্রামিং প্রশ্ন: এমসিকিউ ও লিখিত অনুশীলন"
+summary_en: "Practice programming MCQs and written questions covering core concepts, Python, data structures, sorting, searching, and functions with model answers."
+summary_bn: "কোর কনসেপ্ট, পাইথন, ডেটা স্ট্রাকচার, সর্টিং, সার্চিং ও ফাংশন নিয়ে প্রোগ্রামিং এমসিকিউ ও লিখিত প্রশ্ন অনুশীলন করুন — মডেল উত্তর সহ।"
 ---
 
-## The output-prediction method
-
-Don't trace in your head — write the state table:
-
-```text
-x = 5
-x++ + ++x
- ^      ^
- |      └─ left-to-right? NOT GUARANTEED in C
- └─ modifying x twice without a sequence point = undefined
-```
-
-Whenever an expression modifies the same variable twice with no sequence point between, the standard says *undefined behaviour*. Exams sometimes expect you to pick "undefined" — and sometimes print what a specific compiler does. Read the options: "Undefined behaviour" present ⇒ choose it.
-
-## Pointer essentials
-
-```c
-int a = 10;
-int *p = &a;
-int **q = &p;   // pointer to pointer
-
-*p  == 10
-**q == 10
-sizeof(p) == sizeof(void*)   // platform address width
-```
-
-- `*` → dereference, `&` → address-of.
-- Array name decays to a pointer to its first element (except with `sizeof` and `&`).
-- `p + 1` advances by `sizeof(*p)` bytes, not one byte.
-
-## Structures
-
-A **structure** is a user-defined type grouping mixed-type variables under one name (arrays only hold one type).
-
-```c
-struct Student {
-    int rollNo;
-    char name[50];
-    float marks;
-};
-
-struct Student s1 = {101, "Akib", 89.5};
-printf("%d %s %.2f\n", s1.rollNo, s1.name, s1.marks);
-
-struct Student *ptr = &s1;
-printf("%d\n", ptr->rollNo);        // arrow for pointers; (*ptr).rollNo also works
-```
-
-- `.` (dot) for a normal variable, `->` (arrow) for a pointer.
-- Array of structures stores multiple records; structures nest inside structures.
-- Pass **by value** (copy) or **by reference** (pointer).
-- `typedef struct { ... } Student;` removes the need to repeat `struct`.
-
-### Structure vs union
-
-| | Structure (`struct`) | Union (`union`) |
-| --- | --- | --- |
-| Memory | Separate for every member (sum of sizes) | Shared — size = **largest** member |
-| Active values | All members valid at once | Only one member valid at a time |
-| Use | Full records (student, employee) | Save memory when only one field is used |
-
-```c
-struct A { int i; float f; char c; };  // 4+4+1 (+ padding)
-union B  { int i; float f; char c; };  // size of largest member (4)
-```
-
-## Structure padding & alignment
-
-CPUs read memory in fixed-size words, so the compiler aligns each member to an address that is a multiple of its own size, inserting unused **padding** bytes.
-
-**Golden rule:** a data type must start at an address that is a multiple of its size.
-
-| Type | Size | Must start at multiple of |
-| --- | --- | --- |
-| char | 1 | 1 |
-| short | 2 | 2 |
-| int / float | 4 | 4 |
-| double | 8 | 8 |
-| pointer | 4 or 8 | 4 or 8 |
-
-### Example — padding between members
-
-```c
-struct Example { char a; int b; char c; };
-```
-
-```text
-Address:  0    1    2    3    4    5    6    7    8    9   10   11
-Content: [a] [pad][pad][pad][------b------][c] [pad][pad][pad]
-sizeof = 12  (not 1+4+1 = 6)
-```
-
-Reorder largest-first to cut padding:
-
-```c
-struct Better { int b; char a; char c; };   // sizeof = 8
-```
-
-### The only two questions to ask
-
-1. "Is my next free address a multiple of this member's size?" → if not, pad until it is.
-2. "Is my total size a multiple of the LARGEST member's size?" → if not, pad at the end.
-
-**Worked example:**
-
-```c
-struct Practice { char a; short b; char c; double d; };
-```
-
-- `a` at 0 → next free 1
-- `b` (short, multiple of 2): pad 1 byte → `b` at 2–3 → next free 4
-- `c` at 4 → next free 5
-- `d` (multiple of 8): pad 3 bytes → `d` at 8–15 → next free 16
-- 16 is a multiple of 8 → no trailing padding → **sizeof = 16**
-
-### Removing padding
-
-```c
-#pragma pack(1)   // pack tightly — no padding
-struct Packed { char a; int b; char c; };   // sizeof = 6
-#pragma pack()    // reset
-```
-
-Trade-off: saves memory but misaligned data may need multiple CPU reads (slower).
+Programming notes from **Section A** (written Q&A), **Section B** (topic-wise practice), and **Section C** (MCQ) — covering core concepts, Python, data types, operators, control structures, arrays, searching, and recursion with past-paper style answers.
 
 <Callout type="tip">
-Exam favourite: `struct { char a; int b; }` is **8** bytes on typical platforms (1 + 3 padding + 4); the equivalent union is **4** bytes.
+Practice in order: concepts → data types → control flow → arrays/strings → searching/recursion → Python. Answers are model responses — examiners accept any correct wording.
 </Callout>
 
-## Recurrence of common patterns
+## Programming Concepts
 
-```c
-int fact(int n) { return n <= 1 ? 1 : n * fact(n - 1); }
-int fib(int n)  { return n < 2 ? n : fib(n-1) + fib(n-2); }  // O(2^n)
+**Q: What is the difference between a compiled language and an interpreted language?**
+**A:** A **compiled** language translates the whole source into machine code *before* execution (e.g. C, C++) — faster runtime, errors found at compile time. An **interpreted** language executes line by line via an interpreter (e.g. Python, JavaScript) — easier to debug, usually slower.
+
+**Q: What are algorithm, flowchart, and program?**
+**A:** An **algorithm** is a step-by-step finite procedure to solve a problem. A **flowchart** is the *graphical* representation of that algorithm using symbols. A **program** is the coded implementation of the algorithm in a specific language.
+
+**Q: What is the difference between syntax and semantics?**
+**A:** **Syntax** = the grammatical rules of the language (how statements must be written). **Semantics** = the *meaning* of the statement — what it actually does when executed.
+
+**Q: Difference between a program and a program instruction?**
+**A:** A **program** is the complete set of instructions that solves a task. A **program instruction** is a *single* statement in that program (one line of code).
+
+**Q: What is the difference between a variable and a constant?**
+**A:** A **variable** can change value during execution (`x = 10` → `x = 20`). A **constant** is fixed and must not change (`PI = 3.14159`).
+
+**Q: What are the attributes of a program?**
+**A:** Name, input, output, and function (what it is called with, what data it takes, what it returns/prints, and what it does).
+
+**Q: Structured vs unstructured programming?**
+**A:** **Structured** uses modules, loops, and selection with a single entry/exit flow (easy to test, easy to maintain). **Unstructured** uses `GOTO`-style jumps — hard to follow, hard to test.
+
+**Q: Why do we need programming languages like COBOL and FORTRAN (why learn programming)?**
+**A:** To express algorithms in a form humans can write and machines can execute — each language targets a domain (COBOL: business data; FORTRAN: scientific math) instead of raw machine code.
+
+## Errors, Bugs, and Testing
+
+**Q: What is the difference between a bug and debugging?**
+**A:** A **bug** is a defect in the program. **Debugging** is the process of *finding and fixing* those bugs.
+
+**Q: What are the different types of errors?**
+**A:** **Syntax errors** (grammar), **runtime errors** (crash during execution, e.g. divide by zero), **logic errors** (runs but wrong result).
+
+**Q: What is the difference between testing, validation, and verification?**
+**A:** **Verification** — *Are we building the product right?* (against specs, reviews/static checks). **Validation** — *Are we building the right product?* (against user needs, execution/testing). **Testing** — the activity of executing the software to find defects (part of validation).
+
+**Q: What is a test suite?**
+**A:** A collection of test cases designed to exercise a program and check expected behaviour.
+
+**Q: What is documentation?**
+**A:** Manuals, comments, and specs that describe how the software is designed, used, and maintained (required for readability and handover).
+
+**Q: What are the common security-testing tools? Which one is for detection?**
+**A:** IDS, IPS, firewall, antivirus. An **IDS** (Intrusion Detection System) *detects* and alerts; an IPS actively blocks; a firewall filters traffic; antivirus scans for malware.
+
+**Q: At which stage are software defects detected — coding or execution?**
+**A:** Defects appear at **coding** time (syntax/logic mistakes) but are *detected* by running the code — compiler/interpreter catches syntax, **execution/testing** catches runtime and logic bugs.
+
+**Q: What is code readability? Why does it matter?**
+**A:** How easy code is for humans to understand — naming, indentation, comments, structure. Readable code is easier to debug, review, and maintain.
+
+**Q: What is required to execute a program?**
+**A:** Source code → (compiler/interpreter) → executable/loadable form → run on a processor with required inputs. Necessary: valid syntax, a translator, and an environment/runtime.
+
+**Q: How do you eliminate deadlock?**
+**A:** Prevent it by: acquiring resources in a fixed order, avoiding circular wait, using timeouts, or requiring all resources up front (no hold-and-wait).
+
+## Control Structures and Arithmetic
+
+**Q: Write two-layer if statements.**
+**A:**
+```python
+if score >= 60:
+    if score >= 80:
+        print("A")
+    else:
+        print("B")
+else:
+    print("Fail")
 ```
 
-Count recursive calls to get complexity: naive fib is O(2ⁿ); memoised is O(n).
+**Q: What is an if condition / conditional statement?**
+**A:** A statement that runs a block only when a Boolean expression is true (`if`, `elif`/`else if`, `else`).
 
-## Python gotchas that show up
+**Q: Difference between while and do-while loops?**
+**A:** **while** checks the condition *before* the first run (may run 0 times). **do-while** runs the body *first*, then checks — always runs at least once.
 
-- `b = a` aliases; `b = a.copy()`, `list(a)`, `[*a]` are shallow; `copy.deepcopy` is deep.
-- Strings are immutable — every "concatenation" creates a new object.
-- Integer division `//` vs `/` (true division returns float).
+**Q: What are the different types of loops?**
+**A:** **Entry-controlled** (while, for) — test before each run. **Exit-controlled** (do-while) — test after each run. Count-controlled (`for i in range(n)`) vs condition-controlled (`while`).
 
-<Callout type="tip">
-For linked-list questions, draw three boxes and move pointers literally. Visual tracing beats mental tracing on 90% of these problems.
-</Callout>
+**Q: What is a case structure?**
+**A:** Multi-way selection (`match`/`switch`/`case`) that picks one branch from many possible values of an expression.
+
+**Q: How does the computer silently handle rounding in arithmetic?**
+**A:** Fixed-width binary floating-point cannot represent many decimals exactly; the CPU rounds to the nearest representable value. Classic case: `0.1 + 0.2 != 0.3` in IEEE 754.
+
+**Q: What is an assignment statement vs a relational expression?**
+**A:** **Assignment** stores a value (`x = 5`). **Relational** compares two values and yields True/False (`x == 5`). Assignment uses `=`; relation uses `==`, `!=`, `<`, `>`, etc.
+
+**Q: What are relational operators?**
+**A:** `==`, `!=`, `<`, `<=`, `>`, `>=` — compare operands and return a Boolean.
+
+**Q: What is an input and an output statement?**
+**A:** **Input** reads data into the program (e.g. `input()`, `scanf`). **Output** displays or returns results (e.g. `print()`, `printf`).
+
+## Data: Types, Arrays, Strings, Searching
+
+**Q: What are data types? Give integer and double examples.**
+**A:** A data type defines what values a variable can hold and what operations work on it. **Integer** — whole numbers (`42`, `-7`). **Double** — floating-point with decimals (`3.14`, `-0.5`).
+
+**Q: What is type conversion?**
+**A:** Changing a value from one type to another — **implicit** (auto, e.g. int→float) or **explicit** (cast, e.g. `int("5")`, `float(x)`).
+
+**Q: Why do we need arrays?**
+**A:** To store many values of the same type under one name with indexed access — instead of declaring hundreds of separate variables.
+
+**Q: How do you modify array elements?**
+**A:** By index: `arr[2] = 99` replaces the third element (0-based indexing).
+
+**Q: Difference between an array and a linked list?**
+**A:** **Array** — fixed/contiguous memory, O(1) index access, costly insert/delete in the middle. **Linked list** — nodes with pointers, dynamic size, O(1) insert/delete at known node, O(n) access.
+
+**Q: Difference between a stack and a queue?**
+**A:** **Stack** — LIFO (last in, first out), `push`/`pop` at one end. **Queue** — FIFO (first in, first out), enqueue at rear, dequeue at front.
+
+**Q: What is a string? How do you compare strings?**
+**A:** A sequence of characters. Compare **lexicographically** (character by character using ASCII/Unicode order) — Python: `s1 == s2`, `s1 < s2`.
+
+**Q: What is ASCII?**
+**A:** American Standard Code for Information Interchange — maps characters to numbers (A=65, a=97, 0=48, space=32) so text can be stored as numbers.
+
+**Q: Linear search vs binary search?**
+**A:** **Linear** — check each element in order; works on any list; O(n). **Binary** — repeatedly halves a *sorted* list by comparing with the middle; O(log n).
+
+**Q: What is the table-driven method?**
+**A:** Deciding behaviour from a lookup table (condition → action) instead of long `if/elif` chains — easier to extend and test.
+
+## Subprograms, Translation, and Execution
+
+**Q: Difference between a subprogram, procedure, and function?**
+**A:** All are reusable code blocks. A **function** returns a value; a **procedure** performs actions (may not return); a **subprogram** is the general term covering both.
+
+**Q: What is a subroutine?**
+**A:** A named block of code that can be called multiple times — avoids duplication (function/procedure).
+
+**Q: Procedure vs function?**
+**A:** **Procedure** = do something (side effects, no required return). **Function** = compute and return a value.
+
+**Q: Recursion vs iteration?**
+**A:** **Recursion** — a function calls itself with a base case; elegant for trees/divide-and-conquer, uses call-stack memory. **Iteration** — loops (`for`/`while`); usually less memory and faster.
+
+**Q: What is recursion?**
+**A:** Solving a problem by having a function call itself on a smaller input until a **base case** stops the calls (`factorial(n) = n * factorial(n-1)`, `factorial(0) = 1`).
+
+**Q: Source-to-source translator vs compiler?**
+**A:** A **source-to-source translator** (transpiler) converts source code to *another source language* (e.g. TS→JS) which is still compiled/interpreted later. A **compiler** translates source directly to **machine/object code**.
+
+**Q: Can a source-to-source translator produce assembly code?**
+**A:** Yes — if the target language is assembly, it emits assembly as text, which an assembler then turns into machine code.
+
+**Q: Source code vs machine code?**
+**A:** **Source code** — human-readable program text. **Machine code** — binary instructions the CPU executes directly.
+
+**Q: What is an object program?** *(MCQ — compiled program output)*
+**A:** The **object program** is the translated (machine-language) result a compiler produces from source code. Source program = what you write; compiler = the tool; object program = its output.
+
+## Problem Solving and Flowcharts
+
+**Q: Stepwise (blockwise) problem solving?**
+**A:** Break a large problem into small blocks — understand → plan steps → write algorithm/flowchart → code → test each block — rather than coding everything at once.
+
+**Q: Flowchart vs program?**
+**A:** A **flowchart** is a *visual* plan of logic (symbols, arrows) with no syntax rules of a language. A **program** is the actual coded implementation in a specific language.
+
+**Q: How is software different from hardware?**
+**A:** **Software** = programs and data (intangible, can be copied/updated). **Hardware** = physical components (tangible, cannot be “copied” as data).
+
+**Q: What are the most common errors beginners make?**
+**A:** Syntax mistakes (missing `:` / brackets), wrong variable names, off-by-one index errors, incorrect loop conditions, and logic errors in conditions.
+
+**Q: What is “execute”?**
+**A:** To run a program so its instructions are carried out by the CPU (via interpreter or compiled binary).
+
+**Q: How do you write the Pascal triangle (first rows) in a program?**
+**A:** Each row starts and ends with 1; each inner value = sum of the two values above it.
+```
+    1
+   1 1
+  1 2 1
+ 1 3 3 1
+1 4 6 4 1
+```
+Nested loops with `C(n,k) = n!/(k!(n-k)!)` or by building each row from the previous row.
+
+## Python Questions
+
+**Q: Python basics — why is it popular for beginners?**
+**A:** Clean readable syntax, dynamic typing, huge standard library, runs everywhere — good for learning programming fundamentals.
+
+**Q: Python data types?**
+**A:** `int`, `float`, `str`, `bool`, `list`, `tuple`, `dict`, `set` (plus `NoneType`).
+
+**Q: Python list vs tuple?**
+**A:** **List** — mutable `[]`; **tuple** — immutable `()`, usable as dict key.
+
+## Section C Practice
+
+**Q (MCQ):** A compiled program results in __? A) object program · B) compiler · C) source program · D) assembly program
+
+**A:** **A — object program.** The compiler translates the source program into an object (machine) program.
+
+**Q:** Design a simple computer system that monitors … *(open-ended Section A item — no single model answer; structure your reply as: inputs → sensors/data collection → processing rules → alerts/output → storage).*
+
+## Python Exercises
+
+```python
+# 1. Even/Odd
+n = int(input("Enter a number: "))
+print("Even" if n % 2 == 0 else "Odd")
+
+# 2. Factorial (iterative)
+def factorial(n):
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+# 3. Factorial (recursive)
+def factorial_r(n):
+    return 1 if n <= 1 else n * factorial_r(n - 1)
+
+# 4. Linear search
+def linear_search(arr, key):
+    for i, v in enumerate(arr):
+        if v == key:
+            return i
+    return -1
+
+# 5. Binary search (list must be sorted)
+def binary_search(arr, key):
+    lo, hi = 0, len(arr) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if arr[mid] == key:
+            return mid
+        if arr[mid] < key:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return -1
+
+# 6. Fibonacci
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        print(a, end=" ")
+        a, b = b, a + b
+
+# 7. String reverse
+def reverse_string(s):
+    return s[::-1]
+
+# 8. Sum of list elements
+def total(lst):
+    return sum(lst)
+```
+
+## Practice Questions
+
+**Q: What is a compiler? What is an interpreter?**
+**A:** **Compiler** translates the entire source to object/machine code in one pass before execution. **Interpreter** translates and executes line by line.
+
+**Q: What is a programming language?**
+**A:** A formal language with syntax and semantics used to write instructions a computer can execute (machine code after translation).
+
+**Q: What is an array?**
+**A:** A collection of elements of the same type stored under one name, accessed by index.
+
+**Q: What is the difference between an array and a linked list?**
+**A:** See Data section — contiguous/indexed vs dynamic/pointer-based.
+
+**Q: What is a pointer?**
+**A:** A variable that stores the *memory address* of another variable (C/C++); enables dynamic memory and indirect access.
+
+**Q: What is an algorithm?**
+**A:** Finite, ordered, unambiguous steps to solve a problem — input → process → output.
+
+**Q: What is a flowchart?**
+**A:** Graphical algorithm using standard symbols (oval = start/stop, parallelogram = I/O, rectangle = process, diamond = decision).
+
+**Q: What is a function?**
+**A:** A named, reusable block that takes parameters, executes statements, and may return a value — reduces duplication and eases testing.
+
+**Q: What are the differences between arrays and records?**
+**A:** **Array** — same type elements, index access. **Record (struct)** — one object with *different* typed fields, accessed by field name.
+
+**Q: What is the difference between the C language and C++ language?**
+**A:** **C** — procedural, functions + structs. **C++** — adds classes, inheritance, polymorphism, STL (supports OOP as well as procedural).
+
+## Drills
+
+1. Compiled vs interpreted — one line each, with examples.
+2. Write a two-layer if statement in Python or C.
+3. While vs do-while — when does each run zero times?
+4. Linear vs binary search — precondition and big-O.
+5. Recursion vs iteration — memory trade-off.
+6. Source-to-source translator vs compiler — what does each output?
+7. Stack vs queue — real-life example of each.
+8. Why does `0.1 + 0.2` not equal `0.3` in floating-point?

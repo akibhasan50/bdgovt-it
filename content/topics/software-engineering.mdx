@@ -1,98 +1,245 @@
 ---
-title_en: "Software Engineering"
-title_bn: "সফটওয়্যার ইঞ্জিনিয়ারিং"
-summary_en: "SDLC models, testing taxonomy, Agile ceremonies and the Git commands every office uses."
-summary_bn: "এসডিএলসি মডেল, টেস্টিং শ্রেণিবিন্যাস, অ্যাজাইল রীতি আর প্রতিটি অফিসে ব্যবহৃত গিট কমান্ড।"
+title_en: "Software Engineering MCQ & Written Notes"
+title_bn: "সফটওয়্যার ইঞ্জিনিয়ারিং এমসিকিউ ও লিখিত নোট"
+summary_en: "Learn Software Engineering, SDLC, Agile, Testing, and Software Maintenance with real CB exam questions and model answers."
+summary_bn: "সফটওয়্যার ইঞ্জিনিয়ারিং, SDLC, Agile, টেস্টিং ও সফটওয়্যার মেইনটেন্যান্স শিখুন — প্রকৃত সিবি পরীক্ষার প্রশ্ন ও মডেল উত্তর সহ।"
 ---
 
-## Lifecycle models
-
-- **Waterfall** — sequential, rigid, suits stable requirements.
-- **Spiral** — risk-driven, iterative, heavier documentation.
-- **Agile/Scrum** — iterations (sprints) of 1–4 weeks, daily standup ≤ 15 min, demo + retrospective each sprint.
-- **Prototype** — build to clarify requirements.
-
-## UML at a glance
-
-UML is the standardised visual modelling language for designing and documenting object-oriented systems — **14 diagram types**: 7 structural (what the system *is*) + 7 behavioural (what the system *does*).
-
-| Category | Diagrams |
-| --- | --- |
-| Structural | Class, Object, Component, Deployment, Package |
-| Behavioural | Use Case, Sequence, Activity, State, Collaboration |
-
-### Class diagram
-
-Represents classes, attributes, methods and relationships. `+` public, `-` private, `#` protected.
-
-| Relationship | Symbol | Meaning | Example |
-| --- | --- | --- | --- |
-| Association | Simple line | General connection | Student — Course |
-| Aggregation | Hollow diamond | "has-a" (weak) | Department – Professor |
-| Composition | Filled diamond | "part-of" (strong) | House – Room |
-| Inheritance | Hollow triangle | "is-a" | Animal – Dog |
-| Dependency | Dashed arrow | Uses temporarily | Order – Payment |
-| Multiplicity | Numbers on ends | `1`, `0..1`, `1..*`, `*` | — |
-
-### Use case diagram
-
-Shows functional requirements — actors and what they can do.
-
-- Stick figure = **actor**, oval = **use case**, rectangle = system boundary
-- `<<include>>` → one use case *always* uses another (Withdraw Cash always requires Login)
-- `<<extend>>` → optional/conditional behaviour (Print Receipt is optional)
-
-### DFD (Data Flow Diagram)
-
-Shows how **data moves** through a system — never control flow or timing.
-
-| Symbol (Yourdon/DeMarco) | Represents |
-| --- | --- |
-| Circle / rounded rectangle | Process |
-| Rectangle | External entity |
-| Open rectangle / parallel lines | Data store |
-| Arrow | Data flow |
-
-- **Level 0 (context diagram)** — the whole system as one process
-- **Level 1** — major sub-processes
-- **Level 2+** — further breakdown
+Software Engineering (SE) is a systematic, disciplined, and quantifiable approach to the **development, operation, and maintenance** of software. This note covers the SDLC, requirements and design, testing, Agile, maintenance, and software quality — mapped to CB exam questions with model answers.
 
 <Callout type="tip">
-Quick comparison: ER → database design · Use case → functional requirements · DFD → data movement · Class diagram → static OOP structure. "Which diagram shows actors?" → use case.
+Primary exam anchors: *SE as a systematic, disciplined, quantifiable approach* (CB CE '23, '24) · objectives/advantages/maintenance (CB AE'22, CE'21) · service and deployment models appear on the Cloud page.
 </Callout>
 
-## Testing taxonomy
+## What is Software Engineering
 
-| Level | Target |
-| --- | --- |
-| Unit | individual functions/classes |
-| Integration | module interactions |
-| System | end-to-end workflows |
-| Acceptance | customer requirements |
+**Software Engineering** is the application of engineering principles to software — its development, operation, and maintenance. It treats software work as a measurable, repeatable process rather than ad-hoc coding.
 
-By technique: **black-box** (spec-based: equivalence partitioning, boundary value) vs **white-box** (structural: statement/branch coverage). Sanity vs smoke: smoke = broad shallow "does it start?"; sanity = targeted "does this fix work?".
+### Why Software Engineering is needed
 
-<Callout type="tip">
-"Testing without knowing internal code" → black-box. That one sentence answers most testing MCQs.
+| Need | What it delivers |
+|------|------------------|
+| Portability & maintainability | Software that runs across environments and is easy to change |
+| Reliability | Correct, consistent behaviour under expected conditions |
+| High-quality products | Quality built into the process, not patched in at the end |
+| Lower development cost | Reuse and planned processes cut rework |
+| Reusability | Components used across projects save time |
+| Time-to-market | Faster delivery of working software |
+| Evolution / longevity | Software updated as requirements grow |
+| Quality as a process | Quality measured and improved at every phase |
+
+### Core attributes of SE work
+
+Four attributes structure every SE project:
+
+- **Requirement analysis** — what the system must do
+- **Design** — how the system will be built
+- **Coding** — writing the implementation
+- **Testing** — finding and fixing defects before release
+
+## Software Development Life Cycle (SDLC)
+
+The **SDLC** is a structured process to design, develop, test, deploy, and maintain software. It exists so problems are solved systematically — analysis → design → coding → testing — and **software maintenance** consumes the largest share of the total cost because systems must keep working as needs change.
+
+### SDLC phases
+
+| Phase | Question it answers | Main output |
+|-------|---------------------|-------------|
+| Requirement Analysis | *What to build?* | Software Requirements Specification (SRS), reviewed with stakeholders |
+| Design | *How to build?* | High-Level Design (HLD) and Low-Level Design (LLD) |
+| Implementation | *Write the code* | Source code |
+| Testing | *Find the defects* | Test results, defect reports |
+| Deployment | *Deliver to users* | Live system |
+| Maintenance | *Keep it running* | Patches, updates, improvements |
+
+<Callout type="warning">
+Exam trap: Requirement Analysis answers **What** to build; Design answers **How** to build. Do not swap them.
 </Callout>
 
-## Estimation & metrics
+## Requirements Engineering
 
-Function points and COCOMO for effort; use-case points for OO. Cyclomatic complexity = E − N + 2P — independent paths through code.
+**Requirements Engineering** captures, analyses, documents, and validates what stakeholders need. **Market research** informs which features users actually want before work starts.
 
-## Version control in practice
+### Types of requirements
 
-```bash
-git clone / init / status
-git add . && git commit -m "msg"
-git push origin feature-x     # upload
-git pull                      # fetch + merge
-git merge main                # bring main INTO your branch
-git rebase main               # replay your commits on top
-```
+| Type | Focus |
+|------|-------|
+| Functional | Specific behaviours and functions of the system |
+| Non-functional | Performance, security, usability, reliability |
+| Business | Organisational rules and goals |
+| User | What end users need to do their work |
+| Implementation | Constraints on technology, platform, process |
+| Interface | How the system talks to other systems |
+| Regulatory | Legal and compliance constraints |
+| Data reporting | Reports and data the system must produce |
 
-Branch-per-feature, PR review, `.gitignore`, semantic commits — expected knowledge in any BD IT interview.
+### Prototyping
+
+Building a preliminary model of the system lets stakeholders see and react to the design early.
+
+**Advantages**
+- Uncovers missing or wrong requirements before full development
+- Improves communication with clients
+- Reduces cost of late changes
+
+**Disadvantages**
+- Can encourage scope creep if the prototype is treated as final
+- Rapid throwaway models may ignore non-functional needs
+- Extra effort if the prototype is built twice (throwaway + final)
+
+## Design Principles and Documents
+
+### Three design principles
+
+| Principle | Meaning |
+|-----------|---------|
+| Modularity | Break the system into independent, interchangeable modules |
+| Abstraction | Hide detail; expose only what callers need |
+| Encapsulation | Bundle data and methods; restrict direct access |
+
+### SRS vs FRS vs BRS vs SDD vs HLD
+
+| Pair | Difference |
+|------|------------|
+| **SRS vs FRS** | SRS is the full system requirements spec (all requirements, system-wide). FRS is the *functional* requirements spec — only what the software must *do*. |
+| **SRS vs BRS** | SRS is technical and solution-oriented for developers. BRS (Business Requirements Specification) states *business* needs and goals for stakeholders. |
+| **SDD vs HLD** | SDD (Software Design Document) documents overall design decisions. HLD (High-Level Design) focuses on system architecture and module-level structure. SDD is broader; HLD is the architectural view inside it. |
+
+## Implementation and Programming
+
+Good software starts with disciplined programming:
+
+1. **Learn the basics** of at least one language
+2. **Practice regularly** on real problems
+3. **Understand fundamentals** — data structures, control flow, complexity
+4. **Focus on problem-solving** before clever syntax
+
+### Function as a Service (FaaS) benefits
+
+- No infrastructure to manage — the platform runs the functions
+- Teams focus on business logic only
+- Automatic scaling with demand
+- Quick updates and deployments
+
+## Testing
+
+Testing is a planned activity to **find defects** before users do.
+
+### Purposes of testing
+
+1. Find bugs and defects
+2. Verify the software meets requirements
+3. Ensure quality before release
+4. Build stakeholder confidence
+5. Validate performance, security, and usability
+6. Prevent costly failures in production
+
+### Levels of testing
+
+| Level | Scope | What it checks |
+|-------|-------|----------------|
+| Unit testing | Individual functions/classes | Code coverage of each unit |
+| Integration testing | Combined modules | APIs and interfaces between modules |
+| System testing | Whole system | End-to-end, scenario-based behaviour |
+| Acceptance testing | Against user needs | User needs and business needs are met |
+
+### Testing methodologies
+
+| Method | Approach |
+|--------|----------|
+| **Black box** | Test from the outside — inputs and outputs only; no knowledge of internal code |
+| **White box** | Test inside the code — paths, conditions, statements (structural) |
+| **Gray box** | Combination — some internal knowledge, mostly input/output focus |
 
 <Callout type="info">
-CI runs builds/tests on every merge; CD deploys automatically. "What does CI/CD stand for" still appears in screening exams.
+MCQ style: *debugging vs testing* — testing **finds** defects; debugging **fixes** them after they are found.
 </Callout>
+
+## Software Maintenance
+
+Maintenance is the largest cost in the SDLC. Three categories:
+
+| Type | Trigger | Example |
+|------|---------|---------|
+| **Corrective** | Fix a reported defect | Patch a crash bug |
+| **Adaptive** | Changed environment | Port to a new OS or library version |
+| **Perfective** | Improved requirements | Add a feature or improve performance |
+
+## Agile Software Development
+
+**Agile** delivers software in small, iterative increments with continuous feedback.
+
+**Benefits:** faster delivery, early feedback, easier requirement changes, closer customer collaboration.
+
+### Agile lifecycle — 6 stages
+
+1. **Planning** — scope, resources, timeline
+2. **Concept / requirements** — what to build
+3. **Iteration development** — build in short sprints
+4. **Testing** — verify each increment
+5. **Delivery** — release to users
+6. **Production maintenance** — support and improve
+
+### Process breakdown
+
+Each iteration runs a mini-cycle: requirements → design → code → test → review → feedback into the next iteration. Cross-functional teams, daily stand-ups, and sprint reviews keep progress visible.
+
+## Business Impact of Quality
+
+### Qualitative factors
+
+Organisations track business outcomes alongside technical metrics:
+
+- Deliver **+20%** projects on time
+- Drive **10%** of revenue from newly developed products
+- Use **20%** of engineering capacity for platform rework
+
+### Cost of quality
+
+| Metric | Meaning |
+|--------|---------|
+| Defect rate | Defects per unit of work (e.g. per KLOC or per release) |
+| Failure cost | Cost when defective software reaches production |
+| Cost of control | Cost of prevention and appraisal (reviews, testing) |
+
+Defect metrics tie **cost and schedule** to quality: more escaped defects raise failure cost and delay delivery.
+
+## Software Quality Attributes
+
+| Attribute | Meaning |
+|-----------|---------|
+| Customer satisfaction | Meets user needs and expectations |
+| Reliability | Performs correctly over time |
+| Robustness | Handles invalid input and edge cases |
+| Maintainability | Easy to modify and extend |
+| Reusability | Components usable in other projects |
+
+## Past Exam Questions
+
+**Q1:** Software Engineering (SE) is a systematic, disciplined, and quantifiable approach to the development, operation, and maintenance of software. Explain the statement. *(CB CE '23, '24)*
+
+**A:** SE applies engineering methods to software work. *Systematic* means phased SDLC (requirements → design → code → test → deploy → maintain); *disciplined* means standards, reviews, and defined processes; *quantifiable* means metrics (defect rate, cost, schedule) guide decisions. Together they cover development, operation, and maintenance — not just coding.
+
+**Q2:** What are the objectives/advantages of Software Engineering? What are the characteristics of software maintenance? *(CB AE'22, CE'21)*
+
+**A:** *Objectives/advantages:* reliable high-quality software, lower cost through reuse and process, portability and maintainability, faster time-to-market, evolution over time. *Maintenance characteristics:* it is the costliest SDLC phase; ongoing after deployment; three types — corrective (fix defects), adaptive (environment changes), perfective (new/improved requirements).
+
+**Q3 (MCQ):** Debugging is to testing as __ is to __. Options include: A) finding bugs / fixing them · B) fixing / finding · … *(CB AE'22)*
+
+**A:** **A** — testing finds bugs; debugging fixes them.
+
+**Q4:** Explain the SDLC phases with the question each phase answers.
+
+**A:** Requirement Analysis — *What* to build (SRS); Design — *How* to build (HLD/LLD); Implementation — write code; Testing — find defects; Deployment — deliver; Maintenance — keep it running. Analysis is *what*, design is *how*.
+
+**Q5:** What is prototyping? Give its advantages and disadvantages.
+
+**A:** Building an early model of the system for feedback. *Advantages:* uncovers missing requirements, improves client communication, reduces late change cost. *Disadvantages:* risk of scope creep, may ignore non-functional needs, can mean building twice.
+
+**Q6:** Compare black box, white box, and gray box testing.
+
+**A:** Black box — inputs/outputs only, no code knowledge. White box — internal structure, path and condition coverage. Gray box — partial internal knowledge with mostly input/output focus.
+
+**Q7:** List three design principles of software engineering.
+
+**A:** **Modularity** (independent modules), **abstraction** (hide detail, expose essentials), **encapsulation** (bundle data + methods, restrict access).

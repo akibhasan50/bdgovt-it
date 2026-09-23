@@ -5,6 +5,12 @@ summary_en: "OSI vs TCP/IP, subnetting arithmetic, protocol roles — the highes
 summary_bn: "ওএসআই বনাম টিসিপি/আইপি, সাবনেটিং হিসাব, প্রোটোকলের ভূমিকা — সামগ্রিকভাবে সবচেয়ে বেশি আসে।"
 ---
 
+A computer network is two or more devices connected to **share data, resources, and services** — hardware, software, and processing power.
+
+<Callout type="tip">
+Jobqns exam anchor: *What is a packet?* *(CB TE'25)* · objectives, types, topologies, and device-by-layer appear in written exams.
+</Callout>
+
 ## Networking basics — the journey of data
 
 ```text
@@ -35,6 +41,63 @@ Your device → [Switch]  — devices WITHIN your local network (MAC, Layer 2)
 Switch = traffic cop *inside* a building · Router = traffic cop *between* cities · DNS = phonebook · Firewall = guard checking IDs at the gate.
 </Callout>
 
+### How data moves: packets
+
+Data is split into small **packets** that travel independently and are reassembled at the destination. Each packet carries source/destination addresses plus a sequence number.
+
+**Past exam (CB TE'25):** *What is a packet?* — the unit of data formatted for transmission: **header** (addresses, sequence number), **payload** (data chunk), **trailer** (error-checking info).
+
+## Objectives of a network
+
+| Objective | What it achieves |
+| --- | --- |
+| **Share resources** | Printers, storage, Internet connection used by many devices |
+| **Share data** | Central databases and files accessible everywhere |
+| **Communication** | Email, messaging, video calls between users |
+| **Reliability** | Redundant paths keep services up if one link fails |
+| **Scalability** | Add devices without redesigning the network |
+| **Performance / Security** | Balanced load; authenticated access and encryption |
+
+## Types of networks
+
+### By ownership
+
+| Type | Coverage | Typical use |
+| --- | --- | --- |
+| **PAN** | ~10 m (personal) | Phone + watch + earbuds |
+| **LAN** | Home, office, campus | Local file/print sharing |
+| **MAN** | City-wide | Cable TV, city Wi-Fi |
+| **WAN** | Country / global | The Internet, branch offices |
+
+### By service
+
+| Type | Focus |
+| --- | --- |
+| **Broadcast** | One sender → all receivers (traditional Ethernet, radio) |
+| **Point-to-point** | Dedicated link between exactly two nodes |
+
+LAN: computers share resources (data, peripherals) within a limited area. MAN covers a city; WAN spans countries — the Internet is the largest WAN.
+
+## Client-server vs peer-to-peer
+
+| Client-Server | Peer-to-Peer (P2P) |
+| --- | --- |
+| Dedicated central **server** stores data, enforces security | Every node can act as **client and server** |
+| Scales well; centralised backup and admin | No single point of failure; cheap to set up |
+| Server failure takes the network down | Harder to secure and back up consistently |
+| Examples: web, email servers | Examples: BitTorrent, small-team shares |
+
+## Network topologies
+
+| Topology | Shape | Pros | Cons |
+| --- | --- | --- | --- |
+| **Bus** | Single backbone cable | Simple, cheap, easy to extend | One break kills the network; collision-heavy |
+| **Star** | All nodes → central switch/hub | Easy to add nodes; one bad cable only drops that node | Hub failure disconnects everyone |
+| **Ring** | Each node → next, forming a loop | Equal access; no collisions | One break can partition the ring |
+| **Mesh** | Many redundant paths | Highly fault-tolerant | Expensive; complex cabling |
+| **Tree** | Hierarchical star/bus | Fits org structure; scalable | Backbone failure affects a whole branch |
+| **Hybrid** | Mix of the above | Tuned to the site | Design complexity |
+
 ## Network devices
 
 | Device | Main job | OSI layer | Uses |
@@ -50,6 +113,25 @@ Switch = traffic cop *inside* a building · Router = traffic cop *between* citie
 Firewall types: **packet-filtering** (headers only), **stateful inspection** (tracks connection state), **proxy** (middleman, hides internals), **NGFW** (firewall + IPS + deep packet inspection). Can be hardware or software (e.g. Windows Firewall).
 
 **Hub vs switch:** a hub floods every frame to everyone (collisions, one shared collision domain); a switch reads the MAC and forwards only to the target port — each port is its own collision domain. A router breaks **broadcast domains**.
+
+### Repeater vs hub
+
+Both operate at **Layer 1**:
+
+- **Repeater** — regenerates a weakened signal on one segment (e.g. 10BASE-5 extended to ~950 m with four repeaters). No traffic filtering.
+- **Hub** — a *multi-port* repeater: one port's signal is retransmitted to **all** other ports → broadcasts, collisions, shared bandwidth.
+
+### NIC (Network Interface Card)
+
+The hardware that lets a computer join a network — converts parallel data to serial form for the wire and handles L1/L2 addressing.
+
+| Advantages | Disadvantages |
+| --- | --- |
+| Standardised connectivity (Ethernet/Wi-Fi) | Transfer speed limited by the NIC's capability |
+| Offloads frame handling from the CPU | Adds cost |
+| Enables DMA for efficient transfers | Requires drivers and configuration |
+
+**MAC (Media Access Control)** — unique hardware address burned into the NIC (e.g. `00:1A:2B:3C:4D:5E`); used at the data-link layer to identify devices on the local segment.
 
 ## OSI vs TCP/IP
 
@@ -395,3 +477,25 @@ Samples 2.1, 5.8, 7.3, 4.2 → quantise 2, 6, 7, 4 → encode 010 110 111 100
 <Callout type="tip">
 "Most secure Wi-Fi today" → WPA3. "Which wireless standard is 5 GHz-only?" → 802.11a (and ac). Bluetooth range vs NFC: metres vs centimetres.
 </Callout>
+
+## Past Exam Questions (jobqns)
+
+**Q1:** What is a packet? *(CB TE'25)*
+
+**A:** A packet is the unit of data used for network transmission: **header** (source/destination addresses, sequence number), **payload** (the data segment), and **trailer** (error-detection info). The sender breaks messages into packets; the receiver reorders them with sequence numbers.
+
+**Q2:** State four objectives of a computer network.
+
+**A:** Share resources (printers, storage) · share data · enable communication · improve reliability via redundant paths. (Also scalability, performance, security.)
+
+**Q3:** Compare client-server and peer-to-peer networks.
+
+**A:** Client-server uses a dedicated central server for storage, security, and backup — scalable but the server is a single point of failure. In P2P every node acts as both client and server — no central failure point and cheap to set up, but security and backup are harder.
+
+**Q4:** Distinguish bus, star, and ring topologies.
+
+**A:** **Bus** — single backbone; simple and cheap but one break fails the network. **Star** — all nodes connect to a central hub/switch; easy to extend, hub failure is fatal to the LAN. **Ring** — data travels node-to-node in a loop; even access, but a break can partition the network.
+
+**Q5:** What is a hub? How is it different from a switch?
+
+**A:** A hub is a multi-port Layer-1 repeater that broadcasts to **all** ports — shared bandwidth, collision-prone. A switch is Layer-2: learns MAC addresses and forwards frames **only** to the destination port — dedicated bandwidth, fewer collisions.
