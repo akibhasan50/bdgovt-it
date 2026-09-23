@@ -12,19 +12,20 @@ export function Callout({
   const map = {
     tip: {
       icon: Lightbulb,
-      className:
-        "border-lime/40 bg-lime/10 text-foreground",
+      frame: "border-lime/40 bg-lime/8",
+      chip: "bg-lime/20 text-lime-foreground",
       label: "Exam tip",
     },
     warning: {
       icon: AlertTriangle,
-      className:
-        "border-warning/40 bg-warning/10 text-foreground",
+      frame: "border-warning/40 bg-warning/10",
+      chip: "bg-warning/20 text-warning",
       label: "Careful",
     },
     info: {
       icon: Info,
-      className: "border-cyan/40 bg-cyan/10 text-foreground",
+      frame: "border-cyan/40 bg-cyan/10",
+      chip: "bg-cyan/20 text-cyan",
       label: "Note",
     },
   } as const;
@@ -34,16 +35,24 @@ export function Callout({
   return (
     <div
       className={cn(
-        "my-6 flex gap-3 rounded-xl border p-4 text-sm leading-relaxed",
-        cfg.className
+        "my-6 flex gap-3.5 rounded-2xl border-l-4 p-4 text-sm leading-relaxed shadow-xs",
+        cfg.frame
       )}
     >
-      <Icon className="mt-0.5 size-4 shrink-0" aria-hidden />
-      <div>
-        <span className="mb-1 block font-semibold text-xs tracking-wide uppercase">
+      <span
+        aria-hidden
+        className={cn(
+          "mt-0.5 grid size-7 shrink-0 place-items-center rounded-lg",
+          cfg.chip
+        )}
+      >
+        <Icon className="size-4" />
+      </span>
+      <div className="min-w-0">
+        <span className="mb-1.5 block text-xs font-bold tracking-widest text-foreground/90 uppercase">
           {cfg.label}
         </span>
-        <div className="text-muted-foreground [&_strong]:text-foreground">
+        <div className="space-y-2 text-foreground/75 [&_strong]:text-foreground [&_p]:my-0">
           {children}
         </div>
       </div>

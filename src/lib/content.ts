@@ -4,9 +4,12 @@ import type { ReactNode } from "react";
 import { cache } from "react";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
+import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 
 const contentDir = path.join(process.cwd(), "content", "topics");
+
+const mdxOptions = { remarkPlugins: [remarkGfm] };
 
 export type TopicFrontmatter = {
   title_en: string;
@@ -69,10 +72,12 @@ export const getTopicContent = cache(async (slug: string): Promise<TopicContent>
     const { intro, sections } = splitSections(content);
 
     const compiled = await Promise.all(
-      sections.map((s) => compileMDX({ source: s.body, components: mdxComponents }))
+      sections.map((s) =>
+        compileMDX({ source: s.body, components: mdxComponents, options: { mdxOptions } })
+      )
     );
     const introCompiled = intro
-      ? await compileMDX({ source: intro, components: mdxComponents })
+      ? await compileMDX({ source: intro, components: mdxComponents, options: { mdxOptions } })
       : null;
 
     const seen = new Set<string>();

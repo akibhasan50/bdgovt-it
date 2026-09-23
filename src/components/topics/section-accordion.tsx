@@ -30,8 +30,8 @@ export function SectionAccordion({ sections }: { sections: TopicSection[] }) {
 
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <p className="text-xs text-muted-foreground">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
           {sections.length} {t("sectionCount")}
         </p>
         <Button
@@ -54,17 +54,25 @@ export function SectionAccordion({ sections }: { sections: TopicSection[] }) {
       </div>
 
       <Accordion type="multiple" value={value} onValueChange={setValue}>
-        {sections.map((section) => (
+        {sections.map((section, index) => (
           <AccordionItem
             key={section.id}
             value={section.id}
             id={section.id}
-            className="scroll-mt-24"
+            className="scroll-mt-24 border-border/70"
           >
-            <AccordionTrigger className="py-3.5 text-base font-semibold hover:no-underline">
-              {section.title}
+            <AccordionTrigger className="group items-center rounded-xl px-3 py-3.5 text-left text-base font-semibold tracking-tight hover:bg-muted/50 hover:no-underline aria-expanded:bg-muted/40">
+              <span className="flex min-w-0 items-center gap-3">
+                <span
+                  aria-hidden
+                  className="grid size-6 shrink-0 place-items-center rounded-md bg-primary/10 font-mono text-[0.7rem] font-bold text-primary tabular-nums"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="truncate">{section.title}</span>
+              </span>
             </AccordionTrigger>
-            <AccordionContent className="pb-4 text-[0.95rem]">
+            <AccordionContent className="mb-1 rounded-xl border border-border/60 bg-card px-4 pt-1 pb-5 text-[0.95rem] shadow-xs [&>:first-child]:mt-0 [&_p:first-of-type]:text-base [&_p:first-of-type]:text-foreground/85">
               {section.content}
             </AccordionContent>
           </AccordionItem>
