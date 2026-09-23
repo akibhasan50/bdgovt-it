@@ -206,7 +206,10 @@
     "practiceTopic": "এই টপিক প্র্যাকটিস",
     "relatedTopics": "সম্পর্কিত টপিক",
     "keyConcepts": "মূল ধারণা",
-    "readChapter": "অধ্যায়ের নোট"
+    "readChapter": "অধ্যায়ের নোট",
+    "sectionCount": "টপিক",
+    "expandAll": "সব খুলুন",
+    "collapseAll": "সব বন্ধ করুন"
   },
   "banks": {
     "title": "চাকরিভিত্তিক প্রশ্নব্যাংক",

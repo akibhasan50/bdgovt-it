@@ -5,41 +5,369 @@ summary_en: "Scheduling, deadlocks, memory management — where the diagrams and
 summary_bn: "স্কিউডিং, ডেডলক, মেমরি ম্যানেজমেন্ট — ডায়াগ্রাম আর স্টারভেশনের ঘর।"
 ---
 
-## CPU scheduling
+## OS basics — what it is and does
 
-- **FCFS** — simple, convoy effect possible.
-- **SJF** — optimal average waiting time, needs burst prediction; can starve.
-- **Round Robin** — time quantum; too small = context-switch overhead, too large = degenerates to FCFS.
-- **Priority** — starvation unless aging applied.
+An **operating system** is system software that acts as the interface between users/applications and computer hardware, managing CPU, memory, storage and I/O.
+
+```text
+User → Application programs (Word, Chrome, games)
+     → Operating system (Windows, Linux, Android)
+     → Hardware (CPU, RAM, disk, I/O)
+```
+
+| Function | What it does | Example |
+| --- | --- | --- |
+| Process management | create, schedule, terminate processes | Chrome + Spotify at once |
+| Memory management | allocate/deallocate memory to processes | each app gets its own region |
+| File management | organise, protect, retrieve files | folders, save/open |
+| Device management | control I/O via drivers | print to the right printer |
+| Security & access control | unauthorised access protection | passwords, file permissions |
+| User interface | GUI or CLI | desktop / shell |
+| Error detection & handling | monitor and recover | low-disk warning |
+| Resource allocation / job accounting | who gets what, usage tracking | CPU scheduling, billing |
+
+**Goals of an OS:** convenience for users, efficiency (utilisation of hardware) and extensibility (ability to evolve).
+
+**Boot process:** firmware (BIOS/UEFI) → POST → boot loader (GRUB) → kernel loaded into memory → init/systemd starts services → login.
 
 <Callout type="tip">
-"Which algorithm can starve long jobs?" — anything without aging (SJF, pure priority). Round Robin guarantees fairness and never starves.
+One-line definition examiners want: "The OS is the interface between the user and the hardware, and the resource manager."
 </Callout>
 
-## Deadlock — the four Coffman conditions
+## Types of operating systems
 
-1. Mutual exclusion
-2. Hold and wait
-3. **No** preemption
-4. Circular wait
+| OS type | Key idea | Example |
+| --- | --- | --- |
+| **Batch** | jobs grouped, executed without interaction; one error can delay the batch | old payroll processing |
+| **Multiprogramming** | several programs in memory; CPU switches on I/O waits so it's never idle | early mainframes |
+| **Multitasking** | fast switching → illusion of simultaneity (time-sharing) | Windows running many apps |
+| **Multiprocessing** | multiple CPUs, *true* parallelism — SMP (equal peers) or AMP (master/slave) | multi-core servers |
+| **Time-sharing** | CPU sliced among users round-robin | mainframe terminals |
+| **Real-time (RTOS)** | guaranteed response within a deadline — **hard** (airbags, pacemaker: miss = failure) vs **soft** (video streaming: occasional miss OK) | airbag ECU |
+| **Distributed** | many independent computers act as ONE system | Google's infrastructure |
+| **Network OS (NOS)** | server manages network resources; each PC still runs mostly independently | Windows Server |
+| **Embedded** | lightweight, fast-boot OS for dedicated devices | washing machine, car ECU |
 
-All four must hold. Allow preemption or break the cycle (impose ordering) and deadlock disappears.
+**Multitasking vs multiprocessing:** one CPU switching fast (appears simultaneous) vs many CPUs (actually simultaneous).
+
+**Batch vs time-sharing:** batch groups jobs with no user interaction and optimises throughput; time-sharing gives each user a CPU slice and optimises response time.
+
+<Callout type="tip">
+"Missing the deadline causes total failure" → hard real-time. "Many computers appear as one system" → distributed OS. "Server manages users/groups/shares" → NOS.
+</Callout>
+
+## User space, kernel space & system calls
+
+The **kernel** is the core of the OS — loaded first at boot, always resident in memory, with direct hardware control.
+
+```text
+USER SPACE     — apps (Chrome, Word): restricted access;
+                 a crash only kills that app
+KERNEL SPACE   — process/memory mgmt, drivers, file system:
+                 full hardware access; a crash = kernel panic / BSOD
+HARDWARE
+```
+
+**Why separate?** One buggy or malicious app can't take down the whole system.
+
+### System calls
+
+User-space apps can't touch hardware directly — they ask the kernel via **system calls**:
+
+| Category | Calls |
+| --- | --- |
+| Process control | `fork()`, `exit()`, `wait()` |
+| File management | `open()`, `read()`, `write()`, `close()` |
+| Device management | `ioctl()` variants |
+| Information | `getpid()`, time queries |
+| Communication | `pipe()`, `socket()`, `shmget()` |
+
+```text
+Text editor (user) --write()--> Kernel --talks to--> Hard disk
+                 <-- result ---
+```
+
+The transition is a **mode/context switch** and has overhead. CPU modes: **user (restricted)** vs **kernel (supervisor/privileged)**. A user-mode program attempting a privileged instruction triggers a **trap/exception** handled by the kernel.
+
+### Kernel architectures
+
+| Feature | Monolithic | Microkernel | Hybrid |
+| --- | --- | --- | --- |
+| Size | large — *all* OS services in kernel space | small — only essentials (IPC, scheduling, minimal memory mgmt) | mix of both |
+| Other services | in kernel space | separate processes in **user space** | some in kernel, some modular |
+| Communication | direct function calls | **message passing (IPC)** | both |
+| Speed | faster | slower (IPC overhead) | balanced |
+| Stability / security | less stable, bigger attack surface | more stable, isolated failures | balanced |
+| Examples | **Linux, Unix**, MS-DOS | **QNX, Minix, L4** | **Windows NT, macOS XNU** |
+
+<Callout type="tip">
+Linux = monolithic · QNX/Minix = microkernel · Windows NT/macOS = hybrid. "System calls are the bridge between user space and kernel space."
+</Callout>
+
+## Process and thread
+
+A **process** = a program *in execution* with its own address space, tracked by a **PCB** (process control block: state, registers, memory maps, open files). A **thread** is a lightweight unit of execution *within* a process — threads of the same process share code, data and heap, but each has its own **stack, registers and program counter**.
+
+| | Process | Thread |
+| --- | --- | --- |
+| Address space | isolated, own copy | shared with sibling threads |
+| Creation/switch cost | heavier (page-table switch) | lighter (same address space) |
+| Communication | IPC (pipes, sockets, shared memory) | direct shared variables |
+| Failure | one process crash doesn't kill others | a bad thread can corrupt shared state |
+| Memory | more | less |
+
+### Process states
+
+```text
+New → Ready → Running → Terminated
+         ↑ ↓
+       Waiting (I/O)
+Running --interrupt/time slice--> Ready
+Waiting --I/O done--> Ready
+```
+
+**Context switch** = save state of the current process/PCB and load the next — pure overhead (no useful work done).
+
+### Thread models
+
+| Model | Idea |
+| --- | --- |
+| Many-to-one | many user threads → one kernel thread (old Green Threads; one blocks all) |
+| One-to-one | each user thread → kernel thread (Linux NPTL, Windows) — true parallelism |
+| Many-to-many | many user ↔ many kernel threads (Solaris) |
+
+**User-level threads** are invisible to the kernel (fast, but a blocking syscall stalls all); **kernel-level threads** are scheduled by the OS.
+
+### Inter-process communication (IPC)
+
+- **Pipes** — byte stream between related processes (`ls | grep`)
+- **Message passing** — send/receive explicitly (`msgsnd`)
+- **Shared memory** — fastest: map the same region, synchronise yourself
+- **Sockets** — IPC across machines
+- **Signals** — async notifications (`SIGKILL`, `SIGINT`)
+
+### Concurrency problems
+
+Race conditions occur when threads interleave on shared data — fixed with **mutexes** (mutual exclusion locks) and **semaphores** (counting/binary). Classic synchronisation problems: **producer–consumer, readers–writers, dining philosophers**.
+
+<Callout type="info">
+Thrashing = too little memory for the working set → constant paging. The OS responds by reducing the multiprogramming degree.
+</Callout>
+
+## Process scheduling algorithms
+
+The **short-term scheduler** picks the next Ready process for the CPU. Metrics: waiting time, turnaround time, response time, throughput, CPU utilisation.
+
+| Algorithm | Rule | Strength | Weakness |
+| --- | --- | --- | --- |
+| **FCFS** | first come, first served | simplest | **convoy effect** — short jobs wait behind long ones |
+| **SJF** | shortest CPU burst next | **optimal** average waiting time | needs burst prediction; long jobs can **starve** |
+| **SRTF** | preemptive SJF — shortest *remaining* burst | best for dynamic loads | same starvation issue |
+| **Round Robin** | fixed **time quantum**, cyclic | fair, guarantees response, never starves | too small = context-switch overhead; too large = degenerates to FCFS |
+| **Priority** | lowest number / highest priority first | models importance | **starvation** of low priority — fix with **aging** |
+| **Multilevel queue** | permanent queues (system, interactive, batch) with own policy | suits mainframes | inflexible — job can't move queues |
+| **Multilevel feedback queue** | jobs can move between queues by aging/behaviour | adaptive, most realistic | more complex |
+
+**Preemptive** = OS can forcibly take the CPU (RR, SRTF, priority with aging); **non-preemptive** = runs until it blocks or finishes (FCFS, SJF).
+
+### Worked example — FCFS vs SJF
+
+Jobs A, B, C with burst times **7, 3, 1** arriving in that order:
+
+| | FCFS | SJF (same arrival order → run 1, 3, 7) |
+| --- | --- | --- |
+| Order | A, B, C | C, B, A |
+| Waiting | A=0, B=7, C=10 | C=0, B=1, A=4 |
+| Avg waiting | (0+7+10)/3 = **5.67** | (0+1+4)/3 = **1.67** |
+
+**Round Robin, quantum = 2**, bursts `5, 1, 4`:
+
+```text
+Timeline: [A A][B][A A][C C][A]
+A finishes fairly instead of holding the CPU for 5 straight
+```
+
+<Callout type="tip">
+"Which algorithm can starve long jobs?" — anything without aging (SJF, pure priority). Round Robin guarantees fairness and never starves. "Optimal average waiting time" → SJF. Too-large quantum turns RR into FCFS.
+</Callout>
+
+## Deadlock
+
+A **deadlock** is a set of processes where each waits for a resource held by another — nobody proceeds.
+
+### The four Coffman conditions (all four must hold)
+
+1. **Mutual exclusion**
+2. **Hold and wait**
+3. **No preemption**
+4. **Circular wait**
+
+Allow preemption or break the cycle (impose an ordering on resource requests) and deadlock disappears.
+
+### Handling strategies
+
+| Strategy | Idea | Cost |
+| --- | --- | --- |
+| **Prevention** | break one of the four conditions by design (e.g. ordered resource allocation) | may reduce utilisation/throughput |
+| **Avoidance** | grant requests only if the system stays in a **safe state** — **Banker's algorithm** | needs max-demand info in advance |
+| **Detection + recovery** | build a wait-for graph, detect cycles, then kill/rollback a victim | recovery cost |
+| **Ignorance (Ostrich)** | pretend it won't happen — what most general-purpose OSes do | simple, risky |
+
+### Banker's algorithm (avoidance) — worked example
+
+Available = `(1 5 2 0)`. Three processes, resources `A B C D`:
+
+| Process | Allocation | Max | Need = Max − Alloc |
+| --- | --- | --- | --- |
+| P1 | 0 1 1 0 | 1 5 2 0 | **1 4 1 0** |
+| P2 | 1 0 0 1 | 2 2 1 1 | **1 2 1 0** |
+| P3 | 1 1 0 0 | 2 3 1 2 | **1 2 1 2** |
+
+Is it safe? Check who can finish with `(1 5 2 0)`:
+
+1. P2 needs `(1 2 1 0)` ≤ available → run P2 → release → avail = `(2 5 2 1)`
+2. P1 needs `(1 4 1 0)` ≤ available → run P1 → avail = `(2 6 3 1)`
+3. P3 needs `(1 2 1 2)` ≤ available → run P3
+
+Safe sequence exists: **P2 → P1 → P3** ⇒ safe state, grant requests. If no such ordering exists, the state is unsafe — deny the request.
+
+**Deadlock detection:** resource-allocation graph with no instances = cycle ⇒ deadlock; with single instances, a cycle is *necessary and sufficient*.
+
+<Callout type="tip">
+"Which Coffman condition does *not* hold if resources can be preempted?" → No preemption. Imposing an ordering on lock acquisition breaks circular wait — the cheapest practical fix. Safe sequence exists? Safe. None? Unsafe — refuse the allocation.
+</Callout>
 
 ## Memory management
 
 | Technique | Idea |
 | --- | --- |
-| Partitioning | fixed/variable holes; fragmentation issues |
+| Partitioning | fixed/variable holes; external fragmentation |
 | Paging | fixed-size pages ↔ frames, no external fragmentation |
-| Segmentation | variable-size logical units |
-| Virtual memory | demand paging, page fault handling |
+| Segmentation | variable-size logical units (code, stack, heap) |
+| Virtual memory | demand paging, page-fault handling |
 
-**Belady's anomaly**: with FIFO, more frames → *more* page faults. LRU and optimal are stack algorithms and don't suffer from it.
+### Core concepts
 
-## Threads & concurrency
+- **Logical (virtual) address** vs **physical address** — the **MMU** translates one to the other.
+- **Binding** of addresses can happen at compile, load or run time; run-time binding needs relocation.
+- **Swapping** — whole process moved to disk when not running, back in when scheduled.
+- **Fragmentation** — *external* = free space too scattered for a large process (solved by paging); *internal* = wasted space inside a partition.
 
-Process = isolated address space; thread = shares process memory, own stack. Race conditions are fixed with mutexes/semaphores. Classic synchronisation problems: producer–consumer, readers–writers, dining philosophers.
+### Address translation math
+
+With 4 KB pages, logical address `5000`:
+
+```text
+page number = floor(5000 / 4096) = 1
+offset      = 5000 mod 4096      = 904
+page table: page 1 → frame 4
+physical    = 4 × 4096 + 904 = 17288
+```
+
+### Paging
+
+Memory split into fixed **frames**; process split into fixed **pages** of the same size. Page table maps page → frame; no external fragmentation, only a little internal at the last page.
+
+```text
+Logical address = [page number | offset]
+physical frame = page_table[page number]
+physical address = [frame | offset]
+```
+
+Two-level page tables cut the table's own memory cost; a **TLB** caches recent translations (a hit skips the page-table walk).
+
+### Segmentation & paging combined
+
+Segments (logical units) are paged — modern x86 uses segmented + paged addressing; gives protection per segment and no external fragmentation per page.
+
+### Virtual memory & demand paging
+
+Only the pages actually needed are loaded (**demand paging**). A missing page triggers a **page fault** → fetch from disk → restart the instruction. Benefits: larger logical space than physical RAM, more processes in memory, less I/O (only needed pages).
+
+**Thrashing** = too little memory for the working set → the system spends its time paging instead of executing. Cure: increase frames or reduce multiprogramming degree (working-set / page-fault-frequency models).
 
 <Callout type="info">
-Thrashing = too little memory for the working set → constant paging. The OS responds by reducing multiprogramming degree.
+Belady's anomaly: with **FIFO**, more frames → *more* page faults. LRU and Optimal are stack algorithms and don't suffer from it.
+</Callout>
+
+## Page replacement techniques
+
+When a fault occurs and no frame is free, the OS picks a **victim** page to evict.
+
+| Algorithm | Picks | Notes |
+| --- | --- | --- |
+| **FIFO** | oldest page | simplest; suffers **Belady's anomaly** |
+| **LRU** | page not used for the longest time | good approximation of optimal; needs counters/stack |
+| **Optimal (OPT)** | page needed farthest in the future | theoretical best — needs future knowledge, used as a benchmark |
+| **LFU** | least frequently used | counters; can retain stale hot pages |
+| **Second-chance (FIFO + reference bit)** | FIFO, but give referenced pages another pass | cheap FIFO improvement |
+
+### Worked example — FIFO
+
+Reference string `7 0 1 2 0 3 0 4`, **3 frames** — evict the oldest inserted page:
+
+```text
+t1 7: fault → [7,_,_]     t2 0: fault → [7,0,_]
+t3 1: fault → [7,0,1]     t4 2: fault → [2,0,1]  (evicts 7)
+t5 0: hit                 t6 3: fault → [2,3,1]  (evicts 0)
+t7 0: fault → [2,3,0]     t8 4: fault → [4,3,0]  (evicts 2)
+faults at: 7, 0, 1, 2, 3, 0, 4  → 7 page faults
+```
+
+### Worked example — LRU
+
+Same string, **3 frames** — evict the page *least recently used*:
+
+```text
+t1 7: fault → [7,_,_]     t2 0: fault → [7,0,_]
+t3 1: fault → [7,0,1]     t4 2: fault → [2,0,1]  (evicts 7, least recent)
+t5 0: hit                 t6 3: fault → [2,0,3]  (evicts 1)
+t7 0: hit                 t8 4: fault → [4,0,3]  (evicts 2)
+faults at: 7, 0, 1, 2, 3, 4  → 6 page faults (fewer than FIFO here)
+```
+
+Belady's proof with 3 vs 4 frames on `1 2 3 4 1 2 5 1 2 3 4 5`: 4 frames produces *more* faults than 3 under FIFO.
+
+<Callout type="tip">
+Exam pattern: trace the string, write the frame table column by column, count the misses. "Which algorithm suffers Belady's?" → FIFO (and other non-stack algorithms), never LRU/Optimal.
+</Callout>
+
+## I/O & device management
+
+The OS hides device details behind **device drivers** and standard APIs.
+
+| Method | How it works | Cost |
+| --- | --- | --- |
+| **Polling (programmed I/O)** | CPU keeps checking the device's status flag | simple, **wastes CPU** in busy-wait |
+| **Interrupt-driven** | device signals the CPU when ready | CPU works elsewhere until the interrupt |
+| **DMA** | a controller moves whole blocks to/from memory; CPU interrupted only at the end | best for large transfers — CPU does copy-free I/O |
+
+**Spooling** (simultaneous peripheral operations on-line) queues jobs for a shared device — print spooling lets many users "print at once" without fighting over the printer.
+
+**Disk scheduling** (given a request queue, compute the order):
+
+| Algorithm | Rule |
+| --- | --- |
+| FCFS | in arrival order — fair, slow |
+| SSTF | nearest request next |
+| SCAN | elevator: sweep to one end, then reverse |
+| C-SCAN | sweep one way, jump back to start, sweep again (uniform wait) |
+| LOOK / C-LOOK | like SCAN but only go as far as the last request |
+
+<Callout type="tip">
+"CPU copies every byte of the printer data" → polling/PIO is wasteful → DMA is the answer. Disk SCAN = elevator; C-SCAN gives more uniform latency.
+</Callout>
+
+## Protection & security in the OS
+
+**Protection** = internal policy controlling who may access which resource; **security** = external defence against attacks (including the outside world).
+
+- **Access matrix** — subjects (users/processes) × objects (files/devices) cells hold rights (`read`, `write`, `execute`); implemented row-wise (capability lists) or column-wise (access lists).
+- **Protection rings** — ring 0 = kernel (most privilege), outer rings = user code; each ring may access fewer things (x86 rings 0–3).
+- **File permissions** — `rwx` triples for owner/group/other (Linux `chmod 754`).
+- **Authentication factors** — something you *know* (password), *have* (token), *are* (biometric).
+- **Accounting/auditing** — log who did what, for post-incident traces.
+
+<Callout type="info">
+Protection vs security exam line: protection is about *rogue processes inside the system*; security is about *unauthorised outsiders and malware*. Rings protect against faults inside; firewalls protect the boundary.
 </Callout>

@@ -21,6 +21,7 @@ import { cn } from "@/lib/utils";
 import { McqVirtualList } from "@/components/topics/mcq-virtual-list";
 import { ReadingProgress } from "@/components/topics/reading-progress";
 import { RelatedTopics } from "@/components/topics/related-topics";
+import { SectionAccordion } from "@/components/topics/section-accordion";
 import { TopicProgress } from "@/components/topics/topic-progress";
 import { TopicIcon } from "@/components/topics/topic-icons";
 
@@ -166,8 +167,13 @@ export default async function TopicPage(props: PageProps<"/topics/[slug]">) {
         <h2 className="font-display mb-6 text-2xl font-bold tracking-tight">
           {t("readChapter")}
         </h2>
-        {content.exists && content.content ? (
-          content.content
+        {content.exists && content.sections.length > 0 ? (
+          <>
+            {content.intro ? (
+              <div className="mb-8">{content.intro}</div>
+            ) : null}
+            <SectionAccordion sections={content.sections} />
+          </>
         ) : (
           <div className="rounded-2xl border border-dashed border-border bg-card p-6 text-sm leading-relaxed text-muted-foreground">
             <p className="font-semibold text-foreground">

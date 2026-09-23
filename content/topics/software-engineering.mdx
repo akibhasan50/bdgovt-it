@@ -12,6 +12,55 @@ summary_bn: "এসডিএলসি মডেল, টেস্টিং শ্
 - **Agile/Scrum** — iterations (sprints) of 1–4 weeks, daily standup ≤ 15 min, demo + retrospective each sprint.
 - **Prototype** — build to clarify requirements.
 
+## UML at a glance
+
+UML is the standardised visual modelling language for designing and documenting object-oriented systems — **14 diagram types**: 7 structural (what the system *is*) + 7 behavioural (what the system *does*).
+
+| Category | Diagrams |
+| --- | --- |
+| Structural | Class, Object, Component, Deployment, Package |
+| Behavioural | Use Case, Sequence, Activity, State, Collaboration |
+
+### Class diagram
+
+Represents classes, attributes, methods and relationships. `+` public, `-` private, `#` protected.
+
+| Relationship | Symbol | Meaning | Example |
+| --- | --- | --- | --- |
+| Association | Simple line | General connection | Student — Course |
+| Aggregation | Hollow diamond | "has-a" (weak) | Department – Professor |
+| Composition | Filled diamond | "part-of" (strong) | House – Room |
+| Inheritance | Hollow triangle | "is-a" | Animal – Dog |
+| Dependency | Dashed arrow | Uses temporarily | Order – Payment |
+| Multiplicity | Numbers on ends | `1`, `0..1`, `1..*`, `*` | — |
+
+### Use case diagram
+
+Shows functional requirements — actors and what they can do.
+
+- Stick figure = **actor**, oval = **use case**, rectangle = system boundary
+- `<<include>>` → one use case *always* uses another (Withdraw Cash always requires Login)
+- `<<extend>>` → optional/conditional behaviour (Print Receipt is optional)
+
+### DFD (Data Flow Diagram)
+
+Shows how **data moves** through a system — never control flow or timing.
+
+| Symbol (Yourdon/DeMarco) | Represents |
+| --- | --- |
+| Circle / rounded rectangle | Process |
+| Rectangle | External entity |
+| Open rectangle / parallel lines | Data store |
+| Arrow | Data flow |
+
+- **Level 0 (context diagram)** — the whole system as one process
+- **Level 1** — major sub-processes
+- **Level 2+** — further breakdown
+
+<Callout type="tip">
+Quick comparison: ER → database design · Use case → functional requirements · DFD → data movement · Class diagram → static OOP structure. "Which diagram shows actors?" → use case.
+</Callout>
+
 ## Testing taxonomy
 
 | Level | Target |

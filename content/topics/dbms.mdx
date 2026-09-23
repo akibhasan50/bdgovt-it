@@ -5,38 +5,400 @@ summary_en: "ER models, normal forms, transactions and indexing — the theory b
 summary_bn: "ইআর মডেল, নরমাল ফর্ম, ট্রানজেকশন ও ইনডেক্সিং — প্রতিটি এসকিউএল প্রশ্নের পেছনের তত্ত্ব।"
 ---
 
+## What is a Database & DBMS?
+
+A **database** is a structured collection of data stored electronically — text, numbers, images, anything organised for easy access.
+
+A **Database Management System (DBMS)** is software that sits between the database and its users/applications, handling storage, retrieval, updates and security in a structured way.
+
+```text
+User / Application
+      ↓
+   DBMS  (interface, security, recovery, concurrency)
+      ↓
+  Database (stored data)
+```
+
+**Core functions of a DBMS:**
+
+- **Data management** — create, update and query data through a systematic interface instead of ad-hoc files.
+- **Data integrity & security** — enforce rules and permissions so data stays consistent and private.
+- **Concurrency** — many users can work at the same time without overwriting each other.
+- **Reliability** — backup and recovery so a crash never loses committed work.
+
+<Callout type="tip">
+DBMS = the *manager* of the database. "Interface between database and users" is the one-line definition examiners look for.
+</Callout>
+
+## Problems with file-based systems
+
+Before DBMS, data lived in plain files. The classic six problems:
+
+| Problem | What goes wrong |
+| --- | --- |
+| **Data redundancy** | Same fact duplicated across files — student name stored in both academic and hostel files |
+| **Data inconsistency** | Update in one file, not the other → conflicting versions of the truth |
+| **Difficult access** | No query mechanism; finding one record means manual folder searching |
+| **Poor security** | No access controls — anyone with file access sees everything |
+| **Single-user access** | Files lock crudely; concurrent work risks corruption |
+| **No backup/recovery** | Delete or corruption is usually permanent |
+
+## Advantages & disadvantages of DBMS
+
+**Advantages:**
+
+1. **Reduced redundancy** — central storage, one copy of each fact.
+2. **High security** — authentication, roles, permissions.
+3. **Data integrity** — constraints block invalid values (age 200, GPA 5.0).
+4. **Easy access** — SQL instead of manual file digging.
+5. **Multi-user support** — concurrent transactions handled safely.
+6. **Data sharing** — authorised users share data under DBA control.
+7. **Standard enforcement** — consistent formats and naming.
+8. **Backup & recovery** — automatic protection from failure.
+
+**Disadvantages:**
+
+1. **Complexity** — needs skilled designers and a DBA.
+2. **Large size** — the engine itself consumes storage.
+3. **Performance overhead** — extra layers vs raw files for tiny datasets.
+4. **High impact of failure** — one crash can affect *all* applications.
+5. **Cost** — licensing, hardware, maintenance.
+
+<Callout type="info">
+Trade-off in one line: DBMS buys security, integrity and sharing — paying with cost and complexity. For a single small flat file, a file system can still be simpler.
+</Callout>
+
+## Types of DBMS
+
+| Type | Structure | Relationships | Example use |
+| --- | --- | --- | --- |
+| **Hierarchical** | Tree — parent–child | 1:1, 1:N only | old IMS, org charts |
+| **Network** | Graph with pointers | M:N via links | CAD/CAM data |
+| **Relational (RDBMS)** | Tables (relations) | Keys join tables | MySQL, Oracle, PostgreSQL |
+| **Object-oriented (OODBMS)** | Objects with data + methods | Object references | multimedia, CAD |
+| **Distributed (DDBMS)** | Split across network nodes | Transparent access | geographically spread data |
+
+- **Hierarchical** — simple and fast for tree-shaped data, but a child has only one parent; complex relationships are awkward.
+- **Network** — child can have many parents (fixes hierarchical's limit), but navigation via pointers makes applications fragile.
+- **Relational** — rows = tuples, columns = attributes, keys define relationships; the dominant model, powered by SQL. Simple, flexible, set-based queries.
+- **OODBMS** — stores objects directly (audio, video, complex types) with their methods; natural for OOP languages (Java, C++).
+- **DDBMS** — data spread over multiple nodes; decentralised management improves availability, reliability and scale.
+
+<Callout type="tip">
+"Child can have only one parent" → hierarchical. "Child can have many parents via pointers" → network. "Everything today runs on this" → relational.
+</Callout>
+
+## Data models & DBMS architecture
+
+### Data models
+
+A **data model** is a set of conceptual tools describing data, relationships and constraints — the blueprint of a database.
+
+Common models: **ER**, **relational**, **object-oriented**, **hierarchical**, **network**, **object-relational**, **flat**, **semi-structured** (XML/JSON).
+
+The **relational model** stores data as tables: each row is a **tuple** (record), each column an **attribute** (property). Tables relate through **primary keys** and **foreign keys**.
+
+| Student_Id | Name | Branch |
+| --- | --- | --- |
+| 1404001 | Misu | CSE |
+| 1503002 | Avi | ETE |
+| 1302119 | Rimon | CE |
+
+This relation `STUDENT` has 3 attributes and 3 tuples.
+
+### Architecture tiers
+
+| Tier | Shape | Who talks to whom |
+| --- | --- | --- |
+| **1-tier** | user ↔ DBMS directly | developer on a local server; no network needed |
+| **2-tier** | client ↔ database server | client holds UI + logic; server handles queries (ODBC/JDBC) |
+| **3-tier** | client ↔ application server ↔ database | middleware holds business logic; better security & scalability |
+
+More tiers = more **abstraction** — better security and flexibility, more complexity.
+
+### Levels of data abstraction
+
+1. **Physical (internal)** — *how* bits are stored on disk (file structures, indexing).
+2. **Logical (conceptual)** — *what* data exists: tables, relationships, constraints.
+3. **View (external)** — what each user sees — a student sees grades, a teacher sees attendance.
+
+<Callout type="tip">
+"Which level describes disk layout?" → physical. "Which level shows only your subset?" → view. Architecture questions almost always test this three-level ladder.
+</Callout>
+
 ## ER model essentials
 
-Entities, attributes, relationships (1:1, 1:N, M:N). Weak entity → dependent on a key of another entity, identified by partial key + owner. A **ternary relationship** connects three entity sets — cardinality questions hinge on reading the notation correctly.
+An **ER diagram** models the logical structure of a database — entities, their attributes, and the relationships between them.
+
+| Symbol | Represents | Example |
+| --- | --- | --- |
+| Rectangle | Entity | `STUDENT`, `COURSE` |
+| Oval | Attribute | `name`, `roll_no` |
+| Diamond | Relationship | `ENROLLS_IN` |
+| Double oval | Multi-valued attribute | `phone_numbers` |
+| Double rectangle | Weak entity | `DEPENDENT` |
+| Underlined attribute | Primary key | `student_id` |
+| Dashed oval | Derived attribute | `age` (from dob) |
+
+**Attribute types:** simple vs composite (`name` → first, last), single vs multi-valued, stored vs derived (`age` derived from `date_of_birth`).
+
+**Cardinality:**
+
+- **1:1** — one to one (a person has one passport)
+- **1:N** — one to many (one teacher teaches many students)
+- **M:N** — many to many (students enrol in many courses)
+
+**Participation:** *total* (every entity instance participates — each order has a customer) vs *partial* (some may not — a student may take no courses).
+
+A **weak entity** depends on a key of an owner entity, identified by a partial key + owner (a `DEPENDENT` needs its `EMPLOYEE`). A **ternary relationship** connects three entity sets — cardinality questions hinge on reading the notation correctly.
+
+```text
+[STUDENT] ---< ENROLLS_IN >--- [COURSE]
+   |                                |
+ (student_id, name)          (course_id, course_name)
+
+Relationship attribute: enrollment_date
+Cardinality: M:N
+```
+
+**ER → relational conversion:** entity → table, attributes → columns, 1:N and 1:1 relationships → foreign key on the "many"/one side, M:N → a **junction table** holding both keys as a composite primary key.
+
+## Keys & integrity constraints
+
+| Key | Definition |
+| --- | --- |
+| **Super key** | any attribute set that uniquely identifies a row |
+| **Candidate key** | minimal super key — no column can be dropped |
+| **Primary key** | the chosen candidate key; NOT NULL, unique |
+| **Foreign key** | column referencing a primary/unique key in another table |
+| **Composite key** | key made of two or more columns |
+
+A table can have many candidate keys but exactly **one** primary key.
+
+**Integrity constraints:**
+
+- **Entity integrity** — primary key can never be NULL.
+- **Referential integrity** — every foreign key must match an existing referenced row, or be NULL (no orphans).
+- **Domain constraint** — values must be of the right type/range (age ≥ 0).
+- **Key constraint** — primary key values are unique.
+
+**Assertions & triggers** go beyond row-level checks:
+
+- An **assertion** is a global SQL condition the DBMS re-checks on *every* change — e.g. "total salary of dept ≤ budget". Expensive, rarely used.
+- A **trigger** is procedural code that fires automatically on an event (`INSERT`/`UPDATE`/`DELETE`) — e.g. auto-fill an audit row. Stored procedures *you call*; triggers *the database calls*.
+
+<Callout type="tip">
+"Which constraint allows no NULL?" → entity integrity (on the PK). "What fires automatically after an UPDATE?" → trigger.
+</Callout>
 
 ## Normal forms in one breath
 
-1. **1NF** — atomic values, no repeating groups.
-2. **2NF** — 1NF + no partial dependency on a composite key.
-3. **3NF** — 2NF + no transitive dependency of non-key attributes on the key.
+**Normalization** organises data to reduce redundancy and avoid anomalies by splitting large tables into smaller related ones.
+
+| Anomaly | Meaning |
+| --- | --- |
+| Insertion | Can't insert data without unrelated data present (can't add a course until a student enrols) |
+| Update | Same fact repeated in many rows — must update all (advisor's phone in every student row) |
+| Deletion | Deleting one fact accidentally deletes another (last student's row deletes the course too) |
+
+1. **1NF** — atomic values only, one value per cell, no repeating groups.
+2. **2NF** — 1NF + no *partial* dependency on a composite key.
+3. **3NF** — 2NF + no *transitive* dependency of non-key attributes on the key.
 4. **BCNF** — every determinant is a candidate key.
+5. **4NF** — BCNF + no multi-valued dependency.
 
 <Callout type="tip">
-TwoNF removes *partial*; threeNF removes *transitive*. One word each — learn them as pairs.
+TwoNF removes *partial*; threeNF removes *transitive*. One word each — learn them as pairs. Higher normal form = less redundancy but more joins; **denormalization** is the deliberate reverse for read-heavy reports. Real databases usually stop at 3NF or BCNF.
 </Callout>
+
+### Worked example — 1NF to 3NF
+
+Starting (not even 1NF — repeating groups):
+
+| StudentID | StudentName | Course1 | Course2 | Advisor | AdvisorPhone |
+| --- | --- | --- | --- | --- | --- |
+| 101 | Akib | DBMS | OS | Dr. Rahman | 017xxxxxxx |
+| 102 | Nadia | DBMS | — | Dr. Karim | 018xxxxxxx |
+
+**1NF** — one course per row:
+
+| StudentID | StudentName | Course | Advisor | AdvisorPhone |
+| --- | --- | --- | --- | --- |
+| 101 | Akib | DBMS | Dr. Rahman | 017xxxxxxx |
+| 101 | Akib | OS | Dr. Rahman | 017xxxxxxx |
+| 102 | Nadia | DBMS | Dr. Karim | 018xxxxxxx |
+
+**2NF** — key is `StudentID + Course`; `StudentName` only needs `StudentID` (partial dependency) → split into **Student** `(StudentID, StudentName, Advisor, AdvisorPhone)` and **StudentCourse** `(StudentID, Course)`.
+
+**3NF** — `StudentID → Advisor → AdvisorPhone` is transitive → split **Advisor** `(Advisor, AdvisorPhone)` out of Student.
+
+## Dependencies & BCNF
+
+If knowing a **Student ID** determines the **Student Name**: `StudentID → StudentName`. Read the arrow as "determines" — the left side must uniquely pin down one right side.
+
+**Armstrong's axioms** (how dependencies are derived):
+
+- **Reflexivity** — `A → A`
+- **Augmentation** — `A → B` implies `AC → BC`
+- **Transitivity** — `A → B` and `B → C` imply `A → C`
+
+Closure, union and decomposition follow from these three.
+
+**Partial dependency** — only possible with a *composite* (2+-column) key: the column needs only *part* of the key.
+
+```text
+Key = (StudentID, Course) but StudentName needs only StudentID
+(A, B) → C, yet really A → C     → fixed in 2NF
+```
+
+**Transitive dependency** — a chain through another non-key column, even with a single-column key:
+
+```text
+StudentID → Advisor → AdvisorPhone     → fixed in 3NF
+```
+
+| | Partial | Transitive |
+| --- | --- | --- |
+| Key is | composite (2+ columns) | even single-column |
+| Problem | column depends on only *part* of the key | non-key column depends on *another* non-key column |
+| Pattern | `(A, B) → C` but really `A → C` | `A → B → C` |
+| Fixed in | 2NF | 3NF |
+
+### BCNF — stricter 3NF
+
+For **every** dependency `X → Y`, `X` must be a super key. Classic example — each teacher teaches only ONE subject:
+
+| Student | Subject | Teacher |
+| --- | --- | --- |
+| Akib | DBMS | Rahman |
+| Akib | OS | Karim |
+| Nadia | DBMS | Rahman |
+
+Dependencies: `(Student, Subject) → Teacher` and `Teacher → Subject`. `Teacher` is not a super key but determines `Subject` → violates BCNF. **Fix:** split into `StudentTeacher(Student, Teacher)` and `TeacherSubject(Teacher PK, Subject)` — now `Teacher → Subject` is fine.
+
+Every relation in BCNF is automatically in 3NF, but not vice versa — BCNF decomposition may not always preserve dependencies.
+
+<Callout type="info">
+For every arrow, ask: "Could the left side by itself uniquely identify a row (a candidate key)?" Yes for all → BCNF. No for even one → split the table.
+</Callout>
+
+## File organization & indexing
+
+**File organization** decides how records sit on disk:
+
+| Organization | Idea | Strength |
+| --- | --- | --- |
+| **Heap (unordered)** | records appended anywhere | fast inserts |
+| **Sequential (sorted)** | records kept in key order | fast range scans, sequential access |
+| **Hashed** | hash(key) → bucket/address | fastest equality lookups |
+| **Indexed sequential** | sorted file + index | both equality and range |
+
+**Indexing** keeps a side structure mapping key → record location so the DBMS skips full-file scans.
+
+- **Primary index** — on the ordered file's key; one entry per block (**sparse**).
+- **Dense index** — one entry per record; faster lookups, bigger index.
+- **Sparse vs dense** — sparse = fewer entries (one per block, great for ordered files); dense = entry per record (works on unordered files too).
+- **Secondary index** — on a non-key/unordered attribute; an extra indirection hop.
+- **B+ tree** — balanced multi-level tree; all data only at leaves → more keys per node, clean range scans (`<`, `>`, BETWEEN).
+- **Hash index** — `hash(key)` picks a bucket; excellent for `=`, useless for ranges. Extendible hashing / linear probing are the named variants.
+
+<Callout type="tip">
+Range query → B+ tree / ordered index. Equality query → hash index. "Index on a non-key attribute" → secondary index. Sparse needs an ordered file; dense does not.
+</Callout>
+
+## Transactions
+
+A **transaction** is a single logical unit of work — one or more read/write/update/delete operations that must complete *entirely* or *not at all*. Transferring money from Account A to B (debit + credit) is one transaction: if either step fails, the whole thing fails.
+
+### Transaction states
+
+| State | Meaning |
+| --- | --- |
+| Active | Transaction is being executed |
+| Partially committed | Last operation executed, changes not yet permanently saved |
+| Committed | Completed successfully, changes saved permanently |
+| Failed | Execution stopped due to error |
+| Aborted | Rolled back, database restored to previous state |
+
+### Key commands
+
+- **COMMIT** — saves all changes permanently
+- **ROLLBACK** — undoes changes if an error occurs
+- **SAVEPOINT** — a point to roll back to, without rolling back the whole transaction
 
 ## ACID
 
-- **Atomicity** — all or nothing (rollback).
-- **Consistency** — constraints hold before and after.
-- **Isolation** — concurrent transactions don't interfere.
-- **Durability** — committed data survives crashes (WAL/force policy).
+- **Atomicity** — all or nothing; if debit succeeds but credit fails, the entire transaction rolls back.
+- **Consistency** — the database moves from one valid state to another; constraints and relationships hold (total money in the bank is unchanged by a transfer).
+- **Isolation** — concurrent transactions don't interfere; each behaves as if it were the only one running. Prevents **dirty read, non-repeatable read, phantom read** via isolation levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable.
+- **Durability** — once committed, changes survive crashes and power failures (WAL/force policy, logs and backups).
 
-## Indexing
+**Anomalies isolation must prevent:**
 
-- **Primary index** on ordered file, dense/sparse.
-- **Secondary index** on non-key or unordered attribute — extra indirection level.
-- **B+ tree** keeps data only at leaves → more keys per node, better range scans.
+| Anomaly | Meaning |
+| --- | --- |
+| Dirty read | reading data another transaction hasn't committed yet |
+| Non-repeatable read | re-reading a row gives a different value (someone committed in between) |
+| Phantom read | re-running a query returns new rows (someone inserted) |
 
-<Callout type="info">
-"Which index is best for range queries on a sorted key?" → primary/B+ tree ordered index. Equality queries also do well with hashing.
+<Callout type="tip">
+Memory trick: A-C-I-D = *All Changes Isolated Durably*. "Which property is ensured by transaction logs?" → Durability.
 </Callout>
 
-## Concurrency
+## Concurrency control & deadlock
 
-Conflict serializability via precedence graph; two-phase locking (2PL) guarantees it but can deadlock. Timestamp ordering and MVCC are the alternatives name-dropped in harder papers.
+Concurrent transactions must produce the same result as *some* serial order — **serializability**.
+
+- **Conflict serializability** — build a precedence graph of conflicting operations (same data, at least one write); no cycle ⇒ serializable.
+- **Recoverable schedule** — a transaction commits only after the transactions it read from have committed.
+
+**Lock-based protocols:**
+
+| Protocol | Rule | Trade-off |
+| --- | --- | --- |
+| **Basic 2PL** | growing phase (acquire only), then shrinking (release only) | serializable, but can hold locks forever |
+| **Strict 2PL** | hold exclusive locks until commit/abort | no cascading aborts — the practical choice |
+- **Shared (S)** lock = readers; **Exclusive (X)** lock = writers; S and X conflict with each other.
+
+**Deadlock handling** (two transactions each waiting for the other's lock):
+
+- **Prevention** — lock-all-upfront, or ordered lock acquisition so a cycle can never form.
+- **Detection** — wait-for graph; cycle ⇒ abort the youngest victim and roll it back.
+- **Avoidance / timeouts** — timeout on lock wait, or Banker's-style safe-state checks.
+
+**Alternatives to locking:** *timestamp ordering* assigns each transaction a timestamp and rejects out-of-date accesses; *MVCC* gives readers a snapshot so they never block writers (PostgreSQL, MySQL InnoDB).
+
+<Callout type="tip">
+"Which 2PL variant avoids cascading aborts?" → Strict 2PL. "Graph has a cycle?" → not conflict-serializable. Locks, timestamps and MVCC are the three families names dropped in harder papers.
+</Callout>
+
+## Query processing & cost estimation
+
+The optimizer picks the cheapest plan for a query. Two costs dominate exam questions:
+
+### Selection `σ`
+
+| Plan | Cost idea | When |
+| --- | --- | --- |
+| **File scan** | read every block: `b` | no index |
+| **Single-level index** | index probe + few block reads | equality `=` on indexed attr |
+| **Multiple-level index** | `height × cost-of-probe` | big index |
+| **Ordered index + range** | probe to start, then scan entries | `<`, `>`, BETWEEN |
+
+Equality on a hashed key ≈ 1–2 I/Os; a file scan ≈ `b` I/Os (where `b` = blocks in the file).
+
+### Join `⨝`
+
+| Method | Cost sketch |
+| --- | --- |
+| **Nested loop** | `br × bs` block reads — fine for tiny outer relation |
+| **Block nested loop** | `(br / buffer) × bs` — buffer the outer relation |
+| **Index nested loop** | `br × cost of index probe on inner` — best when inner is indexed |
+| **Sort-merge** | sort both (`br log br`) + merge linear — good for large inputs |
+| **Hash join** | build + probe, roughly `2 × (br + bs)` — great for equality joins of similar size |
+
+**Rule of thumb:** tiny outer + indexed inner → index nested loop; both huge, equality join → hash join; need sorted output → sort-merge.
+
+<Callout type="info">
+Costs are counted in **page/block I/Os** — CPU is assumed cheap in these formulas. `b` = blocks, `br`/`bs` = blocks of relations R and S.
+</Callout>

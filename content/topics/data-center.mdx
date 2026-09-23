@@ -31,10 +31,31 @@ Containers share the host kernel → lighter, start in seconds, higher density. 
 - **PUE = total facility energy ÷ IT equipment energy** — closer to 1.0 is better; legacy sites run 1.8+, modern designs aim < 1.3.
 - Hot-aisle/cold-aisle containment; N+1 redundancy for power and cooling.
 
+## RAID levels
+
+RAID combines multiple physical disks into one logical unit to improve **performance, redundancy, or both**.
+
+- **Striping** — split data across disks (speed)
+- **Mirroring** — exact copy on two disks (reliability)
+- **Parity** — extra information to reconstruct lost data
+
+| Level | Name | Min disks | Technique | Fault tolerance | Notes |
+| --- | --- | --- | --- | --- | --- |
+| **RAID 0** | Striping | 2 | Data split across disks | **None** | Fastest, 100% storage efficiency |
+| **RAID 1** | Mirroring | 2 | Exact copy on 2 disks | High (1 disk) | 50% efficiency, good reads |
+| **RAID 2** | Bit-level striping + Hamming code | 3+ | Rarely used commercially | Yes | Slow |
+| **RAID 3** | Byte-level striping, dedicated parity | 3+ | 1 parity disk | Yes | Good for large files |
+| **RAID 4** | Block-level striping, dedicated parity | 3+ | 1 parity disk | Yes | Parity disk bottlenecks writes |
+| **RAID 5** | Block-level striping, **distributed** parity | 3+ | Parity spread across disks | Yes (1 disk) | Best speed/storage/fault balance |
+| **RAID 6** | RAID 5 + extra parity block | 4+ | Double distributed parity | Yes (**2** disks) | Slightly slower writes |
+| **RAID 10 (1+0)** | Mirroring + striping | 4+ | Combines RAID 1 & 0 | High | Very fast, needs more disks (50%) |
+
+<Callout type="tip">
+RAID 0 → speed, NO redundancy. RAID 1 → redundancy, no write boost. RAID 5 → most popular in business. RAID 6 → survives two failures. RAID 10 → best performance + redundancy, expensive.
+</Callout>
+
 ## Availability concepts
 
-- **RAID 1** = mirroring (survives one disk failure).
-- **RAID 5** = striping + distributed parity (needs ≥3 disks).
 - HA clusters fail over nodes; uptime tiers (Tier I–IV) map to concurrent maintainability and fault tolerance.
 
 <Callout type="info">

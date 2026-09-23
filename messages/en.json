@@ -206,7 +206,10 @@
     "practiceTopic": "Practice this topic",
     "relatedTopics": "Related topics",
     "keyConcepts": "Key concepts",
-    "readChapter": "Chapter notes"
+    "readChapter": "Chapter notes",
+    "sectionCount": "topics",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all"
   },
   "banks": {
     "title": "Job-category question banks",

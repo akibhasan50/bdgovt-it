@@ -5,7 +5,67 @@ summary_en: "OSI vs TCP/IP, subnetting arithmetic, protocol roles — the highes
 summary_bn: "ওএসআই বনাম টিসিপি/আইপি, সাবনেটিং হিসাব, প্রোটোকলের ভূমিকা — সামগ্রিকভাবে সবচেয়ে বেশি আসে।"
 ---
 
+## Networking basics — the journey of data
+
+```text
+Your device → [Switch]  — devices WITHIN your local network (MAC, Layer 2)
+           → [Router]  — your network to OTHER networks (IP, Layer 3)
+           → [Modem]   — digital ↔ analog signal for the ISP's line
+           → [ISP]     — internet access provider
+           → [Firewall] — security gate filtering traffic
+           → THE INTERNET
+```
+
+**Opening google.com, step by step:**
+
+1. Browser types "google.com" → **DNS lookup** returns e.g. `142.250.183.14`
+2. Router sees the destination is off-network → sends via modem
+3. Modem converts the digital request for the ISP's line
+4. ISP hops it across the internet (many routers/ISPs) to Google's server
+5. Response travels back the same way; firewalls check traffic en route
+6. Browser renders the response
+
+**Supporting concepts:**
+
+- **IPv4** — 32-bit, e.g. `192.168.1.1` (~4.3 billion). **IPv6** — 128-bit, virtually unlimited.
+- **Private IP** — inside home/office only (`192.168.x.x`, `10.x.x.x`); **public IP** — assigned by ISP, unique on the internet.
+- **DHCP** — auto-assigns IPs. **DNS** — the phonebook (name → IP). **MAC** — unique hardware address. **Gateway** — the exit IP of your local network (usually the router).
+
+<Callout type="tip">
+Switch = traffic cop *inside* a building · Router = traffic cop *between* cities · DNS = phonebook · Firewall = guard checking IDs at the gate.
+</Callout>
+
+## Network devices
+
+| Device | Main job | OSI layer | Uses |
+| --- | --- | --- | --- |
+| **Hub** | repeats signal to every port — no intelligence | Layer 1 | bits |
+| **Switch** | connect devices in the same network, unicast to the right port | Layer 2 | MAC address |
+| **Router** | connect different networks, pick the best path, DHCP | Layer 3 | IP address |
+| **Modem** | modulate (digital→analog) and demodulate (analog→digital) | Layer 1 | signal conversion |
+| **Firewall** | filter traffic by rules (IP, port, protocol) | Multiple | rules / state |
+| **Access point** | bridges wired LAN to Wi-Fi clients | Layer 2 | radio + MAC |
+| **ISP** | provide internet access (Tier 1 backbone → Tier 3 local) | — | owns/leases infrastructure |
+
+Firewall types: **packet-filtering** (headers only), **stateful inspection** (tracks connection state), **proxy** (middleman, hides internals), **NGFW** (firewall + IPS + deep packet inspection). Can be hardware or software (e.g. Windows Firewall).
+
+**Hub vs switch:** a hub floods every frame to everyone (collisions, one shared collision domain); a switch reads the MAC and forwards only to the target port — each port is its own collision domain. A router breaks **broadcast domains**.
+
 ## OSI vs TCP/IP
+
+**OSI** is a 7-layer conceptual framework for how data travels across a network.
+
+**Top→bottom:** "All People Seem To Need Data Processing" · **Bottom→top:** "Please Do Not Throw Sausage Pizza Away"
+
+| # | Layer | Main job | PDU | Devices | Protocols |
+| --- | --- | --- | --- | --- | --- |
+| 7 | Application | User/app interaction | Data | — | HTTP, FTP, SMTP, DNS |
+| 6 | Presentation | Format, encrypt, compress | Data | — | SSL/TLS, JPEG, ASCII |
+| 5 | Session | Manage sessions/checkpoints | Data | — | NetBIOS, RPC, PPTP |
+| 4 | Transport | End-to-end reliability, ports | Segment | — | TCP, UDP |
+| 3 | Network | Best path, logical addressing | Packet | **Router** | IP, ICMP, ARP |
+| 2 | Data Link | MAC addressing, error detection | Frame | **Switch**, Bridge, NIC | Ethernet, MAC |
+| 1 | Physical | Raw bits, cables, signals | Bits | **Hub**, Repeater, cable | Ethernet cable, Wi-Fi |
 
 | OSI (7) | TCP/IP |
 | --- | --- |
@@ -15,6 +75,32 @@ summary_bn: "ওএসআই বনাম টিসিপি/আইপি, স�
 | Data Link + Physical | Network Access |
 
 Routing lives at OSI **network** layer (IP). Switching at data link. Cabling/signal at physical.
+
+### Layer highlights
+
+- **Layer 7** — HTTP/HTTPS (web), FTP (files), SMTP/POP3/IMAP (mail), DNS, Telnet/SSH.
+- **Layer 6** — translation, **encryption (SSL/TLS)**, compression. "Where does encryption happen?" → Presentation.
+- **Layer 5** — establishes/manages/terminates sessions (staying logged into a bank site across pages).
+- **Layer 4** — segmentation, flow control, error control, port numbers. TCP three-way handshake: `SYN → SYN-ACK → ACK`.
+- **Layer 3** — IP addressing and routing; **`ping` uses ICMP**; ARP resolves IP → MAC.
+- **Layer 2** — sub-layers **LLC** (flow/error control) and **MAC** (physical addressing, medium access).
+- **Layer 1** — hub repeats the signal to everyone with no intelligence.
+
+### Encapsulation (sending)
+
+```text
+L7 message → L6 encrypt/format → L5 session info
+→ L4 + ports        = Segment
+→ L3 + src/dst IP   = Packet
+→ L2 + src/dst MAC  = Frame
+→ L1                = Bits on the wire
+```
+
+Receiving is the exact reverse (decapsulation). PDU order top→bottom: Data → Data → Data → Segment → Packet → Frame → Bits.
+
+<Callout type="tip">
+Router = Layer 3 + IP · Switch = Layer 2 + MAC · Hub = Layer 1 · TCP/UDP = Layer 4 · SSL/TLS = Layer 6.
+</Callout>
 
 ## Protocol cheat sheet
 
@@ -27,25 +113,285 @@ Routing lives at OSI **network** layer (IP). Switching at data link. Cabling/sig
 | FTP | file transfer (20/21) |
 | SMTP/POP3/IMAP | mail send / receive |
 | TCP / UDP | reliable / fast transport |
+| ICMP | error reporting (`ping`) |
 
-## Subnetting in 30 seconds
+**Port numbers worth memorising:** 20/21 FTP · 22 SSH · 23 Telnet · 25 SMTP · 53 DNS · 67/68 DHCP · 80 HTTP · 110 POP3 · 143 IMAP · 443 HTTPS · 3306 MySQL · 5432 PostgreSQL.
 
-Total addresses = 2^(32−prefix). Usable hosts = total − 2 (network + broadcast).
+## TCP, UDP & ARQ
 
-```text
-/26 → 2^6 = 64 addresses → 62 usable hosts
-/30 → 4 addresses → 2 usable (point-to-point link)
-/24 → 256 → 254 usable
-```
+### TCP vs UDP
+
+| Feature | TCP | UDP |
+| --- | --- | --- |
+| Connection | Connection-oriented (3-way handshake) | Connectionless |
+| Reliability | Reliable, resends lost data | Best-effort, no resend |
+| Ordering | Sequence numbers keep order | No guarantee |
+| Flow/congestion control | Yes | No |
+| Header | 20–60 bytes | 8 bytes |
+| Speed | Slower | Faster |
+| Data unit | Segment | Datagram |
+| Use case | Web, email, file transfer | Streaming, gaming, VoIP, DNS |
+
+**Three-way handshake:** `Client SYN → Server SYN-ACK → Client ACK` (connection established). **Four-way termination:** `FIN, ACK, FIN, ACK` — four steps because each side finishes independently.
+
+**Memory trick:** T = *Trustworthy* (reliable, slower); U = *Unreliable but Ultra-fast*.
+
+### ARQ (Automatic Repeat Request)
+
+Error detection + acknowledgements + retransmission on timeout.
+
+| Feature | Stop-and-Wait | Go-Back-N | Selective Repeat |
+| --- | --- | --- | --- |
+| Frames before waiting | 1 | N (window size) | N (window size) |
+| On error, resends | that frame | lost frame **+ all after it** | **only** the lost frame |
+| Receiver buffer | No | No | Yes |
+| ACK type | Per frame | Cumulative | Individual |
+| Efficiency | Lowest | Medium | **Highest** |
+| Complexity | Simplest | Moderate | Most complex |
+
+- **Stop-and-Wait** — `Efficiency = Tt / (Tt + 2 × Tp)`; simple but sender idles most of the time. Sequence numbers discard duplicates.
+- **Go-Back-N** — receiver discards out-of-order frames; wastes bandwidth resending correct ones. Best on low error-rate links.
+- **Selective Repeat** — receiver buffers out-of-order frames and requests only the missing one. Best on high error-rate links.
+
+**Sliding window** — sender keeps up to N frames "in flight" before needing ACKs; the window slides forward as ACKs arrive.
 
 <Callout type="tip">
-For BD exam subnetting, the pattern is always: find the block size (256 − last octet of mask), then divide. Practise ten and the arithmetic becomes automatic.
+Go-Back-N = "one fails, redo everything after it". Selective Repeat = "one fails, redo only that one". Receiver buffer needed? Only Selective Repeat.
 </Callout>
 
-## TCP vs UDP
+## IPv4 addressing & classes
 
-TCP: connection-oriented (3-way handshake), ordered, reliable, heavier. UDP: connectionless, no ordering guarantees, lighter — DNS, video streaming, VoIP ride on it.
+An IPv4 address has two parts: **network** + **host** (how many of each depends on the class).
+
+| Class | First octet | Default mask | Prefix | Networks | Hosts/network |
+| --- | --- | --- | --- | --- | --- |
+| **A** | 1–126 | `255.0.0.0` | /8 | 126 | 16,777,214 |
+| **B** | 128–191 | `255.255.0.0` | /16 | 16,384 | 65,534 |
+| **C** | 192–223 | `255.255.255.0` | /24 | 2,097,152 | 254 |
+| **D** | 224–239 | — | — | multicast | — |
+| **E** | 240–255 | — | — | experimental | — |
+
+- **127.x.x.x** is loopback (`127.0.0.1` = localhost) — inside class A but reserved.
+- **Private ranges (RFC 1918):** `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` — never routed on the public internet.
+- **APIPA / link-local:** `169.254.0.0/16` — what your OS picks when DHCP fails.
+- **NAT** lets many private IPs share one public IP at the gateway — why IPv4 private ranges survived as long as they did.
+
+**CIDR notation** `/n` = n network bits: `192.168.1.0/26` → mask `255.255.255.192`.
+
+<Callout type="tip">
+First octet 127 → loopback, not a normal class A host. Class D → multicast. Private range of class C → `192.168.x.x` — the home-router default.
+</Callout>
+
+## Subnetting — worked examples
+
+Total addresses = `2^(32−prefix)`; usable hosts = total − 2 (network + broadcast). Block size for the last octet = `256 − mask_octet`.
+
+### Example 1 — how many hosts?
+
+`/26` → `2^6 = 64` addresses → **62 usable hosts**.
+`/30` → 4 addresses → **2 usable** (point-to-point link).
+`/24` → 256 → 254 usable.
+
+### Example 2 — find the subnet of an address
+
+Host `192.168.10.35/27`. Mask `255.255.255.224`, block size `256 − 224 = 32`:
+
+```text
+Subnets: 0, 32, 64, 96 ...
+35 falls in 32 → subnet 192.168.10.32/27
+range 192.168.10.32 – 192.168.10.63
+network = .32   broadcast = .63   usable .33 – .62
+```
+
+### Example 3 — split a network
+
+Need 4 subnets of a `192.168.1.0/24` network → borrow 2 bits (`2^2 = 4`) → new mask `/26`:
+
+```text
+192.168.1.0/26    (.0  – .63)
+192.168.1.64/26   (.64 – .127)
+192.168.1.128/26  (.128– .191)
+192.168.1.192/26  (.192– .255)
+```
+
+**Rule of thumb:** count needed hosts → pick `2^h ≥ hosts+2` → remaining bits after the host part are subnets (or vice versa). Practice ten and the arithmetic becomes automatic.
+
+<Callout type="tip">
+MCQ shortcut: mask `255.255.255.192` → last octet steps of 64; `.224` → steps of 32; `.240` → steps of 16. The block size *is* the subnet increment.
+</Callout>
+
+## Routing algorithms
+
+The network layer decides the **path** — forward algorithm at each router (local) vs global path selection.
+
+| Algorithm | Type | Idea | Weakness |
+| --- | --- | --- | --- |
+| **Distance Vector (Bellman-Ford)** | distributed, iterative | each router shares hop/distance vector with neighbours; RIP uses this | **count-to-infinity**, slow convergence, routing loops |
+| **Link State (Dijkstra)** | global | every router floods the full topology and runs Dijkstra itself | more memory/CPU, flooding overhead — OSPF uses this |
+| **Path Vector** | like distance vector with full path | BGP — policy + loop avoidance between autonomous systems | large path updates |
+
+- **RIP** — distance vector, hop count ≤ 15, updates every 30 s. Simple, small networks.
+- **OSPF** — link state, cost (bandwidth-aware), fast convergence — the enterprise default.
+- **BGP** — path vector *between* ASes — the protocol of the internet itself.
+
+**Shortest path** is measured in hops (RIP) or cost/bandwidth (OSPF), not distance in km.
+
+<Callout type="info">
+"Routers share only with neighbours and can count to infinity" → distance vector. "Each router knows the whole topology" → link state. "Between ISPs/autonomous systems" → BGP.
+</Callout>
+
+## Error detection — data link layer
+
+| Error type | Description |
+| --- | --- |
+| Single-bit | exactly one bit flips (`10110` → `10100`) |
+| Burst | two or more *consecutive* bits flip (more common in real transmission) |
+
+**Detection** only knows an error happened (request resend). **Correction** fixes it automatically without retransmission.
+
+### Parity check
+
+Add one bit so the total number of 1s is even (even parity) or odd (odd parity).
+
+- Data `1011001` (four 1s, even) → parity **0** → `10110010`
+- Data `1010001` (three 1s, odd) → parity **1** → `10100011`
+
+**Limitation:** detects only an ODD number of bit errors — if an EVEN number flip, parity still matches and the error slips through. **2-D parity** arranges data in a grid with row *and* column parity bits to catch more patterns.
+
+### Checksum
+
+1. Split data into fixed-size blocks
+2. Add them with **1's complement addition** (wrap carry-out back in)
+3. Complement the sum → checksum; send data + checksum
+4. Receiver adds everything: result **all 1s** → no error; otherwise error
+
+```text
+Blocks: 1001 + 0110 + 1100
+1001+0110 = 1111; 1111+1100 = 11011 → wrap: 1011+1 = 1100
+Checksum = complement(1100) = 0011
+Receiver: 1001+0110+1100+0011 = 1111 → all 1s → OK
+```
+
+Also used in TCP/UDP headers (Transport layer).
+
+### CRC (Cyclic Redundancy Check)
+
+Treat data as a binary number, divide by a generator polynomial `G` using **modulo-2 (XOR) division**; the remainder is the CRC.
+
+**Sender:** append n zeros (n = bits in G − 1) → XOR-divide by G → replace zeros with remainder → transmit.
+**Receiver:** divide the whole received word by the same G → remainder **0** = OK, non-zero = error.
+
+Detects all single-bit errors, all burst errors up to the CRC length, and most larger bursts. Standards: CRC-8 (embedded), CRC-16 (USB), **CRC-32 (Ethernet, ZIP, PNG)**.
+
+| | Parity | Checksum | CRC |
+| --- | --- | --- | --- |
+| Complexity | Simplest | Moderate | Most complex |
+| Extra bits | 1 | block-sized | n (generator-based) |
+| Burst errors | Poor | Moderate | **Excellent** |
+| Reliability | Low | Medium | High |
+| Used in | simple serial links | TCP/UDP | Ethernet / most DLL protocols |
+
+## Hamming code — error *correction*
+
+Adds parity bits at positions that are **powers of 2** (1, 2, 4, 8, 16…); all other positions hold data.
+
+```text
+Position:  1   2   3   4   5   6   7   8   9 ...
+Content:   P1  P2  D1  P4  D2  D3  D4  P8  D5 ...
+```
+
+Parity bits needed: `2^r ≥ m + r + 1` (m = data bits). The classic **(7,4) code** = 4 data bits, 3 parity bits, 7 total.
+
+Each parity bit covers positions whose binary representation shares its bit:
+
+| Parity | Positions checked |
+| --- | --- |
+| P1 | 1, 3, 5, 7, 9, 11… |
+| P2 | 2, 3, 6, 7, 10, 11… |
+| P4 | 4, 5, 6, 7, 12, 13, 14, 15… |
+| P8 | 8–15, 24–31… |
+
+### Encode data `1011`
+
+```text
+Position:   1    2    3    4    5    6    7
+Content:    P1   P2    1   P4    0    1    1
+```
+
+- P1 (1,3,5,7): bits 1,0,1 → two 1s (even) → **P1 = 0**
+- P2 (2,3,6,7): bits 1,1,1 → three 1s (odd) → **P2 = 1**
+- P4 (4,5,6,7): bits 0,1,1 → two 1s (even) → **P4 = 0**
+
+**Transmitted = `0110011`** (even parity throughout).
+
+### Detect & correct
+
+If position 5 flips: received `0110111`. Recompute checks → C1=1, C2=0, C4=1. Arrange as **C4 C2 C1** = `101` = decimal **5** → flip bit 5 → original restored. Position 0 → no error. Extract data from positions 3,5,6,7 → `1011`.
+
+<Callout type="info">
+Hamming corrects 1-bit errors (and only *detects* 2-bit). CRC detects but doesn't correct — it triggers retransmission. Hamming lives in ECC memory and satellite links; CRC lives in Ethernet.
+</Callout>
+
+## Data encoding — ASK, FSK, PSK & PCM
+
+| Conversion | Technique | Example |
+| --- | --- | --- |
+| Digital → Analog | **ASK, FSK, PSK, QAM** | modem over a phone line |
+| Analog → Digital | **PCM** (sample → quantise → encode) | VoIP, CD recording |
+| Digital → Digital | line coding (NRZ, Manchester) | Ethernet |
+| Analog → Analog | AM, FM | radio, old TV |
+
+A carrier sine wave `A × sin(2πft + φ)` has three properties to vary:
+
+| Technique | Varies | Noise immunity | Use |
+| --- | --- | --- | --- |
+| **ASK** (Amplitude Shift Keying) | Amplitude (1 = on, 0 = off / OOK) | Poor | Fiber optics, RFID |
+| **FSK** (Frequency Shift Keying) | Frequency (1 = f1, 0 = f2) | Moderate | Old dial-up modems, caller ID |
+| **PSK** (Phase Shift Keying) | Phase (1 = 0°, 0 = 180°) | **Best** | Wi-Fi, Bluetooth, satellite |
+
+**QPSK** uses 4 phases (0°, 90°, 180°, 270°) → 2 bits per symbol. **QAM** varies *both* amplitude and phase (16-QAM = 4 bits/symbol) — cable modems, 4G/5G, Wi-Fi.
+
+**Memory trick:** ASK = amplitude (weakest), FSK = frequency (middle), PSK = phase (strongest, most used today).
+
+**Line coding (digital → digital):** NRZ (simple, no clock), Manchester (transition per bit — self-clocking, used by classic Ethernet, but doubles bandwidth), NRZI, 4B/5B.
+
+### PCM — analog to digital
+
+1. **Sampling** — measure amplitude at intervals. **Nyquist: rate ≥ 2 × max frequency.** Voice ≈ 4 kHz → 8,000 samples/s (why telephones sample at 8 kHz). Too low → *aliasing*.
+2. **Quantisation** — round each sample to the nearest fixed level (introduces *quantisation error*; more levels = more accuracy, more bits).
+3. **Encoding** — level → binary (8 levels → 3 bits: `000`…`111`).
+
+```text
+Samples 2.1, 5.8, 7.3, 4.2 → quantise 2, 6, 7, 4 → encode 010 110 111 100
+```
 
 ## Wireless & security
 
-Wi-Fi standards (802.11a/b/g/n/ac/ax), WPA3 replacing WPA2, and the classic "which is most secure" MCQ. Firewalls filter by rules; IDS detects, IPS prevents; VPN encrypts transit.
+### Wi-Fi standards (802.11)
+
+| Standard | Nickname | Band | Max rate (typical) |
+| --- | --- | --- | --- |
+| 802.11a | — | 5 GHz | 54 Mbps |
+| 802.11b | — | 2.4 GHz | 11 Mbps |
+| 802.11g | — | 2.4 GHz | 54 Mbps |
+| 802.11n | Wi-Fi 4 | 2.4 + 5 GHz | 600 Mbps |
+| 802.11ac | Wi-Fi 5 | 5 GHz | ~3.5 Gbps |
+| 802.11ax | Wi-Fi 6/6E | 2.4/5/6 GHz | ~9.6 Gbps |
+
+- 2.4 GHz = longer range, more interference (microwaves, Bluetooth); 5/6 GHz = faster, shorter range.
+- **Bluetooth** (2.4 GHz, ~10–100 m) and **NFC** (~10 cm) complete the short-range family. NFC is a *set-up* technology — pair with NFC, continue over Bluetooth/Wi-Fi.
+
+### Wi-Fi security evolution
+
+| Protocol | Status | Weakness |
+| --- | --- | --- |
+| WEP | broken — never use | RC4 key attacks in minutes |
+| WPA | legacy | TKIP flaws |
+| WPA2 | long-time standard | handshake offline cracking (KRACK) |
+| **WPA3** | current best | SAE handshake resists dictionary attacks |
+
+**Other defences:** WIDS/WIPS (wireless intrusion detection/prevention), MAC filtering (trivially spoofed — speed bump, not security), VPN encrypting traffic over any network, firewall rules by IP/port/protocol.
+
+<Callout type="tip">
+"Most secure Wi-Fi today" → WPA3. "Which wireless standard is 5 GHz-only?" → 802.11a (and ac). Bluetooth range vs NFC: metres vs centimetres.
+</Callout>

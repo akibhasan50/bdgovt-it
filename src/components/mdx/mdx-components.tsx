@@ -80,5 +80,25 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  table: (props: ComponentPropsWithoutRef<"table">) => (
+    <div className="my-6 overflow-x-auto rounded-xl border border-border">
+      <table
+        className="w-full min-w-[420px] border-collapse text-left text-sm"
+        {...props}
+      />
+    </div>
+  ),
+  th: (props: ComponentPropsWithoutRef<"th">) => (
+    <th
+      className="border-b border-border bg-muted/60 px-3 py-2 font-semibold text-foreground"
+      {...props}
+    />
+  ),
+  td: (props: ComponentPropsWithoutRef<"td">) => (
+    <td
+      className="border-b border-border px-3 py-2 align-top text-muted-foreground last:border-b-0"
+      {...props}
+    />
+  ),
   Callout,
 };
