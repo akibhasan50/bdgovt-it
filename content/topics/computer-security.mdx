@@ -132,6 +132,37 @@ ISMS standard for information-security management. **Audit violation scenarios p
 
 Controls map to CIA + accountability: unique user IDs, need-to-know access, encryption in transit/at rest, logged privileged actions, scheduled tested backups.
 
+### Malware family [BKKB AP 2026]
+
+**Q: Which software steals data and sends it to a remote user?**
+
+**Answer:** **Spyware**
+
+**Explanation:** spyware runs covertly on the host, records activity (keystrokes, screens, files, credentials) and **exfiltrates it to an attacker-controlled server**. The user rarely notices — no obvious "infection" symptom, which is why it differs from ransomware.
+
+**Full family table:**
+
+| Type | What it does | How it spreads | Exam keyword |
+| --- | --- | --- | --- |
+| **Spyware** | monitors & **ships data to a remote attacker** | bundled freeware, drive-by download | *steals data → remote user* |
+| Virus | corrupts files/programs | needs a **host file** + user action (open/execute) | attaches to carrier |
+| Worm | self-replicates across networks | **no host file**, exploits network services | spreads by itself |
+| Trojan | looks legitimate, runs malicious payload | social engineering, fake apps | trust/disguise |
+| Ransomware | encrypts data, demands payment | phishing, RDP brute force | CIA → availability |
+| Adware | injects ads, tracks clicks | bundled installers | annoying, often legal-grey |
+
+**Related info:**
+
+- **Rootkit** — hides itself (and other malware) from the OS/admin tools; deep persistence.
+- **Keylogger** — specialised spyware for keystrokes only.
+- **Botnet** — compromised machines under remote command (DDoS army).
+
+**Exam tip:** the giveaway phrase is always **"sends stolen data to a remote user"** → **spyware**. If the stem says *"disguised as useful software"* → **Trojan**. If *"spreads without user opening a file"* → **worm**.
+
+<Callout type="tip">
+BKKB AP 2026 wording: *"Which software steals data and sends it to a remote user?"* → **Spyware**. Pair it with Trojan (disguise) and Worm (autonomous network spread) — those three are the usual MCQ distractors.
+</Callout>
+
 ## PKI & legal basics
 
 Certificate Authority issues TLS certs chaining to a trusted root. Bangladesh's **Digital Security Act 2018** (now succeeded by the Cyber Security Act 2023) criminalises unauthorised access and cyber offences — know the year the current act was enacted.

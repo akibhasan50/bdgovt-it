@@ -626,6 +626,70 @@ Exam trap: Shannon takes SNR as a **ratio**, not dB. Convert first: `SNR_dB = 10
 
 **A:** bits/sample = log₂256 = 8. Bit rate = 8000 × 8 = **64 kbps**.
 
+**Q8:** Which device uses MAC addresses for forwarding? *(BKKB AP 2026)*
+
+**A:** **Switch**
+
+**Explanation:** an Ethernet **switch** operates at **Layer 2 (Data Link)**. It builds/learns a **MAC address table** (port ↔ source MAC) from incoming frames and forwards each frame **only out the destination port** — not a flood.
+
+**Related info:**
+
+| Device | Layer | Address used | Behaviour |
+| --- | --- | --- | --- |
+| **Switch** | 2 | **MAC** | selective forward via MAC table |
+| Router | 3 | IP | route between networks using routing table |
+| Hub | 1 | none | broadcast every frame to **all** ports |
+| Repeater | 1 | none | regenerates signal on one link |
+
+**Exam tip:** *MAC → switch* · *IP → router* · *flood-all → hub* — one word maps to each device.
+
+---
+
+**Q9:** Which network is suitable for approximately 100 km coverage? *(BKKB AP 2026)*
+
+**A:** **MAN** (Metropolitan Area Network)
+
+**Explanation:** a MAN spans a **city or metro region** — roughly tens of kilometres, which matches "~100 km" far better than LAN (building/campus, ≤ a few km) or PAN (personal devices, ~10 m). WAN covers countries/continents (thousands of km).
+
+**Related info:**
+
+| Type | Typical span | Example |
+| --- | --- | --- |
+| PAN | ~10 m | phone + earbuds (Bluetooth) |
+| LAN | building / campus (≤ few km) | office Wi-Fi |
+| **MAN** | **city (~10–100 km)** | city-wide ISP, cable TV backbone |
+| WAN | country / global | the Internet, bank core WAN |
+
+**Exam tip:** read the distance first — *metres → PAN*, *building → LAN*, *city/tens-of-km → MAN*, *cross-country → WAN*.
+
+---
+
+**Q10:** Which protocol is used to send email? What does HTTP 404 mean? *(BKKB AP 2026)*
+
+**A (send):** **SMTP** (Simple Mail Transfer Protocol)
+
+**Explanation:** SMTP **pushes** mail from the client (or sending server) toward the recipient's server, usually on port **25 / 587**. Retrieving/reading uses a different protocol.
+
+**A (404):** **Not Found** — the server understood the request but has **no resource at that URL** (client-side "wrong/missing path", not a server crash).
+
+**Related info:**
+
+| Protocol | Role | Port |
+| --- | --- | --- |
+| **SMTP** | **send / relay** mail | 25, 587 |
+| POP3 | download mailbox (leaves or removes on server) | 110 / 995 |
+| IMAP | sync mailbox across devices | 143 / 993 |
+
+| Code | Meaning | Class |
+| --- | --- | --- |
+| 200 | OK | success |
+| 301 | Moved permanently | redirect |
+| 401 / 403 | unauthenticated / forbidden | client error |
+| **404** | **Not Found** | client error |
+| 500 | Internal server error | server error |
+
+**Exam tip:** **SMTP = Simple Mail Transfer (send)** · POP/IMAP = receive. 404 is *client asked for something that isn't there*; 500 is *our server broke*.
+
 **Q8:** Distinguish spoofing and sniffing.
 
 **A:** Spoofing impersonates a trusted source (active attack — fake IP/MAC/email). Sniffing passively captures packets on the network to steal credentials. Counter with anti-spoofing filters/MFA vs encryption and port security.

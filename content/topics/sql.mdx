@@ -139,6 +139,65 @@ HAVING AVG(sale_amount) > 50000 AND COUNT(*) >= 3;
 | DDL | CREATE, ALTER, DROP, TRUNCATE |
 | DML | SELECT, INSERT, UPDATE, DELETE |
 | DCL | GRANT, REVOKE |
+
+**Three BKKB AP 2026 one-liners, answered properly:**
+
+**Q1: Which one is a DCL command — INSERT, GRANT, or SELECT?**
+
+**Answer:** **GRANT**
+
+**Explanation:** DCL (**Data Control Language**) manages **permissions/privileges**, not data or schema. `GRANT` gives a privilege; `REVOKE` takes it away.
+
+| Category | Commands | One-line job |
+| --- | --- | --- |
+| DDL | CREATE, ALTER, DROP, TRUNCATE | define/modify structure |
+| DML | INSERT, UPDATE, DELETE | manipulate row data |
+| DQL | SELECT | read/query data |
+| **DCL** | **GRANT, REVOKE** | control access rights |
+| TCL | COMMIT, ROLLBACK, SAVEPOINT | transaction control |
+
+**Exam tip:** *INSERT* → DML · *SELECT* → DQL · *GRANT* → DCL. Only GRANT/REVOKE control **who may do what**.
+
+---
+
+**Q2: What is the input/output of an aggregate function?**
+
+**Answer:** **Many rows → a single value**
+
+**Explanation:** aggregates collapse a group of rows into one scalar result during/after grouping.
+
+| Function | Returns |
+| --- | --- |
+| `COUNT(*)` | number of rows |
+| `SUM(col)` | total |
+| `AVG(col)` | average |
+| `MIN(col)` / `MAX(col)` | extreme values |
+
+**Worked:** `SELECT dept, COUNT(*) FROM emp GROUP BY dept;` — input = all employee rows; output = one `(dept, count)` row per department.
+
+**Related info:** aggregates run in the **SELECT/HAVING** stage (after FROM→WHERE→GROUP BY). That's why `WHERE COUNT(*) > 5` is invalid but `HAVING COUNT(*) > 5` works.
+
+---
+
+**Q3: Which key uniquely identifies a tuple in a relation?**
+
+**Answer:** **Primary Key**
+
+**Explanation:** the primary key is a candidate key **chosen** to uniquely identify each tuple (row). Constraints: **unique** and **NOT NULL**.
+
+| Key | Role |
+| --- | --- |
+| **Primary Key** | uniquely identifies a tuple; no NULL, no duplicates |
+| Candidate Key | any minimal key that *could* be primary |
+| Foreign Key | references a primary/unique key in **another** table |
+| Super Key | any superset of attributes that still uniquely identifies |
+| Alternate Key | candidate keys not chosen as primary |
+
+**Exam tip:** stem says *"uniquely identifies a tuple"* → **Primary Key** (not foreign — FK only *links*; not candidate — that's the pool before a choice).
+
+<Callout type="tip">
+BKKB AP 2026 trio: GRANT → DCL · aggregate = many rows → 1 value · uniquely identifies tuple → Primary Key. Learn them as three fixed pairs.
+</Callout>
 | TCL | COMMIT, ROLLBACK, SAVEPOINT |
 
 <Callout type="warning">

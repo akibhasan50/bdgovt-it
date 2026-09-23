@@ -96,6 +96,47 @@ else:
 **Q: What are the different types of loops?**
 **A:** **Entry-controlled** (while, for) — test before each run. **Exit-controlled** (do-while) — test after each run. Count-controlled (`for i in range(n)`) vs condition-controlled (`while`).
 
+**Q: What is the output?** `for(i=0;i<=6;i++) printf("%d ", i+2);` *(BKKB AP 2026)*
+
+**Answer:** `2 3 4 5 6 7 8`
+
+**Explanation:** the loop variable `i` runs over every integer with `i <= 6`, starting from `0` — that is `i = 0,1,2,3,4,5,6` (**7 iterations**). Each iteration prints `i + 2`.
+
+| i | i+2 printed |
+| --- | --- |
+| 0 | 2 |
+| 1 | 3 |
+| 2 | 4 |
+| 3 | 5 |
+| 4 | 6 |
+| 5 | 7 |
+| 6 | 8 |
+
+**Related info:** `i <= 6` is **inclusive** (includes 6); `i < 6` would stop at 5 and print only `2…7`. Off-by-one on the boundary is the classic trap — always check `<=` vs `<` before counting iterations.
+
+**Exam tip:** count iterations first (`0…6` = 7), then map `i → i+2` — don't mentally execute the whole program if the pattern is linear.
+
+---
+
+**Q: iOS and macOS are primarily associated with which programming language?** *(BKKB AP 2026)*
+
+**Answer:** **Swift**
+
+**Explanation:** Apple's modern first-party language for **iOS, macOS, watchOS, tvOS** app development — introduced by Apple in 2014 as the safer, faster replacement for Objective-C.
+
+**Related info:**
+
+| Platform / era | Language |
+| --- | --- |
+| iOS / macOS (modern) | **Swift** |
+| iOS / macOS (legacy) | Objective-C |
+| Android (modern) | Kotlin |
+| Android (legacy) | Java |
+| Windows desktop / .NET | C# / C++ |
+| Cross-platform systems | C / C++ / Rust |
+
+**Exam tip:** *Apple + "primarily / modern"* → **Swift**. If the options include Objective-C and the stem says *older / legacy* → Objective-C. Pair Swift↔Apple the same way you pair Kotlin↔Android.
+
 **Q: What is a case structure?**
 **A:** Multi-way selection (`match`/`switch`/`case`) that picks one branch from many possible values of an expression.
 

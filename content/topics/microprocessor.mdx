@@ -250,3 +250,42 @@ INTR (maskable, needs INTA), TRAP (non-maskable, highest priority in 8085), RST 
 4. 32- vs 64-bit [CB SO(IT) 2023] — 32-bit caps RAM at 4 GB; 64-bit uses terabyte-scale address space; i3 (2–4 cores, no turbo) < i5 (4–6, turbo) < i7 (6–8+, hyper-threading).
 5. Heterogeneous multicore [CB SO(IT) 2020] — big cores for heavy tasks, efficiency cores for light ones → performance **and** battery/thermal balance.
 6. Why pipelining exists — one instruction per cycle once full; without it, every instruction pays the full multi-step latency alone.
+7. **Which memory uses flip-flops?** [BKKB AP 2026]
+
+   **Answer:** **SRAM** (Static RAM).
+
+   **Explanation:** each SRAM cell is a **bistable latch built from flip-flops/transistors** — as long as power is on, the bit holds itself; no refresh cycle. DRAM stores each bit as a **charge on a capacitor**, which leaks → must be refreshed thousands of times per second.
+
+   | | SRAM | DRAM |
+   | --- | --- | --- |
+   | Cell | flip-flop (6 transistors) | 1 transistor + 1 capacitor |
+   | Refresh | **not needed** | **required** |
+   | Speed | faster | slower |
+   | Cost / density | expensive, low density | cheap, high density |
+   | Typical use | **CPU cache** (L1/L2/L3) | **main memory** (RAM sticks) |
+
+   **Exam tip:** *flip-flop → SRAM → cache* · *capacitor → DRAM → main memory* — that three-word chain is the whole MCQ.
+
+8. **Memory size units** [BKKB AP 2026]
+
+   **Answer / table:**
+
+   ```text
+   1 Byte  = 8 bits
+   1 KB    = 1024 Bytes
+   1 MB    = 1024 KB
+   1 GB    = 1024 MB
+   1 TB    = 1024 GB
+   ```
+
+   **Related info (address-bus width):**
+
+   | Address bits | Addressable memory | How |
+   | --- | --- | --- |
+   | 16 | 64 KB | 2¹⁶ = 65536 |
+   | 20 | 1 MB | 2²⁰ ≈ 10⁶ |
+   | 24 | 16 MB | 2²⁴ |
+   | 32 | 4 GB | 2³² |
+   | 64 | 16 EB (theoretical) | 2⁶⁴ |
+
+   **Exam tip:** questions say "how much memory can a 20-bit address bus reach?" → compute `2^width`, don't recite the table. For *byte* sizes remember **1024 = 2¹⁰**, not 1000.

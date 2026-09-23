@@ -125,14 +125,62 @@ Verify `m0` (0000): only `A'C'D'` fires ✓. Verify `m15` (1111): `AB` ✓.
  AB=10 [  0    1   X   0 ]    m9, d11
 ```
 
-Use X to fill 1-groups: `{m1,m5,m9,d11}` → `C'D` (all D=1… wait D=1 column with C varying) — cells 0001,0101,1001,1011 → `C' D`? Actually A varies: m1=0001,m5=0101,m9=1001,d11=1011 — not a clean 4. Group `{m1,m5,d3,d7}` → `A' D` (0001,0101,0011,0111 all A=0,D=1). Group `{m1,m9,d?}` …
+**Method:** (1) circle all 1s in powers of 2 · (2) treat X as 1 whenever it enlarges a group · (3) treat X as 0 when unneeded · (4) every 1 must sit in ≥1 circle; Xs are optional · (5) write SOP from essential groups.
 
-**Method:** (1) circle all 1s in powers of 2 · (2) treat X as 1 whenever it helps a bigger circle · (3) treat X as 0 when it's not needed · (4) every 1 must sit in ≥1 circle; Xs optional · (5) write SOP from essential groups.
+**Worked cover:** `{m1,m5,d3,d7}` → `A'D` · `{m2, d3}` extend with d0/d1-row … prefer quads: `{m1,m5,d3,d7} = A'D`, `{m1, m9}` + d… — teaching answer: **use don't-cares freely to turn pairs into quads/octets; the minimal SOP that covers all 1s is unique once every essential group is taken.**
 
-Example solution using d0,d3,d7,d11 as 1s:
+### Absorption & algebra drills [BKKB AP 2026]
 
-- `{m1,m5,m9, ...}` and don't-care–assisted quads preferred over pairs
-- Final teaching answer: **prefer any cover where each group is size 4/8; don't-care usage is free**
+**Q: Simplify `(A + AB)(B + AB)`.**
+
+**Answer:** `AB`
+
+**Solution — two ways:**
+
+```text
+Method 1 — Absorption first (fastest)
+  A + AB = A          (absorption: A absorbs AB)
+  B + AB = B
+  (A + AB)(B + AB) = A · B = AB
+
+Method 2 — Expand then factor
+  (A + AB)(B + AB)
+    = AB + A·AB + AB + AB·AB
+    = AB + AB + AB + AB      (since A·A = A, B·B = B)
+    = AB
+```
+
+**Absorption laws to memorise:**
+
+| Law | Form |
+| --- | --- |
+| Absorption | `A + AB = A` |
+| Absorption (AND) | `A(A + B) = A` |
+| Redundancy | `A + A'B = A + B` |
+| Combining | `A(A' + B) = AB` |
+
+**Related info:** absorption collapses a term that already "contains" the other factor — once you spot `AB` inside `A + …` or inside `B + …`, the extra piece vanishes.
+
+---
+
+**Q: Convert binary `101011` to decimal.**
+
+**Answer:** `43`
+
+**Solution:**
+
+```text
+Bit positions:  5  4  3  2  1  0
+Bits:           1  0  1  0  1  1
+
+= 1×2⁵ + 0×2⁴ + 1×2³ + 0×2² + 1×2¹ + 1×2⁰
+= 32   +  0   +  8   +  0   +  2   +  1
+= 43
+```
+
+**Related info:** binary → decimal = sum of `bit × 2^position` (positions from 0 at the right). Decimal → binary = repeated division by 2, read remainders bottom-up. Octal = groups of 3 bits; hex = groups of 4.
+
+**Exam tip:** memorise powers of 2 up to 2¹⁰ (`1,2,4,8,16,32,64,128,256,512,1024`) — conversion MCQs become addition.
 
 ### 8×1 multiplexer design [AME 2024–2026]
 
@@ -226,3 +274,4 @@ Race-around in plain JK (J=K=1 while the clock stays high, output toggles endles
 7. Alarm truth table: `A = (M ∧ N) ∨ P` — fires on rows 001, 011, 101, 111 [Combined Bank O(IT) 2022].
 8. Digital IC characteristics: binary representation, Boolean logic, integration, low power, noise immunity, speed, reliability [CB AME/AHE 2023].
 9. Three-input XOR `A⊕B⊕C` from 2:1 multiplexers [DWASA AME-2025] — output is 1 on odd-weight rows; chain two 2:1 MUXes with A as the outer select.
+10. Absorption: `(A+AB)(B+AB) = AB` and binary `101011 = 43` [BKKB AP 2026] — square-twice algebra and bit-weighting; both are one-liners once the law is memorised.

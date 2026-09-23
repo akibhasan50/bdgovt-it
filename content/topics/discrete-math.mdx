@@ -43,3 +43,36 @@ Binomial theorem coefficient of xᵏ in (a+b)ⁿ is C(n,k)·aⁿ⁻ᵏ·bᵏ.
 ## Number theory
 
 GCD via Euclid's algorithm, LCM × GCD = product of numbers (two-number case), modular arithmetic for cryptography chapters (RSA relies on it).
+
+### Algebra drills [BKKB AP 2026]
+
+**Q: If `a − 1/a = 2`, find `a⁴ + 1/a⁴`.**
+
+**Answer:** `34`
+
+**Solution:**
+
+```text
+Given:   a − 1/a = 2
+
+Step 1 — square both sides:
+  (a − 1/a)² = 2²
+  a² − 2·a·(1/a) + 1/a² = 4
+  a² − 2 + 1/a² = 4
+  a² + 1/a² = 6
+
+Step 2 — square again:
+  (a² + 1/a²)² = 6²
+  a⁴ + 2·a²·(1/a²) + 1/a⁴ = 36
+  a⁴ + 2 + 1/a⁴ = 36
+  a⁴ + 1/a⁴ = 34
+```
+
+**Related info:**
+
+| Given | After 1st square | After 2nd square |
+| --- | --- | --- |
+| `a − 1/a = k` | `a² + 1/a² = k² + 2` | `a⁴ + 1/a⁴ = (k²+2)² − 2` |
+| `a + 1/a = k` | `a² + 1/a² = k² − 2` | `a⁴ + 1/a⁴ = (k²−2)² − 2` |
+
+**Method:** **square twice** — the cross term is always `±2` and cancels the constant you need to move. Same pattern for `a³ ± 1/a³` (multiply the linear expression by the square).
