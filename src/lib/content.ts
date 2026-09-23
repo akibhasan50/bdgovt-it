@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import { mdxComponents } from "@/components/mdx/mdx-components";
 
 const contentDir = path.join(process.cwd(), "content", "topics");
+const bankContentDir = path.join(process.cwd(), "content", "banks");
 
 const mdxOptions = { remarkPlugins: [remarkGfm] };
 
@@ -29,6 +30,14 @@ export type TopicContent = {
   intro: ReactNode | null;
   sections: TopicSection[];
   exists: boolean;
+};
+
+export type PaperQuestion = {
+  qNo: number;
+  question: string;
+  answer: string;
+  detailSource: string;
+  section: string;
 };
 
 function slugify(title: string, fallbackIndex: number) {
@@ -64,9 +73,36 @@ function splitSections(source: string) {
   };
 }
 
-export const getTopicContent = cache(async (slug: string): Promise<TopicContent> => {
+function parsePaperQuestions(source: string): PaperQuestion[] {
+  const { sections } = splitSections(source);
+  const questions: PaperQuestion[] = [];
+
+  for (const section of sections) {
+    const body = section.body;
+    const parts = body.split(/\n(?=\*\*Q\d+:)/);
+    for (const part of parts) {
+      const header = part.match(/^\*\*Q(\d+):\s*([\s\S]*?)\*\*/);
+      if (!header) continue;
+      const qNo = Number(header[1]);
+      const question = header[2].replace(/\\_/g, "_").replace(/\s+/g, " ").trim();
+      const answerMatch = part.match(/\*\*Answer:\*\*\s*(.+)/);
+      const answer = (answerMatch?.[1] ?? "").replace(/\*\*/g, "").trim();
+      questions.push({
+        qNo,
+        question,
+        answer: answer || "—",
+        detailSource: part.trim(),
+        section: section.title,
+      });
+    }
+  }
+
+  return questions.sort((a, b) => a.qNo - b.qNo);
+}
+
+async function loadMdxContent(dir: string, slug: string): Promise<TopicContent> {
   try {
-    const file = path.join(contentDir, `${slug}.mdx`);
+    const file = path.join(dir, `${slug}.mdx`);
     const raw = await fs.readFile(file, "utf8");
     const { content, data } = matter(raw);
     const { intro, sections } = splitSections(content);
@@ -95,4 +131,39 @@ export const getTopicContent = cache(async (slug: string): Promise<TopicContent>
   } catch {
     return { frontmatter: null, intro: null, sections: [], exists: false };
   }
+}
+
+export const getTopicContent = cache(async (slug: string): Promise<TopicContent> => {
+  return loadMdxContent(contentDir, slug);
 });
+
+export const getBankPaperContent = cache(
+  async (slug: string): Promise<TopicContent> => {
+    return loadMdxContent(bankContentDir, slug);
+  }
+);
+
+export const getBankPaperQuestions = cache(
+  async (slug: string): Promise<PaperQuestion[]> => {
+    try {
+      const raw = await fs.readFile(path.join(bankContentDir, `${slug}.mdx`), "utf8");
+      const { content } = matter(raw);
+      return parsePaperQuestions(content);
+    } catch {
+      return [];
+    }
+  }
+);
+
+export async function compilePaperDetail(source: string): Promise<ReactNode> {
+  try {
+    const compiled = await compileMDX({
+      source,
+      components: mdxComponents,
+      options: { mdxOptions },
+    });
+    return compiled.content;
+  } catch {
+    return source;
+  }
+}

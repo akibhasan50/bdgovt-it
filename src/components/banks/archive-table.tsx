@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   type ColumnFiltersState,
@@ -23,11 +23,13 @@ import {
   ArrowRight,
   ArrowUp,
   ArrowUpDown,
+  ChevronDown,
   Search,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import {
   Select,
   SelectContent,
@@ -44,7 +46,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { WrittenQA } from "@/lib/types";
-import { cn } from "@/lib/utils";
 
 const features = tableFeatures({
   columnFilteringFeature,
@@ -99,6 +100,7 @@ export function ArchiveTable({ rows }: { rows: WrittenQA[] }) {
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 10,
@@ -192,8 +194,36 @@ export function ArchiveTable({ rows }: { rows: WrittenQA[] }) {
           ),
           enableGlobalFilter: false,
         }),
+        helper.display({
+          id: "expand",
+          enableGlobalFilter: false,
+          enableSorting: false,
+          cell: ({ row }) => {
+            const detail = row.original.detail;
+            if (!detail) return null;
+            const isOpen = expandedId === row.original.id;
+            return (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="h-8 gap-1 text-xs"
+                aria-expanded={isOpen}
+                onClick={() => setExpandedId(isOpen ? null : row.original.id)}
+              >
+                {isOpen ? t("hideAnswer") : t("showAnswer")}
+                <ChevronDown
+                  className={cn(
+                    "size-3.5 transition-transform",
+                    isOpen && "rotate-180"
+                  )}
+                />
+              </Button>
+            );
+          },
+        }),
       ]),
-    [locale, t]
+    [expandedId, locale, t]
   );
 
   const table = useTable({
@@ -291,19 +321,49 @@ export function ArchiveTable({ rows }: { rows: WrittenQA[] }) {
         <TableBody>
           {table.getRowModel().rows.length ? (
             table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
-                {row.getAllCells().map((cell) => (
-                  <TableCell
-                    key={cell.id}
-                    className={cn(
-                      "px-3 py-3 align-top",
-                      cell.column.id === "question" && "whitespace-normal"
-                    )}
-                  >
-                    {table.FlexRender({ cell })}
-                  </TableCell>
-                ))}
-              </TableRow>
+              <Fragment key={row.id}>
+                <TableRow>
+                  {row.getAllCells().map((cell) => (
+                    <TableCell
+                      key={cell.id}
+                      className={cn(
+                        "px-3 py-3 align-top",
+                        cell.column.id === "question" && "whitespace-normal"
+                      )}
+                    >
+                      {table.FlexRender({ cell })}
+                    </TableCell>
+                  ))}
+                </TableRow>
+                {expandedId === row.original.id && row.original.detail ? (
+                  <TableRow className="hover:bg-transparent">
+                    <TableCell
+                      colSpan={columns.length}
+                      className="bg-muted/30 px-4 py-4 align-top"
+                    >
+                      <div className="mb-2 flex flex-wrap items-center gap-2">
+                        <Badge
+                          variant="secondary"
+                          className="bg-primary/10 font-mono text-primary"
+                        >
+                          {row.original.answer}
+                        </Badge>
+                        {row.original.paperSlug ? (
+                          <a
+                            href={`/banks/papers/${row.original.paperSlug}#chapter`}
+                            className="text-xs font-semibold text-primary hover:underline"
+                          >
+                            {t("openPaper")} →
+                          </a>
+                        ) : null}
+                      </div>
+                      <div className="max-w-3xl text-sm leading-relaxed text-foreground/90 [&_a]:text-primary [&_a:hover]:underline [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_code]:font-mono [&_code]:text-[0.85em] [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:bg-muted [&_pre]:p-3 [&_pre]:font-mono [&_pre]:text-xs [&_table]:mt-2 [&_table]:w-full [&_th]:border [&_th]:border-border [&_th]:bg-muted/50 [&_th]:px-2 [&_th]:py-1.5 [&_th]:text-left [&_th]:text-xs [&_th]:font-semibold [&_td]:border [&_td]:border-border [&_td]:px-2 [&_td]:py-1.5 [&_td]:text-xs">
+                        {row.original.detail}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : null}
+              </Fragment>
             ))
           ) : (
             <TableRow>

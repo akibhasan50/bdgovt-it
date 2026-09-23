@@ -226,7 +226,13 @@
     "ofEntries": "টি এন্ট্রি",
     "filterTopics": "ফিল্টার",
     "writtenQA": "লিখিত প্রশ্নোত্তর",
-    "pastPapers": "পুরোনো পেপার"
+    "pastPapers": "পুরোনো পেপার",
+    "fullPapers": "সম্পূর্ণ পেপার সমাধান",
+    "fullSolution": "সম্পূর্ণ সমাধান",
+    "answerStructure": "উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ",
+    "showAnswer": "উত্তর দেখুন",
+    "hideAnswer": "উত্তর লুকান",
+    "openPaper": "সম্পূর্ণ পেপার খুলুন"
   },
   "news": {
     "title": "নিউজ ও বিজ্ঞপ্তি",

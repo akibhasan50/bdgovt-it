@@ -289,31 +289,6 @@ export const topics: Topic[] = [
     examWeight: 62,
     related: ["daa", "theory-of-computation", "digital-logic-design"],
   },
-  {
-    slug: "bkkb-ap-2026",
-    title: {
-      en: "BKKB Assistant Programmer 2026",
-      bn: "বিকেকেবি সহকারী প্রোগ্রামার ২০২৬",
-    },
-    description: {
-      en: "Full solved paper — all 62 released questions with explanations, related info and exam tips.",
-      bn: "সম্পূর্ণ সমাধান — প্রকাশিত ৬২টি প্রশ্ন, ব্যাখ্যা, সম্পর্কিত তথ্য ও পরীক্ষার টিপসহ।",
-    },
-    icon: "FileCode2",
-    color: "success",
-    questionCount: 62,
-    chapters: 10,
-    difficulty: "medium",
-    examWeight: 88,
-    related: [
-      "digital-logic-design",
-      "programming-questions",
-      "computer-networks",
-      "sql",
-      "microprocessor",
-      "os",
-    ],
-  },
 ];
 
 export function getTopic(slug: string) {

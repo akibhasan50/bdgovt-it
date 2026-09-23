@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { topics } from "@/lib/data/topics";
-import { bankCategories } from "@/lib/data/banks";
+import { bankCategories, bankPapers } from "@/lib/data/banks";
 import { exams } from "@/lib/data/exams";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -40,6 +40,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const paperRoutes: MetadataRoute.Sitemap = bankPapers.map((paper) => ({
+    url: `${base}/banks/papers/${paper.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.8,
+  }));
+
   const examRoutes: MetadataRoute.Sitemap = exams.map((exam) => ({
     url: `${base}/exams/${exam.id}`,
     lastModified: new Date(),
@@ -47,5 +54,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticRoutes, ...topicRoutes, ...bankRoutes, ...examRoutes];
+  return [...staticRoutes, ...topicRoutes, ...bankRoutes, ...paperRoutes, ...examRoutes];
 }

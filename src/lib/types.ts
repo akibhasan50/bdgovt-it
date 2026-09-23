@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type Locale = "bn" | "en";
 
 export type Localized = { en: string; bn: string };
@@ -94,6 +96,10 @@ export type WrittenQA = {
   year: number;
   exam: string;
   group: string;
+  answer?: string;
+  paperSlug?: string;
+  qNo?: number;
+  detail?: ReactNode;
 };
 
 export type Guide = {

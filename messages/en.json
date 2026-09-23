@@ -226,7 +226,13 @@
     "ofEntries": "entries",
     "filterTopics": "Filter",
     "writtenQA": "Written Q&A",
-    "pastPapers": "Past papers"
+    "pastPapers": "Past papers",
+    "fullPapers": "Full paper solutions",
+    "fullSolution": "Full solution",
+    "answerStructure": "Answer → Explanation → Related info → Exam tip",
+    "showAnswer": "Show answer",
+    "hideAnswer": "Hide answer",
+    "openPaper": "Open full paper"
   },
   "news": {
     "title": "News & circulars",

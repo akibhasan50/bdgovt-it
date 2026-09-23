@@ -1,5 +1,46 @@
 import type { BankCategory, Guide, LeaderboardEntry, WrittenQA } from "@/lib/types";
 
+export type BankPaper = {
+  slug: string;
+  bank: string;
+  title: { en: string; bn: string };
+  description: { en: string; bn: string };
+  year: number;
+  exam: string;
+  organization: { en: string; bn: string };
+  questionCount: number;
+};
+
+export const bankPapers: BankPaper[] = [
+  {
+    slug: "bkkb-ap-2026",
+    bank: "bank-it",
+    title: {
+      en: "BKKB Assistant Programmer 2026 — Full Solution",
+      bn: "বিকেকেবি সহকারী প্রোগ্রামার ২০২৬ — সম্পূর্ণ সমাধান",
+    },
+    description: {
+      en: "All 62 released questions with Answer → Explanation → Related info → Exam tip.",
+      bn: "প্রকাশিত ৬২টি প্রশ্ন — উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ।",
+    },
+    year: 2026,
+    exam: "BKKB AP",
+    organization: {
+      en: "Bangladesh Karmachari Kallyan Board",
+      bn: "বাংলাদেশ কর্মচারী কল্যাণ বোর্ড",
+    },
+    questionCount: 62,
+  },
+];
+
+export function getBankPaper(slug: string) {
+  return bankPapers.find((p) => p.slug === slug);
+}
+
+export function getBankPapersByBank(bankSlug: string) {
+  return bankPapers.filter((p) => p.bank === bankSlug);
+}
+
 export const bankCategories: BankCategory[] = [
   {
     slug: "bank-it",

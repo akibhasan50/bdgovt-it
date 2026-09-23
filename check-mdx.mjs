@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Compile-check every content/topics/*.mdx file.
+ * Compile-check content/topics/*.mdx and content/banks/*.mdx.
  * Usage: node check-mdx.mjs [slug...]
  */
 import fs from "node:fs/promises";
@@ -9,18 +9,43 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 
-const dir = path.join(process.cwd(), "content", "topics");
+const dirs = [
+  { dir: path.join(process.cwd(), "content", "topics"), label: "content/topics" },
+  { dir: path.join(process.cwd(), "content", "banks"), label: "content/banks" },
+];
 const slugs = process.argv.slice(2);
-const files = slugs.length
-  ? slugs.map((s) => `${s}.mdx`)
-  : (await fs.readdir(dir)).filter((f) => f.endsWith(".mdx"));
-
 const components = {
   Callout: ({ children }) => children,
 };
 
+const files = [];
+if (slugs.length) {
+  for (const { dir, label } of dirs) {
+    for (const s of slugs) {
+      const file = `${s}.mdx`;
+      try {
+        await fs.access(path.join(dir, file));
+        files.push({ dir, label, file });
+      } catch {
+        /* not in this dir */
+      }
+    }
+  }
+} else {
+  for (const { dir, label } of dirs) {
+    try {
+      const list = await fs.readdir(dir);
+      for (const file of list.filter((f) => f.endsWith(".mdx"))) {
+        files.push({ dir, label, file });
+      }
+    } catch {
+      /* dir may not exist */
+    }
+  }
+}
+
 let failed = 0;
-for (const file of files) {
+for (const { dir, file } of files) {
   try {
     const raw = await fs.readFile(path.join(dir, file), "utf8");
     const { content } = matter(raw);

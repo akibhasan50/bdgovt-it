@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
-import { ArrowLeft, Building2 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Building2, FileText } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { ArchiveTable } from "@/components/banks/archive-table";
 import { colorChip } from "@/components/content/accents";
-import { bankCategories, getBank, getWrittenByBank } from "@/lib/data/banks";
+import {
+  bankCategories,
+  getBank,
+  getBankPapersByBank,
+  getWrittenByBank,
+} from "@/lib/data/banks";
+import { getPaperWrittenQAs } from "@/lib/bank-paper-rows";
 import { cn } from "@/lib/utils";
 
 export async function generateStaticParams() {
@@ -38,7 +44,11 @@ export default async function BankPage(props: PageProps<"/banks/[slug]">) {
     getTranslations("banks"),
     getLocale(),
   ]);
-  const rows = getWrittenByBank(slug);
+  const papers = getBankPapersByBank(slug);
+  const paperRows = (
+    await Promise.all(papers.map((p) => getPaperWrittenQAs(p.slug)))
+  ).flat();
+  const rows = [...getWrittenByBank(slug), ...paperRows];
   const title = locale === "bn" ? bank.title.bn : bank.title.en;
   const description =
     locale === "bn" ? bank.description.bn : bank.description.en;
@@ -87,6 +97,37 @@ export default async function BankPage(props: PageProps<"/banks/[slug]">) {
       </div>
 
       <Separator className="my-6" />
+
+      {papers.length > 0 ? (
+        <div className="mb-6 flex flex-col gap-3">
+          <h2 className="font-display text-lg font-semibold sm:text-xl">
+            {t("fullPapers")}
+          </h2>
+          {papers.map((paper) => (
+            <Link
+              key={paper.slug}
+              href={`/banks/papers/${paper.slug}`}
+              className="card-hover group flex items-center gap-4 rounded-2xl border border-border bg-card p-4 sm:p-5"
+            >
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-success/12 text-success">
+                <FileText className="size-5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <p className="font-display text-base font-semibold group-hover:text-primary sm:text-lg">
+                  {locale === "bn" ? paper.title.bn : paper.title.en}
+                </p>
+                <p className="mt-0.5 line-clamp-1 text-sm text-muted-foreground">
+                  {locale === "bn" ? paper.description.bn : paper.description.en}
+                </p>
+              </div>
+              <Badge variant="secondary" className="font-mono text-[11px]">
+                {paper.questionCount}
+              </Badge>
+              <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
+            </Link>
+          ))}
+        </div>
+      ) : null}
 
       <div className="mb-4 flex items-center justify-between gap-3">
         <h2 className="font-display text-lg font-semibold sm:text-xl">
