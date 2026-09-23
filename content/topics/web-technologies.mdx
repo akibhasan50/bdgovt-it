@@ -5,7 +5,20 @@ summary_en: "HTTP lifecycle, status codes, REST verbs, cookies/sessions — plus
 summary_bn: "এইচটিটিপি লাইফসাইকেল, স্ট্যাটাস কোড, রেস্ট ভার্ব, কুকি/সেশন — পাশাপাশি ফ্রন্ট-এন্ড বেসিক।"
 ---
 
+<Callout type="info">
+**AME exam weightage:** Web technologies often ride along in the SE & governance block (**~3%** AME / part of applied IT). Favourites: **HTTP 2xx / 4xx / 5xx class meanings**, REST verbs, and **responsive design via CSS media queries**.
+</Callout>
+
 ## HTTP status codes you must not confuse
+
+### Class ranges first [AME pattern]
+
+| Range | Class | Meaning | Examples |
+| --- | --- | --- | --- |
+| **2xx** | Success | request accepted/OK | 200 OK, 201 Created, 204 No Content |
+| **3xx** | Redirection | look elsewhere | 301 permanent, 302 temporary, 304 Not Modified |
+| **4xx** | Client error | *your* request is wrong | 400 Bad, 401 Unauth, 403 Forbidden, 404 Missing |
+| **5xx** | Server error | *our* side broke | 500 Internal, 502 Bad Gateway, 503 Unavailable |
 
 | Code | Meaning |
 | --- | --- |
@@ -21,7 +34,7 @@ summary_bn: "এইচটিটিপি লাইফসাইকেল, স্�
 | 503 | Service unavailable |
 
 <Callout type="tip">
-401 vs 403 is a standard interview pair: 401 = "who are you?", 403 = "I know who you are — no."
+401 vs 403 is a standard interview pair: 401 = "who are you?", 403 = "I know who you are — no." 5xx always means the server failed even if the client sent a valid request.
 </Callout>
 
 ## Ports & protocols
@@ -46,4 +59,25 @@ Cookies (server-readable, 4KB-ish, domain-scoped), localStorage (client-only, ~5
 
 ## Rendering & performance
 
-Critical rendering path: parse HTML → DOM, CSS → CSSOM, combine → layout → paint → composite. Lazy loading, code splitting, CDN caching and HTTP/2 multiplexing are the usual "how do you make it faster" answers.
+Critical rendering path: parse HTML → DOM, CSS → CSSOM, combine → layout → paint → composite. Lazy loading, code splitting, CDN caching and HTTP/2 multiplexing are the usual "how do you make you make it faster" answers.
+
+## Responsive design & CSS media queries [AME pattern]
+
+**Responsive Web Design (RWD)** = one site, fluid grid + flexible images + media queries — no separate m. site.
+
+```css
+/* mobile-first pattern */
+.container { width: 100%; }
+
+@media (min-width: 768px)  { .container { width: 75%; } }   /* tablet  */
+@media (min-width: 1024px) { .container { width: 60%; } }   /* desktop */
+```
+
+| Technique | Role |
+| --- | --- |
+| Fluid grid | % widths instead of fixed px |
+| Flexible images | `max-width: 100%` — never overflow the column |
+| **Media queries** | apply CSS when viewport/features match (`min-width`, `orientation`, `prefers-color-scheme`) |
+| Viewport meta | `<meta name="viewport" content="width=device-width, initial-scale=1">` — required for mobile |
+
+Exam phrasing: *"How do you make a page look different on mobile?"* → media query on viewport width (plus the viewport meta tag).

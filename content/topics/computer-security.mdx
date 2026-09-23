@@ -6,7 +6,9 @@ summary_bn: "সিমেট্রিক বনাম অ্যাসিমে�
 ---
 
 <Callout type="info">
-**AP exam weightage:** cybersecurity questions sit inside the Networks block (**15–20%** combined). Highest-yield here: CIA triad, spoofing vs sniffing, MITM on Diffie–Hellman, TLS private-key exposure, Same-Origin Policy, and classic crypto classification (AES vs RSA).
+**AP exam weightage:** cybersecurity questions sit inside the Networks block (**15–20%** combined). Highest-yield: CIA triad, spoofing vs sniffing, MITM on Diffie–Hellman, TLS private-key exposure, Same-Origin Policy, and classic crypto classification (AES vs RSA).
+
+**AME exam weightage (2021–2026):** Cybersecurity & banking tech carry **14%** — second only to networking. Favourites: **Atomicity of inter-bank EFT/RTGS (ACID)**, MFA/OTP delivery, digital signatures, NGFW vs stateful firewalls, WAF, **ISO/IEC 27001** audit flags (shared superuser passwords, non-compliant backup schedules), symmetric vs asymmetric crypto.
 </Callout>
 
 ## CIA triad [AP pattern, 2023–2026]
@@ -80,6 +82,55 @@ Firewall filters traffic by rules; **IDS** alerts, **IPS** drops; DMZ isolates p
 <Callout type="tip">
 "Passive capture" → sniffing · "Fake identity" → spoofing · "DH with no auth" → MITM · "Cross-site data read blocked by browser" → Same-Origin · "Leaked server key" → past + future impersonation (use ECDHE for forward secrecy).
 </Callout>
+
+## Banking transaction security [AME 2024–2026]
+
+### Atomicity in EFT/RTGS — the ACID question
+
+Fund transfer A→B must happen **completely or not at all**:
+
+| Failure point | Without atomicity | With atomicity (ACID-A) |
+| --- | --- | --- |
+| Debit done, credit crashes | money vanishes | debit **rolled back** — account unchanged |
+| Partial multi-leg transfer | inconsistent balances | journal/WAL forces both-or-neither |
+
+**Atomicity** = all-or-nothing (transaction log + rollback). Complements **Consistency** (constraints hold), **Isolation** (concurrent transfers don't interleave wrongly), **Durability** (commit survives power loss). *"Inter-bank fund transfer requires which ACID property?"* → **Atomicity**.
+
+### MFA, OTP & digital signatures
+
+| Factor type | Examples |
+| --- | --- |
+| Something you **know** | password, PIN |
+| Something you **have** | OTP on phone, hardware token |
+| Something you **are** | fingerprint, face, iris |
+
+**MFA** = at least two *different* factor types. Bank OTP channels: **SMS, push notification, authenticator app (TOTP), email** — SMS is weakest (SIM-swap), app/TOTP preferred.
+
+**Digital signature** = hash(message) encrypted with sender's **private key** → receiver verifies with sender's **public key**. Gives integrity + authentication + non-repudiation (not confidentiality — the message itself is often only hashed, not encrypted).
+
+### Firewall depth — stateful vs NGFW vs WAF
+
+| Layer | What it protects | Exam keyword |
+| --- | --- | --- |
+| Packet-filtering | IP/port headers | ACL rules |
+| **Stateful** | connection state tables | established sessions |
+| **NGFW** | DPI + IPS + app/user ID | "deep packet inspection" |
+| **WAF** | web app HTTP layer | SQLi, XSS, OWASP top 10 |
+| IDS/IPS | anomaly/malware signatures | detect vs prevent |
+
+### ISO/IEC 27001 & IT audit flags [AME 2024–2026]
+
+ISMS standard for information-security management. **Audit violation scenarios papers love:**
+
+| Scenario | Verdict | Why |
+| --- | --- | --- |
+| Shared superuser (root/admin) password across staff | **violation** | no accountability, breaks least-privilege & unique-ID controls |
+| Backup only weekly for transaction DB needing daily | **violation** | RPO too large vs stated policy |
+| Root login over SSH with password (no key) | **violation** | weak authentication for highest privilege |
+| Firewall rule `allow any any` on DMZ | **violation** | no least-privilege segmentation |
+| Documented DR test twice a year with evidence | **compliant** | policy met, auditable |
+
+Controls map to CIA + accountability: unique user IDs, need-to-know access, encryption in transit/at rest, logged privileged actions, scheduled tested backups.
 
 ## PKI & legal basics
 

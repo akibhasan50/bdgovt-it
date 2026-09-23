@@ -7,6 +7,8 @@ summary_bn: "লার্নিংয়ের ধরন, ক্লাসিক 
 
 <Callout type="info">
 **AP exam weightage (2020–2026):** ML/AI & modern IT trends carry **5–10%** of the technical paper — smaller but rising. Highest-yield: the three learning paradigms, data-preprocessing steps (missing values & noise), and big-data vocabulary (MapReduce/Hadoop). Often appears as short written notes or classification MCQs.
+
+**AME exam weightage:** programming, algorithms & Linux (incl. big-data pipelines) carry **8%**. The **pick-five Hadoop component** scenario for banking/fraud/real-time logs is the signature AME big-data question since 2023.
 </Callout>
 
 ## Learning types
@@ -97,6 +99,7 @@ The same question shape returns with different scenarios — choose five and jus
 - **Generic pipeline** [Combined Bank AE/AME 2026]: HDFS + YARN + MapReduce + Hive + Flume → ingestion, storage, processing, resources, analytics.
 - **Fraud analytics + maintenance prediction** [CB AME/AE 2023]: HDFS + Kafka + Spark + Hive + Mahout.
 - **E-commerce recommendations** [CB AME/AE 2023]: Flume + HDFS + YARN + MapReduce + Mahout.
+- **Real-time banking transaction logs** [AME 2024–2026]: **Kafka** (stream bus for live events) + **Flume** or Kafka Connect (ingest) + **HDFS** (raw lake) + **Spark** (near-real-time processing) + **Hive** (warehouse reports) — pick five, justify: capture → land → store → process → query. **Sqoop** instead of Flume when the source is a **relational core-banking DB** (SQL → HDFS bulk pulls), not append-only logs.
 
 ## Bayes drill [ICB AP-2026]
 

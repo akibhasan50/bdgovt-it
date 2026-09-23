@@ -9,6 +9,8 @@ Software Engineering (SE) is a systematic, disciplined, and quantifiable approac
 
 <Callout type="info">
 **AP exam weightage (2020–2026):** SE & OOP together carry **15–20%** of the technical paper. Highest-yield: C/Java code-output tracing (recursion, pointers, inheritance rules), SDLC phases, **Function Point calculations**, **Git workflows**, and system requirement specification. DU papers lean theoretical (flowcharts, SDLC); BIBM papers add project metrics (function points).
+
+**AME exam weightage (2021–2026):** SE & governance carry only **3%** on AME — but CMMI and verification vs validation appear as short written answers almost every cycle. Pair with web-tech (HTTP codes, media queries) for Q10-style questions.
 </Callout>
 
 <Callout type="tip">
@@ -181,6 +183,22 @@ Testing is a planned activity to **find defects** before users do.
 <Callout type="info">
 MCQ style: *debugging vs testing* — testing **finds** defects; debugging **fixes** them after they are found.
 </Callout>
+
+### Verification vs Validation [AME 2024–2026, CMMI L3]
+
+| | Verification | Validation |
+| --- | --- | --- |
+| Question | *Are we building the **product right**?* | *Are we building the **right product**?* |
+| Checks against | spec / design / standards | user needs & business requirements |
+| Typical activities | reviews, inspections, unit tests, static analysis | system/acceptance tests, UAT demos, pilot |
+| Timing | throughout development | at and near delivery |
+| Failure means | implementation diverged from design | product solves the wrong problem |
+
+**CMMI Level 3 (Defined)** — processes are documented, standardised, org-wide:
+
+- Level 1 Initial (adhoc) → 2 Managed (project-specific) → **3 Defined (org standard)** → 4 Quantitatively Managed → 5 Optimizing
+- **L3 process areas examiners name:** Requirements Development, Technical Solution, **Verification**, **Validation**, Integrated Project Management, Process/Product Quality Assurance, Decision Analysis
+- At L3, verification & validation are **established organisational processes**, not one-off project heroics
 
 ## Software Maintenance
 

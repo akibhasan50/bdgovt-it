@@ -5,6 +5,10 @@ summary_en: "8086/8085, addressing modes, interrupts, pipelining and the memory 
 summary_bn: "৮০৮৬/৮০৮৫, অ্যাড্রেসিং মোড, ইন্টারাপ্ট, পাইপলাইনিং ও মেমরি হাইরার্কি।"
 ---
 
+<Callout type="info">
+**AME exam weightage (2021–2026):** Computer architecture & memory carry **11%** of the paper. Highest-yield numericals: **cache bit mapping** (tag/index/offset for direct, 2-way, 4-way set-associative), **effective access time**, disk capacity, page-table size, and **multistage pipeline vs single-cycle** CPU performance comparisons. E-Zone/BB AME papers put heavy math here every year since 2023.
+</Callout>
+
 ## Microprocessor vs microcomputer vs microcontroller
 
 | | Microprocessor (μP) | Microcomputer | Microcontroller (μC) |
@@ -150,11 +154,89 @@ Virtual memory sits between RAM and disk logically: demand paging maps virtual p
 
 **Direct-mapped cache** [BB AME-2023]: 16 KB cache, 4-word blocks, 32-bit addresses. Word = 4 B → block = 16 B → **offset 4 bits**; lines = `16 KB / 16 B = 1024` → **index 10 bits**; **tag = 32 − 10 − 4 = 18 bits**.
 
+**Set-associative cache bit mapping — the general formula [AME 2023–2026]:**
+
+```text
+offset bits = log₂(block/line size in bytes)
+#lines      = cache_size / line_size
+#sets       = #lines / associativity (W = 1, 2, 4 …)
+index bits  = log₂(#sets)
+tag bits    = address_bits − index bits − offset bits
+```
+
+**Worked — Direct-mapped (W=1):** 32 KB cache, 64 B lines, 32-bit address.
+
+```text
+offset = log₂64 = 6
+lines  = 32 KB / 64 B = 512
+sets   = 512 (W=1)
+index  = log₂512 = 9
+tag    = 32 − 9 − 6 = 17
+```
+
+**Worked — 4-way set-associative:** same 32 KB / 64 B / 32-bit.
+
+```text
+offset = 6
+lines  = 512
+sets   = 512 / 4 = 128
+index  = log₂128 = 7
+tag    = 32 − 7 − 6 = 19      ← fewer index bits, more tag bits
+```
+
+**Worked — 2-way:** sets = 512/2 = 256 → index 8 → tag = 32 − 8 − 6 = **18**.
+
+| Mapping | Sets for 32 KB / 64 B | Index | Tag (32-bit) |
+| --- | --- | --- | --- |
+| Direct (1-way) | 512 | 9 | **17** |
+| 2-way | 256 | 8 | **18** |
+| 4-way | 128 | 7 | **19** |
+| Fully associative | 1 | 0 | **26** |
+
+**Key insight:** higher associativity → **fewer index bits, more tag bits**, fewer conflict misses.
+
+**Page table size [AME pattern]:**
+
+```text
+pages         = Virtual_space / Page_size
+PTE size      = frame-number bits + flags  (often 4 bytes)
+page table    = pages × PTE size
+```
+
+Worked: 32-bit VA, 4 KB pages, 4-byte PTE → pages = 2²⁰, table = **4 MB** — why multi-level page tables + TLB exist.
+
+**Effective access time (cache hit ratio):**
+
+```text
+EAT = H × T_cache + (1 − H) × T_main
+```
+
+Worked: H = 0.95, T_cache = 1 ns, T_main = 100 ns → 0.95×1 + 0.05×100 = **5.95 ns**.
+
 **Disk capacity** [CB SO(IT) 2022]: sector 512 B × 50 sectors × 2000 tracks = **25,600 B per track**; 5 double-sided platters = 10 surfaces → **512,000,000 B**.
 
 **Hit ratio** [CB AE 2021]: 75% hit, RAM 10 ns, SSD 10 ms → `0.75×10 ns + 0.25×10 ms ≈ 2.5 ms` — the miss penalty dominates.
 
 **CPU speed factors** [Rupali ANE-2023]: clock speed, core count, cache size, word length, bus speed, architecture (pipelining/ILP). **2.40 GHz** = 2.40 billion cycles per second.
+
+### Multistage pipeline vs single-cycle CPU [AME 2024–2026]
+
+| | Single-cycle | Multistage pipeline |
+| --- | --- | --- |
+| Timing | one long clock = slowest instruction | clock = slowest **stage** only |
+| Throughput | 1 instruction / clock | **1 instruction / clock** once full |
+| Latency | same total work per instruction | similar latency, overlapped execution |
+| Clock period | must cover IF+ID+EX+MEM+WB | covers only one stage → **much higher MHz** |
+| Hazards | none | structural, data (need forwarding), control (branch flush) |
+| Hardware | simple control, no hazard logic | inter-stage registers, hazard detection units |
+
+Pipeline speedup (ideal, k stages): **≈ k×** throughput vs non-pipelined; efficiency drops with stall cycles:
+
+```text
+Speedup = k / (1 + stall_fraction × (k − 1))   (rough exam form)
+```
+
+Multistage is preferred because the clock is set by the longest **stage**, not the longest **instruction** — the entire design question AME papers keep rephrasing.
 
 ## Interrupts (8085/8086 family)
 

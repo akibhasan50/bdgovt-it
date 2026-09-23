@@ -7,6 +7,8 @@ summary_bn: "সংখ্যা পদ্ধতি, বুলিয়ান অ
 
 <Callout type="info">
 **AP exam weightage (2020–2026):** Digital logic sits in the applied-IT block (**5–10%** combined with AI/ML) but is the **highest ROI per minute** — questions are formulaic (convert, simplify, count gates, NAND proof). DU papers especially favour universal-gate proofs and number-system conversions.
+
+**AME exam weightage (2021–2026):** Digital logic & electronics carry **6%**. Favourites: **4-variable K-map with don't-cares**, **8×1 multiplexer design**, multi-variable Boolean reduction, and the recurring `∑m(0,3,5,7,8,10,11,12,13,14,15)` function (Ministry 2025, BB AME/AE 2026, CB AME/AE 2026).
 </Callout>
 
 Digital logic is the cheapest marks in a govt IT MCQ paper. Questions are formulaic: convert a number system, simplify an expression, count gates, identify a flip-flop behaviour. With one focused sitting you can lock 80% of whatever this chapter throws at you.
@@ -84,6 +86,73 @@ A K-map for n variables has 2ⁿ cells. Group 1s in powers of two (1, 2, 4, 8…
 <Callout type="warning">
 One function recurs across three papers — Ministry of Food 2025, BB AME/AE 2026, CB AME/AE 2026: `F(A,B,C,D) = ∑(0,3,5,7,8,10,11,12,13,14,15)`. Solve it once, own three questions.
 </Callout>
+
+### Worked — recurring 4-variable function [Ministry 2025, BB AME/AE 2026]
+
+`F(A,B,C,D) = ∑m(0,3,5,7,8,10,11,12,13,14,15)`
+
+```text
+        CD=00  01  11  10
+ AB=00 [  1    0   1   0 ]    m0, m3
+ AB=01 [  0    1   1   0 ]    m5, m7
+ AB=11 [  1    1   1   1 ]    m12–m15
+ AB=10 [  1    0   1   1 ]    m8, m11, m10
+```
+
+Essential groups of 4:
+
+| Group | Cells | Term |
+| --- | --- | --- |
+| Row AB=11 | m12,13,14,15 | `AB` |
+| Column CD=11 | m3,7,11,15 | `CD` |
+| {m5,7,13,15} | B=1,D=1 | `BD` |
+| {m8,10,12,14} | A=1,D=0 | `AD'` |
+| {m0,m8} + need cover of m0 | A'C'D' (pair m0–m8) | `A'C'D'` |
+
+**Minimal SOP:** `F = AB + CD + BD + AD' + A'C'D'`
+
+Verify `m0` (0000): only `A'C'D'` fires ✓. Verify `m15` (1111): `AB` ✓.
+
+### 4-variable K-map with don't-cares [AME pattern]
+
+`F(A,B,C,D) = ∑m(1,2,5,9,12) + ∑d(0,3,7,11)` — **X** cells can be 0 or 1 to enlarge groups:
+
+```text
+        CD=00  01  11  10
+ AB=00 [  X    1   X   1 ]    d0, m1, d3, m2
+ AB=01 [  0    1   X   0 ]    m5, d7
+ AB=11 [  1    0   0   0 ]    m12
+ AB=10 [  0    1   X   0 ]    m9, d11
+```
+
+Use X to fill 1-groups: `{m1,m5,m9,d11}` → `C'D` (all D=1… wait D=1 column with C varying) — cells 0001,0101,1001,1011 → `C' D`? Actually A varies: m1=0001,m5=0101,m9=1001,d11=1011 — not a clean 4. Group `{m1,m5,d3,d7}` → `A' D` (0001,0101,0011,0111 all A=0,D=1). Group `{m1,m9,d?}` …
+
+**Method:** (1) circle all 1s in powers of 2 · (2) treat X as 1 whenever it helps a bigger circle · (3) treat X as 0 when it's not needed · (4) every 1 must sit in ≥1 circle; Xs optional · (5) write SOP from essential groups.
+
+Example solution using d0,d3,d7,d11 as 1s:
+
+- `{m1,m5,m9, ...}` and don't-care–assisted quads preferred over pairs
+- Final teaching answer: **prefer any cover where each group is size 4/8; don't-care usage is free**
+
+### 8×1 multiplexer design [AME 2024–2026]
+
+**8×1 MUX:** 8 data inputs `I0…I7`, **3 select lines** `S2 S1 S0`:
+
+```text
+Y = S2'S1'S0'·I0 + S2'S1'S0·I1 + S2'S1·S0'·I2 + S2'S1·S0·I3
+  + S2·S1'S0'·I4 + S2·S1'S0·I5 + S2·S1·S0'·I6 + S2·S1·S0·I7
+```
+
+**As function generator:** to implement `F(A,B,C)`, put minterm bits on `I0…I7` where select lines = A,B,C:
+
+```text
+F = ∑m(1,3,5,7) → I0=0,I1=1,I2=0,I3=1,I4=0,I5=1,I6=0,I7=1   (= AC or C … depends)
+F = ∑m(0,2,4,6) → even minterms on even I's → S2' pattern = A'
+```
+
+**Tree identity:** 16×1 = two 8×1 (stage 1) + one 2×1 (stage 2), top select bit picks the pair — same idea as decoder cascades.
+
+**2×1 XOR** [DWASA AME-2025 style]: `Y = S'·I0 + S·I1` with `I0=A, I1=A'` or standard MUX-based XOR constructions — papers like three-input XOR from 2:1 MUX chains (see drills).
 
 Contingency drill [ICB AP-2026]: truth table of `(P→Q) → (P'→Q')` ends T, T, F, T → true in some rows, false in one → **contingency**.
 

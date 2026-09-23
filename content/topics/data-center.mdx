@@ -5,6 +5,10 @@ summary_en: "Hypervisors, containers, PUE and the infrastructure questions Bangl
 summary_bn: "হাইপারভাইজর, কনটেইনার, PUE আর বাংলাদেশের ডেটা সেন্টার পদের প্রশ্ন।"
 ---
 
+<Callout type="info">
+**AME exam weightage (2021–2026):** Cloud computing & data-center infrastructure carry **13%** of the paper — third-largest block. Favourites: **RAID selection for core-banking DBs vs log servers**, diesel vs gas generator choice, UPS redundancy, **Type 1 vs Type 2 hypervisors**, PUE/cooling efficiency, and Hadoop pipeline component selection. BB AME and Pubali papers recycle energy-efficiency + virtualization questions every cycle.
+</Callout>
+
 ## What a data center is
 
 A **centralized physical facility** where an organization's servers, storage and networking collect, process, store and distribute data — kept secure, cooled, powered and highly available. Components in one breath: servers, storage, network gear, power supply, cooling, security.
@@ -106,6 +110,31 @@ RAID combines multiple physical disks into one logical unit to improve **perform
 <Callout type="tip">
 RAID 0 → speed, NO redundancy. RAID 1 → redundancy, no write boost. RAID 5 → most popular in business. RAID 6 → survives two failures. RAID 10 → best performance + redundancy, expensive.
 </Callout>
+
+### RAID selection scenarios [AME 2023–2026]
+
+| Workload | Pick | Why |
+| --- | --- | --- |
+| **Core banking transaction DB** (OLTP, hot writes, zero data loss) | **RAID 10** | mirror+stripe = best write perf + 1-disk failure survival per mirror; rebuilds faster than parity RAID |
+| Large analytical DB / capacity-first | RAID 5 | good read+space balance, tolerates 1 disk |
+| Need **2-disk** fault tolerance (compliance, nearline) | **RAID 6** | double parity — survives simultaneous rebuild + failure |
+| Logging / temp staging (rebuildable data) | RAID 0 or 5 | speed/space over redundancy — logs can be regenerated |
+| Boot volumes, small mirrors | RAID 1 | simple, fast reads |
+
+**Rule of thumb papers reward:** transaction integrity + performance → **RAID 10**; capacity + single parity OK → RAID 5; must survive two failures → RAID 6; pure speed, disposable data → RAID 0.
+
+### Backup generator — diesel vs gas [AME pattern]
+
+| | Diesel | Natural gas |
+| --- | --- | --- |
+| Fuel energy density | higher — longer runtime per tank | lower; needs pipeline/CNG supply |
+| Load efficiency | excellent at high steady load | good; better part-load options |
+| Maintenance | more (filters, injectors) | cleaner burn, less oil contamination |
+| Emissions | higher NOx/PM | lower CO₂, cleaner |
+| Site constraint | tank storage on-site | needs gas line to facility |
+| **Exam pick** | **primary for large DCs** (runtime, reliability, fuel stored) | where gas is cheap/available, lower emission targets |
+
+**UPS redundancy:** N (no spare) < N+1 (one spare module) < 2N (fully duplicated). Tier 3/4 sites use N+1 or 2N+1 for UPS **and** cooling — pair this with the tier table above.
 
 ## Operations & selection
 
