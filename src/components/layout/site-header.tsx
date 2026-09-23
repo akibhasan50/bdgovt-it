@@ -303,7 +303,7 @@ function TopicsMega() {
                 {topic.title.en}
               </span>
               <span className="block text-[0.7rem] text-muted-foreground">
-                {topic.questionCount} {t("common.questions")}
+                {topic.chapters} {t("topics.chapters")}
               </span>
             </span>
           </Link>

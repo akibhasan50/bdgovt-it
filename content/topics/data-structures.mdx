@@ -175,24 +175,6 @@ Applications: CPU/disk scheduling, IO buffers & pipes, interrupt handling, print
 
 Order returned: **1, 2, 3, 4** — same as enqueue order. FIFO preserved. Transfer only runs when `outStack` is fully empty, so expensive transfers never happen back-to-back.
 
-```python
-class QueueUsingStacks:
-    def __init__(self):
-        self.inStack = []
-        self.outStack = []
-
-    def enqueue(self, x):
-        self.inStack.append(x)          # O(1)
-
-    def dequeue(self):
-        if not self.outStack:           # only transfer when outStack is empty
-            while self.inStack:
-                self.outStack.append(self.inStack.pop())
-        if not self.outStack:
-            raise IndexError("Queue is empty")
-        return self.outStack.pop()      # O(1) amortized
-```
-
 **Why it's amortized O(1), not O(n) every time:** each element moves at most twice in its whole life — once into `inStack`, once transferred to `outStack`. A transfer only happens when `outStack` runs dry (meaning every queued element was sitting untouched in `inStack`). You can't have two expensive transfers in a row without cheap enqueues refilling `inStack` in between. Over **n** enqueues + **n** dequeues, total work is O(n) overall — not O(n) per dequeue. Some single dequeue calls cost O(n) (a transfer after a batch of enqueues); most are O(1) (just pop `outStack`). Spread evenly, each operation averages **O(1)**.
 
 | | Time (per call) | Time (amortized) |
