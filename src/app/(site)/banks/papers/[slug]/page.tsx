@@ -15,6 +15,10 @@ import {
 import { getBankPaperContent } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
+// Incomplete prerendered RSC payloads (Next #93889) crash the flight client
+// on soft-nav with enqueueModel errors — always render this route on demand.
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return bankPapers.map((paper) => ({ slug: paper.slug }));
 }
@@ -118,27 +122,29 @@ export default async function BankPaperPage(props: PageProps<"/banks/papers/[slu
 
       <Separator className="my-6" />
 
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <h2 className="font-display text-lg font-semibold sm:text-xl">
-          {t("fullSolution")}
-        </h2>
-        <span className="text-xs text-muted-foreground">
-          {t("answerStructure")}
-        </span>
-      </div>
-
-      {content.exists && content.sections.length > 0 ? (
-        <>
-          {content.intro ? (
-            <div className="mb-8">{content.intro}</div>
-          ) : null}
-          <SectionAccordion sections={content.sections} />
-        </>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border bg-card p-6 text-sm text-muted-foreground">
-          Full solution is on the way.
+      <div id="chapter" className="scroll-mt-24">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <h2 className="font-display text-lg font-semibold sm:text-xl">
+            {t("fullSolution")}
+          </h2>
+          <span className="text-xs text-muted-foreground">
+            {t("answerStructure")}
+          </span>
         </div>
-      )}
+
+        {content.exists && content.sections.length > 0 ? (
+          <>
+            {content.intro ? (
+              <div className="mb-8">{content.intro}</div>
+            ) : null}
+            <SectionAccordion sections={content.sections} />
+          </>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border bg-card p-6 text-sm text-muted-foreground">
+            Full solution is on the way.
+          </div>
+        )}
+      </div>
     </section>
   );
 }

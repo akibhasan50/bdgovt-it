@@ -1,3 +1,4 @@
+import "server-only";
 import type { WrittenQA } from "@/lib/types";
 import { compilePaperDetail, getBankPaperQuestions } from "@/lib/content";
 import { getBankPaper } from "@/lib/data/banks";

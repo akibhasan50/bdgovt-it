@@ -1,32 +1,20 @@
-"use client";
+import type { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
+import { ChevronDown } from "lucide-react";
+import { ExpandSectionsButton } from "@/components/topics/expand-sections-button";
+import { OpenHashSection } from "@/components/topics/open-hash-section";
+import { cn } from "@/lib/utils";
 
-import * as React from "react";
-import { useTranslations } from "next-intl";
-import { ChevronsDownUp, ChevronsUpDown } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
-import type { TopicSection } from "@/lib/content";
+type Section = {
+  id: string;
+  title: string;
+  content: ReactNode;
+};
 
-export function SectionAccordion({ sections }: { sections: TopicSection[] }) {
-  const t = useTranslations("topics");
-  const [value, setValue] = React.useState<string[]>([]);
-
-  React.useEffect(() => {
-    const id = window.location.hash.slice(1);
-    if (id && sections.some((s) => s.id === id)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time hash deep-link on mount
-      setValue([id]);
-    }
-  }, [sections]);
+export async function SectionAccordion({ sections }: { sections: Section[] }) {
+  const t = await getTranslations("topics");
 
   if (sections.length === 0) return null;
-
-  const allOpen = value.length === sections.length;
 
   return (
     <div>
@@ -34,35 +22,25 @@ export function SectionAccordion({ sections }: { sections: TopicSection[] }) {
         <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
           {sections.length} {t("sectionCount")}
         </p>
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          className="h-8 gap-1.5 text-xs"
-          aria-expanded={allOpen}
-          onClick={() =>
-            setValue(allOpen ? [] : sections.map((section) => section.id))
-          }
-        >
-          {allOpen ? (
-            <ChevronsDownUp className="size-3.5" />
-          ) : (
-            <ChevronsUpDown className="size-3.5" />
-          )}
-          {allOpen ? t("collapseAll") : t("expandAll")}
-        </Button>
+        <ExpandSectionsButton
+          sectionIds={sections.map((s) => s.id)}
+          expandLabel={t("expandAll")}
+          collapseLabel={t("collapseAll")}
+        />
       </div>
 
-      <Accordion type="multiple" value={value} onValueChange={setValue}>
+      <OpenHashSection ids={sections.map((s) => s.id)} />
+
+      <div className="flex flex-col">
         {sections.map((section, index) => (
-          <AccordionItem
+          <details
             key={section.id}
-            value={section.id}
             id={section.id}
-            className="scroll-mt-24 border-border/70"
+            data-accordion-item=""
+            className="group border-b border-border/70 scroll-mt-24 last:border-b-0"
           >
-            <AccordionTrigger className="group items-center rounded-xl px-3 py-3.5 text-left text-base font-semibold tracking-tight hover:bg-muted/50 hover:no-underline aria-expanded:bg-muted/40">
-              <span className="flex min-w-0 items-center gap-3">
+            <summary className="group flex cursor-pointer list-none items-center rounded-xl px-3 py-3.5 text-left text-base font-semibold tracking-tight transition-colors outline-none hover:bg-muted/50 open:bg-muted/40 [&::-webkit-details-marker]:hidden">
+              <span className="flex min-w-0 flex-1 items-center gap-3">
                 <span
                   aria-hidden
                   className="grid size-6 shrink-0 place-items-center rounded-md bg-primary/10 font-mono text-[0.7rem] font-bold text-primary tabular-nums"
@@ -71,13 +49,22 @@ export function SectionAccordion({ sections }: { sections: TopicSection[] }) {
                 </span>
                 <span className="truncate">{section.title}</span>
               </span>
-            </AccordionTrigger>
-            <AccordionContent className="mb-1 rounded-xl border border-border/60 bg-card px-4 pt-1 pb-5 text-[0.95rem] shadow-xs [&>:first-child]:mt-0 [&_p:first-of-type]:text-base [&_p:first-of-type]:text-foreground/85">
+              <ChevronDown
+                aria-hidden
+                className="ml-2 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180"
+              />
+            </summary>
+            <div
+              className={cn(
+                "mb-1 rounded-xl border border-border/60 bg-card px-4 pt-1 pb-5 text-[0.95rem] shadow-xs",
+                "[&>:first-child]:mt-0 [&_p:first-of-type]:text-base [&_p:first-of-type]:text-foreground/85"
+              )}
+            >
               {section.content}
-            </AccordionContent>
-          </AccordionItem>
+            </div>
+          </details>
         ))}
-      </Accordion>
+      </div>
     </div>
   );
 }

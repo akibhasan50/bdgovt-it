@@ -52,13 +52,25 @@ export function SiteHeader() {
   const setCommandOpen = useUIStore((s) => s.setCommandOpen);
   const setMobileNavOpen = useUIStore((s) => s.setMobileNavOpen);
   const [menu, setMenu] = useState<MenuKey>(null);
-  const [lastPathname, setLastPathname] = useState(pathname);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const idleHandle = useRef<number | null>(null);
 
-  if (lastPathname !== pathname) {
-    setLastPathname(pathname);
-    setMenu(null);
-  }
+  const clearIdle = () => {
+    if (idleHandle.current != null) {
+      window.cancelIdleCallback?.(idleHandle.current);
+      idleHandle.current = null;
+    }
+  };
+
+  const deferMenuClear = () => {
+    clearIdle();
+    const run = () => setMenu(null);
+    if (typeof window.requestIdleCallback === "function") {
+      idleHandle.current = window.requestIdleCallback(run, { timeout: 400 });
+    } else {
+      idleHandle.current = window.setTimeout(run, 200) as unknown as number;
+    }
+  };
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -71,13 +83,23 @@ export function SiteHeader() {
     return () => window.removeEventListener("keydown", onKey);
   }, [setCommandOpen]);
 
+  useEffect(() => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    deferMenuClear();
+    return clearIdle;
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- close menu after nav, deferred past flight
+  }, [pathname]);
+
   const openMenu = (key: Exclude<MenuKey, null>) => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
+    clearIdle();
     setMenu(key);
   };
   const scheduleClose = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setMenu(null), 140);
+    closeTimer.current = setTimeout(() => {
+      deferMenuClear();
+    }, 140);
   };
 
   const isActive = (href: string) =>

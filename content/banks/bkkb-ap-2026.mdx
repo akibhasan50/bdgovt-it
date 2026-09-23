@@ -641,6 +641,32 @@ Square:  a⁴ + 2 + 1/a⁴ = 36  →   a⁴ + 1/a⁴ = 34
 
 ---
 
+**Q17: Convert binary `101011` into decimal.**
+
+**Answer:** **43**
+
+**Explanation:** Each bit is a power of 2, counted from the right (position 0):
+
+| Bit position | 5 | 4 | 3 | 2 | 1 | 0 |
+| --- | --- | --- | --- | --- | --- | --- |
+| Bit value | 1 | 0 | 1 | 0 | 1 | 1 |
+| Contribution | 32 | 0 | 8 | 0 | 2 | 1 |
+
+`101011₂ = 32 + 0 + 8 + 0 + 2 + 1 = **43**`
+
+**Related info:**
+
+| Base | System | Quick check |
+| --- | --- | --- |
+| 2 | Binary | digits 0–1 |
+| 8 | Octal | group bits in 3s |
+| 10 | Decimal | our normal numbers |
+| 16 | Hex | digits 0–F, group bits in 4s |
+
+**Exam tip:** Always write powers under the bits before summing — place-value errors are the classic trap (`101011` looks like `43` not `42`/`44`).
+
+---
+
 **Q20: AI is usually built using which language? (Prolog, Java, C)**
 
 **Answer:** **Prolog**
@@ -780,7 +806,9 @@ Square:  a⁴ + 2 + 1/a⁴ = 36  →   a⁴ + 1/a⁴ = 34
 
 **Answer:** **GRANT**
 
-**Explanation:** DCL manages privileges: GRANT gives, REVOKE takes away.
+**Explanation:** DCL manages privileges: **GRANT** gives rights, **REVOKE** takes them away.
+
+**Related info:**
 
 | Category | Commands |
 | --- | --- |
@@ -1058,6 +1086,26 @@ A + A'B = A + B
 
 ---
 
+**Q22: What is Augmented Reality (AR)?**
+
+**Answer:** Technology that **overlays digital information / graphics / virtual elements on top of the real-world view** (does not replace reality).
+
+**Explanation:** AR composites computer-generated layers onto live surroundings — usually through a phone camera, HUD, or glasses — while the physical scene stays visible and interactive.
+
+**Related info:**
+
+| Tech | What the user sees | Example |
+| --- | --- | --- |
+| **AR** | real world **+ digital overlay** | Google Maps live view, Snapchat filters |
+| VR | fully virtual environment (real world replaced) | Meta Quest headset |
+| MR / XR | digital objects anchored & interactive in real space | HoloLens |
+
+**Uses:** navigation, gaming, education, shopping/try-on.
+
+**Exam tip:** *Real world kept + digital layer added* → **AR**; *world fully replaced* → **VR**. That one contrast is the usual MCQ split.
+
+---
+
 **Q60: Which software steals data and sends it to a remote user?**
 
 **Answer:** **Spyware**
@@ -1106,9 +1154,9 @@ A + A'B = A + B
 
 ---
 
-**Q49: Memory-size related question (stem incomplete)**
+**Q49: Memory-size related question (stem/options incomplete on the released key)**
 
-**Answer:** Stem/options incomplete — use the standard unit ladder:
+**Answer:** Stem incomplete — memorise the standard unit ladder anyway:
 
 ```text
 1 Byte = 8 bits
@@ -1118,9 +1166,18 @@ A + A'B = A + B
 1 TB   = 1024 GB
 ```
 
-**Related info:** Address width → capacity: 16 bit → 64 KB · 20 bit → 1 MB · 32 bit → 4 GB.
+**Explanation:** Memory MCQs almost always ask one of two shapes: (1) *convert 1 GB → MB/KB*, or (2) *how many bytes can an address of N bits select?* For (2) capacity = `2^N` bytes (assuming byte-addressable).
 
-**Exam tip:** Learn `2^width` for buses and `1024 = 2^10` for file sizes — covers both MCQ shapes.
+**Related info:**
+
+| Address width | Byte-addressable capacity |
+| --- | --- |
+| 16 bit | 2¹⁶ = 64 KB |
+| 20 bit | 2²⁰ = 1 MB |
+| 32 bit | 2³² = 4 GB |
+| 64 bit | 2⁶⁴ = 16 EB (theoretical) |
+
+**Exam tip:** Learn `2^width` for address buses and `1024 = 2^10` for file sizes — covers both MCQ shapes even when the printed stem is cut off.
 
 ## Where each answer lives in the syllabus
 

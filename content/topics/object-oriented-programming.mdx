@@ -22,6 +22,16 @@ The four pillars, as a one-line exam answer each:
 | Inheritance | Derive new classes from existing ones (code reuse, "is-a") |
 | Polymorphism | Same message, different behaviour (compile-time or runtime) |
 
+### The four pillars — proper descriptions
+
+**Encapsulation** wraps data (fields) and the methods that operate on that data into a single unit (the class) and restricts direct access to the internals with access modifiers (`private` / `protected` / `public`). Outside code calls public methods; private state never leaks. Also called **data hiding**. Why it matters: integrity (only validated paths can change state), easier debugging (change is local), safer team work (interfaces stay stable while internals evolve).
+
+**Abstraction** shows *what* an object does, not *how*. You drive a car with steering and pedals — you never touch the combustion cycle. In code, abstract classes and interfaces define the contract; concrete subclasses implement the details. Related tools: `abstract` methods (must be overridden), interfaces (pure contract in classic Java), pure virtual functions in C++.
+
+**Inheritance** lets a subclass acquire fields and methods of a superclass: code reuse + an **"is-a"** relationship. Covered in full below — five types, Java vs C++ support, diamond problem.
+
+**Polymorphism** = "many forms": the same message (method call, operator) produces different behaviour depending on the runtime type. **Compile-time polymorphism** = overloading (and templates/generics). **Runtime polymorphism** = overriding through a base reference (`Animal a = new Dog(); a.eat();`). Needs inheritance for the runtime form.
+
 Nine standard advantages over procedural style — memorise the headline words:
 
 | Advantage | One-line reason |
@@ -55,16 +65,16 @@ Class vs structure is the same contrast one level down: a structure groups plain
 
 ## The six properties [BPDB-2004, BOF-2018, NTRCA-14/16/19/20, Uttara Bank-2019]
 
-1. **Class** — user-defined type; blueprint with data members and member functions (Car: wheels, speed, mileage shared by all cars).
-2. **Object** — instance with **identity** (name), **state** (data), **behavior** (methods). Dog: state color/breed; behavior bark/eat.
-3. **Abstraction** — essential features only; driving uses accelerator/brake without engine knowledge.
-4. **Encapsulation** — data + methods in one unit, access restricted — also called **data hiding**; bank data reachable only through methods.
-5. **Inheritance** — child acquires parent properties; code reuse (Animal → Dog inherits eat, sleep).
-6. **Polymorphism** — many forms; **compile-time → overloading, run-time → overriding**. Same person as father/employee/husband.
+1. **Class** — user-defined type; blueprint with data members and member functions (Car: wheels, speed, mileage shared by all cars). Not a built-in type — you define structure and behaviour once, then instantiate.
+2. **Object** — instance of a class with **identity** (unique name/reference), **state** (current field values), **behavior** (methods it can run). Dog: state color/breed; behavior bark/eat. Class is the recipe; object is the cake.
+3. **Abstraction** — essential features only; hide implementation detail. Driving uses accelerator/brake without engine knowledge. Implemented with abstract classes, interfaces, and access control.
+4. **Encapsulation** — data + methods in one unit, access restricted — also called **data hiding**; bank balance reachable only through `deposit`/`withdraw`. Combines binding + restriction (abstraction is the design goal; encapsulation is the mechanism).
+5. **Inheritance** — child acquires parent properties and behaviours; code reuse and "is-a" (Animal → Dog inherits eat, sleep, then adds bark). Five shapes: single, multilevel, multiple, hierarchical, hybrid.
+6. **Polymorphism** — many forms; **compile-time → overloading, run-time → overriding**. Same person as father/employee/husband — same reference type, different concrete behaviour.
 
 ## Encapsulation in code
 
-Data stays `private`, touched only through `public` methods:
+Data stays `private`, touched only through `public` methods — the outside world cannot bypass validation:
 
 ```cpp
 class BankAccount {
@@ -91,7 +101,7 @@ Skeleton: `class ClassName { private: ... public: ... protected: ... };` — sen
 
 ## Inheritance & its vocabulary [NTRCA-14, PSC-17, ICB-17 MCQ]
 
-A **derived/child/subclass** acquires members of a **super/parent/base class**:
+**Inheritance** allows a class (**subclass / derived class**) to acquire the **properties and behaviours** (fields and methods) of another class (**superclass / base class**), promoting **code reuse** and establishing an **"is-a"** relationship — Dog *is an* Animal, so Dog inherits `eat`, `sleep` without rewriting them.
 
 ```cpp
 class A { public: int x = 10; void print() { cout << "Hello" << endl; } };
@@ -100,17 +110,109 @@ class B : public A {};   // B b; b.print(); uses inherited members
 
 ICB-17 tests the synonyms directly: Super = Parent = Base; Derived = Child = Subclass.
 
+**Core benefit across all types:** write shared behaviour once in the superclass; every subclass reuses it. A subclass object can also be treated as its superclass type — `Animal a = new Dog();` — which is the bridge into runtime polymorphism.
+
 ### Types of inheritance
 
-| Type | Shape | C++ sketch |
-| --- | --- | --- |
-| Single | one parent | `class B : public A {}` |
-| Multiple | two+ parents | `class C : public A, public B {}` |
-| Multilevel | chain | `class C : public B {}` with `B : public A` |
-| Hierarchical | one parent, many children | `Dog`, `Cat`, `Pig` all `: public Animal` |
-| Hybrid | mix of the above | needs virtual inheritance |
+| Type | Structure | Java support | C++ support |
+| --- | --- | --- | --- |
+| Single | 1 parent → 1 child | Yes | Yes |
+| Multilevel | chain of 3+ classes | Yes | Yes |
+| Hierarchical | 1 parent → many children | Yes | Yes |
+| Multiple | 1 child ← 2+ parents | No (interfaces only) | Yes |
+| Hybrid | combination of the above | Partial (via interfaces) | Yes |
 
-Constructor order = chain order: Animal → Dog → Pug prints parent lines first; hierarchical children each fire the shared Animal constructor.
+#### 1. Single inheritance
+
+One subclass extends exactly one superclass.
+
+```java
+class Animal {
+    void eat() { System.out.println("Animal eats"); }
+}
+class Dog extends Animal {
+    void bark() { System.out.println("Dog barks"); }
+}
+// Dog dog = new Dog(); dog.eat(); dog.bark(); — both work
+```
+
+C++ form: `class Dog : public Animal {};`
+
+#### 2. Multilevel inheritance
+
+A chain: each class inherits from the previous one.
+
+```java
+class Animal {
+    void eat() { System.out.println("Animal eats"); }
+}
+class Mammal extends Animal {
+    void walk() { System.out.println("Mammal walks"); }
+}
+class Dog extends Mammal {
+    void bark() { System.out.println("Dog barks"); }
+}
+// Dog inherits eat() from Animal AND walk() from Mammal — both levels up the chain
+```
+
+Constructor order = chain order: Animal → Mammal → Dog — parent constructors run first.
+
+#### 3. Multiple inheritance
+
+One class inherits from two or more superclasses.
+
+```cpp
+// C++ — direct
+class Flyable  { public: void fly()  { cout << "Flying";  } };
+class Swimmable { public: void swim() { cout << "Swimming"; } };
+class Duck : public Flyable, public Swimmable { };
+// Duck has both fly() and swim()
+```
+
+```java
+// Java — via interfaces, since Java disallows multiple class inheritance
+interface Flyable  { void fly(); }
+interface Swimmable { void swim(); }
+class Duck implements Flyable, Swimmable {
+    public void fly()  { System.out.println("Flying"); }
+    public void swim() { System.out.println("Swimming"); }
+}
+```
+
+```cpp
+// Compact exam sketches
+class B : public A {};                 // single
+class C : public B {};                 // multilevel   (A → B → C)
+class D : public A, public B {};       // multiple     (C++ direct; Java → interfaces)
+```
+
+#### 4. Hierarchical inheritance
+
+One superclass, many independent subclasses (siblings).
+
+```java
+class Animal {
+    void eat() { System.out.println("Animal eats"); }
+}
+class Dog extends Animal { void bark() {} }
+class Cat extends Animal { void meow() {} }
+class Bird extends Animal { void fly()  {} }
+// Three siblings all reuse Animal's eat(), each adds its own behaviour
+```
+
+Each child fires the shared Animal constructor when created.
+
+#### 5. Hybrid inheritance
+
+Any **combination** of the above — e.g. hierarchical + multilevel: `Animal → Mammal`, then fan-out `Mammal → Dog` and `Mammal → Cat` (multilevel down to Mammal, hierarchical from there). Common in real layered "is-a" hierarchies. In C++ a pure diamond hybrid needs **virtual inheritance** to keep one shared base; in Java you model the same shape with interfaces.
+
+```text
+      Animal
+         |
+      Mammal          ← multilevel to here
+      /    \
+    Dog    Cat        ← hierarchical fan-out
+```
 
 ### Diamond problem & Java's answer
 
@@ -122,7 +224,7 @@ Constructor order = chain order: Animal → Dog → Pug prints parent lines firs
       GrandChild
 ```
 
-Both paths carry `Parent::sum()` — GrandChild's call is ambiguous. **Java refuses multiple inheritance with classes** for exactly this reason; use **interfaces** instead. **C++ fixes it with virtual inheritance.**
+Both paths carry `Parent::sum()` — GrandChild wouldn't know which version to use: **ambiguity**. If B and C each override a method from A differently, D inherits two conflicting implementations. **Java refuses multiple inheritance with classes** for exactly this reason and only allows multiple inheritance through **interfaces** (historically method signatures only; default methods now require explicit conflict-resolution rules). **C++ fixes the diamond with virtual inheritance.**
 
 <Callout type="warning">
 Ambiguity, not performance, is the stated reason Java bans multiple class inheritance. Exam phrasing: "Why multiple inheritance is not supported in Java?" → answer = ambiguity problem, solved by interfaces.
@@ -130,7 +232,7 @@ Ambiguity, not performance, is the stated reason Java bans multiple class inheri
 
 ## Polymorphism [CB-24, PSC-25, NTRCA-14, BB-14, PSC-17]
 
-"Poly" many + "morph" forms. The operator `+` adds `10 + 32 → 42` and concatenates `"poly" + "morphism"` — one operator, multiple behaviours.
+"Poly" many + "morph" forms — same interface or message, different concrete behaviour. The operator `+` adds `10 + 32 → 42` and concatenates `"poly" + "morphism"` — one operator, multiple behaviours. Without polymorphism you would need name-different methods for every type; with it, callers stay type-agnostic.
 
 | | Compile-time (static) | Run-time (dynamic) |
 | --- | --- | --- |
@@ -165,13 +267,13 @@ Redefine operators for user-defined types. Rules:
 
 ## Overriding, virtual, pure virtual [BB-2014]
 
-Overriding = child redefines a parent method with the **same signature**. Without `virtual`, calls bind at compile time — a `Polygon*` pointing at a Rectangle still prints the **base** area (0, 0, 0). With `virtual`, the same pointers print 200 / 100 / 0: correct dispatch at runtime.
+Overriding = child redefines a parent method with the **same signature** so the runtime type picks the implementation. Without `virtual`, calls bind at compile time — a `Polygon*` pointing at a Rectangle still prints the **base** area (0, 0, 0). With `virtual`, the same pointers print 200 / 100 / 0: correct dispatch at runtime.
 
 ```cpp
 class Base { public: virtual void func() = 0; };  // pure virtual → abstract class
 ```
 
-Derived **must** implement `func()`, else compilation fails.
+Derived **must** implement `func()`, else compilation fails. A class with any pure virtual function cannot be instantiated — same rule as a Java `abstract` class with an `abstract` method.
 
 <Callout type="tip">
 A single MCQ often tests the pair: overloading → compile-time polymorphism; overriding → runtime polymorphism. "Method hiding" (static) is neither — statics hide, they do not override.
@@ -237,7 +339,7 @@ You rarely implement these in MCQs; you identify them from a two-line descriptio
 
 1. **Recursive Fibonacci in C++** [BPSC AP-2026] — base cases `n==0 → 0`, `n==1 → 1`, else `fibonacci(n-1) + fibonacci(n-2)`; input 10 → `0 1 1 2 3 5 8 13 21 34`.
 2. **Method overloading vs overriding, short notes** [CB AE(IT) 2021] — overloading: same class, params differ, return type alone insufficient, compile-time; overriding: parent→child same signature, dynamic method dispatch, runtime.
-3. **Name three inheritance types with trees** [Combined Bank AP-2022] — Single (Animal→Dog), Multiple (Printer+Scanner→AllInOne), Multilevel (Vehicle→Car→ElectricCar).
+3. **Name three inheritance types with trees** [Combined Bank AP-2022] — Single (Animal→Dog), Multiple (Printer+Scanner→AllInOne), Multilevel (Vehicle→Car→ElectricCar). Full five-type table with Java/C++ support is under **Types of inheritance**.
 4. **Compile-time vs runtime error** [RAKUB ANSE-2026] — compile-time: syntax/type errors, no executable; runtime: compiles fine, fails during execution (`10 / 0`, index out of range).
 5. **Abstract `Player` with `Batsman`/`Bowler`** [Janata ASA-2021] — abstract `average()`; Batsman returns `(double) runs / matches` (500/10 → 50.0); class stays abstract while any method is pure.
 6. **What is programming? Structured vs OOP** [Sonali Bank ADA-2026] — programming = writing instructions the computer follows; examples C, Java, Python, C++; structured is function-based, OOP is object-based with encapsulation and inheritance.
