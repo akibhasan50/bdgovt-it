@@ -384,6 +384,89 @@ The network layer decides the **path** — forward algorithm at each router (loc
 "Routers share only with neighbours and can count to infinity" → distance vector. "Each router knows the whole topology" → link state. "Between ISPs/autonomous systems" → BGP.
 </Callout>
 
+## IP addressing, routing & OSPF [Q9]
+
+**IP addressing — the "who."** Each device on a network is identified by an **IP address**, which routers use to determine the **destination network** for a packet — not the individual host, but *which network* it lives on. Think postal address: network portion = street, host portion = unit number; the subnet mask marks the split. Example: `192.168.1.10/24` → network `192.168.1.0`, host `.10`.
+
+**Routing — the "how to get there."** Routing is the process of selecting a path across interconnected networks to deliver packets from source to destination. Every router keeps a **routing table** ("to reach network X, send it out this interface, to this next router"). A packet hops router-to-router, each one moving it one step closer, until it reaches the destination network.
+
+**OSPF** (**O**pen **S**hortest **P**ath **F**irst) is a **link-state interior gateway routing protocol** — one concrete way routers *cooperate* to make that routing decision: share a common map, then each compute its own best next-hop.
+
+### OSPF in five steps
+
+| Step | What happens | Key term |
+| --- | --- | --- |
+| **1. Discover & describe** | Each router discovers its neighbors and builds an advertisement of its **directly connected links and their costs** | **LSA** (Link-State Advertisement) |
+| **2. Flood & sync** | LSAs are flooded to all other routers **in the area**, so every router holds an **identical** full-topology map | **LSDB** (Link-State Database) |
+| **3. Compute** | Each router **independently** runs Dijkstra's Shortest Path First on that map → shortest-cost path to every other network/router | SPF / Dijkstra |
+| **4. Install** | The result maps **destination IP prefixes → best next-hop interface** | routing table |
+| **5. Forward** | On each packet: **longest prefix match** in the table → send to that next hop → repeat hop-by-hop until destination | data plane |
+
+Nobody stores or carries the full path end-to-end. Every router only makes a **local, one-hop** decision — but because everyone ran Dijkstra on the **same map**, the hops chain together correctly.
+
+OSPF **converges quickly** and **scales well** because it uses **areas** to limit LSA flooding scope.
+
+### Why areas make it scale
+
+Without areas, every LSA would flood the *entire* network and every router would need a full map of everything — huge, slow to converge, fragile at scale. OSPF splits the network into **areas**:
+
+- LSA flooding and full-topology awareness stay **inside** an area
+- Only **summarized reachability** crosses between areas
+- → less flooding, faster convergence, scales to large networks without every router knowing every last detail everywhere
+
+### Worked example — four routers
+
+Costs are **lower = better** (bandwidth-aware):
+
+```text
+      A
+     / \
+   2/   \5
+   /     \
+  B ---3-- C
+  |        |
+  1        1
+   \      /
+     \  /
+      D
+```
+
+**Steps 1–2 — one shared map.** A builds *"I'm A, I connect to B (cost 2) and C (cost 5)"*; B, C, D do the same for their own links; LSAs flood until all four hold the **identical LSDB** (whole topology + costs).
+
+**Step 3 — A's independent Dijkstra run:**
+
+- A → B direct = **2**
+- A → C direct = **5**, or A → B → C = 2 + 3 = **5** (tie, either works)
+- A → D: A → B → D = 2 + 1 = **3**, cheaper than A → C → D = 5 + 1 = 6
+
+Best path to D is **via B**, total cost **3**.
+
+**Step 4 — A's routing table** stores only the **immediate next hop**, not the whole path:
+
+| Destination | Next Hop | Cost |
+| --- | --- | --- |
+| Network B | B (direct) | 2 |
+| Network C | C (direct) or B | 5 |
+| Network D | **B** | 3 |
+
+**Step 5 — forward a packet to D.** A does **longest prefix match** (most specific matching entry) → sees → B → forwards. B runs *its own* lookup → forwards to D. Local one-hop decisions only; the path materialises because the maps agreed.
+
+<Callout type="tip">
+**One-line summary:** IP addressing labels *where* things are, routing decides *the path*, and OSPF is one concrete way routers cooperate — share a common map, each compute its own best next-hop — to make that routing decision efficiently and consistently.
+</Callout>
+
+### OSPF vocabulary (exam quick-scan)
+
+| Term | Means |
+| --- | --- |
+| **IGP** | Interior Gateway Protocol — routing *inside* one autonomous system (OSPF, RIP). Exterior = between ASes (BGP). |
+| **LSA** | One router's description of its own links + costs |
+| **LSDB** | The flooded collection of all LSAs — identical in an area |
+| **Cost** | OSPF metric, bandwidth-aware (lower = better) — not hop count |
+| **Convergence** | Time until all routers agree on fresh routes after a change |
+| **Longest prefix match** | Pick the most specific matching prefix, not just any match |
+| **Area** | Flood/scoping boundary; ABR summarizes between areas |
+
 ## Error detection — data link layer
 
 | Error type | Description |
