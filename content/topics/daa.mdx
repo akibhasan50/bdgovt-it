@@ -5,18 +5,124 @@ summary_en: "Sorting, greedy, DP, graph algorithms — the complexity table you 
 summary_bn: "সর্টিং, গ্রিডি, ডিপি, গ্রাফ অ্যালগরিদম — মুখস্থ করতেই হবে সেই জটিলতা টেবিল।"
 ---
 
+<Callout type="info">
+**BPSC syllabus:** asymptotic notations · algorithm techniques & analysis · divide and conquer · dynamic programming · greedy · branch and bound · string matching · computational geometry · graph algorithms · spanning trees · shortest paths · max-flow · searching · approximation & parallel algorithms.
+</Callout>
+
+## Asymptotic notations
+
+Growth rates as n → ∞, ignoring constants and lower-order terms:
+
+| Notation | Reads as | Meaning |
+| --- | --- | --- |
+| **O(f(n))** | "big-oh" / **upper** bound | grows *at most* like f(n) — worst case |
+| **Ω(f(n))** | "omega" / **lower** bound | grows *at least* like f(n) — best case |
+| **Θ(f(n))** | "theta" / **tight** bound | grows *exactly* like f(n) — best = worst |
+
+Worked: `3n² + 10n + 5` is O(n²), Ω(n), and Θ(n²) only if the leading term dominates all cases. Sorting comparisons:
+
+```text
+Binary search ............. O(log n)
+Merge / quick / heap sort . O(n log n) average  (quick worst: O(n²))
+Bubble / insertion / select O(n²)
+BFS / DFS ................. O(V + E)
+```
+
+**Best / average / worst** pick different inputs: insertion sort on sorted data is O(n) (best) but O(n²) on reverse-sorted (worst).
+
 ## Sorting complexity table
 
-| Algorithm | Best | Average | Worst | Stable? |
-| --- | --- | --- | --- | --- |
-| Quick sort | O(n log n) | O(n log n) | O(n²) | No |
-| Merge sort | O(n log n) | O(n log n) | O(n log n) | Yes |
-| Heap sort | O(n log n) | O(n log n) | O(n log n) | No |
-| Insertion | O(n) | O(n²) | O(n²) | Yes |
+| Algorithm | Best | Average | Worst | Stable? | Space |
+| --- | --- | --- | --- | --- | --- |
+| Quick sort | O(n log n) | O(n log n) | O(n²) | No | O(log n)* |
+| Merge sort | O(n log n) | O(n log n) | O(n log n) | Yes | O(n) |
+| Heap sort | O(n log n) | O(n log n) | O(n log n) | No | O(1) |
+| Insertion | O(n) | O(n²) | O(n²) | Yes | O(1) |
+| Bubble | O(n)** | O(n²) | O(n²) | Yes | O(1) |
+| Selection | O(n²) | O(n²) | O(n²) | No | O(1) |
+| Radix | O(nk) | O(nk) | O(nk) | Yes | O(n + k) |
+
+\* recursion stack; ** with early-exit when no swaps. Quick's worst case = already-sorted input + first/last-element pivot → partitions of size n−1/0 every time; fix with **median-of-three** or random pivot.
 
 <Callout type="tip">
-"Stable *and* O(n log n) worst case" → merge sort. That exact phrasing has appeared in BPSC and power-sector papers.
+"Stable *and* O(n log n) worst case" → merge sort. "Guaranteed O(n log n) *and* in-place" → heap sort. "Fastest in practice, bad worst case" → quick sort. Those three phrasings cover most sorting MCQs.
 </Callout>
+
+### Why merge over quick? (Ministry of Food, 2024)
+
+1. **Guaranteed** O(n log n) in every case (quick can degrade to O(n²)).
+2. **Stable** — preserves order of equal keys (sort by dept, then salary).
+3. **External sorting** — sequential disk-friendly; quick needs random access.
+4. **Parallelises easily** — independent subproblems.
+
+Quick's counter-advantage: O(log n) stack and excellent cache behaviour — usually faster in practice on average data.
+
+## Worked sort traces
+
+Same array through three algorithms: `[30, 25, 62, 45, 7, 10]`
+
+```text
+Bubble pass 1: 25 30 45 7 10 62     (largest bubbles right)
+Bubble pass 2: 25 30 7 10 45 62
+...
+Final:         7 10 25 30 45 62      (5 passes, early stop when no swaps)
+
+Insertion: each key shifted left into the sorted prefix
+  25|30 62 45 7 10 → 25 30|62 ...   → final 7 10 25 30 45 62
+
+Selection: find min of unsorted, swap to front
+  min 7 ↔ 30 → 7 ...   min 10 ↔ 25 → ... final 7 10 25 30 45 62
+```
+
+**Quick sort walkthrough** (Ministry of Food, Network/Website Manager, 2024) — list `41, 25, 87, 57, 80, 79, 19, 36, 42, 7`, first-element pivots:
+
+```text
+pivot 41 → 25 19 36 7 | 41 | 87 57 80 79 42
+left  pivot 25 → 19 7 | 25 | 36
+      pivot 19 → 7 | 19
+right pivot 87 → 57 80 79 42 | 87
+      pivot 57 → 42 | 57 | 80 79
+            pivot 80 → 79 | 80
+Final: 7 19 25 36 41 42 57 79 80 87
+```
+
+**Radix sort (LSD)** — `170, 45, 75, 90, 802, 24, 2, 66`:
+
+```text
+by 1s:  170 90 802 2 24 45 75 66
+by 10s: 802 2 24 45 66 170 75 90
+by 100s: 2 24 45 66 75 90 170 802   ✓
+```
+
+## Searching
+
+| | Linear | Binary |
+| --- | --- | --- |
+| Input | sorted or not | **must be sorted** |
+| Idea | check each element | halve the range each step |
+| Time | O(n) | O(log n) |
+| Fails when | — | array unsorted (wrong half chosen) |
+
+Worked binary search for **35** in `10, 14, 19, 26, 27, 31, 31, 33, 35, 42, 44`:
+
+```text
+low=1 high=11 mid=6 → 31 < 35 → search right
+low=7 high=11 mid=9 → 35 = 35 → found at position 9   (2 comparisons)
+```
+
+Past paper (CB, AP, 2026): *step-by-step how binary search works; why does it fail on unsorted data?* Answer: comparisons decide which half to discard — unsorted data makes that decision invalid, so the target can be skipped.
+
+```text
+binarySearch(a, n, key):
+  low ← 0; high ← n − 1
+  while low ≤ high:
+    mid ← low + (high − low) / 2      # avoids overflow
+    if a[mid] = key: return mid
+    elif a[mid] < key: low ← mid + 1
+    else: high ← mid − 1
+  return −1
+Time O(log n), Space O(1)          (ICB Asset Management, AP, 24)
+```
 
 ## Paradigm → example mapping
 
@@ -29,6 +135,37 @@ summary_bn: "সর্টিং, গ্রিডি, ডিপি, গ্রা�
 
 Fractional knapsack is greedy (take by value/weight ratio). **0/1 knapsack** is not — greedy fails, DP is required. One word changes the correct paradigm.
 
+**Greedy** commits to the locally best choice, top-down, never revises. Needs the *greedy choice property* + optimal substructure. Its failure mode, worked: max root-to-leaf path in tree `5 / (9,6) / (1,2,1,20)` — greedy takes 5→9→2 = **16** while optimal is 5→6→20 = **31**.
+
+**DP** needs *optimal substructure* + *overlapping subproblems*:
+
+| Approach | Idea | Fibonacci time |
+| --- | --- | --- |
+| Naive recursion | recompute subproblems | O(2ⁿ) |
+| **Memoisation** (top-down) | cache results on first call | O(n) |
+| **Tabulation** (bottom-up) | fill a table forward | O(n) |
+
+F(5)'s recursion tree recomputes F(3) twice and F(2) three times — that overlap *is* the reason DP exists. Classic DP names: 0/1 knapsack, LCS, matrix-chain, coin change.
+
+<Callout type="tip">
+Greedy = one shot, never look back. DP = remember everything, build up. "Overlapping subproblems?" → DP. "Local choice is always safe (fractional knapsack)?" → greedy.
+</Callout>
+
+## Divide & conquer
+
+**Divide** into independent subproblems → **conquer** recursively (base case) → **combine** answers.
+
+| Application | Beats brute force down to |
+| --- | --- |
+| Binary search | O(n) → O(log n) |
+| Merge / quick sort | O(n²) → O(n log n) |
+| Closest pair of points | O(n²) → O(n log n) |
+| Strassen matrix multiply | O(n³) → O(n^2.807) ≈ n^2.81 |
+| Karatsuba big-number multiply | O(n²) → O(n^1.59) |
+| FFT (Cooley–Tukey) | O(n²) → O(n log n) |
+
+Subproblems are independent → naturally parallel (the syllabus's "parallel algorithms" hook).
+
 ## Graph algorithms
 
 ```text
@@ -37,14 +174,65 @@ Dijkstra (binary heap) . O((V + E) log V)
 Bellman–Ford ........... O(V · E)
 Kruskal / Prim ......... O(E log V)
 Topological sort ....... O(V + E)
+Floyd–Warshall ......... O(V³)
 ```
+
+**Dijkstra worked trace** — edges `A–B 4, A–C 5, B–C 11, B–D 9, B–E 7, C–E 3, E–D 13, E–F 6, D–F 2`:
+
+```text
+visit A → B=4, C=5
+visit B → D=13, E=11
+visit C → E = min(11, 5+3) = 8
+visit E → F = 8+6 = 14
+visit D → F = min(14, 13+2) = 14
+Final: B=4, C=5, E=8, D=13, F=14
+```
+
+**Why it fails on negatives:** once a vertex is "visited" its distance is final — but a later negative edge could have improved it. Counterexample: `A–B 4, A–C 1, C–B −3` → real answer −2 via C; Dijkstra may lock in 4. Use **Bellman–Ford** instead.
 
 <Callout type="warning">
 Dijkstra + negative weights = wrong answers. If a question mentions negative edges, the intended algorithm is Bellman–Ford.
 </Callout>
 
+## Spanning trees & MST
+
+Spanning tree: all n vertices, connected, acyclic, exactly **n − 1 edges**. Every connected undirected graph has ≥ 1; complete graph up to `n^(n−2)` (Cayley). MST = minimum total edge weight.
+
+| | Prim | Kruskal |
+| --- | --- | --- |
+| Grows | one tree from a start vertex | forest of singletons, merge |
+| Picks | cheapest edge out of visited set | globally cheapest edge that adds no cycle |
+| Data structure | priority queue | sort edges + union-find |
+| Best for | dense graphs (V²) | sparse graphs (E log E) |
+
+Kruskal selection order on edge weights `B–D 5, A–B 6, C–F 9, F–E 10, B–C 11, …` — take in ascending order, skip anything that closes a cycle, stop at n − 1 edges.
+
 ## Recurrence intuition
 
 - T(n) = 2T(n/2) + n → O(n log n) (merge sort).
 - T(n) = T(n−1) + n → O(n²) (naive recursive loops).
-- Master theorem cases map directly onto divide-and-conquer heights.
+- T(n) = 2T(n/2) + O(1) → O(n) (binary search-style).
+- **Master theorem** cases map directly onto divide-and-conquer heights: compare `a` (subproblems) vs `b^d` (work outside recursion).
+
+## Syllabus one-liners (branch & bound → parallel)
+
+- **Branch & bound** — systematic search with bounding functions that prune non-promising branches (assignment / TSP / 0/1 knapsack exact solvers).
+- **String matching** — naive O(nm); **KMP** precomputes a failure function → O(n + m); Rabin–Karp hashes windows.
+- **Computational geometry** — closest pair (D&C), convex hull, line-segment intersection.
+- **Max-flow** — Ford–Fulkerson/Edmonds–Karp augmenting paths; min-cut = max-flow theorem.
+- **Approximation algorithms** — provable ratio vs optimal (e.g. greedy set-cover ≤ ln n) when NP-hardness rules out exact solutions.
+- **Parallel algorithms** — independent subproblems run simultaneously; D&C and BSP-style map-reduce are the usual answers.
+
+## Past-paper drills
+
+**1. Bubble vs merge** (`CB, AP, 26`) — bubble swaps adjacent pairs, O(n²); merge divides and merges, O(n log n) guaranteed → bubble's quadratic comparisons kill it on large data.
+
+**2. Binary search** (`CB, AP, 26`) — steps + "unsorted fails because half-elimination is invalid" (see Searching).
+
+**3. Quick's worst case** (`CBt, O(IT), 24`) — time O(n²), space O(n); happens on sorted input with end pivots; fixed by median-of-three/random pivot.
+
+**4. Merge function** (`CB 3 Bank, AE (IT), 21`) — write `mergeSort(A,p,r)` + `merge(A,p,q,r)`; state O(n log n).
+
+**5. Shortest path** (`Janata Bank, ASA, 21`) — write Dijkstra pseudocode with dist[]/visited[] and the relaxation loop.
+
+**6. Kruskal MST** (`Sonali Bank, O(IT), 21`) — sort edges, union-find cycle check, n − 1 edges, sum the costs.

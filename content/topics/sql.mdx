@@ -5,13 +5,61 @@ summary_en: "Joins, aggregates, subqueries and the clause-order questions exams 
 summary_bn: "জয়েন, অ্যাগ্রিগেট, সাবকোয়েরি আর ক্লজ-অর্ডারের প্রশ্ন — পরীক্ষা কখনো বাদ দেয় না।"
 ---
 
+<Callout type="info">
+Written papers rarely ask definitions — they hand you two tables and ask for a query, an output, or a clause-by-clause reading. Every drill below is adapted from real BPSC / bank / ministry papers.
+</Callout>
+
 ## Execution order (memorise this)
 
 ```text
 FROM / JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT
 ```
 
-That's why `WHERE` can't see aliases and `HAVING` can filter aggregates — they run at different stages.
+| # | Clause | Action |
+| --- | --- | --- |
+| 1 | FROM / JOIN | identify and combine source rows |
+| 2 | WHERE | filter individual rows |
+| 3 | GROUP BY | bucket the surviving rows |
+| 4 | aggregates | SUM, COUNT, AVG, MIN, MAX per bucket |
+| 5 | HAVING | filter whole groups |
+| 6 | SELECT | choose/rename output columns |
+| 7 | ORDER BY | sort the final result |
+
+That's why `WHERE` can't see aliases or aggregates, and `HAVING` can — they run at different stages.
+
+## WHERE vs HAVING
+
+| | WHERE | HAVING |
+| --- | --- | --- |
+| Filters | individual **rows** | whole **groups** |
+| When | before GROUP BY | after aggregation |
+| Aggregates? | not allowed (`COUNT(*) > 5` is invalid here) | the whole point |
+| Speed | cheap — shrinks input early | runs on already-grouped data |
+
+```sql
+-- WHERE first: only Sales rows feed the average
+SELECT dept, AVG(salary)
+FROM employees
+WHERE dept = 'Sales'
+GROUP BY dept;
+
+-- HAVING last: keep groups whose average clears a bar
+SELECT dept, AVG(salary)
+FROM employees
+GROUP BY dept
+HAVING AVG(salary) > 50000;
+
+-- both together: Sales region, total over 100,000
+SELECT region, SUM(sales) AS total
+FROM orders
+WHERE region = 'Sales'
+GROUP BY region
+HAVING SUM(sales) > 100000;
+```
+
+<Callout type="tip">
+Rule of thumb: row-level condition → WHERE. Group-level condition (on an aggregate) → HAVING. "Filter before grouping" is almost always faster, so push everything you can into WHERE.
+</Callout>
 
 ## Join types
 
@@ -19,6 +67,23 @@ That's why `WHERE` can't see aliases and `HAVING` can filter aggregates — they
 - **LEFT/RIGHT** — all rows from one side + matches.
 - **FULL OUTER** — all rows from both, NULL where unmatched.
 - **CROSS** — Cartesian product (n × m rows).
+
+Worked micro-example — `Customers(1 Rahim, 2 Karim, 3 Belal)` and `Orders(2→3 Belal 500, 5→Helal 800)`:
+
+| Join | Rows returned | Shape |
+| --- | --- | --- |
+| INNER | Belal 500, Helal 800 | matches only |
+| LEFT | Rahim NULL, Karim NULL, Belal 500, Rony NULL, Helal 800 | all customers, NULL side filled |
+| RIGHT | unmatched orders kept with NULL customer | all orders |
+| FULL OUTER | union of LEFT + RIGHT | nothing dropped |
+
+```sql
+SELECT e.name AS employee, m.name AS manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.emp_id;   -- self-join
+```
+
+A **self-join** (employee → its manager, both in the same table) is the classic "find the manager of each employee" paper question — use LEFT JOIN so managers-less rows still appear.
 
 <Callout type="tip">
 `INNER JOIN` and `WHERE col = value` filtering look identical in simple cases; the MCQ difference appears when NULLs or outer joins are involved.
@@ -29,16 +94,41 @@ That's why `WHERE` can't see aliases and `HAVING` can filter aggregates — they
 ```sql
 WHERE sal > ALL (SELECT ...)   -- greater than the maximum
 WHERE sal > ANY (SELECT ...)   -- greater than the minimum
-WHERE sal IN  (SELECT ...)     -- equals any member
+WHERE IN  (SELECT ...)         -- equals any member
 ```
 
-`EXISTS` checks row existence, not value equality — it short-circuits and is often faster.
+`EXISTS` checks row existence, not value equality — it short-circuits and is often faster. The anti-join idiom "students who completed no subject":
+
+```sql
+SELECT s.name
+FROM students s
+LEFT JOIN marks m ON s.id = m.student_id
+WHERE m.student_id IS NULL;
+```
 
 ## Aggregate rules
 
 - `COUNT(*)` counts rows; `COUNT(col)` skips NULLs.
 - `AVG(col)`, `SUM(col)` ignore NULLs entirely.
 - `DISTINCT` inside `COUNT` collapses duplicates first.
+
+**Classic output MCQ** (`CB, SO(IT), 22`) — insert `1, 2, 2, 3, NULL, NULL, 4, 5`:
+
+```sql
+SELECT COUNT(val) FROM t;               -- 6  (non-NULL values)
+SELECT COUNT(DISTINCT val) FROM t;      -- 5  (unique non-NULL: 1,2,3,4,5)
+```
+
+**GROUP BY + HAVING pattern:**
+
+```sql
+SELECT region,
+       AVG(sale_amount) AS avg_sale,
+       COUNT(*)          AS n
+FROM Sales
+GROUP BY region
+HAVING AVG(sale_amount) > 50000 AND COUNT(*) >= 3;
+```
 
 ## DDL vs DML vs DCL
 
@@ -50,5 +140,143 @@ WHERE sal IN  (SELECT ...)     -- equals any member
 | TCL | COMMIT, ROLLBACK, SAVEPOINT |
 
 <Callout type="warning">
-TRUNCATE is DDL (structure-level, minimal logging). DELETE is DDL-logged-per-row DML. The category of TRUNCATE is a favourite exam gotcha.
+TRUNCATE is DDL (structure-level, minimal logging). DELETE is logged-per-row DML. The category of TRUNCATE is a favourite exam gotcha.
+</Callout>
+
+## Data types & choosing a primary key
+
+Paper question (`CB, O(IT-24), 26`): design a `STUDENT` table — Roll Number, Name, Department, Email, Admission Date.
+
+| Column | Type | Why |
+| --- | --- | --- |
+| RollNumber | `INT` | compact numeric identifier |
+| Name | `VARCHAR(100)` | variable-length text |
+| Department | `VARCHAR(50)` | short codes like CSE/EEE |
+| Email | `VARCHAR(100)` | variable-length, often UNIQUE |
+| AdmissionDate | `DATE` | date only, `YYYY-MM-DD` |
+
+```sql
+CREATE TABLE STUDENT (
+    RollNumber   INT PRIMARY KEY,
+    Name         VARCHAR(100),
+    Department   VARCHAR(50),
+    Email        VARCHAR(100),
+    AdmissionDate DATE
+);
+```
+
+**RollNumber is the primary key**: unique per student, never NULL — exactly the two PK guarantees.
+
+## Referential actions — ON DELETE CASCADE
+
+With `Employees.DeptID → Managers.ID` declared `ON DELETE CASCADE`:
+
+- **(a)** deleting a parent row **automatically deletes** all child rows referencing it — the DBMS enforces referential integrity for you.
+- **(b)** delete one Manager → every Employee under that manager vanishes too.
+- **(c)** In banking, one wrong `DELETE` becomes mass data loss.
+
+Safer alternatives:
+
+| Action | On parent delete |
+| --- | --- |
+| `CASCADE` | delete children too |
+| `RESTRICT` / `NO ACTION` | refuse the delete while children exist |
+| `SET NULL` | blank the child's FK |
+| soft delete | never delete — flip a `status` column to inactive |
+
+<Callout type="warning">
+Best practice for money systems: prefer `RESTRICT`/`NO ACTION` or soft deletes. Cascade is convenient for dependent tables (order lines when the order dies) — dangerous for anything with audit or financial history.
+</Callout>
+
+## Reading a query clause by clause
+
+Drill from `Sonali & Janata Bank, O(IT), 2023` — annotate before answering:
+
+```sql
+SELECT d.department_name, AVG(e.salary) AS average_salary
+FROM employees e
+JOIN department d ON e.department_id = d.department_id
+WHERE e.salary > (SELECT AVG(salary) FROM employees)
+GROUP BY d.department_name
+HAVING COUNT(*) > 2
+ORDER BY average_salary DESC;
+```
+
+| Clause | Reads as |
+| --- | --- |
+| SELECT | department name + its average salary |
+| FROM/JOIN | employees ⨝ departments on department_id |
+| WHERE (row) | keep only above-**company-wide** average earners |
+| GROUP BY | one bucket per department |
+| HAVING (group) | only departments with **more than 2** such employees |
+| ORDER BY | highest average salary first |
+
+Correlated twist (`Rupali, ANE, 2023`): the inner `SELECT AVG(salary) ... WHERE department_id = d.department_id` re-runs **per department** — now "above *my department's* average" instead of the global one. Same skeleton, different meaning.
+
+## Past-paper query drills
+
+**1. Join two tables** (`CB, O(it-22)`) — employee names in "IT":
+
+```sql
+SELECT E.Name
+FROM EMPLOYEES E
+JOIN DEPARTMENTS D ON E.DeptID = D.DeptID
+WHERE D.DeptName = 'IT';
+```
+
+**2. Filter + per-group count** (`CB, O(it-23)`) — marks over 80, then count per department:
+
+```sql
+SELECT StudentID, Name, Marks FROM STUDENTS WHERE Marks > 80;
+
+SELECT Department, COUNT(*) AS Total_Students
+FROM STUDENTS
+WHERE Marks > 80
+GROUP BY Department;
+```
+
+**3. LEFT JOIN census** (`Ministry of Food, 2024`) — three students with 3 marks each, one with none: `COUNT(*)` over the LEFT JOIN = 3 + 3 + 3 + 1 = **10** (the empty student is kept as one NULL-padded row). Then:
+
+```sql
+SELECT S.StudentName, COUNT(M.Subject) AS NumberOfSubjects  -- completed counts
+FROM Students S LEFT JOIN Marks M ON S.StudentId = M.StudentId
+GROUP BY S.StudentId, S.StudentName;
+
+SELECT DISTINCT Subject FROM Marks;                          -- subject list
+```
+
+**4. HAVING on a sum** (`CB, SO(it), 2025`) — students whose marks total ≥ 200:
+
+```sql
+SELECT StudentName
+FROM Students S
+JOIN Marks M ON S.StudentId = M.StudentId
+GROUP BY S.StudentId, S.StudentName
+HAVING SUM(Mark) >= 200;
+```
+
+**5. Chain of junction tables** (`CB, AP, 23`) — related through `R` and `Q` on the shared `tid`:
+
+```sql
+SELECT R.sid, Q.uid
+FROM R JOIN Q ON R.tid = Q.tid;
+
+SELECT S.A, U.C
+FROM S
+JOIN R ON S.sid = R.sid
+JOIN Q ON R.tid = Q.tid
+JOIN U ON Q.uid = U.uid;
+```
+
+**6. Multi-condition HAVING** (`6 Bank & FI, AP, 21`) — payroll under 100000:
+
+```sql
+SELECT cname
+FROM Works
+GROUP BY cname
+HAVING SUM(salary) < 100000;
+```
+
+<Callout type="tip">
+Pattern recognition: "per X" → GROUP BY X. Condition mentions SUM/AVG/COUNT → HAVING. "Who has no …" → LEFT JOIN … IS NULL (or NOT IN). "Same city as their company" → multi-table self-consistency WHERE. "Give 10% raise" → `UPDATE ... SET salary = salary * 1.1`.
 </Callout>

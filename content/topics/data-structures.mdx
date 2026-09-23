@@ -19,19 +19,211 @@ Almost every data-structure MCQ is an operations-vs-structure lookup:
 
 \* when the position is already known.
 
-## Trees
+## Classification & basic operations
 
-- **BST in-order** → keys come out sorted ascending. Pre-order gives the insertion order of construction questions.
-- **Heap property**: parent ≤ children (min-heap). Extract-min swaps the last node to the root and sifts down → O(log n).
-- **AVL / height-balanced**: balance factor ∈ `{−1, 0, 1}`.
+| Class | Meaning | Examples |
+| --- | --- | --- |
+| **Linear** | elements in sequence, neighbour-linked | array, stack, queue, linked list |
+| **Non-linear** | hierarchical or networked; can't visit all in one pass | trees, graphs |
+| **Static** | size fixed at compile time; index access | array |
+| **Dynamic** | grows/shrinks at runtime (resize overhead) | linked list, queue, stack impls |
+
+The seven basic operations: **insert, delete, search, update, traverse, merge, access**.
+
+Three characteristics decide whether a structure is any good: **correctness** (right answers in all cases), **time complexity** (how it slows as n grows), **space complexity** (memory it burns). Pick structures by balancing all three.
+
+## Arrays
+
+An array stores same-type elements in **contiguous** memory; index starts at 0 → O(1) access. Types: 1D (row), 2D (rows × cols), 3D (layers of 2D).
+
+**2D location formulas** (favourite numerical):
+
+```text
+Row-major:   Loc(A[i][j]) = Base + [(i × cols) + j] × size
+Column-major: Loc(A[i][j]) = Base + [(j × rows) + i] × size
+```
+
+Example: `A[2][3]`, 4 columns, row-major → `Base + (2×4 + 3) × size`.
+
+### Array vs linked list (past paper: Ministry, AP (CSE), 2023)
+
+| Point | Array | Linked list |
+| --- | --- | --- |
+| Memory | contiguous, fixed size | non-contiguous, dynamic |
+| Access | direct O(1) | sequential O(n) |
+| Insert/delete | slow — shift elements | fast if position known |
+| Overhead | data only | data + pointer |
+| Cache | excellent locality | poor locality |
+| Implementation | simple | pointer-heavy |
 
 <Callout type="tip">
-"Which traversal prints a BST sorted?" is practically an annual question. Answer: in-order.
+"Contiguous + fixed" → array. "Dynamic + pointer" → linked list. Cache performance is the modern tie-breaker arrays almost always win.
+</Callout>
+
+## Linked lists
+
+Each **node** = data + link. First node = **HEAD**, last link = **NULL** (singly).
+
+```c
+struct node { int data; struct node *next; };            /* singly   */
+struct node { int data; struct node *next, *prev; };      /* doubly   */
+/* circular: last node points back to first — no NULL at the end */
+```
+
+| Type | Links | Traverse |
+| --- | --- | --- |
+| Singly | next only | forward |
+| Doubly | next + prev | forward & backward |
+| Circular singly | last → first | loop from any node |
+| Circular doubly | both ways + wrap | both directions, no NULL ends |
+
+Advantages over arrays: dynamic size, O(1) insert/delete at a known position (no shifting), no wasted capacity, uses fragmented memory, natural base for stacks/queues/graphs.
+
+## Stacks
+
+**LIFO** — insert and delete only at the **top**. Like a pile of plates.
+
+| ADT operation | Meaning |
+| --- | --- |
+| `push(x)` | add on top (overflow if full) |
+| `pop()` | remove top (underflow if empty) |
+| `top()` / peek | read top without removing |
+| `size`, `isEmpty`, `isFull` | bookkeeping |
+
+Applications: function-call frames, expression evaluation, undo/browser history, backtracking (mazes, N-queens), task management.
+
+```text
+PUSH: if full → Overflow; else top++, stack[top] = data
+POP:  if empty → Underflow; else data = stack[top], top--
+```
+
+## Expression notation
+
+| Form | Shape | Example |
+| --- | --- | --- |
+| Infix | operand **op** operand | `A + B` |
+| Prefix | **op** operand operand | `+AB` |
+| Postfix | operand operand **op** | `AB+` |
+
+Worked conversions (first-element pivot style, as papers demand):
+
+```text
+(a+b)*c        → postfix: ab+c*        → prefix: *+abc
+a/b+c/d        → postfix: ab/cd/+      → prefix: +/ab/cd
+(a+b*d)*(b-c)  → postfix: abd*+bc-*    → prefix: *+a*bd-bc
+((a+b)*c)-d    → prefix: -*+abcd
+ab+cd+*        → infix:  (a+b)*(c+d)
+-*+abcd        → infix:  ((a+b)*c)-d
+```
+
+**Precedence** picks which operator acts first (`*` over `+`); **associativity** orders equal-precedence operators (left-to-right for `+ - * /`).
+
+## Queues
+
+**FIFO** — enqueue at **rear**, dequeue at **front**. Two pointers (`front`, `rear`), start at `-1`.
+
+| Type | Idea | Exam detail |
+| --- | --- | --- |
+| Simple | linear array queue | dequeued slots at the front are wasted |
+| **Circular** | rear wraps to index 0 | `(rear + 1) % size` — space reused |
+| **Priority** | dequeue highest priority first | implement with array, list or **heap** |
+| **Deque** | insert/remove at *both* ends | circular front-pointer move-back |
+
+Circular wrap trace (size 5): fill `10…50`, dequeue 10,20 → `[_, _, 30, 40, 50]`, enqueue 60,70 → `[60, 70, 30, 40, 50]`.
+
+Applications: CPU/disk scheduling, IO buffers & pipes, interrupt handling, printer spool, call-centre routing.
+
+### Stack vs queue (past paper: BPSC (AME)-24; CB (AP)-24)
+
+| | Stack | Queue |
+| --- | --- | --- |
+| Order | LIFO | FIFO |
+| Ends | both ops at top | rear in, front out |
+| Ops | push / pop | enqueue / dequeue |
+| Pointers | one (`top`) | two (`front`, `rear`) |
+| Example | undo buffer | printer queue |
+
+### Queue using two stacks (past paper: CB, AP, 2026)
+
+`S1` receives enqueues. To dequeue: if `S2` is empty, pop **everything** from `S1` into `S2` (this reverses order — oldest lands on top), then pop `S2`. Why it works: the transfer flips LIFO into FIFO.
+
+## Trees
+
+A **tree** is connected and acyclic — exactly one path between any two nodes.
+
+**Vocabulary:** root, parent/child, leaf (external) vs internal node, edge, height (max edges root→deepest leaf), depth, degree, forest (disjoint trees).
+
+| Type | Rule |
+| --- | --- |
+| **Full** binary | every node has 0 or 2 children |
+| **Complete** | all levels filled left→right (last may be partial) |
+| **Perfect** | all internal nodes have 2 children; all leaves same level |
+| **Skewed** | one child each — a chain (BST worst case) |
+
+**Binary-tree formulas** (root at level 0):
+
+```text
+max nodes at level L        = 2^L
+max nodes at height h       = 2^(h+1) − 1
+min nodes at height h       = h + 1
+edges with n nodes          = n − 1
+```
+
+Worked: level 4 → 2^4 = **16** nodes max; n = 17 → level = ⌈log₂ 17⌉ = **5**.
+
+### BST & traversals
+
+Insert order `50, 30, 70, 20, 40, 60, 80` → classic balanced BST. On that tree:
+
+```text
+Inorder  (L root R): 20 30 40 50 60 70 80   ← sorted: the annual question
+Preorder (root L R): 50 30 20 40 70 60 80
+Postorder (L R root): 20 40 30 60 80 70 50
+```
+
+**Construct from traversals:** preorder's first element is always the **root**; split inorder around it into left/right subtrees; recurse. Example — inorder `D B E A F C`, preorder `A B D E C F` → root `A`, left `{D B E}`, right `{F C}` → tree `A(B(D,E), C(F))`. Swap roles for postorder+inorder (postorder's **last** element is the root).
+
+## Heaps
+
+A heap is a **complete binary tree** satisfying the heap property: **max-heap** parent ≥ children (max at root), **min-heap** parent ≤ children. Powers priority queues, heap sort, Dijkstra and Prim.
+
+Worked heapify — array `(56, 33, 48, 29, 99, 12, 344)` → **min-heap**:
+
+```text
+swap 48↔12, 33↔29, 56↔12, 56↔48
+→ 12, 29, 48, 33, 99, 56, 344
+```
+
+Extract-min: swap last node into root, **sift down** → O(log n).
+
+<Callout type="tip">
+"Heap is complete" (shape) **and** "heap-ordered" (values). Both required — a question that gives a complete tree violating parent/child order is testing exactly that distinction.
 </Callout>
 
 ## Graphs
 
+**V** vertices + **E** edges; directed (`(u,v) ≠ (v,u)`) vs undirected; weighted vs unweighted. Terms: adjacency, path, cycle, degree, subgraph.
+
+**Representation:**
+
+| | Adjacency matrix | Adjacency list |
+| --- | --- | --- |
+| Shape | V×V array; 1 = edge | array of lists |
+| Space | O(V²) always | O(V + E) — sparse-friendly |
+| Edge check | O(1) | O(degree) |
+| Symmetric? | yes, if undirected | n/a |
+
 BFS uses a **queue** (level-order, shortest path in unweighted graphs). DFS uses a **stack or recursion**. Both are O(V + E) with adjacency lists.
+
+| | BFS | DFS |
+| --- | --- | --- |
+| Structure | queue | stack / recursion |
+| Explore | level by level | dive deep, backtrack |
+| Best for | shortest path (unweighted), web crawlers | cycle detection, topological sort, mazes |
+
+Past paper (DPDC (AE), 2025): *why DFS over BFS?* — less memory for deep trees, finds any solution fast, backtracks naturally; **but BFS still wins for shortest path**.
+
+**Spanning tree:** covers all n vertices, connected, acyclic, exactly **n − 1 edges**. Every connected undirected graph has ≥ one; a complete graph can have up to `n^(n−2)` (Cayley). **MST** = minimum total edge weight — grown by **Prim** (add min edge from the visited set) or **Kruskal** (sort all edges, add if no cycle).
 
 <Callout type="info">
 Dijkstra fails on negative weights; Bellman–Ford handles them. This pairing shows up constantly.
@@ -41,6 +233,18 @@ Dijkstra fails on negative weights; Bellman–Ford handles them. This pairing sh
 
 Load factor α = n / table_size. Average probe count grows with α; rehashing when α > threshold keeps operations near O(1). Collision resolution: chaining (buckets) vs open addressing (linear/quadratic probing, double hashing).
 
-## Stacks & queues
+<Callout type="tip">
+Sorted array → binary search O(log n). Unsorted → linear O(n). No order at all but speed needed → hash O(1) average. Match the structure to the access pattern.
+</Callout>
 
-Function call frames, expression evaluation, undo buffers → stack. Scheduling, BFS, printer spools → queue. Deque sits in the middle; priority queue is a heap underneath.
+## Past-paper drills
+
+**1. Stack vs queue** (`BPSC (AME)-24; CB (AP)-24`) — answer with the five-row table above: LIFO/FIFO, one end/two ends, one pointer/two pointers, undo vs printer.
+
+**2. Queue from two stacks** (`CB, AP, 2026`) — describe the S1→S2 transfer and *why* the reversal produces FIFO.
+
+**3. Build a tree** — inorder `D B E A F C` + preorder `A B D E C F`: root A → recurse. Then give all three traversals of your tree.
+
+**4. Heap conversion** — given an array, heapify bottom-up (heapify each non-leaf from last to root) and state the final level-order.
+
+**5. Expression conversion** — convert infix to postfix *and* prefix, then say which needs parentheses (infix only).

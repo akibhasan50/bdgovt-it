@@ -5,6 +5,10 @@ summary_en: "ER models, normal forms, transactions and indexing — the theory b
 summary_bn: "ইআর মডেল, নরমাল ফর্ম, ট্রানজেকশন ও ইনডেক্সিং — প্রতিটি এসকিউএল প্রশ্নের পেছনের তত্ত্ব।"
 ---
 
+<Callout type="info">
+**BPSC syllabus map:** Definition of DBMS, types, advantages/disadvantages · data models (ER & relational) · integrity constraints · functional dependencies · assertions & triggers · file organization · indexing (sparse/dense, B+ tree, hash) · normalization (2NF, 3NF, BCNF) · query processing & cost estimation · transactions & concurrency control (lock-based protocols, deadlock handling) · SQL.
+</Callout>
+
 ## What is a Database & DBMS?
 
 A **database** is a structured collection of data stored electronically — text, numbers, images, anything organised for easy access.
@@ -116,6 +120,10 @@ This relation `STUDENT` has 3 attributes and 3 tuples.
 
 More tiers = more **abstraction** — better security and flexibility, more complexity.
 
+- **1-tier fits when:** data rarely changes, one user, or development/testing — e.g. MySQL installed on your own laptop while learning SQL, no network needed.
+- **2-tier in the wild:** a bank teller's client app sends a withdrawal request straight to the DB server over **ODBC/JDBC**; the server checks the balance and replies. Direct and fast, but the client must be trusted.
+- **3-tier:** large web apps put an application server (middleware) in the middle — it validates requests (integrity), holds business logic, and lets you scale app servers without touching the data tier.
+
 ### Levels of data abstraction
 
 1. **Physical (internal)** — *how* bits are stored on disk (file structures, indexing).
@@ -124,6 +132,25 @@ More tiers = more **abstraction** — better security and flexibility, more comp
 
 <Callout type="tip">
 "Which level describes disk layout?" → physical. "Which level shows only your subset?" → view. Architecture questions almost always test this three-level ladder.
+</Callout>
+
+## Schema vs instance
+
+A **schema** is the static blueprint of the database — tables, columns, keys and constraints, designed up front. It changes rarely (DDL / migrations).
+
+An **instance** is the actual rows sitting in the tables at one point in time — a snapshot. It changes with every `INSERT` / `UPDATE` / `DELETE`.
+
+| | Schema | Instance |
+| --- | --- | --- |
+| What | structure / design | data content at a moment |
+| Analogy | a blank form | the filled-in answers |
+| Changes | rarely (DDL) | constantly (DML) |
+| Example | `STUDENT(StudentID, Name, Branch)` | the rows present on 16 May vs 17 May |
+
+Worked example: the `STUDENT` instance holds 2 rows on 16 May; on 17 May a new student (Rafi Hasan) inserts → 3 rows. **Same schema, different instances** — the same query run on the two dates returns different answers.
+
+<Callout type="tip">
+"Structure at design time" → schema. "Content at a moment" → instance. The words also label the three abstraction levels (external / logical / internal schema) — same ladder, different zoom.
 </Callout>
 
 ## ER model essentials
@@ -137,8 +164,13 @@ An **ER diagram** models the logical structure of a database — entities, their
 | Diamond | Relationship | `ENROLLS_IN` |
 | Double oval | Multi-valued attribute | `phone_numbers` |
 | Double rectangle | Weak entity | `DEPENDENT` |
+| Double diamond | Identifying relationship of a weak entity | `HAS_DEPENDENT` |
 | Underlined attribute | Primary key | `student_id` |
 | Dashed oval | Derived attribute | `age` (from dob) |
+| Single line | Partial participation | a student may take no courses |
+| Double line | Total participation | every dependent needs its employee |
+
+An ER diagram draws **entity sets** (all students), never individual instances.
 
 **Attribute types:** simple vs composite (`name` → first, last), single vs multi-valued, stored vs derived (`age` derived from `date_of_birth`).
 
@@ -150,7 +182,16 @@ An **ER diagram** models the logical structure of a database — entities, their
 
 **Participation:** *total* (every entity instance participates — each order has a customer) vs *partial* (some may not — a student may take no courses).
 
-A **weak entity** depends on a key of an owner entity, identified by a partial key + owner (a `DEPENDENT` needs its `EMPLOYEE`). A **ternary relationship** connects three entity sets — cardinality questions hinge on reading the notation correctly.
+**Degree of a relationship:**
+
+| Degree | Shape | Example |
+| --- | --- | --- |
+| Unary (recursive) | entity relates to itself | an employee manages another employee |
+| Binary | two entity sets | student enrols in course — the common case |
+| Ternary | three entity sets | supplier supplies product to project |
+| N-ary | four or more | rare; prefer decomposing into binaries |
+
+A **weak entity** (`DEPENDENT`) has no key of its own: it is drawn with a **double rectangle**, always sits in **total participation**, and connects through an **identifying relationship (double diamond)** to its owner — identified by a *partial key* plus the owner's key (`EMPLOYEE` + dependent name). A **ternary relationship** connects three entity sets — cardinality questions hinge on reading the notation correctly.
 
 ```text
 [STUDENT] ---< ENROLLS_IN >--- [COURSE]
@@ -163,6 +204,10 @@ Cardinality: M:N
 
 **ER → relational conversion:** entity → table, attributes → columns, 1:N and 1:1 relationships → foreign key on the "many"/one side, M:N → a **junction table** holding both keys as a composite primary key.
 
+<Callout type="info">
+Past-paper drill (tagged `CB, AP, 26`): *"Book ↔ Borrower — 1:1, 1:N or M:N? Justify."* Answer: **M:N** — one book is borrowed by many borrowers over time, one borrower borrows many books. Model it with an intermediate **Loan** table `(BookID, BorrowerID, borrow_date, return_date)` keyed on both IDs.
+</Callout>
+
 ## Keys & integrity constraints
 
 | Key | Definition |
@@ -170,8 +215,12 @@ Cardinality: M:N
 | **Super key** | any attribute set that uniquely identifies a row |
 | **Candidate key** | minimal super key — no column can be dropped |
 | **Primary key** | the chosen candidate key; NOT NULL, unique |
+| **Alternate key** | a candidate key that was *not* chosen as primary |
+| **Unique key** | like a primary key but nullable; several allowed |
 | **Foreign key** | column referencing a primary/unique key in another table |
 | **Composite key** | key made of two or more columns |
+
+Worked enumeration on `STUDENT`: `{StudentID}`, `{StudentID, Name}`, `{StudentID, Email}`, `{StudentID, Name, Phone}` are all **super keys**; the minimal ones — `{StudentID}` and `{StudentID, Email}` — are **candidate keys**; pick one as **primary**, the other becomes an **alternate key**. A **unique key** (e.g. `Email`) allows NULLs, so it is weaker than a primary key.
 
 A table can have many candidate keys but exactly **one** primary key.
 
@@ -207,11 +256,15 @@ A table can have many candidate keys but exactly **one** primary key.
 4. **BCNF** — every determinant is a candidate key.
 5. **4NF** — BCNF + no multi-valued dependency.
 
+Formal **3NF test**: for every dependency `X → Y`, either `X` is a super key **or** `Y` is a prime attribute (part of some candidate key). Violates both → not 3NF.
+
 <Callout type="tip">
 TwoNF removes *partial*; threeNF removes *transitive*. One word each — learn them as pairs. Higher normal form = less redundancy but more joins; **denormalization** is the deliberate reverse for read-heavy reports. Real databases usually stop at 3NF or BCNF.
 </Callout>
 
 ### Worked example — 1NF to 3NF
+
+Micro-fix first — a phone column holding `98765432, 98123456` in one cell is not atomic; split to one row per value (`201 Alex` appears twice, `203 David` twice). That is 1NF.
 
 Starting (not even 1NF — repeating groups):
 
@@ -235,6 +288,15 @@ Starting (not even 1NF — repeating groups):
 ## Dependencies & BCNF
 
 If knowing a **Student ID** determines the **Student Name**: `StudentID → StudentName`. Read the arrow as "determines" — the left side must uniquely pin down one right side.
+
+**Types of functional dependencies:**
+
+| Type | Rule | Example |
+| --- | --- | --- |
+| **Trivial** | right side ⊆ left side — adds no information | `{Employee_Id, Name} → Name` |
+| **Non-trivial** | right side not in left; the useful kind | `Employee_Id → Name` |
+| **Multivalued** | double arrow `→→`; attribute holds many independent values | `Employee_Id →→ Phone` |
+| **Transitive** | chain through another attribute | `Employee_Id → Zip → City` |
 
 **Armstrong's axioms** (how dependencies are derived):
 
@@ -341,6 +403,15 @@ A **transaction** is a single logical unit of work — one or more read/write/up
 | Non-repeatable read | re-reading a row gives a different value (someone committed in between) |
 | Phantom read | re-running a query returns new rows (someone inserted) |
 
+**One mini worked example per property:**
+
+| Property | Worked example |
+| --- | --- |
+| Atomicity | debit $100 from A; if the matching credit to B fails, the debit rolls back — A unchanged |
+| Consistency | a transfer never changes the bank's total; stock can't be driven negative by overselling |
+| Isolation | two users race for seat `A1` — both read "free"; locking/serializability lets exactly one win |
+| Durability | payment committed as "Saved" — a power cut one second later must not erase it (logs + force) |
+
 <Callout type="tip">
 Memory trick: A-C-I-D = *All Changes Isolated Durably*. "Which property is ensured by transaction logs?" → Durability.
 </Callout>
@@ -352,24 +423,49 @@ Concurrent transactions must produce the same result as *some* serial order — 
 - **Conflict serializability** — build a precedence graph of conflicting operations (same data, at least one write); no cycle ⇒ serializable.
 - **Recoverable schedule** — a transaction commits only after the transactions it read from have committed.
 
-**Lock-based protocols:**
+### Lock-based protocols
 
 | Protocol | Rule | Trade-off |
 | --- | --- | --- |
 | **Basic 2PL** | growing phase (acquire only), then shrinking (release only) | serializable, but can hold locks forever |
 | **Strict 2PL** | hold exclusive locks until commit/abort | no cascading aborts — the practical choice |
+
 - **Shared (S)** lock = readers; **Exclusive (X)** lock = writers; S and X conflict with each other.
 
-**Deadlock handling** (two transactions each waiting for the other's lock):
+### Deadlock — the four Coffman conditions
 
-- **Prevention** — lock-all-upfront, or ordered lock acquisition so a cycle can never form.
-- **Detection** — wait-for graph; cycle ⇒ abort the youngest victim and roll it back.
-- **Avoidance / timeouts** — timeout on lock wait, or Banker's-style safe-state checks.
+All four must hold **at the same time**; breaking any one prevents deadlock:
 
-**Alternatives to locking:** *timestamp ordering* assigns each transaction a timestamp and rejects out-of-date accesses; *MVCC* gives readers a snapshot so they never block writers (PostgreSQL, MySQL InnoDB).
+| Condition | Meaning | How it can be broken |
+| --- | --- | --- |
+| **Mutual exclusion** | a resource is held exclusively | rarely — locks are inherently exclusive |
+| **Hold and wait** | holder waits while keeping another lock | acquire all locks up front |
+| **No preemption** | locks can't be forcibly taken away | lock preemption / abort the holder |
+| **Circular wait** | T1 waits for T2, T2 waits for T1 | impose a global lock-ordering rule |
+
+Worked schedule: **T1** locks `STUDENT`, then asks for `GRADE`; **T2** locks `GRADE`, then asks for `STUDENT` → circular wait → deadlock until the DBMS intervenes.
+
+### Handling strategies — four families
+
+| Family | Idea | Named techniques |
+| --- | --- | --- |
+| **Prevention** | make a Coffman condition impossible | lock-all-upfront, ordered acquisition, **Wait-Die**, **Wound-Wait** |
+| **Avoidance** | grant a request only if the system stays *safe* | safe-state check before each grant |
+| **Detection** | allow it, find it, kill a victim | **wait-for graph** — cycle ⇒ abort youngest |
+| **Ignoring** | pretend it's rare | **Ostrich algorithm** — what Windows & UNIX do |
+
+**Wait-Die** (timestamp-based): an **older** transaction waits for a younger one; a **younger** transaction that would wait for an older one **dies** (aborts) and later restarts **with its original timestamp**.
+
+**Wound-Wait**: an **older** transaction **wounds** (aborts) a younger holder and takes the lock; a **younger** transaction simply waits for an older one. Fewer restarts than Wait-Die when old transactions dominate.
+
+**Wait-for graph detection:** nodes = transactions; edge `Ti → Tj` means Ti waits for Tj's lock. **Cycle = deadlock** (`T1 ↔ T2`, or `T1 → T2 → T3 → T1`). The scheduler picks a victim (youngest / least work done) and rolls it back.
+
+### Alternatives to locking
+
+*Timestamp ordering* assigns each transaction a timestamp and rejects out-of-date accesses; *MVCC* gives readers a snapshot so they never block writers (PostgreSQL, MySQL InnoDB).
 
 <Callout type="tip">
-"Which 2PL variant avoids cascading aborts?" → Strict 2PL. "Graph has a cycle?" → not conflict-serializable. Locks, timestamps and MVCC are the three families names dropped in harder papers.
+"Which 2PL variant avoids cascading aborts?" → Strict 2PL. "Graph has a cycle?" → not conflict-serializable. Name all four Coffman conditions, and know Wait-Die vs Wound-Wait: **wait-die = young dies; wound-wait = young gets wounded** (only by an older txn).
 </Callout>
 
 ## Query processing & cost estimation
