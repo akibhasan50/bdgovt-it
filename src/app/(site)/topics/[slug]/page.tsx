@@ -162,7 +162,7 @@ export default async function TopicPage(props: PageProps<"/topics/[slug]">) {
 
       <article
         id="chapter"
-        className="mx-auto max-w-3xl scroll-mt-24 px-4 py-10 sm:px-6"
+        className="mx-auto max-w-5xl scroll-mt-24 px-4 py-10 sm:px-6"
       >
         <h2 className="font-display mb-6 text-2xl font-bold tracking-tight">
           {t("readChapter")}

@@ -1,9 +1,23 @@
 ---
 title_en: "Computer Security"
 title_bn: "কম্পিউটার সিকিউরিটি"
-summary_en: "Symmetric vs asymmetric crypto, hashing, network defenses and the BD cyber-law basics."
-summary_bn: "সিমেট্রিক বনাম অ্যাসিমেট্রিক ক্রিপ্টো, হ্যাশিং, নেটওয়ার্ক সুরক্ষা আর বিডি সাইবার আইনের বেসিক।"
+summary_en: "Symmetric vs asymmetric crypto, hashing, CIA triad, network attacks and the BD cyber-law basics."
+summary_bn: "সিমেট্রিক বনাম অ্যাসিমেট্রিক ক্রিপ্টো, হ্যাশিং, CIA ট্রায়াড, নেটওয়ার্ক আক্রমণ আর বিডি সাইবার আইনের বেসিক।"
 ---
+
+<Callout type="info">
+**AP exam weightage:** cybersecurity questions sit inside the Networks block (**15–20%** combined). Highest-yield here: CIA triad, spoofing vs sniffing, MITM on Diffie–Hellman, TLS private-key exposure, Same-Origin Policy, and classic crypto classification (AES vs RSA).
+</Callout>
+
+## CIA triad [AP pattern, 2023–2026]
+
+The three pillars every security question maps to:
+
+| Pillar | Goal | Attack that breaks it | Control |
+| --- | --- | --- | --- |
+| **Confidentiality** | only authorised parties read | sniffing, eavesdropping, theft | encryption, access control |
+| **Integrity** | data unaltered & accurate | MITM tampering, malware | hashes, MACs, digital signatures |
+| **Availability** | systems up when needed | DDoS, ransomware | redundancy, backups, rate limiting |
 
 ## Cryptography
 
@@ -37,7 +51,35 @@ Hashes verify integrity; digital signatures (hash + private key) also authentica
 | Man-in-the-middle | TLS, certificate pinning |
 | SQL injection | parameterised queries |
 
+### Spoofing vs sniffing — the paired MCQ
+
+| | Spoofing | Sniffing |
+| --- | --- | --- |
+| Action | *impersonates* a trusted source (fake IP, MAC, email) | *passively captures* packets on the wire |
+| Goal | gain access / redirect traffic | steal credentials, map the network |
+| Type | **active** attack | **passive** attack |
+| Example | ARP spoofing, phishing from a look-alike domain | Wireshark capturing HTTP passwords on open LAN |
+| Counter | anti-spoofing filters, ARP inspection, MFA | encryption (TLS/VPN), switch port security |
+
+### MITM on Diffie–Hellman key exchange
+
+DH authenticates **nobody**. An attacker sits in the middle, opens one DH conversation with each party, and relays modified messages — each side believes it shares a key only with the other, while the attacker shares keys with both and can read/modify everything.
+
+**Fix:** **authenticate** the DH public keys (digital signatures / certificates inside TLS). Pure unauthenticated DH is wide open to MITM.
+
+### TLS/SSL private-key exposure
+
+If the server's **private key** leaks: attacker can **impersonate the server** to any client, and — without forward secrecy — **retroactively decrypt recorded traffic**. Rotate the cert immediately. **DHE/ECDHE** key exchange provides **forward secrecy**: past sessions remain safe even if the long-term private key is later stolen.
+
+### Same-Origin Policy (SOP)
+
+Browser rule: script from `https://bank.com` may only freely access resources from the **same origin** (scheme + host + port). Cross-origin reads are blocked unless the target opts in via **CORS**. Primary defence against a malicious third-party page reading your logged-in banking session.
+
 Firewall filters traffic by rules; **IDS** alerts, **IPS** drops; DMZ isolates public services.
+
+<Callout type="tip">
+"Passive capture" → sniffing · "Fake identity" → spoofing · "DH with no auth" → MITM · "Cross-site data read blocked by browser" → Same-Origin · "Leaked server key" → past + future impersonation (use ECDHE for forward secrecy).
+</Callout>
 
 ## PKI & legal basics
 

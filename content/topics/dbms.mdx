@@ -7,6 +7,10 @@ summary_bn: "ইআর মডেল, নরমাল ফর্ম, ট্রা�
 
 <Callout type="info">
 **BPSC syllabus map:** Definition of DBMS, types, advantages/disadvantages · data models (ER & relational) · integrity constraints · functional dependencies · assertions & triggers · file organization · indexing (sparse/dense, B+ tree, hash) · normalization (2NF, 3NF, BCNF) · query processing & cost estimation · transactions & concurrency control (lock-based protocols, deadlock handling) · SQL.
+
+<Callout type="info">
+**AP exam weightage (2020–2026):** DBMS carries **15–20%** of the technical paper. Highest-yield: complex SQL with `JOIN`/`GROUP BY`/`HAVING`, ER diagrams (especially Library Management), ER-to-relational conversion, normalization, and 2PL concurrency. BIBM-style papers lean heavily on query writing; E-Zone adds 2PL schedule numericals.
+</Callout>
 </Callout>
 
 ## What is a Database & DBMS?
@@ -207,6 +211,39 @@ Cardinality: M:N
 <Callout type="info">
 Past-paper drill (tagged `CB, AP, 26`): *"Book ↔ Borrower — 1:1, 1:N or M:N? Justify."* Answer: **M:N** — one book is borrowed by many borrowers over time, one borrower borrows many books. Model it with an intermediate **Loan** table `(BookID, BorrowerID, borrow_date, return_date)` keyed on both IDs.
 </Callout>
+
+### Library Management System — full ER [AP pattern, 2023–2026]
+
+The most repeated ER construction question. Entities, attributes, and cardinality:
+
+```text
+[MEMBER] ---< BORROWS >--- [BOOK]
+   |                          |
+(member_id PK, name,       (book_id PK, title,
+ phone, join_date)          isbn, status)
+
+[STAFF] ---< ISSUES >--- [LOAN] >--- [BOOK]
+   |                        |
+(staff_id PK, name)     (loan_id PK,
+                          member_id FK, book_id FK,
+                          issue_date, due_date, return_date)
+
+[BOOK] ---1:N--- [AUTHOR]     M:N via [BOOK_AUTHOR]
+[BOOK] ---1:N--- [PUBLISHER]
+[BOOK] ---M:N--- [CATEGORY]   via [BOOK_CATEGORY]
+```
+
+**Cardinality summary:**
+
+| Relation | Card | Why |
+| --- | --- | --- |
+| MEMBER : BOOK (direct) | M:N | many members borrow many books — needs junction |
+| MEMBER : LOAN | 1:N | one member has many loan records |
+| BOOK : LOAN | 1:N | one book issued many times over |
+| STAFF : LOAN | 1:N | one librarian issues many loans |
+| BOOK : AUTHOR | M:N | junction `BOOK_AUTHOR(book_id, author_id)` |
+
+**ER → relational tables:** `MEMBER(member_id, …)`, `BOOK(book_id, …)`, `LOAN(loan_id, member_id FK, book_id FK, staff_id FK, …)`, `BOOK_AUTHOR(book_id FK, author_id FK)` composite PK. Loan is the textbook **relationship-as-entity** pattern.
 
 ## Keys & integrity constraints
 

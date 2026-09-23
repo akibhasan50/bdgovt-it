@@ -5,6 +5,10 @@ summary_en: "OSI vs TCP/IP, subnetting arithmetic, protocol roles — the highes
 summary_bn: "ওএসআই বনাম টিসিপি/আইপি, সাবনেটিং হিসাব, প্রোটোকলের ভূমিকা — সামগ্রিকভাবে সবচেয়ে বেশি আসে।"
 ---
 
+<Callout type="info">
+**AP exam weightage (2020–2026):** Networks & cybersecurity carry **15–20%** of the technical paper. Highest-yield: **Shannon capacity** `C = B log₂(1+SNR)`, **PCM bit rate**, OSI/TCP-IP layer details, TCP vs UDP, **TLS/SSL security**, **MITM attacks**, and **CRC** error checking. 2023–2026 papers show a sharp rise in step-by-step communication calculations (BIBM/E-Zone).
+</Callout>
+
 A computer network is two or more devices connected to **share data, resources, and services** — hardware, software, and processing power.
 
 <Callout type="tip">
@@ -447,6 +451,36 @@ A carrier sine wave `A × sin(2πft + φ)` has three properties to vary:
 Samples 2.1, 5.8, 7.3, 4.2 → quantise 2, 6, 7, 4 → encode 010 110 111 100
 ```
 
+**PCM bit rate — the E-Zone numerical [AP 2024–2026]:**
+
+```text
+Bit rate = Sampling rate × bits per sample
+         = Sampling rate × log₂(number of quantisation levels)
+```
+
+Worked: voice channel, 8000 samples/s, 256 levels → bits/sample = log₂256 = 8 → rate = 8000 × 8 = **64 kbps** (the classic T1/DS0 answer).
+
+Worked: 4 kHz max freq, 12-bit samples → rate ≥ 2×4000 = 8000 samples/s → 8000 × 12 = **96 kbps**.
+
+### Shannon's channel capacity [BIBM / E-Zone, 2023–2026]
+
+```text
+C = B × log₂(1 + SNR)     bits per second
+```
+
+- `B` = channel bandwidth (Hz), `SNR` = signal-to-noise ratio (**linear**, not dB)
+- If given SNR in dB: `SNR_linear = 10^(SNR_dB / 10)`
+
+**Worked:** B = 4 kHz, SNR = 1023 → C = 4000 × log₂(1+1023) = 4000 × log₂1024 = 4000 × 10 = **40,000 bps = 40 kbps**.
+
+**Worked (dB):** B = 3 MHz, SNR = 30 dB → linear = 10³ = 1000 → C = 3×10⁶ × log₂(1001) ≈ 3×10⁶ × 9.97 ≈ **29.9 Mbps**.
+
+**Nyquist (noise-free):** `C = 2 B log₂ L` (L = signal levels) — memorise both formulas; the paper picks one.
+
+<Callout type="warning">
+Exam trap: Shannon takes SNR as a **ratio**, not dB. Convert first: `SNR_dB = 10 log₁₀(SNR_linear)`. log₂1024 = 10 is the number they almost always hide.
+</Callout>
+
 ## Wireless & security
 
 ### Wi-Fi standards (802.11)
@@ -474,8 +508,34 @@ Samples 2.1, 5.8, 7.3, 4.2 → quantise 2, 6, 7, 4 → encode 010 110 111 100
 
 **Other defences:** WIDS/WIPS (wireless intrusion detection/prevention), MAC filtering (trivially spoofed — speed bump, not security), VPN encrypting traffic over any network, firewall rules by IP/port/protocol.
 
+### Network security vocabulary — AP favourites [2023–2026]
+
+**CIA triad** — the three goals of information security:
+
+| Pillar | Meaning | Attack that breaks it |
+| --- | --- | --- |
+| **Confidentiality** | only authorised parties read the data | eavesdropping, sniffing, data theft |
+| **Integrity** | data is accurate and unaltered in transit | MITM tampering, checksum stripping |
+| **Availability** | systems are up when needed | DDoS, ransomware |
+
+**Spoofing vs sniffing** — the classic paired MCQ:
+
+| | Spoofing | Sniffing |
+| --- | --- | --- |
+| Action | *impersonates* a trusted source (fake IP, MAC, email) | *passively captures* packets on the wire |
+| Goal | gain access / redirect traffic | steal credentials, map the network |
+| Active? | active attack | passive attack |
+| Example | ARP spoofing, IP spoofing, phishing email from a look-alike domain | Wireshark capturing HTTP passwords on an open LAN |
+| Counter | anti-spoofing filters, ARP inspection, MFA | encryption (TLS/VPN), switch port security |
+
+**MITM on Diffie–Hellman key exchange:** DH itself authenticates *no one* — an attacker sits in the middle, opens one DH conversation with each party, and relays modified messages — each side thinks it shares a key **only with the other**, while the attacker shares keys with both and can read/modify everything. Fix: **authenticate the DH public keys** (digital signatures / certificates inside TLS), otherwise pure DH is wide open to MITM.
+
+**TLS/SSL private key exposure:** the server's **private key** decrypts the premaster secret in the RSA key-exchange variant and signs server authentication. If it leaks, an attacker can **retroactively decrypt recorded traffic** (if no forward secrecy) and **impersonate the server** to any client — rotate the cert immediately. **Ephemeral DH (DHE/ECDHE)** provides **forward secrecy** so past sessions stay safe even if the long-term private key is later stolen.
+
+**Same-Origin Policy (SOP):** a browser rule — script from origin `https://bank.com` may only freely access resources from that **same** origin (scheme + host + port). Cross-origin reads are blocked unless the target opts in via **CORS** headers. Primary defence against malicious third-party pages reading your logged-in banking session.
+
 <Callout type="tip">
-"Most secure Wi-Fi today" → WPA3. "Which wireless standard is 5 GHz-only?" → 802.11a (and ac). Bluetooth range vs NFC: metres vs centimetres.
+"Passive capture" → sniffing. "Fake identity" → spoofing. "Keys exchanged with no authentication → middleman wins" → MITM on DH. "Which browser policy blocks cross-site data reads?" → Same-Origin Policy. "What does a leaked TLS private key compromise?" → past and future server impersonation.
 </Callout>
 
 ## Past Exam Questions (jobqns)
@@ -499,3 +559,23 @@ Samples 2.1, 5.8, 7.3, 4.2 → quantise 2, 6, 7, 4 → encode 010 110 111 100
 **Q5:** What is a hub? How is it different from a switch?
 
 **A:** A hub is a multi-port Layer-1 repeater that broadcasts to **all** ports — shared bandwidth, collision-prone. A switch is Layer-2: learns MAC addresses and forwards frames **only** to the destination port — dedicated bandwidth, fewer collisions.
+
+**Q6:** A channel has bandwidth 4 kHz and SNR = 1023. Find Shannon capacity. *(AP / BIBM style)*
+
+**A:** C = B log₂(1+SNR) = 4000 × log₂(1024) = 4000 × 10 = **40,000 bps = 40 kbps**.
+
+**Q7:** PCM system samples at 8 kHz with 256 quantisation levels. What is the bit rate?
+
+**A:** bits/sample = log₂256 = 8. Bit rate = 8000 × 8 = **64 kbps**.
+
+**Q8:** Distinguish spoofing and sniffing.
+
+**A:** Spoofing impersonates a trusted source (active attack — fake IP/MAC/email). Sniffing passively captures packets on the network to steal credentials. Counter with anti-spoofing filters/MFA vs encryption and port security.
+
+**Q9:** What is the CIA triad?
+
+**A:** **Confidentiality** (only authorised read), **Integrity** (unaltered data), **Availability** (systems up when needed). Spoofing/sniffing attack confidentiality; MITM tampering attacks integrity; DDoS attacks availability.
+
+**Q10:** Why is plain Diffie–Hellman vulnerable to a man-in-the-middle attack, and how does TLS fix it?
+
+**A:** DH authenticates nobody — an attacker relays two separate key exchanges, sharing a key with each side. TLS fixes this by **authenticating** the DH public keys with digital signatures/certificates, so only the legitimate peer can complete the handshake. ECDHE additionally gives forward secrecy if the server's private key is later stolen.

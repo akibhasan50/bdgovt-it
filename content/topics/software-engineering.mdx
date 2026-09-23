@@ -7,6 +7,10 @@ summary_bn: "সফটওয়্যার ইঞ্জিনিয়ারি
 
 Software Engineering (SE) is a systematic, disciplined, and quantifiable approach to the **development, operation, and maintenance** of software. This note covers the SDLC, requirements and design, testing, Agile, maintenance, and software quality — mapped to CB exam questions with model answers.
 
+<Callout type="info">
+**AP exam weightage (2020–2026):** SE & OOP together carry **15–20%** of the technical paper. Highest-yield: C/Java code-output tracing (recursion, pointers, inheritance rules), SDLC phases, **Function Point calculations**, **Git workflows**, and system requirement specification. DU papers lean theoretical (flowcharts, SDLC); BIBM papers add project metrics (function points).
+</Callout>
+
 <Callout type="tip">
 Primary exam anchors: *SE as a systematic, disciplined, quantifiable approach* (CB CE '23, '24) · objectives/advantages/maintenance (CB AE'22, CE'21) · service and deployment models appear on the Cloud page.
 </Callout>
@@ -80,12 +84,21 @@ Building a preliminary model of the system lets stakeholders see and react to th
 **Advantages**
 - Uncovers missing or wrong requirements before full development
 - Improves communication with clients
-- Reduces cost of late changes
+- Reduces cost of late change cost
 
 **Disadvantages**
 - Can encourage scope creep if the prototype is treated as final
 - Rapid throwaway models may ignore non-functional needs
 - Extra effort if the prototype is built twice (throwaway + final)
+
+### Functional vs security requirements — banking apps [AP pattern]
+
+| | Functional requirement | Security requirement |
+| --- | --- | --- |
+| Asks | *What the system does* | *How the system is protected* |
+| Banking example | "User can transfer funds between accounts" | "All transfers must be authenticated with 2FA and encrypted in transit (TLS)" |
+| Verification | functional test / user acceptance | penetration test, security audit |
+| Example set | balance inquiry, fund transfer, statement download | confidentiality of account data, integrity of transactions, availability of banking services (CIA) |
 
 ## Design Principles and Documents
 
@@ -104,6 +117,20 @@ Building a preliminary model of the system lets stakeholders see and react to th
 | **SRS vs FRS** | SRS is the full system requirements spec (all requirements, system-wide). FRS is the *functional* requirements spec — only what the software must *do*. |
 | **SRS vs BRS** | SRS is technical and solution-oriented for developers. BRS (Business Requirements Specification) states *business* needs and goals for stakeholders. |
 | **SDD vs HLD** | SDD (Software Design Document) documents overall design decisions. HLD (High-Level Design) focuses on system architecture and module-level structure. SDD is broader; HLD is the architectural view inside it. |
+
+## Agile vs Waterfall [AP 2020, 2024]
+
+| | Waterfall | Agile |
+| --- | --- | --- |
+| Flow | linear sequential phases, one at a time | iterative incremental sprints |
+| Requirements | fixed up front in SRS | can change sprint to sprint |
+| Customer involvement | at reviews / sign-off | continuous, every sprint |
+| Delivery | single delivery at the end | working software every sprint |
+| Testing | after each phase | continuous, test-driven |
+| Best when | requirements are stable & well understood | requirements evolve; rapid delivery needed |
+| Risk | late discovery of issues | harder to predict final date/cost |
+
+**Git: commit vs push** — **commit** saves a snapshot of staged changes to your *local* repository history; **push** uploads committed history to the *remote* repository (e.g. GitHub) so others see it. Commit first, push second.
 
 ## Implementation and Programming
 
@@ -204,6 +231,31 @@ Organisations track business outcomes alongside technical metrics:
 
 Defect metrics tie **cost and schedule** to quality: more escaped defects raise failure cost and delay delivery.
 
+### Function Point (FP) computation [BIBM / AP 2023]
+
+Function Points measure functional size from the **user's** point of view — independent of programming language.
+
+**Step 1 — count five components:**
+
+| Component | What | Weights (simple / average / complex) |
+| --- | --- | --- |
+| EI (External Inputs) | data entering the system | 3 / 4 / 6 |
+| EO (External Outputs) | reports, responses leaving | 4 / 5 / 7 |
+| EQ (External Inquiries) | online queries, lookups | 3 / 3 / 4 |
+| ILF (Internal Logical Files) | master files maintained inside | 7 / 10 / 15 |
+| EIF (External Interface Files) | files maintained by other systems but referenced here | 5 / 7 / 10 |
+
+**Step 2 — Unadjusted FP** = Σ (count × weight) for all fifteen cells.
+
+**Step 3 — Value Adjustment Factor (VAF):**
+
+```text
+VAF = 0.65 + 0.01 × Σ  (14 General System Characteristics, each rated 0–5)
+FP  = Unadjusted FP × VAF        (VAF ranges 0.65 … 1.35)
+```
+
+**Worked mini-example:** EI=4 avg (4×4=16), EO=2 avg (2×5=10), EQ=3 simple (3×3=9), ILF=2 avg (2×10=20), EIF=1 complex (1×10=10). Unadjusted = **65**. If Σ GSC = 40 → `VAF = 0.65+0.40 = 1.05` → **FP = 65 × 1.05 = 68.25 ≈ 68**.
+
 ## Software Quality Attributes
 
 | Attribute | Meaning |
@@ -243,3 +295,19 @@ Defect metrics tie **cost and schedule** to quality: more escaped defects raise 
 **Q7:** List three design principles of software engineering.
 
 **A:** **Modularity** (independent modules), **abstraction** (hide detail, expose essentials), **encapsulation** (bundle data + methods, restrict access).
+
+**Q8:** Agile vs Waterfall — when would you choose each? *(AP 2020, 2024)*
+
+**A:** Waterfall — linear phases, fixed requirements, single delivery; choose when requirements are stable and well understood. Agile — iterative sprints, evolving requirements, continuous customer involvement and early delivery; choose when requirements change and speed matters.
+
+**Q9:** What is the difference between `git commit` and `git push`?
+
+**A:** `commit` records a staged snapshot in your **local** repository history. `push` uploads local commits to the **remote** repository so others can see them.
+
+**Q10:** Functional vs security requirements for a banking application.
+
+**A:** *Functional* — what the system does (transfer funds, download statement). *Security* — how it is protected (2FA on transfers, TLS encryption, CIA of account data). Verified by functional tests vs penetration/security audits.
+
+**Q11:** Compute function points for a system with EI=4 (avg), EO=2 (avg), EQ=3 (simple), ILF=2 (avg), EIF=1 (complex), Σ GSC=40.
+
+**A:** Unadjusted = 4×4 + 2×5 + 3×3 + 2×10 + 1×10 = 16+10+9+20+10 = **65**. VAF = 0.65 + 0.01×40 = **1.05**. FP = 65 × 1.05 = **68.25 ≈ 68**.

@@ -5,6 +5,10 @@ summary_en: "Scheduling, deadlocks, memory management — where the diagrams and
 summary_bn: "স্কিউডিং, ডেডলক, মেমরি ম্যানেজমেন্ট — ডায়াগ্রাম আর স্টারভেশনের ঘর।"
 ---
 
+<Callout type="info">
+**AP exam weightage (2020–2026):** OS & system architecture carry **10–15%** of the technical paper. Highest-yield: page-replacement page-fault traces, **TLB / page-table memory calculations**, process vs thread, and **producer–consumer / mutex** synchronisation. E-Zone papers add step-by-step TLB-size numericals on 32-bit logical addresses.
+</Callout>
+
 An operating system is system software that manages hardware and software resources while providing common services for programs — the interface between users and computer hardware.
 
 <Callout type="tip">
@@ -198,6 +202,38 @@ The OS tracks waiting processes in queues:
 
 Race conditions occur when threads interleave on shared data — fixed with **mutexes** (mutual exclusion locks) and **semaphores** (counting/binary). Classic synchronisation problems: **producer–consumer, readers–writers, dining philosophers**.
 
+### Producer–consumer (bounded buffer) [AP pattern]
+
+Shared buffer of size `n`. Producer writes, consumer reads — without synchronisation they race (lost update, buffer overflow).
+
+| Semaphore | Purpose |
+| --- | --- |
+| `mutex = 1` | mutual exclusion — only one thread in the critical section |
+| `empty = n` | free slots — producer **waits** when full |
+| `full = 0`  | filled slots — consumer **waits** when empty |
+
+```text
+PRODUCER:                      CONSUMER:
+wait(empty)                    wait(full)
+wait(mutex)                    wait(mutex)
+produce → buffer[in]           buffer[out] → consume
+in = (in+1) mod n              out = (out+1) mod n
+signal(mutex)                  signal(mutex)
+signal(full)                   signal(empty)
+```
+
+**Order matters:** producer must `wait(empty)` **before** `wait(mutex)` (otherwise it holds the mutex while blocked on a full buffer → deadlock). Same trap on the consumer side with `wait(full)` first.
+
+**Race on a shared counter** without a mutex:
+
+```text
+Thread A: read count=5          Thread B: read count=5
+Thread A: count = 5+1 = 6       Thread B: count = 5+1 = 6
+result: 6 instead of 7          ← lost update
+```
+
+Fix: increment inside a critical section guarded by `mutex` (or an atomic `fetch_add`).
+
 <Callout type="info">
 Thrashing = too little memory for the working set → constant paging. The OS responds by reducing the multiprogramming degree.
 </Callout>
@@ -323,6 +359,46 @@ physical address = [frame | offset]
 ```
 
 Two-level page tables cut the table's own memory cost; a **TLB** caches recent translations (a hit skips the page-table walk).
+
+### TLB & page-table memory — numericals [E-Zone / AP 2024–2026]
+
+**TLB entry size** (fully associative TLB, one entry per cached translation):
+
+```text
+entry = page-number bits  +  frame-number bits  (+ valid/reference bits)
+page-number bits  = logical address bits − offset bits
+frame-number bits  = physical address bits − offset bits
+```
+
+**Worked — 32-bit logical, 4 KB pages, 32-bit physical, TLB holds 64 entries:**
+
+```text
+offset bits       = log₂4096 = 12
+page bits         = 32 − 12 = 20
+frame bits        = 32 − 12 = 20
+entry (no status) = 20 + 20 = 40 bits
++ 1 valid + 1 dirty/ref = 42 bits
+TLB footprint     = 64 × 40 bits = 2560 bits = 320 bytes
+                   (or 64 × 42 ≈ 336 bytes with status bits)
+```
+
+**Full page-table size** (single level, one process):
+
+```text
+pages         = 2^(32−12) = 2^20 = 1,048,576
+PTE           = frame bits + flags  ≈ 4 B (4-byte entries)
+page table    ≈ 2^20 × 4 B = 4 MB     ← why we need multi-level tables + TLB
+```
+
+**Effective access time with TLB:**
+
+```text
+EAT = hit_ratio × (TLB + memory) + (1 − hit_ratio) × (TLB + 2 × memory)
+```
+
+Worked: hit = 0.98, TLB = 100 ns, memory = 1000 ns → EAT = 0.98×1100 + 0.02×2100 = **1120 ns** (vs 2000 ns without TLB).
+
+**Page-fault formula check:** references = 1000, faults = 25 → fault rate 0.025; with service time 8 ms and memory access 200 ns → effective time = 0.975×0.2 + 0.025×8000 µs ≈ **200 µs-scale** — always convert units first.
 
 ### Segmentation & paging combined
 

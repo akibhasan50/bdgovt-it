@@ -5,6 +5,10 @@ summary_en: "Arrays to graphs — complexities, traversals and the exact questio
 summary_bn: "অ্যারে থেকে গ্রাফ — জটিলতা, ট্রাভারসাল আর বিপিএসসি/ব্যাংক পেপারে যে প্রশ্ন বারবার আসে।"
 ---
 
+<Callout type="info">
+**AP exam weightage (2020–2026):** DS & Algo carries **20–25%** of the technical paper — the single largest block. Highest-yield: graph traversals (BFS/DFS), B/B+ trees, heap ops, hash tables, sorting complexities, and array/string algorithm writing. Numerical calculations (B+ tree keys, heap sift steps) are rising in 2023–2026 papers.
+</Callout>
+
 ## Complexity is the whole game
 
 Almost every data-structure MCQ is an operations-vs-structure lookup:
@@ -196,9 +200,52 @@ swap 48↔12, 33↔29, 56↔12, 56↔48
 
 Extract-min: swap last node into root, **sift down** → O(log n).
 
+### Max-heap insert & delete (AP papers, 2023–2026)
+
+**Insert `x`:** place `x` at the next free leaf, then **sift up** (swap with parent while `x > parent` for max-heap) → O(log n).
+
+```text
+Max-heap:     90            Insert 95:          95
+            /    \         place at leaf,      /    \
+          70      80       sift up 95↔90      70      90
+         / \                → new root         / \    /
+       50   60             95                 50  60 80
+```
+
+**Delete root (extract-max):** move last leaf to root, **sift down** (swap with larger child while heap order broken) → O(log n).
+
 <Callout type="tip">
 "Heap is complete" (shape) **and** "heap-ordered" (values). Both required — a question that gives a complete tree violating parent/child order is testing exactly that distinction.
 </Callout>
+
+## B+ tree key calculations [AP 2024, 2026]
+
+A B+ tree of **order `n`** holds at most `n − 1` keys per node and at most `n` children.
+
+```text
+max keys / node      = n − 1
+max children / node  = n
+min keys (non-root)  = ⌈n/2⌉ − 1
+min children (root)  = 2
+```
+
+**Worked — order 5, height 2 (root → leaf, so 2 levels of edges... use node count):**
+
+```text
+n = 5 → max keys/node = 4
+Root: 1 node × 4 keys
+Level 1: max 5 children of root → 5 nodes × 4 keys each
+Total keys ≤ 1×4 + 5×4 = 24
+```
+
+**Height formula for a full tree with `N` keys:**
+
+```text
+N ≤ (n−1) × (1 + n + n² + … + n^(h−1)) = (n−1) × (n^h − 1)/(n − 1) = n^h − 1
+→ h ≥ ⌈log_n (N+1)⌉
+```
+
+Exam drill: *order 6, height 3, N keys max?* → `6³ − 1 = 215` keys.
 
 ## Graphs
 
@@ -223,6 +270,18 @@ BFS uses a **queue** (level-order, shortest path in unweighted graphs). DFS uses
 
 Past paper (DPDC (AE), 2025): *why DFS over BFS?* — less memory for deep trees, finds any solution fast, backtracks naturally; **but BFS still wins for shortest path**.
 
+### A* vs BFS — heuristic search [AP 2026]
+
+| | BFS | A* |
+| --- | --- | --- |
+| Strategy | blind — expand every node at depth d | guided — expand the most promising first |
+| Cost function | depth only | `f(n) = g(n) + h(n)` (cost so far + heuristic estimate to goal) |
+| Optimal? | yes (unweighted) | yes, if `h` is **admissible** (never overestimates) |
+| Speed | explores exponentially many nodes | prunes large useless regions |
+| Example | unweighted shortest path | GPS routing, puzzle solvers |
+
+**Negative cycle detection** (weighted graphs): run Bellman–Ford for `V` iterations; if any distance still relaxes on the `V`-th pass, a **negative cycle** is reachable. Dijkstra cannot be used with negative weights at all.
+
 **Spanning tree:** covers all n vertices, connected, acyclic, exactly **n − 1 edges**. Every connected undirected graph has ≥ one; a complete graph can have up to `n^(n−2)` (Cayley). **MST** = minimum total edge weight — grown by **Prim** (add min edge from the visited set) or **Kruskal** (sort all edges, add if no cycle).
 
 <Callout type="info">
@@ -232,6 +291,19 @@ Dijkstra fails on negative weights; Bellman–Ford handles them. This pairing sh
 ## Hashing
 
 Load factor α = n / table_size. Average probe count grows with α; rehashing when α > threshold keeps operations near O(1). Collision resolution: chaining (buckets) vs open addressing (linear/quadratic probing, double hashing).
+
+### Linear probing — worked [AP 2024]
+
+Insert keys `19, 11, 27, 5` into a table of size 7 with `h(k) = k mod 7`:
+
+```text
+19 → 19 mod 7 = 5 → slot 5
+11 → 11 mod 7 = 4 → slot 4
+27 → 27 mod 7 = 6 → slot 6
+ 5 →  5 mod 7 = 5 → taken → probe 6 → taken → probe 0 → slot 0
+```
+
+Search 5: probe 5 → miss, probe 6 → miss, probe 0 → **hit**. **Clustering** is the cost of linear probing — long runs of occupied slots.
 
 <Callout type="tip">
 Sorted array → binary search O(log n). Unsorted → linear O(n). No order at all but speed needed → hash O(1) average. Match the structure to the access pattern.
@@ -245,6 +317,12 @@ Sorted array → binary search O(log n). Unsorted → linear O(n). No order at a
 
 **3. Build a tree** — inorder `D B E A F C` + preorder `A B D E C F`: root A → recurse. Then give all three traversals of your tree.
 
-**4. Heap conversion** — given an array, heapify bottom-up (heapify each non-leaf from last to root) and state the final level-order.
+**4. Heap conversion** — given an array, heapify bottom-up (heapify each non-leaf from last to root) and state the final level-order. Then insert a new max value and delete the root — show each sift step.
 
 **5. Expression conversion** — convert infix to postfix *and* prefix, then say which needs parentheses (infix only).
+
+**6. B+ tree keys** — order 6, height 3 → max keys `6³ − 1` = **215**. Order 5, keys per node = **4**.
+
+**7. Linear probing** — insert `19, 11, 27, 5` into size-7 table, `h(k)=k mod 7`. Where does 5 land? (slot 0 after probing 5→6→0.)
+
+**8. A* vs BFS** — which uses a heuristic? (A*, `f = g + h`.) Which guarantees shortest path on unweighted graphs? (both, if `h` admissible.)
