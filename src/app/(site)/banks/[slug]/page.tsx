@@ -16,6 +16,10 @@ import {
 import { getPaperWrittenQAs } from "@/lib/bank-paper-rows";
 import { cn } from "@/lib/utils";
 
+// Incomplete prerendered RSC payloads (Next #93889 / #92362) crash the flight
+// client on soft-nav with enqueueModel errors — always render on demand.
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   return bankCategories.map((bank) => ({ slug: bank.slug }));
 }

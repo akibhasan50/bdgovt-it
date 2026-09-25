@@ -31,6 +31,25 @@ export const bankPapers: BankPaper[] = [
     },
     questionCount: 62,
   },
+  {
+    slug: "combined-bank-officer-it-2026",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank Officer IT 2026 — Full Solution",
+      bn: "কম্বাইন্ড ব্যাংক অফিসার আইটি ২০২৬ — সম্পূর্ণ সমাধান",
+    },
+    description: {
+      en: "Technical Q2–Q16 from Combined Bank Officer (IT) 2026 (based year 2024) with Answer → Explanation → Related info → Exam tip.",
+      bn: "কম্বাইন্ড ব্যাংক অফিসার (আইটি) ২০২৬ (বেসড বছর ২০২৪) টেকনিক্যাল Q2–Q16 — উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ।",
+    },
+    year: 2026,
+    exam: "Combined Bank Officer IT",
+    organization: {
+      en: "Combined Bank (based year 2024)",
+      bn: "কম্বাইন্ড ব্যাংক (বেসড বছর ২০২৪)",
+    },
+    questionCount: 15,
+  },
 ];
 
 export function getBankPaper(slug: string) {

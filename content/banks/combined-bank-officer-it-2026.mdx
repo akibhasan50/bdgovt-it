@@ -1,0 +1,354 @@
+---
+title_en: "Combined Bank Officer IT 2026 — Full Solution"
+title_bn: "কম্বাইন্ড ব্যাংক অফিসার আইটি ২০২৬ — সম্পূর্ণ সমাধান"
+summary_en: "Combined Bank Officer (IT), 2026 (based year 2024): technical Q2–Q16 with Answer → Explanation → Related info → Exam tip."
+summary_bn: "কম্বাইন্ড ব্যাংক অফিসার (আইটি), ২০২৬ (বেসড বছর ২০২৪): টেকনিক্যাল Q2–Q16 — উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ।"
+---
+
+<Callout type="info">
+**Paper:** Combined Bank — Officer (IT), 2026 (Based Year 2024)  
+**Exam date:** 31 July 2026 · **Job ID:** 21001 · **Post:** Officer (IT)  
+**Source:** jobqns solutions (technical Q2–Q16). Non-technical block (Q1) is out of scope here.  
+**Structure:** every item is **Answer → Explanation → Related info → Exam tip**.
+</Callout>
+
+## Electrical & electronics
+
+**Q2: Differentiate between a Fuse and a Miniature Circuit Breaker (MCB). Which one is more suitable for modern office electrical installations and why?**
+
+**Answer:** **MCB — resettable, safer, faster fault response**
+
+**Explanation:** A fuse melts a thin element under sustained overcurrent and must be replaced after it blows. An MCB uses a bimatt strip for overload and a solenoid for short-circuit; it trips and can be reset by flipping the switch.
+
+| Feature | Fuse | MCB |
+| --- | --- | --- |
+| Principle | Thermal melt of element | Bimatt + magnetic solenoid |
+| Reuse | Single-use | Resettable |
+| Response | Slower on mild overload | Faster on overload & short circuit |
+| Safety | Exposed live parts on replacement | Switch interface, no wire exposed |
+
+**Related info:** Modern office boards standardise on **MCB + RCD/RCBO** banks so a tripped circuit is restored in seconds without stocking spares of every rating.
+
+**Exam tip:** Stem words *modern office*, *downtime*, *non-technical staff* → **MCB**. Fuse wins only where cost/one-shot isolation is the point.
+
+---
+
+**Q3: Explain the working principle of a PN junction diode. Draw its symbol and describe the difference between forward bias and reverse bias.**
+
+**Answer:** **Barrier diode; forward conducts after ~0.7 V (Si), reverse blocks**
+
+**Explanation:** Joining p-type and n-type material lets electrons and holes diffuse across the join until a **depletion region** forms with a built-in potential barrier. At equilibrium almost no current flows.
+
+```text
+  Anode (+)  ----|>|----  Cathode (-)
+                 diode symbol
+```
+
+| Bias | Polarity | Depletion region | Current |
+| --- | --- | --- | --- |
+| **Forward** | + to p, − to n | Narrows | Flows once barrier is overcome (≈0.7 V Si, ≈0.3 V Ge) |
+| **Reverse** | + to n, − to p | Widens | Only tiny leakage (until breakdown) |
+
+**Related info:** Zener diodes are doped to operate in reverse breakdown on purpose; ordinary signal/power diodes must stay reverse-biased below that rating.
+
+**Exam tip:** *Forward = p side to + terminal*. If the stem gives a silicon diode and 0.5 V, it is still **off**; at 1.0 V it is **on**.
+
+## Programming & web
+
+**Q4: Explain the concepts of Inheritance and Polymorphism in Java. Write a Java program to demonstrate method overriding.**
+
+**Answer:** **Inheritance reuses via `extends`; overriding = runtime polymorphism**
+
+**Explanation:** **Inheritance** lets a subclass inherit fields/methods from a superclass. **Polymorphism** lets one reference drive many forms; **method overriding** is dynamic dispatch where the child reimplements a parent method with the same signature.
+
+```java
+class Animal {
+    void makeSound() {
+        System.out.println("Animal makes a sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void makeSound() {
+        System.out.println("Dog barks");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Animal myDog = new Dog();
+        myDog.makeSound(); // Outputs: Dog barks
+    }
+}
+```
+
+**Related info:**
+
+| Concept | Keyword / cue | When bound |
+| --- | --- | --- |
+| Inheritance | `extends` | Compile time |
+| Overriding | `@Override`, same signature | Runtime |
+| Overloading | same name, different params | Compile time |
+
+**Exam tip:** `Animal a = new Dog(); a.makeSound();` prints **Dog barks** — the *reference* type chooses the field, the *object* type chooses the method.
+
+---
+
+**Q5: Describe any two key differences between the HTTP GET and HTTP POST methods used for communication between a web browser and a web server.**
+
+**Answer:** **GET: data in URL, idempotent & cacheable; POST: data in body, not idempotent**
+
+**Explanation:**
+
+1. **Data placement:** `GET` puts parameters on the query string (visible, bookmarkable). `POST` puts them in the request body (not in the URL).
+2. **Semantics:** `GET` is safe/idempotent and browsers may cache or retry it. `POST` can change server state; default is non-idempotent and non-cacheable.
+
+**Related info:**
+
+| Method | Typical use | Caching | Safe / idempotent |
+| --- | --- | --- | --- |
+| **GET** | Read a page or search | Yes | Yes / yes |
+| **POST** | Submit forms, create resources | No (default) | No / no |
+
+**Exam tip:** *Password in URL* is wrong because **GET** logs the query string — login and payments use **POST**.
+
+## Data center & virtualization
+
+**Q6: A physical server has 32 CPU cores, 96 GB RAM, and 4 TB storage. Each virtual machine (VM) requires 4 CPU cores, 16 GB RAM, and 500 GB storage. Calculate the maximum number of VMs that can be hosted on the server without overcommitting resources. Identify which hardware resource limits the number of VMs.**
+
+**Answer:** **6 VMs; RAM is the bottleneck**
+
+**Explanation:** Without overcommit, each resource is a hard cap:
+
+```text
+CPU:     32 / 4  = 8 VMs
+RAM:     96 / 16 = 6 VMs
+Storage: 4000 / 500 = 8 VMs   (4 TB = 4000 GB here)
+```
+
+The minimum of the three limits is **6**. Memory fails first, so **RAM** is the bottleneck.
+
+**Related info:** Overcommitting CPU is common (burst); overcommitting RAM invites swapping and latency spikes — capacity planning exams almost always ask the **no-overcommit** floor.
+
+**Exam tip:** Always divide every resource, then take `min(...)`. Watch TB → GB conversion (`4 TB → 4000 GB` or `4096 GB` — here 4000 yields the clean 8).
+
+## Database & SQL
+
+**Q7: What is JDBC? Explain the steps required to connect a Java application to a MySQL database.**
+
+**Answer:** **Java Database Connectivity API — six-step connect/query/close flow**
+
+**Explanation:** **JDBC** is Java’s standard API for executing SQL against relational databases.
+
+1. **Load driver** — `Class.forName("com.mysql.cj.jdbc.Driver")` (older JDBC; modern drivers auto-register via SPI).
+2. **Open connection** — `DriverManager.getConnection(url, user, password)`.
+3. **Create statement** — `createStatement()` or preferably `prepareStatement(sql)`.
+4. **Execute** — `executeQuery()` for SELECT, `executeUpdate()` for DML/DDL.
+5. **Read results** — iterate `ResultSet`.
+6. **Close** — `ResultSet`, `Statement`, `Connection` (try-with-resources).
+
+**Related info:** `PreparedStatement` gives parameter binding (SQL-injection defence) and plan reuse; raw `Statement` string-concatenates SQL.
+
+**Exam tip:** Order the steps; if the stem says *prevent SQL injection*, answer **`PreparedStatement`**, not just “JDBC connection”.
+
+---
+
+**Q8: An institute wants to create a database table named STUDENT to store student information. The table should include the columns Roll Number, Name, Department, Email, and Admission Date. Specify the most appropriate SQL data type for each column and identify which column should be defined as the Primary Key, giving a brief justification for your choice.**
+
+**Answer:** **PK = Roll Number; types as INT/VARCHAR, VARCHAR, VARCHAR, VARCHAR, DATE**
+
+**Explanation:** Choose types that match domain width and nullability. The primary key must be **unique and NOT NULL** — roll number is the institute’s natural student key.
+
+| Column | Data type | Why |
+| --- | --- | --- |
+| **Roll Number** | `INT` or `VARCHAR(20)` | Short, unique, stable id |
+| **Name** | `VARCHAR(100)` | Variable-length text |
+| **Department** | `VARCHAR(50)` | Short code or name |
+| **Email** | `VARCHAR(100)` | Local+domain fit in 100 |
+| **Admission Date** | `DATE` | Calendar date only |
+
+**Related info:** `Email` could be `UNIQUE`; `Admission Date` as `DATE` (not `DATETIME`) if time-of-day is irrelevant. Surrogate `id INT AUTO_INCREMENT` is an alternative when roll numbers can change.
+
+**Exam tip:** PK question → look for **immutable + unique + not null**. Roll number beats Name (duplicate names) and Email (can change).
+
+## Computer networks
+
+**Q9: An organization has been assigned the IPv4 network address 192.168.1.0/24. As part of the network deployment, the network administrator is required to divide the address space into four equal-sized subnets to support different departments. Determine the Network Address, Subnet Mask (both CIDR and dotted-decimal notation).**
+
+**Answer:** **/26 · 255.255.255.192 · block size 64**
+
+**Explanation:** Four equal subnets need `log2(4) = 2` host bits borrowed from the /24 host portion: `24 + 2 = /26`. Mask in dotted form is `255.255.255.192`. Each subnet holds `2^6 = 64` addresses (62 usable hosts).
+
+| Subnet | Network | Usable range | Broadcast |
+| --- | --- | --- | --- |
+| **1** | `192.168.1.0/26` | `192.168.1.1` – `192.168.1.62` | `192.168.1.63` |
+| **2** | `192.168.1.64/26` | `192.168.1.65` – `192.168.1.126` | `192.168.1.127` |
+| **3** | `192.168.1.128/26` | `192.168.1.129` – `192.168.1.190` | `192.168.1.191` |
+| **4** | `192.168.1.192/26` | `192.168.1.193` – `192.168.1.254` | `192.168.1.255` |
+
+**Related info:** Mask bits `11000000` = `192`. Increment is `256 - 192 = 64`. `/25` would give only 2 subnets; `/27` would give 8.
+
+**Exam tip:** *N equal subnets* → borrow `ceil(log2 N)` bits, new prefix = old + borrowed, block = `2^(host bits left)`.
+
+---
+
+**Q14: Describe the functions of a Switch and a Router and explain two key differences between these networking devices.**
+
+**Answer:** **Switch = L2 MAC forwarding inside a LAN; Router = L3 IP between networks**
+
+**Explanation:** A **switch** interconnects hosts on one LAN and forwards Ethernet frames using **MAC** addresses (learning the CAM table). A **router** joins different networks (LAN↔WAN, VLAN↔VLAN) and forwards packets using **IP** addresses and routing tables.
+
+| Point | Switch | Router |
+| --- | --- | --- |
+| **OSI layer** | Primarily Layer 2 (Data Link) | Layer 3 (Network) |
+| **Address used** | MAC (physical) | IP (logical) |
+| Scope | One broadcast domain (per VLAN) | Separate broadcast domains |
+
+**Related info:** A Layer-3 switch can route in hardware; consumer “router” boxes also switch — exams still want the classic L2 vs L3 split.
+
+**Exam tip:** *Frames/MAC* → switch. *Packets/IP/subnets* → router. Hub is L1 (old distractor).
+
+## Computer security
+
+**Q10: Differentiate between a Computer Virus and a Computer Worm based on how they spread and replicate across host networks.**
+
+**Answer:** **Virus needs a host file + user action; worm self-propagates over the network**
+
+**Explanation:** A **virus** attaches to a program/document and spreads when that infected object is executed or shared. A **worm** is standalone and copies itself across network links by probing vulnerabilities — no user opening a file is required.
+
+| Feature | Virus | Worm |
+| --- | --- | --- |
+| **Host** | Needs infected file/program | Standalone |
+| **Human action** | Usually required to run | Self-spreading |
+| **Spread path** | Shared files, email attachments | Network scans, remote services |
+
+**Related info:** Worm volume (automatic fan-out) is why signature-only AV lag hurts; Conficker/WannaCia-style outbreaks show worm speed vs classic macro viruses.
+
+**Exam tip:** *No user click, hits many hosts fast* → **worm**. *Attaches to document/exe* → **virus**. Trojan (malicious payload in legit software) is the third distractor.
+
+---
+
+**Q11: Describe the SQL Injection and Cross-Site Scripting (XSS) web security threats and suggest preventive measures for each.**
+
+**Answer:** **SQLi → parameterised queries; XSS → output encoding + CSP**
+
+**Explanation:**
+
+- **SQL injection (SQLi):** attacker inserts SQL into input fields so the backend query runs unintended commands (dump, delete, auth bypass).  
+  **Prevent:** parameterised queries / prepared statements, least-privilege DB accounts, input validation.
+- **Cross-site scripting (XSS):** attacker stores or reflects a script that other users’ browsers run in the site’s origin (session theft, UI defacement).  
+  **Prevent:** context-aware output encoding/escaping, HTTPOnly cookies, **Content-Security-Policy (CSP)**.
+
+| Threat | Injects into | Primary defence |
+| --- | --- | --- |
+| **SQLi** | Database query | `PreparedStatement` / bound params |
+| **XSS** | Page HTML/JS | Encode output + CSP |
+
+**Related info:** CSRF is a different class (forged state-changing requests) — mitigated by tokens/SameSite, not by SQL escaping.
+
+**Exam tip:** Pair the pair: **SQLi ↔ SQL layer ↔ prepared statements**; **XSS ↔ browser/script ↔ escaping/CSP**.
+
+## Digital logic design
+
+**Q12: Draw the circuit schematic diagrams to build an Exclusive-OR (XOR) logic function using only universal NAND gates.**
+
+**Answer:** **4-NAND XOR: `Y = A ⊕ B`**
+
+**Explanation:** With `N1 = NAND(A,B)`, `N2 = NAND(A,N1)`, `N3 = NAND(B,N1)`, `Y = NAND(N2,N3)` you get XOR. NAND is functionally complete, so any two-level XOR expands to this classic tetrad.
+
+```text
+A ──┬───────────────┐
+    │               v
+    │           ┌───────┐
+    ├───┐       │ NAND2 │──┐
+    │   v       └───────┘  │
+    │ ┌───────┐     ^      │   ┌───────┐
+    └─│ NAND1 │─────┤      ├───│ NAND4 │──► Y = A ⊕ B
+    ┌─│       │─────┤      ├───│       │
+    │ └───────┘     v      │   └───────┘
+    │   ^       ┌───────┐  │
+    ├───┘       │ NAND3 │──┘
+    │           └───────┘
+B ──┴───────────────^
+```
+
+**Related info:** XNOR is the same skeleton with an inverter on Y (or rearranged NANDs). NOR-only XOR also takes 4–5 gates — the exam asked **NAND**.
+
+**Exam tip:** Count gates: **4 NANDs for XOR**. If options say 5, they included an explicit output inverter for XNOR confusion.
+
+---
+
+**Q13: What is the difference between a Multiplexer and a Demultiplexer? Explain one practical application of each in digital systems.**
+
+**Answer:** **MUX = many-to-one; DEMUX = one-to-many**
+
+**Explanation:** A **multiplexer** selects one of `2^n` data inputs using `n` select lines and drives a single output. A **demultiplexer** takes one input and routes it to one of `2^n` outputs under the same style of select code.
+
+| | MUX | DEMUX |
+| --- | --- | --- |
+| Direction | Many inputs → one output | One input → many outputs |
+| Typical use | Share one line among sources | Distribute to destinations / decode address |
+| Control | Select lines pick input | Select lines pick output |
+
+**Related info:** MUX + encoder pairs build ALU input stages; DEMUX drives chip-select lines so one CPU write hits a chosen register.
+
+**Exam tip:** *Composite a channel* → **MUX**. *Fan out to a slot/address* → **DEMUX**. Select-line width `n` always addresses `2^n` ports.
+
+## Operating system
+
+**Q15: A system has three processes with the following arrival times and CPU burst times: P1 (0,5), P2 (1,3), P3 (2,2). Using First-Come, First-Served (FCFS) scheduling, calculate the average waiting time and the average turnaround time.**
+
+**Answer:** **Avg WT = 3.33 ms · Avg TAT = 6.67 ms**
+
+**Explanation:** FCFS runs in arrival order with no preemption. P1 is already on CPU at `t=0`, so P2 and P3 queue behind it even though they arrive later.
+
+**Gantt:**
+
+```text
+0    5    8    10
+| P1 | P2 | P3 |
+```
+
+| Process | AT | BT | CT | TAT = CT − AT | WT = TAT − BT |
+| --- | --- | --- | --- | --- | --- |
+| P1 | 0 | 5 | 5 | 5 | 0 |
+| P2 | 1 | 3 | 8 | 7 | 4 |
+| P3 | 2 | 2 | 10 | 8 | 6 |
+
+```text
+Avg TAT = (5 + 7 + 8) / 3 = 20/3 ≈ 6.67 ms
+Avg WT  = (0 + 4 + 6) / 3 = 10/3 ≈ 3.33 ms
+```
+
+**Related info:** FCFS is non-preemptive; convoy effect = short jobs stuck behind a long head. SJF/RR metrics change if you preempt — the stem said **FCFS**.
+
+**Exam tip:** Build the Gantt first, then CT, then TAT, then WT. Never subtract AT twice — `WT = TAT − BT`.
+
+## Software engineering
+
+**Q16: A software company has been hired to develop an Online Library Management System for a university. The librarian wants the system to be delivered in phases so that feedback from users can be incorporated after each release. As a software developer, identify the most suitable Software Development Life Cycle (SDLC) model for this project. Justify your choice by mentioning two advantages of the selected model.**
+
+**Answer:** **Incremental (or Agile/iterative) model**
+
+**Explanation:** Phased delivery with user feedback after each release is exactly incremental/Agile working: build a usable slice, ship it, collect librarian feedback, then extend. Pure Waterfall would defer all feedback to the end; pure big-bang delivery ignores the stated preference for phases.
+
+**Related info:**
+
+| Requirement in stem | Why it fits Incremental/Agile |
+| --- | --- |
+| Deliver in phases | Each increment is a releasable slice |
+| Incorporate user feedback | Demo after every increment |
+
+**Two advantages:**
+
+1. **Early value + continuous feedback** — core circulation features ship first; later phases follow real librarian input.
+2. **Risk reduction & flexibility** — smaller increments surface defects early and absorb requirement changes without a full restart.
+
+**Exam tip:** Stem phrases *in phases*, *feedback after each release*, *changing requirements* → **Incremental / Agile**. Waterfall only fits fixed scope + signed-off requirements.
+
+## Topic map after this paper
+
+<Callout type="tip">
+Fuse/MCB & PN diode → **Electronics / Microprocessor** · inheritance & overriding → **OOP** · GET/POST → **Web** · VM packing → **Data Center** · JDBC & STUDENT types → **SQL/DBMS** · subnetting & switch/router → **Networks** · virus/worm, SQLi/XSS → **Computer Security** · NAND XOR, MUX/DEMUX → **Digital Logic** · FCFS averages → **OS** · phased SDLC → **Software Engineering**. Drill the matching topic page after this paper.
+</Callout>
