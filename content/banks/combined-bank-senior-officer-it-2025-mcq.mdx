@@ -1,0 +1,289 @@
+---
+title_en: "Combined Bank Senior Officer (IT) 2025 — MCQ Solutions"
+title_bn: "কম্বাইন্ড ব্যাংক সিনিয়র অফিসার (আইটি) ২০২৫ — এমসিকিউ সমাধান"
+summary_en: "All 25 MCQs of Combined Bank Senior Officer (IT) (2025) with options, correct answers and explanations where the source provides them."
+summary_bn: "Combined Bank Senior Officer (IT) (2025) এর 25টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।"
+---
+
+<Callout type="info">
+**Paper:** Combined Bank — Combined Bank Senior Officer (IT) (2025)
+
+**Source:** IT Job QnS — MCQ Job Solution. Every question shows its options; the answer line marks the correct option. Explanations are included when the source provides them.
+</Callout>
+
+## Multiple choice questions (Q1–Q25)
+
+**Q1: When the hexadecimal value ABCD in a 32-bit register is logically shifted right by two bits, which of the following is the resulting value in hexadecimal?**
+
+- **(A)** 2AF3
+- **(B)** 6AF3
+- **(C)** AF34
+- **(D)** EAF3
+
+**Answer:** **(A) 2AF3**
+
+**Explanation:** ABCD in binary is 1010 1011 1100 1101. Logical right shift by 2 bits adds two 0s on the left and shifts bits right → 0010 1010 1111 0011. Converting back to hexadecimal gives 2AF3.
+
+**Q2: Which of the following is a variable-length, letter-and-number error-detection scheme, where on the sender side, the data is appended with the remainder obtained by dividing the data bits by a predetermined polynomial, and on the receiver side, error detection is performed by checking whether the received sequence is divisible by the same polynomial?**
+
+- **(A)** CRC
+- **(B)** Hamming code
+- **(C)** Horizontal parity check
+- **(D)** Vertical parity check
+
+**Answer:** **(A) CRC**
+
+**Explanation:** CRC (Cyclic Redundancy Check) divides data by a generator polynomial. The remainder is appended to the data. The receiver divides again using the same polynomial; if remainder is zero, no error.
+
+**Q3: Which of the following in the RAID configuration achieves the highest-speed disk access at the cost of reliability?**
+
+- **(A)** RAID 0
+- **(B)** RAID 1
+- **(C)** RAID 5
+- **(D)** RAID 6
+
+**Answer:** **(A) RAID 0**
+
+**Explanation:** RAID 0 uses striping, where data is split across multiple disks for parallel access, giving very high read and write speed. However, it provides no redundancy; if one disk fails, all data is lost. Other RAID levels (1, 5, 6) provide redundancy but with lower performance compared to RAID 0.
+
+**Q4: In a CPU, which of the following is a special register that contains the address of the next instruction to be fetched?**
+
+- **(A)** Instruction Register
+- **(B)** Program Counter
+- **(C)** Index Register
+- **(D)** General Purpose Register
+
+**Answer:** **(B) Program Counter**
+
+**Explanation:** The Program Counter (PC) stores the memory address of the next instruction to be fetched and executed. After fetching an instruction, the PC automatically updates to point to the next one. The Instruction Register holds the current instruction being executed, not the next address.
+
+**Q5: Which of the following is an appropriate CPU operation associated with cache memory?**
+
+- **(A)** When a cache hit occurs, the CPU fetches data from ROM.
+- **(B)** When a cache hit occurs, the CPU fetches data from main memory.
+- **(C)** When a cache miss occurs, the CPU fetches data from cache memory.
+- **(D)** When a cache miss occurs, the CPU fetches data from main memory.
+
+**Answer:** **(D) When a cache miss occurs, the CPU fetches data from main memory.**
+
+**Explanation:** If a cache hit occurs, the CPU gets the data directly from cache (fast access). If a cache miss occurs, the required data is not in cache, so the CPU fetches it from main memory and may store it in cache for future use. ROM is not involved in normal cache memory operations.
+
+**Q6: For two 8-bit signed integers A and B in 2’s complement format, which of the following will cause an overflow when A and B are added?**
+
+- **(A)** 01111111 and 11111110
+- **(B)** 01111111 and 01111110
+- **(C)** 10000000 and 01110000
+- **(D)** 11111111 and 11111111
+
+**Answer:** **(B) 01111111 and 01111110**
+
+**Explanation:** In 8-bit 2’s complement, the range is −128 to +127. Overflow occurs when two positive numbers produce a negative result or two negative numbers produce a positive result. 01111111 = +127 and 01111110 = +126. Their sum is 253, which exceeds +127, causing overflow. The other combinations do not exceed the valid signed range.
+
+**Q7: The following postfix expression is evaluated where A = 14, B = 3, C = 5, and D = 6. What is its result? Expression: A B C × + D B − C × −**
+
+- **(A)** -3
+- **(B)** 0
+- **(C)** 14
+- **(D)** 403
+
+**Answer:** **(C) 14**
+
+**Explanation:** Substitute values: 14 3 5 × + 6 3 − 5 × − Step 1: 3 × 5 = 15 Step 2: 14 + 15 = 29 Step 3: 6 − 3 = 3 Step 4: 3 × 5 = 15 Step 5: 29 − 15 = 14 Correction: The correct final result is 14.
+
+**Q8: Which of the following statements about SRAM and DRAM is correct?**
+
+- **(A)** DRAM requires more power than SRAM
+- **(B)** SRAM requires fewer transistors per bit than DRAM
+- **(C)** SRAM does not need refreshing while DRAM does
+- **(D)** SRAM stores data in capacitors while DRAM uses flip-flops
+
+**Answer:** **(C) SRAM does not need refreshing while DRAM does**
+
+**Explanation:** SRAM stores data using flip-flops and does not require periodic refreshing as long as power is supplied. DRAM stores data in capacitors, which leak charge over time and therefore must be refreshed regularly. DRAM uses fewer transistors per bit than SRAM, and SRAM generally consumes more power than DRAM per bit.
+
+**Q9: Which of the following RAID levels allows data recovery if one disk fails?**
+
+- **(A)** RAID 0
+- **(B)** RAID 1
+- **(C)** RAID 6
+- **(D)** RAID 5
+
+**Answer:** **(B) RAID 1**
+
+**Explanation:** RAID 1 uses mirroring, where data is duplicated on two disks. If one disk fails, the system can recover data from the mirror disk. RAID 0 provides no redundancy, while RAID 5 and RAID 6 also provide fault tolerance but the simplest single-disk failure recovery is RAID 1.
+
+**Q10: Which of the following is a computer architecture where multiple instructions execute in parallel by slightly offsetting the execution of different instructions?**
+
+- **(A)** RISC
+- **(B)** Pipeline
+- **(C)** VILW
+- **(D)** Von Neuman Architechture
+
+**Answer:** **(B) Pipeline**
+
+**Explanation:** Pipelining divides instruction execution into stages (fetch, decode, execute, etc.) and overlaps them. While one instruction is being executed, another can be decoded and another fetched. This overlapping allows multiple instructions to be processed in parallel at different stages, improving performance.
+
+**Q11: Which of the following statements about flash memory is correct?**
+
+- **(A)** Its content can be erased electrically in blocks
+- **(B)** It requires periodic rewriting of data
+- **(C)** It can be rewritten at high speed and used as CPU cache
+- **(D)** Its entire content is erased by ultraviolet light
+
+**Answer:** **(A) Its content can be erased electrically in blocks**
+
+**Explanation:** Flash memory is a type of non-volatile memory that can be electrically erased and reprogrammed in blocks. It does not require periodic rewriting like DRAM, is slower than SRAM (so not used as CPU cache), and UV erasure applies to EPROM, not flash memory.
+
+**Q12: Which of the following is the octal equivalent of the hexadecimal number 7B5?**
+
+- **(A)** 735
+- **(B)** 7551
+- **(C)** 3665
+- **(D)** 7561
+
+**Answer:** **(C) 3665**
+
+**Explanation:** First convert hexadecimal 7B5 to binary: 7 = 0111, B = 1011, 5 = 0101 → 011110110101. Now group into 3 bits from right for octal: 011 110 110 101. Convert each group to octal: 011 = 3, 110 = 6, 110 = 6, 101 = 5. So the octal equivalent is 3665.
+
+**Q13: For a non-negative integer X, which of the following operations gives the remainder after division of X by 8?**
+
+- **(A)** Bitwise AND with 7
+- **(B)** Bitwise AND with 8
+- **(C)** Bitwise OR with 8
+- **(D)** Right shift X by 3 bits
+
+**Answer:** **(A) Bitwise AND with 7**
+
+**Explanation:** 8 is 2³, so X mod 8 depends only on the last 3 bits of X. 7 in binary is 111, so performing X & 7 keeps only the last 3 bits. Those 3 bits represent the remainder when X is divided by 8. Right shifting by 3 gives the quotient, not the remainder.
+
+**Q14: When sorting an array using randomized quicksort (pivot chosen randomly), what are the average-case and worst-case time complexities?**
+
+- **(A)** O(n log n), O(n)
+- **(B)** O(n log n), O(n²)
+- **(C)** O(n), O(n log n)
+- **(D)** O(n²), O(n²)
+
+**Answer:** **(B) O(n log n), O(n²)**
+
+**Explanation:** In randomized quicksort, the pivot is chosen randomly, which makes balanced partitions highly likely. In the average case, this leads to O(n log n) time complexity. However, in the worst case (when partitions are highly unbalanced), the time complexity becomes O(n²).
+
+**Q15: What is the primary function of a Repeater in a computer network?**
+
+- **(A)** To filter network traffic and manage bandwidth
+- **(B)** To route data packets between different networks based on IP addresses
+- **(C)** To regenerate and amplify signals to extend the physical length of the network
+- **(D)** To connect networks with different architectures or protocols
+
+**Answer:** **(C) To regenerate and amplify signals to extend the physical length of the network**
+
+**Explanation:** A repeater operates at the Physical layer and regenerates weak or degraded signals before forwarding them. This allows the network to cover longer distances without signal loss. It does not filter traffic (switch), route packets (router), or connect different protocols (gateway).
+
+**Q16: Which of the following correctly describes RAID 5?**
+
+- **(A)** Disk striping without parity
+- **(B)** Block-level striping with a dedicated parity disk
+- **(C)** Block-level striping with distributed parity disks
+- **(D)** Mirroring without parity
+
+**Answer:** **(C) Block-level striping with distributed parity disks**
+
+**Explanation:** RAID 5 uses block-level striping to distribute data across multiple disks. It also distributes parity information across all disks, not on a single dedicated disk. This allows recovery from a single disk failure while maintaining good performance.
+
+**Q17: Which search algorithm expands nodes level by level before moving deeper?**
+
+- **(A)** DFS
+- **(B)** BFS
+- **(C)** Hill climbing
+- **(D)** A*
+
+**Answer:** **(B) BFS**
+
+**Explanation:** Breadth-First Search (BFS) explores all nodes at the current depth before moving to the next level. It uses a queue and guarantees the shortest path in an unweighted graph. DFS goes deep first, Hill climbing is heuristic-based, and A* uses cost + heuristic.
+
+**Q18: The main drawback of hill climbing is—**
+
+- **(A)** Expands all nodes
+- **(B)** Requires heuristic functions
+- **(C)** Can get stuck in local optima
+- **(D)** Uses too much memory
+
+**Answer:** **(C) Can get stuck in local optima**
+
+**Explanation:** Hill climbing is a greedy search algorithm that always moves toward a better neighboring state. However, it can get stuck in local optima, plateaus, or ridges where no better neighboring state exists. It does not expand all nodes and typically uses less memory compared to exhaustive search methods.
+
+**Q19: Which of the following is used to restrict access to certain details of an object in OOP?**
+
+- **(A)** Polymorphism
+- **(B)** Inheritance
+- **(C)** Abstraction
+- **(D)** Encapsulation
+
+**Answer:** **(D) Encapsulation**
+
+**Explanation:** Encapsulation restricts direct access to an object's internal data by using access modifiers like private, protected, and public. It protects data and allows controlled access through methods. Polymorphism allows multiple forms, inheritance enables reuse, and abstraction hides complexity but does not directly enforce access control like encapsulation.
+
+**Q20: Which device operates at Layer 2 of OSI?**
+
+- **(A)** Switch
+- **(B)** Hub
+- **(C)** Router
+- **(D)** Modem
+
+**Answer:** **(A) Switch**
+
+**Explanation:** A Switch operates at the Data Link Layer (Layer 2) and forwards frames based on MAC addresses. A Hub operates at the Physical Layer (Layer 1), a Router operates at the Network Layer (Layer 3), and a Modem works at the Physical Layer.
+
+**Q21: A transaction that leaves the database in an inconsistent state if partially executed violates—**
+
+- **(A)** Atomicity
+- **(B)** Consistency
+- **(C)** Isolation
+- **(D)** Durability
+
+**Answer:** **(B) Consistency**
+
+**Explanation:** Atomicity ensures that a transaction is executed completely or not at all. If a transaction is partially executed and leaves the database inconsistent, atomicity is violated. Consistency ensures valid state after completion, Isolation prevents interference, and Durability ensures permanent storage after commit.
+
+**Q22: Which of the following is not a linear data structure?**
+
+- **(A)** Queue
+- **(B)** Stack
+- **(C)** Tree
+- **(D)** Linked List
+
+**Answer:** **(C) Tree**
+
+**Explanation:** Linear data structures arrange elements sequentially (one after another), such as Stack, Queue, and Linked List. A Tree is a non-linear data structure because elements are arranged hierarchically with parent-child relationships rather than in a single sequence.
+
+**Q23: Which OS concept allows multiple processes to run simultaneously?**
+
+- **(A)** Multithreading
+- **(B)** Multiprocessing
+- **(C)** Multilevel Queue
+- **(D)** Time slicing
+
+**Answer:** **(B) Multiprocessing**
+
+**Explanation:** Multiprocessing uses multiple CPUs or cores to execute multiple processes truly simultaneously. Multithreading runs multiple threads within a single process. Time slicing shares CPU time among processes but does not provide true simultaneous execution on a single CPU.
+
+**Q24: (123.4)₁₀ = (?)₁₆**
+
+- **(A)** (7B.4)₁₆
+- **(B)** (7B.6)₁₆
+- **(C)** (7B.8)₁₆
+- **(D)** (7C.6)₁₆
+
+**Answer:** **(B) (7B.6)₁₆**
+
+**Explanation:** Convert integer part: 123 ÷ 16 = 7 remainder 11 → B, so integer part = 7B. Convert fractional part: 0.4 × 16 = 6.4 → integer part = 6. Thus fractional part ≈ .6. Therefore, (123.4)₁₀ ≈ (7B.6)₁₆.
+
+**Q25: If x = 2 and y = 3, what is the value of 2x² + 3y²?**
+
+- **(A)** 25
+- **(B)** 30
+- **(C)** 35
+- **(D)** 40
+
+**Answer:** **(C) 35**
+
+**Explanation:** x² = 2² = 4 and y² = 3² = 9. 2x² = 2 × 4 = 8. 3y² = 3 × 9 = 27. Total = 8 + 27 = 35.

@@ -1,0 +1,1991 @@
+---
+title_en: "Programming Question — Solved Questions & PYQ"
+title_bn: "প্রোগ্রামিং প্রশ্ন — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "45 questions from the IT Job QnS Programming Question topic — 41 with worked answers and explanations, 4 without a text solution in the source."
+summary_bn: "IT Job QnS-এর Programming Question টপিকের 45টি প্রশ্ন — 41টির সমাধান ও ব্যাখ্যা, 4টির টেক্সট সমাধান সোর্সে নেই।"
+---
+
+<Callout type="info">
+**Topic:** Programming Question — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Programming Concept
+
+**Q1: Write a recursive function that returns a boolean after taking a string as parameter to check if its a palindrome or not.**
+
+**Answer:** \#include\<stdio.h>
+
+**Explanation:** `\#include\<stdio.h>
+using namespace std;
+
+// Recursive function to check if a string is a palindrome
+bool isPalindrome(string str, int start, int end) \{
+// Base case: If the start index is greater than or equal to the end index
+if (start ≥ end) \{
+return true;
+\}
+// Check if the first and last characters are the same
+if (str[start] != str[end]) \{
+return false;
+\}
+// Recursive case: Check the substring excluding the first and last characters
+return isPalindrome(str, start + 1, end - 1);
+\}
+
+int main() \{
+string input;
+cout \<\< "Enter a string: "; cin >> input;
+
+if (isPalindrome(input, 0, input.length() - 1)) \{
+cout \<\< input \<\< " is a palindrome." \<\< endl;
+\} else \{
+cout \<\< input \<\< " is not a palindrome." \<\< endl;
+\}
+
+return 0;
+\}`
+
+**Sample I/O:**
+Enter a string: noon
+noon is a palindrome.
+=== Code Execution Successful ===
+
+🔗 Run Online: Check Palindrome
+
+**Related info:** CB, SO(IT), 22
+
+**Q2: Write pseudocode or code in any programming language where every character of a string increases by 1 alphabetically, such as a -> b and z -> a.**
+
+**Answer:** The problem requires character-wise transformation of a string where each alphabet is shifted by one position in the alphabet.
+
+**Explanation:** This is commonly known as a Caesar cipher with shift 1.
+
+**Logic:**
+
+Each character is checked individually. If it is 'z', it wraps to 'a'. If it is 'Z', it wraps to 'A'. Otherwise, ASCII value is incremented by 1.
+
+**Pseudocode:**
+
+FUNCTION shiftString(S)
+RESULT = "
+FOR EACH character c IN S
+IF c == 'z' THEN
+RESULT = RESULT + 'a'
+ELSE IF c == 'Z' THEN
+RESULT = RESULT + 'A'
+ELSE
+RESULT = RESULT + (c + 1)
+END IF
+END FOR
+RETURN RESULT
+END FUNCTION
+
+**Conclusion:** This algorithm runs in O(n) time complexity where n is the length of the string.
+
+**Related info:** ICB, AP, 26
+
+**Q3: Consider the following Java program and determine the integer value printed by the execution of the main() method. class Test \{ static int x = 5; public static int fun (int n) \{ if (n ≤ 1) \{ return 1; \} x=x+2; return fun(n - 1) + x; \} public static void main (String[] args) \{ System.out.println(fun(3)); \} \}**
+
+**Answer:** → n = 3 (>1), so x = 5 + 2 = 7
+
+**Explanation:** **Determine the Output of the Java Program**
+
+**Answer:**
+
+**Initial Value:**
+
+**x = 5**
+
+**Execution Trace**
+
+**fun(3)**
+
+→ n = 3 (>1), so **x = 5 + 2 = 7**
+
+→ Returns **fun(2) + 7**
+
+**fun(2)**
+
+→ n = 2 (>1), so **x = 7 + 2 = 9**
+
+→ Returns **fun(1) + 9**
+
+**fun(1)**
+
+→ n ≤ 1, so returns **1**
+
+**Now Backtracking:**
+
+**fun(2)** = 1 + 9 = **10**
+
+**fun(3)** = 10 + 9 = **19**
+
+**Output = 19**
+
+**Final Answer:** The integer value printed by the **main()** method is **19**.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+**Q4: Write a java code which returns a value**
+
+**Answer:** public class Calculator \{
+
+**Explanation:** public static int add(int a, int b) \{
+return a + b;
+\}
+public static void main(String[] args) \{
+int result = add(10, 20);
+System.out.println("The sum is: " + result);
+\}
+\}
+
+`add() নামের একটা মেথড তৈরি করা হয়েছে যেটা দুইটা সংখ্যা (a এবং b) ইনপুট হিসেবে নিয়ে `
+
+`main() মেথডে `
+
+- মেথড যোগফল হিসাব করে ৩০ রিটার্ন করেছে, যেটা `result` ভ্যারিয়েবলে সংরক্ষণ করা হয়েছে।
+-
+
+শেষে `System.out.println()` দিয়ে “The sum is: 30” প্রিন্ট করা হয়েছে।
+
+**Related info:** Islami, QA(Engineer), 25
+
+**Q5: Write JAVA Code**
+
+**Answer:** not collected
+
+**Related info:** Islami, QA(Engineer), 25
+
+**Q6: Write a C/C++ program to check Balanced parentheses in an Expression.**
+
+**Answer:** \#include \<bits/stdc++.h>
+
+**Explanation:** `\#include \<bits/stdc++.h>
+using namespace std;
+
+// function to check if brackets are balanced
+bool areBracketsBalanced(string expr)
+\{
+stack s;
+char x;
+
+// Traversing the Expression
+for (int i = 0; i \< expr.length(); i++)
+\{
+if (expr[i] == '(' || expr[i] == '[' || expr[i] == '\{')
+\{
+// Push the element in the stack
+s.push(expr[i]);
+continue;
+\}
+
+// IF current current character is not opening
+// bracket, then it must be closing. So stack
+// cannot be empty at this point.
+if (s.empty())
+return false;
+
+switch (expr[i]) \{
+case ')':
+// Store the top element in a
+x = s.top();
+s.pop();
+if (x == '\{' || x == '[')
+return false;
+break;
+
+case '\}':
+// Store the top element in b
+x = s.top();
+s.pop();
+if (x == '(' || x == '[')
+return false;
+break;
+
+case ']':
+// Store the top element in c
+x = s.top();
+s.pop();
+if (x == '(' || x == '\{')
+return false;
+break;
+\}
+\}
+
+// Check Empty Stack
+return (s.empty());
+\}
+
+// Driver code
+int main()
+\{
+string expr;
+
+// Taking input from the user
+cout \<\< "Enter an expression: "; cin >> expr;
+
+// Function call
+if (areBracketsBalanced(expr))
+cout \<\< "Balanced\n";
+else
+cout \<\< "Not Balanced\n";
+return 0;
+\}`
+
+Source : GeeksforGeeks
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q7: We are given an array of integers and a range, we need to find whether the subarray which falls in this range has values in the form of a mountain or not. All values of the subarray are said to be in the form of a mountain if either all values are increasing or decreasing or first increasing and then decreasing. Write a C/C++ Program that shows input is a Mountain sequence or Not Mountain sequence.**
+
+**Answer:** \#include \<bits/stdc++.h>
+
+**Explanation:** `\#include \<bits/stdc++.h>
+using namespace std;
+
+\#define ll long long
+
+bool isMountain(vector\<ll> a) \{
+ll n = a.size();
+
+if (n \< 3)
+return false;
+
+ll i = 1;
+
+// Increasing part
+while (i \< n && a[i] > a[i - 1]) \{
+i++;
+\}
+
+// Peak cannot be first or last
+if (i == 1 || i == n)
+return false;
+
+// Decreasing part
+while (i \< n && a[i] \< a[i - 1]) \{
+i++;
+\}
+
+return i == n;
+\}
+
+int main() \{
+ll n;
+cin >> n;
+
+vector\<ll> a(n);
+for (ll i = 0; i \< n; i++) \{
+cin >> a[i];
+\}
+
+if (isMountain(a)) \{
+cout \<\< "Mountain" \<\< endl;
+\} else \{
+cout \<\< "Not Mountain" \<\< endl;
+\}
+
+return 0;
+\}`
+
+Source: Geeksforgeeks
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q8: Given n jobs starting time n[] and duration d[], print maximum number of jobs that don't overlap between each other.**
+
+**Answer:** \#include \<bits/stdc++.h>
+
+**Explanation:** `\#include \<bits/stdc++.h>
+using namespace std;
+
+\#define N 6
+
+// Define structure for Activity
+struct Activity \{
+int start, finish;
+\};
+
+// Function to compare two activities
+bool Sort_activity(Activity s1, Activity s2) \{
+return (s1.finish \< s2.finish); // Sort by finish time
+\}
+
+// Function to print the maximum number of activities
+void print_Max_Activities(Activity arr[], int n) \{
+// Sort activities based on finish time
+sort(arr, arr + n, Sort_activity);
+
+cout \<\< "Following activities are selected: \n";
+
+int i = 0;
+cout \<\< "(" \<\< arr[i].start \<\< ", " \<\< arr[i].finish \<\< ")\n";
+
+// Select the next activity that starts after the last selected activity finishes
+for (int j = 1; j \< n; j++) \{
+if (arr[j].start ≥ arr[i].finish) \{
+cout \<\< "(" \<\< arr[j].start \<\< ", " \<\< arr[j].finish \<\< ")\n";
+i = j;
+\}
+\}
+\}
+
+int main() \{
+Activity arr[N];
+
+// Taking input from the user
+for (int i = 0; i \< N; i++) \{
+cout \<\< "Enter the start and finish time for job " \<\< i + 1 \<\< " : ";
+cin >> arr[i].start >> arr[i].finish;
+\}
+
+// Function call to print the selected activities
+print_Max_Activities(arr, N);
+
+return 0;
+\}`
+
+Code Link
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q9: Write a C/C++ Program that has a Class Account, Subclass Savings Account, Current Account etc with related hierarchy way.**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** `\#include \<iostream>
+\#include \<string>
+using namespace std;
+
+// Bank Management System using Class & Inheritance in C++
+/*
+1. Saving Account
+2. Current Account
+3. Account Creation
+4. Deposit
+5. Withdraw
+6. Balance
+*/
+
+class account \{
+private:
+string name;
+int accno;
+string atype;
+
+public:
+void getAccountDetails() \{
+cout \<\< "\nEnter Customer Name : ";
+cin >> name;
+cout \<\< "Enter Account Number : ";
+cin >> accno;
+cout \<\< "Enter Account Type : ";
+cin >> atype;
+\}
+
+void displayDetails() \{
+cout \<\< "\n\nCustomer Name : " \<\< name;
+cout \<\< "\nAccount Number : " \<\< accno;
+cout \<\< "\nAccount Type : " \<\< atype;
+\}
+\};
+
+class current_account : public account \{
+private:
+float balance = 0;
+
+public:
+void c_display() \{
+cout \<\< "\nBalance : " \<\< balance;
+\}
+
+void c_deposit() \{
+float deposit;
+cout \<\< "\nEnter amount to Deposit : ";
+cin >> deposit;
+balance = balance + deposit;
+\}
+
+void c_withdraw() \{
+float withdraw;
+cout \<\< "\n\nBalance : " \<\< balance;
+cout \<\< "\nEnter amount to be withdraw : ";
+cin >> withdraw;
+
+if (balance ≥ withdraw && balance > 1000) \{
+balance = balance - withdraw;
+cout \<\< "\nBalance Amount After Withdraw: " \<\< balance;
+\} else \{
+cout \<\< "\nInsufficient Balance";
+\}
+\}
+\};
+
+class saving_account : public account \{
+private:
+float sav_balance = 0;
+
+public:
+void s_display() \{
+cout \<\< "\nBalance : " \<\< sav_balance;
+\}
+
+void s_deposit() \{
+float deposit, interest;
+cout \<\< "\nEnter amount to Deposit : ";
+cin >> deposit;
+sav_balance = sav_balance + deposit;
+interest = (sav_balance * 2) / 100;
+sav_balance = sav_balance + interest;
+\}
+
+void s_withdraw() \{
+float withdraw;
+cout \<\< "\nBalance : " \<\< sav_balance;
+cout \<\< "\nEnter amount to be withdraw : ";
+cin >> withdraw;
+
+if (sav_balance ≥ withdraw && sav_balance > 500) \{
+sav_balance = sav_balance - withdraw;
+cout \<\< "\nBalance Amount After Withdraw: " \<\< sav_balance;
+\} else \{
+cout \<\< "\nInsufficient Balance";
+\}
+\}
+\};
+
+int main() \{
+current_account c1;
+saving_account s1;
+char type;
+int choice;
+
+cout \<\< "\nEnter S for saving customer and C for current a/c customer : ";
+cin >> type;
+
+if (type == 's' || type == 'S') \{
+s1.getAccountDetails();
+
+while (1) \{
+cout \<\< "\nChoose Your Choice" \<\< endl;
+cout \<\< "1) Deposit" \<\< endl;
+cout \<\< "2) Withdraw" \<\< endl;
+cout \<\< "3) Display Balance" \<\< endl;
+cout \<\< "4) Display with full Details" \<\< endl;
+cout \<\< "5) Exit" \<\< endl;
+cout \<\< "Enter Your choice: ";
+cin >> choice;
+
+switch (choice) \{
+case 1:
+s1.s_deposit();
+break;
+case 2:
+s1.s_withdraw();
+break;
+case 3:
+s1.s_display();
+break;
+case 4:
+s1.displayDetails();
+s1.s_display();
+break;
+case 5:
+goto end;
+default:
+cout \<\< "\n\nEntered choice is invalid, TRY AGAIN";
+\}
+\}
+\}
+else if (type == 'c' || type == 'C') \{
+c1.getAccountDetails();
+
+while (1) \{
+cout \<\< "\nChoose Your Choice" \<\< endl;
+cout \<\< "1) Deposit" \<\< endl;
+cout \<\< "2) Withdraw" \<\< endl;
+cout \<\< "3) Display Balance" \<\< endl;
+cout \<\< "4) Display with full Details" \<\< endl;
+cout \<\< "5) Exit" \<\< endl;
+cout \<\< "Enter Your choice: ";
+cin >> choice;
+
+switch (choice) \{
+case 1:
+c1.c_deposit();
+break;
+case 2:
+c1.c_withdraw();
+break;
+case 3:
+c1.c_display();
+break;
+case 4:
+c1.displayDetails();
+c1.c_display();
+break;
+case 5:
+goto end;
+default:
+cout \<\< "\n\nEntered choice is invalid, TRY AGAIN";
+\}
+\}
+\}
+else \{
+cout \<\< "\nInvalid Account Selection";
+\}
+
+end:
+cout \<\< "\nThank You for Banking with us..";
+return 0;
+\}`
+
+Code Link
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q10: An employee's total weekly pay is calculated by multiplying the hourly wage and number of regular hours plus any overtime pay which in turn is calculated as total overtime hours multiplied by 1.5 times the hourly wage. Write a program that takes as inputs the hourly wage. Total regular hours,and total overtime hours and prints an employee's total weekly pay.**
+
+**Answer:** int main()
+
+**Explanation:** `
+\#include \<iostream>
+using namespace std;
+
+int main()
+\{
+float hourlyWage, regularHours, overtimeHours;
+float overtimePay, totalPay;
+
+cout \<\< "Enter Hourly Wage: ";
+cin >> hourlyWage;
+
+cout \<\< "Enter Regular Hours: ";
+cin >> regularHours;
+
+cout \<\< "Enter Overtime Hours: ";
+cin >> overtimeHours;
+
+overtimePay = overtimeHours * 1.5 * hourlyWage;
+totalPay = (regularHours * hourlyWage) + overtimePay;
+
+cout \<\< "Total Weekly Pay = " \<\< totalPay;
+
+return 0;
+\}
+`
+
+**Example**
+
+Hourly Wage = 200
+
+Regular Hours = 40
+
+Overtime Hours = 10
+
+Total Weekly Pay = (40 × 200) + (10 × 1.5 × 200) = 8000 + 3000 = 11000
+
+**Related info:** CB, O(IT), 20
+
+**Q11: Answer the following question from the below code: int fibo (int x, int y)\{ int A = 0; if (x>0&& y\<20 \{ A = 1 ; \} if ( x = = 10) \{ return A; \} return 0; \} (i) Draw the flowchart based on above code(ii) How many conditions are in this code? (iii) Finding the possible path.**
+
+**Answer:** (i) Answer:
+
+**Explanation:** (ii) Answer: There are two conditions in the code:
+(a) The first condition is x> 0 && y \<20
+
+(b) The second condition is x=10
+
+(iii) Answer:
+(iii) Finding the possible path.
+There are two possible paths through the code:
+(a) If x>0&&y\<20 is true and x is not equal to 10, the function returns 0.
+
+(b) If x> 0 && y 0 && y \< 20 is
+false, the function also returns 0.
+
+**Related info:** Pubali, SQA, 23
+
+**Q12: Write a structured program (in C or Python) that takes an integer input n and prints the sum of all even numbers from 1 to n.**
+
+**Answer:** \#include \<stdio.h>
+
+**Explanation:** /* Function to calculate sum of even numbers from 1 to n */
+int sumOfEven(int n) \{
+int sum = 0;
+for (int i = 2; i ≤ n; i += 2) \{
+sum += i;
+\}
+return sum;
+\}
+int main() \{
+int n, result;
+printf("Enter an integer: ");
+scanf("%d", &n);
+result = sumOfEven(n);
+printf("Sum of even numbers from 1 to %d = %d\n", n, result);
+return 0;
+\}
+
+**Sample I/O:**
+Enter an integer: 50
+Sum of even numbers from 1 to 50 = 650
+=== Code Execution Successful ===
+
+🔗 Run Online: Sum of even number.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+**Q13: Write a program using any object-oriented language (e.g., C++ / Java / Python) to represent a Bank Account. Your program should include: . A class BankAccount with data members for account holder's name, account number, and balance. . Member functions to deposit() money, withdraw() money (ensuring sufficient balance), and display() account details. Demonstrate the concept of encapsulation by keeping data member's private and providing appropriate public methods for accessing and modifying them.**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+
+class BankAccount \{
+private:
+string name;
+int accountNumber;
+double balance;
+
+public:
+void setDetails(string n, int accNo, double bal) \{
+name = n;
+accountNumber = accNo;
+balance = bal;
+\}
+
+void deposit(double amount) \{
+balance += amount;
+cout \<\< "Deposited: " \<\< amount \<\< endl;
+\}
+
+void withdraw(double amount) \{
+if (amount ≤ balance) \{
+balance -= amount;
+cout \<\< "Withdrawn: " \<\< amount \<\< endl;
+\} else \{
+cout \<\< "Insufficient balance" \<\< endl;
+\}
+\}
+void display() \{
+cout \<\< "\nAccount Details\n";
+cout \<\< "Account Holder: " \<\< name \<\< endl;
+cout \<\< "Account Number: " \<\< accountNumber \<\< endl;
+cout \<\< "Balance: " \<\< balance \<\< endl;
+\}
+\};
+int main() \{
+BankAccount acc;
+string name;
+int accNo;
+double bal, dep, wit;
+cout \<\< "Enter account holder name: ";
+getline(cin, name);
+
+cout \<\< "Enter account number: ";
+cin >> accNo;
+cout \<\< "Enter initial balance: ";
+cin >> bal;
+acc.setDetails(name, accNo, bal);
+cout \<\< "Enter amount to deposit: ";
+cin >> dep;
+acc.deposit(dep);
+cout \<\< "Enter amount to withdraw: ";
+cin >> wit;
+acc.withdraw(wit);
+acc.display();
+return 0;
+\}
+
+**Sample I/O:**
+Enter account holder name: itjobqns
+Enter account number: 02252016
+Enter initial balance: 5000
+Enter amount to deposit: 300
+Deposited: 300
+Enter amount to withdraw: 100
+Withdrawn: 100
+Account Details
+Account Holder: itjobqns
+Account Number: 2252016
+Balance: 5200
+=== Code Execution Successful ===
+
+🔗 Run Online: Bank Balance & Deposit.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+**Q14: What is the difference between exception and Error in java?**
+
+**Answer:** Meaning: Exception represents conditions that a program can handle; Error represents serious problems that a program cannot handle.
+
+**Explanation:** **Difference between Exception and Error in Java**
+
+- **Meaning:** Exception represents conditions that a program can handle; Error represents serious problems that a program cannot handle.
+- **Recovery:** Exceptions can be caught and handled using try-catch; Errors are generally not recoverable.
+- **Cause:** Exceptions occur due to logical issues or user input; Errors occur due to system-level failures.
+- **Examples:** Exception – NullPointerException, ArithmeticException; Error – OutOfMemoryError, StackOverflowError.
+- **Package:** Both belong to java.lang package, but Error is not meant to be handled.
+
+**Related info:** SPCBL, SAP, 22
+
+**Q15: What is exception handling? Write with an example.**
+
+**Answer:** Exception handling is a mechanism used in programming to handle runtime errors so that the normal flow of the program is not interrupted.
+
+**Explanation:** **Exception Handling**
+
+**Exception handling** is a mechanism used in programming to handle runtime errors so that the normal flow of the program is not interrupted. It helps detect errors and provides a way to recover from them.
+
+**Example (Java):**
+
+`try \{
+int a = 10;
+int b = 0;
+int c = a / b;
+System.out.println(c);
+\} catch (ArithmeticException e) \{
+System.out.println("Division by zero is not allowed");
+\}`
+
+Here, the exception is caught and handled instead of crashing the program.
+
+**Related info:** SPCBL, SAP, 22
+
+**Q16: Difference between High level language low level languages with some example?**
+
+**Answer:** High-Level Languages:
+
+**Explanation:** **Examples:**
+
+- **High-Level Languages**: C, C++, Java, Python, etc.
+- **Low-Level Languages**: Assembly Language, Machine Code.
+
+**Related info:** SPCBL, SAP, 22
+
+**Q17: Given a IPV4 address string, write C/C++/JAVA code to show the class the IP address belongs to.Sample Input: 192.168.0.0Sample Output: Class C**
+
+**Answer:** // Function to determine the class of an IPv4 address
+
+**Explanation:** `
+\#include \<iostream>
+\#include \<string>
+\#include \<sstream>
+using namespace std;
+
+// Function to determine the class of an IPv4 address
+string getIPAddressClass(const string& ipAddress) \{
+stringstream ss(ipAddress);
+string token;
+
+// Get the first octet
+getline(ss, token, '.');
+
+// Convert first octet to integer
+int firstOctet = stoi(token);
+
+// Determine class
+if (firstOctet ≥ 1 && firstOctet ≤ 127) \{
+return "Class A";
+\}
+else if (firstOctet ≥ 128 && firstOctet ≤ 191) \{
+return "Class B";
+\}
+else if (firstOctet ≥ 192 && firstOctet ≤ 223) \{
+return "Class C";
+\}
+else if (firstOctet ≥ 224 && firstOctet ≤ 239) \{
+return "Class D";
+\}
+else if (firstOctet ≥ 240 && firstOctet ≤ 255) \{
+return "Class E";
+\}
+else \{
+return "Invalid IP address";
+\}
+\}
+
+int main() \{
+string ipAddress;
+cin >> ipAddress;
+
+string ipAddressClass = getIPAddressClass(ipAddress);
+
+cout \<\< "IP Address: " \<\< ipAddress
+\<\< " belongs to " \<\< ipAddressClass \<\< endl;
+
+return 0;
+\}
+`
+
+**Related info:** Rupali, ANE, 21
+
+**Q18: Write a program in any language that takes two matrices A and B as inputs ensure your code handles matrices of different dimensions- A) Find matrices C that is multiplication A and B. B) Find average in A and B. C) Max from matrices C 10**
+
+**Answer:** // Input matrices A and B
+
+**Explanation:** `
+\#include \<iostream>
+using namespace std;
+void matrix_multiply(int A[10][10], int B[10][10], int C[10][10], int m, int n, int p, int q) \{
+if (n != p) \{
+cout \<\< "Matrices A and B cannot be multiplied due to incompatible dimensions.\n";
+return;
+\}
+for (int i = 0; i \< m; i++) \{
+for (int j = 0; j \< q; j++) \{
+C[i][j] = 0;
+for (int k = 0; k \< n; k++) \{
+C[i][j] += A[i][k] * B[k][j];
+\}
+\}
+\}
+\}
+float calculate_average(int matrix[10][10], int m, int n) \{
+int sum = 0;
+for (int i = 0; i \< m; i++) \{
+for (int j = 0; j \< n; j++) \{
+sum += matrix[i][j];
+\}
+\}
+return static_cast(sum) / (m * n);
+\}
+int find_max(int matrix[10][10], int m, int n) \{
+int max = matrix[0][0];
+for (int i = 0; i \< m; i++) \{
+for (int j = 0; j \< n; j++) \{ if (matrix[i][j] > max) \{
+max = matrix[i][j];
+\}
+\}
+\}
+return max;
+\}
+int main() \{
+int A[10][10], B[10][10], C[10][10];
+int m, n, p, q;
+cout \<\< "Enter the number of rows and columns for matrix A (m x n): "; cin >> m >> n;
+cout \<\< "Enter the number of rows and columns for matrix B (p x q): "; cin >> p >> q;
+if (n != p) \{
+cout \<\< "Matrices A and B cannot be multiplied due to incompatible dimensions.\n";
+return 0;
+\}
+
+// Input matrices A and B
+cout \<\< "Enter elements of matrix A:\n";
+for (int i = 0; i \< m; i++) \{
+for (int j = 0; j \< n; j++) \{ cin >> A[i][j];
+\}
+\}
+cout \<\< "Enter elements of matrix B:\n";
+for (int i = 0; i \< p; i++) \{
+for (int j = 0; j \< q; j++) \{ cin >> B[i][j];
+\}
+\}
+// A) Multiply matrices A and B
+matrix_multiply(A, B, C, m, n, p, q);
+cout \<\< "Matrix C (A x B):\n";
+for (int i = 0; i \< m; i++) \{
+for (int j = 0; j \< q; j++) \{
+cout \<\< C[i][j] \<\< " ";
+\}
+cout \<\< endl;
+\}
+
+// B) Calculate the average of matrices A and B
+float average_A = calculate_average(A, m, n);
+float average_B = calculate_average(B, p, q);
+cout \<\< "Average of Matrix A: " \<\< average_A \<\< endl;
+cout \<\< "Average of Matrix B: " \<\< average_B \<\< endl;
+// C) Find the maximum value in matrix C
+int max_C = find_max(C, m, q);
+cout \<\< "Maximum value in Matrix C: " \<\< max_C \<\< endl;
+return 0;
+\}`
+
+**Sample I/O:**
+Enter the number of rows and columns for matrix A (m x n): 3 3
+Enter the number of rows and columns for matrix B (p x q): 3 3
+Enter elements of matrix A:
+1 5 7 6 3 2 69 7 12
+Enter elements of matrix B:
+45 63 2 9 8 7 12 10 3
+Matrix C (A x B):
+174 173 58
+321 422 39
+3312 4523 223
+Average of Matrix A: 12.4444
+Average of Matrix B: 17.6667
+Maximum value in Matrix C: 4523
+=== Code Execution Successful ===
+
+🔗 Run Online: Matrix Calculation
+
+**Related info:** CB, SO(IT), 23
+
+**Q19: Write a Program to find summation for a number until it's become single digit.**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** `\#include \<iostream>
+using namespace std;
+
+int singleDigit(int n) \{
+int sum = n;
+
+// Repeatedly calculate sum of digits until it becomes a single digit
+while (sum ≥ 10) \{
+int tempSum = 0;
+
+// Calculate sum of digits of the number
+while (sum > 0) \{
+tempSum += sum % 10;
+sum /= 10;
+\}
+
+sum = tempSum; // Update sum to the sum of digits
+\}
+
+return sum;
+\}
+
+int main() \{
+int n;
+
+// Taking user input
+cout \<\< "Enter a number: ";
+cin >> n;
+
+// Calling the function and printing the result
+cout \<\< "The single digit sum is: " \<\< singleDigit(n) \<\< endl;
+
+return 0;
+\}`
+
+Input: n = 1234
+
+Output: 1
+
+Explanation:
+
+Step 1: 1 + 2 + 3 + 4 = 10
+
+Step 2: 1 + 0 = 1
+
+Input: n = 5674
+
+Output: 4
+
+Explanation:
+
+Step 1: 5 + 6 + 7 + 4 = 22
+
+Step 2: 2 + 2 = 4
+
+**Related info:** Sonali, O(it), 21
+
+**Q20: Find the output of the following program. i=5; While (i≥0) printf("%d", i); i=i-1; \}**
+
+**Answer:** 543210
+
+**Related info:** Sonali, O(it), 21
+
+**Q21: Find the output of the following program. int main() \{ printf ("%d\t", sizeof (6.5)); printf ("%d\t", sizeof(90000)); printf ("%d\t", sizeof ("A")); return 0; \}**
+
+**Answer:** 8 4 2
+
+**Explanation:** **Output:**
+
+`8 4 2`
+
+- **sizeof(6.5)**: 6.5 is a double in C, and the size of a double is typically 8 bytes. Thus, it will print 8.
+- **sizeof(90000)**: 90000 is an integer, and the size of an integer in C is typically 4 bytes. Thus, it will print 4.
+- **sizeof("A")**: "A" is a string literal, and a string in C is stored as an array of characters, including the null terminator. Since "A" consists of 2 characters (A and '\0'), it will print 2.
+
+**Related info:** Sonali, O(it), 21
+
+**Q22: Write a function to find the smallest element from an array**
+
+**Answer:** Algorithm to Find the Smallest Element in an Array
+
+**Explanation:** **START**
+
+**Step 1** → Initialize an array `A` with given values.
+
+**Step 2** → Create a variable `min_value` and set it to a large number (e.g., infinity) or the first element of the array.
+
+**Step 3** → Loop through each element `A[i]` in the array starting from the first element.
+
+**Step 4** → For each element, check if `A[i]` is smaller than `min_value`.
+
+**Step 5** → If `A[i] \< min_value`, update `min_value` to `A[i]`.
+
+**Step 6** → Repeat Steps 4 and 5 until all elements have been checked.
+
+**Step 7** → Display `min_value` as the smallest element of the array.
+
+**STOP**
+
+`\#include \<stdio.h>
+
+int findSmallest(int arr[], int size) \{
+
+// 1. Assume the first number is the smallest
+int smallest = arr[0];
+
+// 2. Look at the rest of the numbers one by one
+for (int i = 1; i \< size; ++i) \{
+
+// 3. If we find a number that is smaller, save it
+if (arr[i] \< smallest) \{
+smallest = arr[i];
+\}
+\}
+
+// 4. Send back the smallest number we found
+return smallest;
+\}`
+
+**Related info:** CB, AP, 23
+
+**Q23: Write a Program to print Prime numbers from 1 to n.**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+int main() \{
+int i, num, n, count;
+cout \<\< "Enter the range: ";
+cin >> n;
+cout \<\< "The prime numbers in between the range 1 to " \<\< n \<\< " are: ";
+
+for (num = 1; num ≤ n; num++) \{
+count = 0;
+for (i = 2; i ≤ num / 2; i++) \{
+if (num % i == 0) \{
+count++;
+break;
+\}
+\}
+if (count == 0 && num != 1)
+cout \<\< num \<\< " ";
+\}
+
+return 0;
+\}
+
+**Sample I/O:**
+Enter the range: 50
+The prime numbers in between the range 1 to 50 are: 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47
+
+=== Code Execution Successful ===
+
+🔗 Run Online: Prime number between range
+
+**Related info:** Combined Bank, AP, 24
+
+**Q24: Write a Program to print Floyd's Triangle for n = 5. Expected Output: 1 01 101 0101 10101**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+int main() \{
+int i, j, n, p, q;
+cout \<\< "Input number of rows: ";
+cin >> n;
+for (i = 1; i ≤ n; i++) \{
+if (i % 2 == 0) \{
+p = 1;
+q = 0;
+\} else \{
+p = 0;
+q = 1;
+\}
+for (j = 1; j ≤ i; j++) \{
+if (j % 2 == 0)
+cout \<\< p;
+else
+cout \<\< q;
+\}
+cout \<\< endl;
+\}
+return 0;
+\}
+
+**Sample I/O:**
+Input number of rows: 6
+1
+01
+101
+0101
+10101
+010101
+=== Code Execution Successful ===
+
+🔗 Run Online: Floyd's Triangle
+
+**Related info:** Combined Bank, AP, 24
+
+**Q25: Write a C++ program to find the sum of the series: 1 + 2 + 4 + 7 + 11 + ... + N.**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+int main() \{
+int n, i, sum = 0, term = 1, nextTerm;
+cout \<\< "Enter the value of n: ";
+cin >> n;
+cout \<\< "The series is: ";
+for (i = 1; i ≤ n; i++) \{
+cout \<\< term \<\< " ";
+sum += term;
+nextTerm = term + i;
+term = nextTerm;
+\}
+
+cout \<\< "\nThe sum of the series is: " \<\< sum \<\< endl;
+return 0;
+\}
+
+**Sample I/O:**
+Enter the value of n: 10
+The series is: 1 2 4 7 11 16 22 29 37 46
+The sum of the series is: 175
+
+=== Code Execution Successful ===
+
+🔗 Run Code: Sum of series: 1+2+4+7+11+...+N
+
+**Related info:** Combined Bank, AP, 24
+
+**Q26: Find the output of the following recursion: #include void fun(int x)\{ if(x\<0)\{ return; \} printf("%d\n", x--); fun(--x); printf("%d\n", x); \} int main() \{ fun(5); return 0; \}**
+
+**Answer:** -
+
+**Explanation:** **Step-by-Step Execution**
+
+-
+
+**Initial call:** `fun(5)`
+
+- `x = 5`
+- Print `5`
+- `x--` (post-decrement) → Pass `x = 4` to `fun(--x)`
+
+-
+
+**Recursive call:** `fun(3)`
+
+- `x = 3`
+- Print `3`
+- `x--` (post-decrement) → Pass `x = 2` to `fun(--x)`
+
+-
+
+**Recursive call:** `fun(1)`
+
+- `x = 1`
+- Print `1`
+- `x--` (post-decrement) → Pass `x = 0` to `fun(--x)`
+
+-
+
+**Recursive call:** `fun(-1)`
+
+- `x = -1`
+- The `if(x\<0) return;` triggers, stopping recursion.
+- Nothing is printed here.
+
+-
+
+**Returning from `fun(1)`:**
+
+- `x = -1` at this point (because `x` was decremented before recursion)
+- Print `-1`
+
+-
+
+**Returning from `fun(3)`:**
+
+- `x = 1`
+- Print `1`
+
+-
+
+**Returning from `fun(5)`:**
+
+- `x = 3`
+- Print `3`
+
+**Related info:** Combined Bank, AP, 24
+
+**Q27: What will be the output of the following program?#include int main() \{ int i = -1, j = -1, k = 0, l = 2, m; m = i++ && j++ && k++ || l++; printf("%d %d %d %d %d", i, j, k, l, m); return 0; \}**
+
+**Answer:** Initially, i = -1.
+
+**Explanation:** **Step 1: Evaluate i++**
+
+Initially, i = -1. Since -1 is a **non-zero value** in C, it is considered **true**.
+
+Therefore, i++ evaluates to true, and then i becomes 0.
+
+**Step 2: Evaluate j++**
+
+Since the left side of && is true, j++ is evaluated. Initially, j = -1, which is also true. After post-increment, j becomes 0.
+
+**Step 3: Evaluate k++**
+
+Since both previous operands are true, k++ is evaluated. Initially, k = 0, which is **false**. After post-increment, k becomes 1.
+
+Therefore:
+
+i++ && j++ && k++ → **false**
+
+**Step 4: Evaluate l++**
+
+Because the left side of || is false, the right side l++ must be evaluated. Initially, l = 2, so l++ returns 2 (true), then l becomes 3.
+
+Thus:
+
+false || true → **true**
+
+Therefore, m = 1.
+
+**Final Values:**
+
+- i = 0
+- j = 0
+- k = 1
+- l = 3
+- m = 1
+
+**Output:**
+
+0 0 1 3 1
+
+**Key Concept:** C uses **short-circuit evaluation** for && and ||. Also, a post-increment operator (++) uses the original value first and increments the variable afterward.
+
+**Related info:** Dwasa,AME,25
+
+**Q28: Write the different approaches of debugging a code.**
+
+**Answer:** Debugging is the process of finding, analyzing, and correcting errors or bugs in a computer program.
+
+**Explanation:** **Different Approaches of Debugging a Code**
+
+**Debugging** is the process of finding, analyzing, and correcting errors or bugs in a computer program. The common approaches to debugging are:
+
+**1. Brute Force Approach:**
+
+In this approach, the programmer uses print statements, logs, memory dumps, or other diagnostic information to find where the error occurs.
+
+**2. Backtracking:**
+
+The programmer starts from the point where the error is observed and traces the program backward through previous statements to identify the source of the error.
+
+**3. Cause Elimination:**
+
+Possible causes of an error are identified and systematically eliminated one by one until the actual cause is found.
+
+**4. Program Slicing:**
+
+Only the statements or parts of the program that can affect a particular variable or incorrect output are examined. This reduces the amount of code that needs to be analyzed.
+
+**5. Using a Debugger:**
+
+A debugging tool is used to execute the program step-by-step, set breakpoints, inspect variables, and monitor program execution to locate the bug.
+
+**Conclusion:**
+
+The main debugging approaches are **Brute Force, Backtracking, Cause Elimination, Program Slicing,** and **Debugger-based debugging**. These techniques help programmers identify and correct errors efficiently.
+
+**Related info:** CB, SO(IT), 20
+
+**Q29: Write a program that check a number is Armstrong or not.**
+
+**Answer:** An Armstrong number is a number whose sum of each digit raised to the power of the total number of digits is equal to the original number.
+
+**Explanation:** **C Program to Check Armstrong Number**
+
+An **Armstrong number** is a number whose sum of each digit raised to the power of the total number of digits is equal to the original number. For example, **153 = 1³ + 5³ + 3³ = 153**.
+
+`
+\#include \<stdio.h>
+
+int main() \{
+int num, original, remainder, digits = 0;
+int sum = 0, power, i;
+
+printf("Enter a number: ");
+scanf("%d", &num);
+
+original = num;
+
+/* Count the number of digits */
+int temp = num;
+while (temp != 0) \{
+digits++;
+temp /= 10;
+\}
+
+/* Calculate the sum of powers of digits */
+temp = num;
+
+while (temp != 0) \{
+remainder = temp % 10;
+power = 1;
+
+for (i = 0; i \< digits; i++) \{
+power *= remainder;
+\}
+
+sum += power;
+temp /= 10;
+\}
+
+if (sum == original)
+printf("%d is an Armstrong number.\n", original);
+else
+printf("%d is not an Armstrong number.\n", original);
+
+return 0;
+\}
+`
+
+**Example:**
+
+For input **153**:
+
+153 = 1³ + 5³ + 3³ = 1 + 125 + 27 = **153**.
+
+Therefore, **153 is an Armstrong number**.
+
+**Related info:** CB, SO(IT), 20
+
+**Q30: Given two integers A and B as input write a program to compute the least common multiple of A and B.**
+
+**Answer:** \#include \<stdio.h>
+
+**Explanation:** int main () \{
+int n1, n2, max;
+printf ("Enter two positive integers: ");
+scanf ("%d %d", &n1, &n2);
+// maximum number between n1 and n2 is stored in max
+
+max = (n1\> n2) ? n1: n2;
+while (1) \{
+// Check if max is divisible by both n1 and n2
+if ((max% n1 == 0)&& (max % n2 ==0)) \{
+// If true, max is the LCM of n1 and n2
+printf("The LCM of %d and %d is %d.", n1,n2,max);
+break;
+\}
+++max;
+\}
+return 0;
+\}
+
+**Sample I/O:**
+Enter two positive integers: 14 8
+The LCM of 14 and 8 is 56.
+=== Code Execution Successful ===
+
+🔗 Run Online: LCM of two integer
+
+**Related info:** BB, AP, 23
+
+**Q31: Consider the following code:Public class Class A \{Public void m1 () \{\}Public void m2 (int i) \{\}Public void m3 (int i) \{\}Public static void m4 (int i) \{\} Public class class B extends class A \{Public static void ml (int i) \{\} Public void m2 (int i) \{\} Public void m3 (string s) \{\} Public static void m4 (int i) \{\}Mention which of the methods overload, override and hied supper class methods. What about the remaining method?**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** BB, AP, 23
+
+**Q32: String reverse program but without using new storage.**
+
+**Answer:** \#include \<bits/stdc++.h>
+
+**Explanation:** `\#include \<bits/stdc++.h>
+using namespace std;
+
+int main() \{
+string s;
+cout \<\< "Enter String: ";
+cin >> s;
+int n = s.length();
+int start = 0, end = n - 1;
+
+while (start \< end) \{
+// XOR-based swapping without using extra storage
+s[start] ^= s[end];
+s[end] ^= s[start];
+s[start] ^= s[end];
+start++;
+end--;
+\}
+
+cout \<\< "Reverse String = " \<\< s \<\< endl;
+return 0;
+\}`
+
+**Sample I/O:**
+Enter String: itjobqns
+Reverse String = snqbojti
+=== Code Execution Successful ===
+
+🔗 Run Online: Reverse String
+
+**Related info:** SB & JB, ADA, 22
+
+**Q33: What will be the output in C and Java code?(i) C program:#include int main()\{ int a[] = \{5,3,4,2,1\}; int i; for(i=0; i\<10; i++) printf("%d\n", a[i]); \} (ii) Java program:public class MyFirst \{ public static void main(String[] args) \{ MyFirst obj = new MyFirst(n); \} static int a = 10; static int n; int b = 5; int c; public MyFirst(int m) \{ System.out.println(a + ", " + b + ", " + c + ", " + n + ", " + m); \} \{ b = 30; n = 20; \} static \{ a = 60; \} \}**
+
+**Answer:** **Not available in source**
+
+**Related info:** CB, AP, 20
+
+**Q34: Write a code in C/C++ that will output the 2nd largest number. (If N≥1)**
+
+**Answer:** **Not available in source**
+
+**Related info:** CB, AP, 20
+
+## Basic
+
+**Q35: Write a program for the following series: e^x = 1 + x/1! + x²/2! + x³/3! + ...**
+
+**Answer:** \#include \<stdio.h> int main() \{ int n, i; float x, sum = 1, term = 1; printf("Enter value of x: "); scanf("%f", &x); printf("Enter number of terms: ");…
+
+**Explanation:** `\#include \<stdio.h>
+int main() \{
+int n, i;
+float x, sum = 1, term = 1;
+printf("Enter value of x: ");
+scanf("%f", &x);
+printf("Enter number of terms: ");
+scanf("%d", &n);
+// Calculate series
+for (i = 1; i ≤ n; i++) \{
+term = term * x / i; // x^i / i!
+sum = sum + term;
+\}
+printf("Value of e^x = %.4f\n", sum);
+return 0;
+\}
+`
+
+**Related info:** Sonali Bank, ADA, 24
+
+**Q36: Write a program for following sequence and analyze complexity of the program 1, 2, 2, 3, 3, 3, ……………………..100 (100times )**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+
+int main() \{
+// Loop from 1 to 100
+for (int n = 1; n ≤ 100; n++) \{
+// Inner loop to repeat 'n' exactly 'n' times
+for (int i = 0; i \< n; i++) \{
+cout \<\< n \<\< " ";
+\}
+\}
+cout \<\< endl; // Print a newline at the end of the sequence
+return 0;
+\}
+
+🔗 Run Online: Printing Sequence
+
+**Related info:** CB, O(IT), 23
+
+**Q37: Write a function which receives an array of integers as parameter and print the numbers divisible by 3 in the array.**
+
+**Answer:** \#include \<stdio.h>
+
+**Explanation:** void printDivisibleBy3(int arr[], int size) \{
+for (int i = 0; i \< size; i++) \{
+if (arr[i] % 3 == 0) \{
+printf("%d\n", arr[i]);
+\}
+\}
+\}
+int main() \{
+int size;
+printf("Enter the number of elements: ");
+scanf("%d", &size);
+
+int numbers[size]; // Variable Length Array (VLA)
+printf("Enter %d numbers:\n", size);
+for (int i = 0; i \< size; i++) \{
+scanf("%d", &numbers[i]);
+\}
+printf("Numbers divisible by 3:\n");
+printDivisibleBy3(numbers, size);
+return 0;
+\}
+
+**Sample I/O:**
+Enter the number of elements: 6
+Enter 6 numbers:
+5 6 9 12 8 11
+Numbers divisible by 3:
+6
+9
+12
+=== Code Execution Successful ===
+
+🔗**Run Online:** Divisible by 3 in the array.
+
+**Related info:** Combined Bank, O(IT), 24
+
+## Pointer
+
+**Q38: #include int main() \{int ledger[5] = \{10, 20, 30, 40, 50\};int *ptr1 = (int *)(&ledger + 1);int *ptr2 = (int *)(ledger + 1);printf("%d, %d", *(ptr1 - 1), *(ptr2 + 2));return 0;\}Find the output.**
+
+**Answer:** int main() \{
+
+**Explanation:** **Code:**
+
+`
+\#include \<stdio.h>
+
+int main() \{
+int ledger[5] = \{10, 20, 30, 40, 50\};
+
+int *ptr1 = (int *)(&ledger + 1);
+int *ptr2 = (int *)(ledger + 1);
+
+printf("%d, %d", *(ptr1 - 1), *(ptr2 + 2));
+return 0;
+\}
+`
+
+**Output:**
+
+**50, 40**
+
+**Step-by-Step Explanation**
+
+**1. Array Layout in Memory**
+
+**2. ptr1 = (int *)(&ledger + 1)**
+
+- **&ledger** is a pointer to the entire array, type **int (*)[5]**.
+- **&ledger + 1** moves forward by the size of the whole array (5 ints = 20 bytes), landing just after the array.
+- **ptr1** now points to memory right after **ledger[4]**.
+
+**3. ptr2 = (int *)(ledger + 1)**
+
+- **ledger** decays to pointer to first element (**int ***).
+- **ledger + 1** moves to **ledger[1]**, which contains 20.
+- **ptr2** points to **ledger[1]**.
+
+**4. *(ptr1 - 1)**
+
+- **ptr1** is just past the array end.
+- **ptr1 - 1** moves back to **ledger[4]**.
+- Value = **50**.
+
+**5. *(ptr2 + 2)**
+
+- **ptr2** points to **ledger[1]**.
+- **ptr2 + 2** lands on **ledger[3]**.
+- Value = **40**.
+
+**Related info:** Combined Bank, AP-23, 26
+
+## Recursion
+
+**Q39: Usually, recursion involves a function Write a recursive algorithm to find the factorial of a number.**
+
+**Answer:** Recursion is a programming technique in which a Function calls itself repeatedly until a Base Case is reached.
+
+**Explanation:** **Recursion** is a programming technique in which a **Function** calls itself repeatedly until a **Base Case** is reached. It is commonly used to solve problems that can be divided into smaller subproblems.
+
+**Recursive Algorithm**
+
+Algorithm Factorial(n)
+BEGIN
+If n = 0 or n = 1 Then
+Return 1
+Else
+Return n × Factorial(n − 1)
+END
+
+**Example**
+
+Input: n = 5
+Factorial(5)
+= 5 × Factorial(4)
+= 5 × 4 × Factorial(3)
+= 5 × 4 × 3 × Factorial(2)
+= 5 × 4 × 3 × 2 × Factorial(1)
+= 5 × 4 × 3 × 2 × 1
+= 120
+
+**Related info:** CB, O(IT), 20
+
+**Q40: Find the output of following program: int F(n) \{ if n == 0 return 0; if n == 1 return 1; return F(n-2)+F(n-1); \} int main () \{ result F(5); \}**
+
+**Answer:** The output of the program will be 5.
+
+**Explanation:** The output of the program will be `5`.
+
+**Code Analysis**
+
+- **Function `F(n)`**:
+
+- The function calculates the Fibonacci number for a given `n` using recursion.
+- **Base Cases**:
+
+- If `n == 0`, it returns 0.
+- If `n == 1`, it returns 1.
+
+- **Recursive Case**:
+
+- For other values of `n`, it returns `F(n-2) + F(n-1)`.
+
+- **Main Function**:
+
+- The main function calls `F(5)` and stores the result (though it should be assigned to a variable like `result`).
+
+**Calculation of `F(5)`**
+
+The Fibonacci sequence calculated by the function is:
+
+`
+F(5) = F(4) + F(3)
+F(4) = F(3) + F(2)
+F(3) = F(2) + F(1)
+F(2) = F(1) + F(0)
+`
+
+**Breaking it down:**
+
+`
+F(2) = 1 (F(1) + F(0) = 1 + 0)
+
+F(3) = 2 (F(2) + F(1) = 1 + 1)
+
+F(4) = 3 (F(3) + F(2) = 2 + 1)
+
+F(5) = 5 (F(4) + F(3) = 3 + 2)
+`
+
+**Related info:** CB, O(IT), 23
+
+## Others
+
+**Q41: Write a program in any language to find the sum of rows and columns of a m X n matrix, where m and n is taken input from the user. Give the output in the following format:**
+
+**Answer:** ✅ C Program to Compute Row and Column Sum of a Matrix
+
+**Explanation:** \#include \<stdio.h>
+int main() \{
+int m, n, i, j;
+
+// Input matrix dimensions
+printf("Enter the number of rows (m): ");
+scanf("%d", &m);
+printf("Enter the number of columns (n): ");
+scanf("%d", &n);
+
+int matrix[m][n];
+
+// Input matrix elements
+printf("Enter the elements of the matrix row-wise:\n");
+for (i = 0; i \< m; i++) \{
+for (j = 0; j \< n; j++) \{
+scanf("%d", &matrix[i][j]);
+\}
+\}
+
+// Calculate and print row sums
+printf("\nMatrix with Row Sums:\n");
+for (i = 0; i \< m; i++) \{
+int rowSum = 0;
+for (j = 0; j \< n; j++) \{
+printf("%d ", matrix[i][j]);
+rowSum += matrix[i][j];
+\}
+printf("%d\n", rowSum); // Row sum
+\}
+
+// Calculate and print column sums
+printf("\nColumn Sums:\n");
+for (j = 0; j \< n; j++) \{
+int colSum = 0;
+for (i = 0; i \< m; i++) \{
+colSum += matrix[i][j];
+\}
+printf("%d ", colSum);
+\}
+
+return 0;
+\}
+
+**Sample I/O:**Enter the number of rows (m): 3
+Enter the number of columns (n): 4
+Enter the elements of the matrix row-wise:
+1 3 4 2
+2 4 5 3
+3 2 2 5
+Output:
+Matrix with Row Sums:
+1 3 4 2 10
+2 4 5 3 14
+3 2 2 5 12
+
+Column Sums:
+6 9 11 10
+
+🔗Sum of rows and columns of a m X n matrix.
+
+**Related info:** Combined Bank, SO(IT), 24
+
+**Q42: Write a program in any language to find the prime numbers between 1....... n, where n is taken as user input. Sample input: Enter value of n: 20 Sample Output: Prime Numbers: 2, 3, 5, 7, 11, 13, 17, 19**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+bool isPrime(int num) \{
+if (num \< 2) return false;
+for (int i = 2; i * i ≤ num; i++) \{
+if (num % i == 0) return false;
+\}
+return true;
+\}
+
+void findPrimes(int n) \{
+cout \<\< "Prime Numbers: ";
+for (int i = 1; i ≤ n; i++) \{
+if (isPrime(i))
+cout \<\< i \<\< " ";
+\}
+cout \<\< endl;
+\}
+
+int main() \{
+int n;
+cout \<\< "Enter value of n: ";
+cin >> n;
+findPrimes(n);
+return 0;
+\}
+
+**Sample I/O:**Enter value of n: 20
+Prime Numbers: 2 3 5 7 11 13 17 19
+
+🔗 Run Online: Prime Number between Range
+
+**Related info:** Combined Bank, SO(IT), 24
+
+**Q43: Suppose we want to develop software for a graphic package and we are given the task to implement circle class. The circle class has to be translatable from its origin. And it should also be able to give perimeter and area of the circle. Identify the data and method requirements for the class and give the data flow of translation method.**
+
+**Answer:** x: X-coordinate of the center.
+
+**Explanation:** **✅ Identifying Data and Methods**
+
+**Data Requirements (Attributes):**
+
+- **x:** X-coordinate of the center.
+- **y:** Y-coordinate of the center.
+- **radius:** Radius of the circle.
+
+**Method Requirements (Functions):**
+
+- **Constructor:** Initializes the circle with given coordinates and radius.
+- **translate(dx, dy):** Moves the circle to a new position by updating its coordinates.
+- **getPerimeter():** Computes the perimeter using the formula:
+- **getArea():** Computes the area using the formula:
+- **printCircle():** Displays the current position and radius of the circle.
+
+**✅ Implementation in C++**
+
+`\#include \<iostream>
+
+\#include \<cmath>
+
+class Circle \{
+
+private:
+
+double x, y, radius;
+
+public:
+
+// Constructor
+
+Circle(double x, double y, double radius) \{
+
+this->x = x;
+
+this->y = y;
+
+this->radius = (radius > 0) ? radius : 1.0;
+
+\}
+
+// Translate method
+
+void translate(double dx, double dy) \{
+
+x += dx;
+
+y += dy;
+
+\}
+
+// Compute perimeter
+
+double getPerimeter() const \{
+
+return 2 * M_PI * radius;
+
+\}
+
+// Compute area
+
+double getArea() const \{
+
+return M_PI * radius * radius;
+
+\}
+
+// Print circle details
+
+void printCircle() const \{
+
+std::cout \<\< "Circle at (" \<\< x \<\< ", " \<\< y \<\< ") with radius "
+
+\<\< radius \<\< std::endl;
+
+\}
+
+\};
+
+// Main function
+
+int main() \{
+
+Circle c(0.0, 0.0, 5.0);
+
+c.printCircle();
+
+std::cout \<\< "Perimeter: " \<\< c.getPerimeter() \<\< std::endl;
+
+std::cout \<\< "Area: " \<\< c.getArea() \<\< std::endl;
+
+c.translate(3.0, 4.0);
+
+std::cout \<\< "After translation: " \<\< std::endl;
+
+c.printCircle();
+
+return 0;
+
+\}`
+
+**✅ Data Flow of the `translate` Method**
+
+**Input:**
+
+Translation values `dx` and `dy` are passed to the `translate` method.
+
+**Process:**
+
+- The method adds `dx` to the current X-coordinate.
+- The method adds `dy` to the current Y-coordinate.
+
+**Output:**
+
+The updated coordinates `(x', y')` reflect the new position of the circle.
+
+**Related info:** Combined Bank, O(IT), 24
+
+## Array
+
+**Q44: Write the pseudocode/ program (in any language) to print the common element between two arrays and the total number of such elements found. [assume each element in an array distinct].**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** using namespace std;
+int main() \{
+int size1, size2;
+// Taking input size of first array
+cout \<\< "Enter size of first array: ";
+cin >> size1;
+int arr1[size1];
+cout \<\< "Enter elements of first array:\n";
+for (int i = 0; i \< size1; i++) \{
+cin >> arr1[i];
+\}
+// Taking input size of second array
+cout \<\< "Enter size of second array: ";
+cin >> size2;
+int arr2[size2];
+cout \<\< "Enter elements of second array:\n";
+for (int i = 0; i \< size2; i++) \{
+cin >> arr2[i];
+\}
+// To store common elements
+int commonElements[size1 \< size2 ? size1 : size2];
+int count = 0;
+// Check each element in arr1 against arr2
+for (int i = 0; i \< size1; i++) \{
+bool found = false;
+for (int j = 0; j \< size2; j++) \{
+if (arr1[i] == arr2[j]) \{
+found = true;
+break;
+\}
+\}
+if (found) \{
+// Check for duplicates
+bool alreadyExists = false;
+for (int k = 0; k \< count; k++) \{
+if (commonElements[k] == arr1[i]) \{
+alreadyExists = true;
+break;
+\}
+\}
+if (!alreadyExists) \{
+commonElements[count] = arr1[i];
+count++;
+\}
+\}
+\}
+// Print common elements
+cout \<\< "Common elements: ";
+for (int i = 0; i \< count; i++) \{
+cout \<\< commonElements[i] \<\< " ";
+\}
+cout \<\< endl;
+// Print total count
+cout \<\< "Total number of common elements: " \<\< count \<\< endl;
+return 0;
+\}
+
+**Sample I/O:**
+Enter size of first array: 5
+Enter elements of first array: 0 20 30 40 50
+Enter size of second array: 6
+Enter elements of second array: 10 2 20 30 60 90
+Common elements: 20 30
+Total number of common elements: 2
+
+=== Code Execution Successful ===
+
+🔗 Run Online: Print Common Elements Between Two Arrays
+
+**Related info:** BB, AD(ICT), 25
+
+## ER Diagram
+
+**Q45: Draw ER Diagram (Not Fully Collected)**
+
+**Answer:** **Not available in source**
+
+**Related info:** CB, AP, 20

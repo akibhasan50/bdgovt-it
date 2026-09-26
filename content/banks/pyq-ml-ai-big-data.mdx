@@ -1,0 +1,409 @@
+---
+title_en: "Machine Learning, AI & Big Data — Solved Questions & PYQ"
+title_bn: "মেশিন লার্নিং, এআই ও বিগ ডেটা — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "17 questions from the IT Job QnS Machine Learning, AI & Big Data topic — 10 with worked answers and explanations, 7 previous-year questions with exam tags."
+summary_bn: "IT Job QnS-এর Machine Learning, AI & Big Data টপিকের 17টি প্রশ্ন — 10টির সমাধান ও ব্যাখ্যা, 7টি পূর্ববর্তী পরীক্ষার প্রশ্ন।"
+---
+
+<Callout type="info">
+**Topic:** Machine Learning, AI & Big Data — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Probability
+
+**Q1: Server X and Server Y distribute incoming web traffic. Server X handles 60% of requests, while Server Y handles the remaining 40%. The probability of high latency is 2% for Server X and 4% for Server Y. Determine the total probability that a randomly selected request encounters high latency and the conditional probability that a delayed request was handled by Server X.**
+
+**Answer:** This is a conditional probability problem using the law of total probability and Bayes' theorem.
+
+**Explanation:** **Given:**
+P(X)=0.6, P(Y)=0.4
+P(L|X)=0.02, P(L|Y)=0.04
+
+**Step 1: Total probability of latency**
+
+P(L) = P(X)P(L|X) + P(Y)P(L|Y)
+= 0.6×0.02 + 0.4×0.04
+= 0.012 + 0.016 = 0.028
+
+**Step 2: Conditional probability**
+
+P(X|L) = (P(X)P(L|X)) / P(L)
+= 0.012 / 0.028 = 3/7 ≈ 0.4286
+
+**Conclusion:** Overall latency probability is 2.8%, and delayed request is more likely from Server Y.
+
+**Related info:** ICB, AP, 26
+
+## Big Data Analytics
+
+**Q2: From the following Hadoop ecosystem components: MapReduce, HDFS, YARN, HBase, ZooKeeper, Pig, Hive, Mahout, Chukwa, Cassandra, Avro, Oozie, Flume, Sqoop Identify five components from the list that you would use to design this pipeline. Justify the role of each chosen component in this scenario, focusing on its functionality.**
+
+**Answer:** Used to store massive volumes of data (petabytes).
+
+**Explanation:** **Selected Hadoop Components for Big Data Pipeline**
+
+**1. HDFS (Hadoop Distributed File System)**
+
+- Used to store **massive volumes of data** (petabytes).
+- Provides **distributed and fault-tolerant storage**.
+
+**2. YARN (Yet Another Resource Negotiator)**
+
+- Manages **cluster resources** and schedules jobs.
+- Ensures efficient execution of multiple applications.
+
+**3. MapReduce**
+
+- Used for **batch data processing**.
+- Processes large datasets in parallel across nodes.
+
+**4. Hive**
+
+- Provides **SQL-like interface** for querying big data.
+- Useful for **data analysis and reporting**.
+
+**5. Flume**
+
+- Used for **real-time data ingestion** (e.g., web server logs).
+- Efficiently collects and transfers streaming data to HDFS.
+
+- These components together support **data ingestion, storage, processing, resource management, and analytics** for a scalable big data pipeline.
+
+**Related info:** Combined Bank, AE(IT)/AME, 26
+
+## Preprocessing
+
+**Q3: Suppose your dataset has missing values and noise. How would you preprocess it?**
+
+**Answer:** Data preprocessing is the step of cleaning and transforming raw data before feeding it into a model.
+
+**Explanation:** **Data Preprocessing for Missing Values and Noise**
+
+Data preprocessing is the step of cleaning and transforming raw data before feeding it into a model. Missing values and noise are two common problems that can reduce accuracy and mislead results. Below are the methods to handle them.
+
+**1. Handling Missing Values**
+
+Missing values occur when some data points are not recorded or are lost. They must be handled carefully to avoid biased results.
+
+- **Deletion:** Remove rows or columns that have too many missing values. This is simple but only works when the missing data is small and random.
+- **Mean/Median/Mode Imputation:** Fill missing numeric values with the average (mean), middle value (median), or most common value (mode) of that column.
+- **Forward/Backward Fill:** Use the previous or next available value to fill the gap, useful in time-series data.
+- **Predictive Imputation:** Use machine learning models like KNN or regression to predict and fill the missing values based on other columns.
+- **Constant Value Fill:** Replace missing values with a fixed number like 0 or a label like "Unknown" for categorical data.
+
+**Example:** In an age column, if 10% of entries are blank, you can fill them with the mean age of all other rows.
+
+**2. Handling Noise**
+
+Noise refers to random errors or unwanted variation in data that hides true patterns. It must be reduced to improve model performance.
+
+- **Binning:** Sort data into groups or bins and replace values with the bin average or median. This smooths out local fluctuations.
+- **Regression:** Fit a regression line to the data and use the predicted values to replace noisy points.
+- **Outlier Detection:** Identify extreme values using the Z-score or IQR method and remove or cap them.
+- **Smoothing Filters:** Use moving average or Gaussian filters to reduce random spikes in numerical data.
+- **Clustering:** Group similar data points together and remove points that do not belong to any major cluster.
+
+**Example:** In a temperature dataset, a sudden reading of 500°C is clearly noise. Using the IQR method, this outlier can be detected and replaced with the median.
+
+**Related info:** Combined Bank, AP-23, 26
+
+## Types of ML
+
+**Q4: Explain the concepts of Reinforcement Learning (RL), Deep Learning (DL), and Federated Learning (FL) in the context of Machine Learning. Briefly describe how each approach differs in its learning mechanism, data usage, and real-world applications.(10 Marks)**
+
+**Answer:** Reinforcement Learning is a type of machine learning where an agent learns by interacting with an environment.
+
+**Explanation:** **Reinforcement Learning (RL)**
+
+Reinforcement Learning is a type of machine learning where an **agent learns by interacting with an environment**. The agent takes actions and receives rewards or penalties, and its goal is to maximize cumulative reward over time.
+
+**Learning Mechanism:** Trial-and-error with reward feedback.
+
+**Data Usage:** Generated through interaction with the environment.
+
+**Applications:** Robotics, game playing (AlphaGo), autonomous vehicles, recommendation systems.
+
+**Deep Learning (DL)**
+
+Deep Learning is a subset of machine learning that uses **multi-layer neural networks** to automatically learn features from large datasets. It is inspired by the human brain structure.
+
+**Learning Mechanism:** Supervised/unsupervised learning using deep neural networks.
+
+**Data Usage:** Requires large, labeled or unlabeled datasets.
+
+**Applications:** Image recognition, speech recognition, natural language processing, medical diagnosis.
+
+**Federated Learning (FL)**
+
+Federated Learning is a distributed learning approach where the model is trained **across multiple devices without sharing raw data**. Only model updates are sent to a central server.
+
+**Learning Mechanism:** Collaborative learning with local model updates.
+
+**Data Usage:** Data remains on local devices (privacy-preserving).
+
+**Applications:** Mobile keyboards, healthcare data analysis, IoT systems, privacy-sensitive applications.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+**Q5: What is machine learning? Differentiate among supervised learning vs unsupervised learning vs reinforcement learning.**
+
+**Answer:** Machine Learning (ML) is a branch of Artificial Intelligence where computers learn from data, identify patterns, and make decisions without explicit…
+
+**Explanation:** **Machine Learning (ML)** is a branch of Artificial Intelligence where computers learn from data, identify patterns, and make decisions without explicit programming.
+
+- **Purpose:** To analyze data and make accurate predictions or decisions automatically.
+- **Example:** Spam filtering, recommendation systems, image recognition.
+- **Key Idea:** The system improves its performance over time by learning from experience (data).
+
+**Types of Machine Learning**
+
+**Supervised Learning:**
+
+- Uses **labeled data** where input and correct output are already known.
+- The model learns a mapping function from input to output.
+- Used for prediction tasks.
+- **Example:** Email classification (spam/not spam), house price prediction.
+
+**Unsupervised Learning:**
+
+- Uses **unlabeled data** without predefined output.
+- The model discovers hidden patterns or relationships in data.
+- Used for grouping and data analysis.
+- **Example:** Customer segmentation, clustering.
+
+**Reinforcement Learning:**
+
+- An **agent** interacts with an environment and learns by trial and error.
+- Uses **reward and punishment** to improve decisions.
+- Focuses on maximizing long-term reward.
+- **Example:** Game playing (Chess, AI agents), robotics control.
+
+**Related info:** Combined Bank, SO(IT), 24
+
+**Q6: Compare and contrast the three fundamental paradigms of Machine Learning: Supervised Learning, Unsupervised Learning, and Reinforcement Learning.**
+
+**Answer:** Machine Learning can be broadly classified into three fundamental paradigms based on how models learn from data:
+
+**Explanation:** **Machine Learning Paradigms**
+
+Machine Learning can be broadly classified into three fundamental paradigms based on how models learn from data: **Supervised Learning**, **Unsupervised Learning**, and **Reinforcement Learning**.
+
+**1) Supervised Learning**
+
+In supervised learning, the model is trained using **labeled data**, where the correct output is already known.
+
+**Learning Mechanism:** Learns by mapping inputs to known outputs.
+
+**Data Usage:** Uses labeled datasets.
+
+**Applications:** Spam detection, image classification, disease prediction.
+
+**2) Unsupervised Learning**
+
+In unsupervised learning, the model works with **unlabeled data** and tries to discover hidden patterns or structures in the data.
+
+**Learning Mechanism:** Pattern discovery and grouping.
+
+**Data Usage:** Uses unlabeled datasets.
+
+**Applications:** Customer segmentation, clustering, anomaly detection.
+
+**3) Reinforcement Learning**
+
+In reinforcement learning, an **agent learns by interacting with an environment** and receives rewards or penalties for actions.
+
+**Learning Mechanism:** Trial-and-error based on reward feedback.
+
+**Data Usage:** Data generated through interaction with the environment.
+
+**Applications:** Robotics, game playing, autonomous systems.
+
+**Key Differences**
+
+Supervised learning relies on labeled data, unsupervised learning finds patterns without labels, and reinforcement learning focuses on decision-making through rewards.
+
+**Related info:** Combined Bank, AP-22, 26
+
+## Generative AI & XAI
+
+**Q7: Imagine a government agency is developing an AI-based citizen service chatbot that can automatically generate responses, summarize documents, and provide policy information to citizens. Explain how Generative AI can be used to power such a system, and how Explainable AI (XAI) techniques can ensure that its responses are transparent, reliable, and accountable. (10 Marks)**
+
+**Answer:** Generative AI can be used to power a government chatbot by enabling it to automatically generate human-like responses, summarize long policy documents, and…
+
+**Explanation:** **Use of Generative AI in a Government Citizen Service Chatbot**
+
+Generative AI can be used to power a government chatbot by enabling it to **automatically generate human-like responses**, **summarize long policy documents**, and **provide accurate policy-related information** to citizens. Using large language models, the chatbot can understand citizens’ questions in natural language and generate clear, context-aware answers. It can also analyze official documents, extract key points, and present simplified summaries, making government services more accessible and efficient.
+
+**Role of Explainable AI (XAI)**
+
+Explainable AI (XAI) techniques help ensure that the chatbot’s responses are **transparent, reliable, and accountable**. XAI allows the system to explain **why** a particular response was generated by showing the source policy, rules, or reasoning behind the answer. This helps government officials and citizens trust the system and verify that the information is correct and unbiased.
+
+**Benefits of Using XAI**
+
+- **Transparency:** Citizens can understand how and from where the answer was derived.
+- **Reliability:** Officials can audit and validate chatbot decisions.
+- **Accountability:** The system can justify responses, reducing the risk of misinformation.
+- **Public Trust:** Clear explanations increase confidence in AI-based public services.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+## Hadoop Ecosystem
+
+**Q8: A financial services provider needs to handle massive streaming and historical log data to perform fraud analytics and ML-driven maintenance prediction. Identify five Hadoop ecosystem technologies appropriate for this use case and describe their roles.**
+
+**Answer:** To process large-scale streaming and historical log data, different Hadoop ecosystem technologies can be used together for storage, processing, querying,…
+
+**Explanation:** To process large-scale streaming and historical log data, different Hadoop ecosystem technologies can be used together for storage, processing, querying, and machine learning.
+
+**1. HDFS (Hadoop Distributed File System)**
+
+- HDFS is used for distributed storage of massive amounts of data across multiple servers.
+- It stores historical logs, transaction records, and streaming data reliably with fault tolerance.
+
+**Role:** Large-scale distributed data storage.
+
+**2. Apache Kafka**
+
+- Kafka is used for real-time data streaming and message collection.
+- It collects continuous transaction logs, user activities, and system events from different sources.
+
+**Role:** Real-time streaming data ingestion.
+
+**3. Apache Spark**
+
+- Spark is a fast data processing framework used for big data analytics and machine learning.
+- It can process both streaming data and historical data efficiently.
+
+**Role:** Real-time analytics, fraud detection, and ML processing.
+
+**4. Apache Hive**
+
+- Hive is a data warehouse tool used to query large datasets using SQL-like language.
+- Analysts can generate reports and analyze fraud-related historical data easily.
+
+**Role:** SQL-based querying and data analysis.
+
+**5. Apache Mahout**
+
+- Mahout provides machine learning algorithms for big data applications.
+- It can be used for predictive analytics, anomaly detection, and maintenance prediction models.
+
+**Role:** Machine learning and predictive analytics.
+
+**Related info:** CB, AME/AE(IT-23), 26
+
+## Big Data, ML & AI
+
+**Q9: Design a scalable big data analytics pipeline for an e-commerce platform that ingests real-time logs, stores petabyte-scale data, supports batch and stream processing, delivers near real-time recommendations, and runs large-scale machine learning models; from the following Hadoop ecosystem components - MapReduce, HDFS, YARN, HBase, ZooKeeper, Pig, Hive, Mahout, Chukwa, Cassandra, Avro, Oozie, Flume, Sqoop - select any five and explain the role of each component in this system.**
+
+**Answer:** To build a scalable Big Data Analytics Pipeline for an E-commerce Platform, the following five Hadoop Ecosystem components can be selected:
+
+**Explanation:** To build a scalable **Big Data Analytics Pipeline** for an **E-commerce Platform**, the following five **Hadoop Ecosystem** components can be selected:
+
+**1. Flume – Real-time Data Ingestion**
+
+**Apache Flume** collects and transfers real-time web logs, clickstream data, and application events from multiple servers into the Hadoop ecosystem. It provides reliable and scalable log ingestion.
+
+**Role:** Ingests real-time logs into **HDFS**.
+
+**2. HDFS – Distributed Storage**
+
+**Hadoop Distributed File System (HDFS)** stores petabyte-scale structured and unstructured data across multiple machines. It provides high fault tolerance and scalability by replicating data blocks.
+
+**Role:** Stores massive datasets reliably for analytics and machine learning.
+
+**3. YARN – Resource Management**
+
+**YARN (Yet Another Resource Negotiator)** manages cluster resources and schedules jobs submitted by different applications, ensuring efficient utilization of the Hadoop cluster.
+
+**Role:** Allocates CPU and memory resources for batch and stream processing jobs.
+
+**4. MapReduce – Batch Processing**
+
+**MapReduce** performs distributed parallel processing of very large datasets stored in **HDFS**. It divides tasks into **Map** and **Reduce** phases for efficient computation.
+
+**Role:** Executes large-scale batch analytics such as sales analysis, customer behavior analysis, and report generation.
+
+**5. Mahout – Machine Learning**
+
+**Apache Mahout** provides scalable machine learning algorithms such as clustering, classification, and recommendation systems on large datasets.
+
+**Role:** Builds recommendation engines and large-scale machine learning models for personalized product recommendations.
+
+**Related info:** CB, AME/AE(IT-23), 26
+
+## Precision and Recall
+
+**Q10: An engineering model is deployed to identify critical network hardware failures. Explain why an a administrator must optimize for recall instead of precision if the business penalty for a missed failure is catastrophic.**
+
+**Answer:** Precision: Out of all cases predicted as failure by the model, how many are actually real failures.
+
+**Explanation:** **Understanding Precision and Recall**
+
+- **Precision:** Out of all cases predicted as failure by the model, how many are actually real failures. High precision means fewer false alarms.
+- **Recall:** Out of all actual failures, how many the model correctly detects. High recall means fewer missed failures.
+
+**Why Recall Matters More Here**
+
+When the cost of missing a failure is extremely high—such as network downtime, data center collapse, financial loss, or safety risks—recall becomes the priority.
+The goal is to detect as many real failures as possible, even if it increases false alarms.
+
+- **False Positive (Low Precision):** A failure is predicted but does not actually exist. Cost: extra inspection time and minor operational disruption.
+- **False Negative (Low Recall):** A real failure is missed by the model. Cost: system outage, financial loss, and possible harm to users.
+
+In such scenarios, a recall-focused approach is preferred because preventing one critical failure is more important than reducing unnecessary alerts.
+
+**Practical Steps to Optimize Recall**
+
+- **Lower classification threshold:** Increase sensitivity so more cases are classified as positive, capturing borderline failures.
+- **Class weights:** Assign higher penalty during training for missing actual failures to bias the model toward detection.
+- **Ensemble methods:** Combine multiple models so that if one misses a failure, another may detect it.
+- **Anomaly detection:** Flag unusual behavior for human review instead of ignoring it automatically.
+
+**Related info:** RAKUB, ANSE, 26
+
+## Previous-year questions (no solutions in source)
+
+**Q11: A financial services provider needs to handle massive streaming and historical log data to perform fraud analytics and ML-driven maintenance prediction. Identify five Hadoop ecosystem technologies appropriate for this use case and describe their roles. (Assumming)**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — BB, AME/AE(it),26
+
+**Q12: You have been hired as a Cloud Data Engineer to design a big data analytes pipeline for an e-commerce company. The company needs to: Ingest millions of real-time web server logs, Store and manage petabytes of raw and structured data, Process data for batch and stream analytics, Provide near real-time product recommendations, Run machine learning models at scale,**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — CB, AME/AE(it),26
+
+**Q13: From the following Hadoop ecosystem components: MapReduce, HDFS, YARN, HBase, ZooKeeper, Pig, Hive, Mahout, Chukwa, Cassandra, Avro, Oozie, Flume, Sqoop Identify five components from the list that you would use to design this pipeline. Justify the role of each chosen component in this scenario, focusing on its functionality.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — CB, AME/AE(it),26
+
+**Q14: Define the term 'Data Mining'. Explain supervised and unsupervised classification with suitable example.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — Ministry of Food, Network/Website Manager(ICT),24
+
+**Q15: How can we validate and check reliability of a machine learning model?**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — Ministry of Food, Network/Website Manager(ICT),24
+
+**Q16: Briefly discuss 'Generative Artificial Intelligence (GAI)' and 'Large Language Models (LLMs)'.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — Ministry of Food, Network/Website Manager(ICT),24
+
+**Q17: Given some features of a diabetic patient dataset, predict whether the patient is diabetic or not. Is this a supervised learning problem or an unsupervised learning problem? Explain in one sentence.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — Submarine Cables(AM),24

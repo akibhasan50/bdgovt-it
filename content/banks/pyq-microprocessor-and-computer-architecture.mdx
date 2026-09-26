@@ -1,0 +1,877 @@
+---
+title_en: "Microprocessor & Computer Architecture — Solved Questions & PYQ"
+title_bn: "মাইক্রোপ্রসেসর ও কম্পিউটার আর্কিটেকচার — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "27 questions from the IT Job QnS Microprocessor & Computer Architecture topic — 24 with worked answers and explanations, 3 without a text solution in the source."
+summary_bn: "IT Job QnS-এর Microprocessor & Computer Architecture টপিকের 27টি প্রশ্ন — 24টির সমাধান ও ব্যাখ্যা, 3টির টেক্সট সমাধান সোর্সে নেই।"
+---
+
+<Callout type="info">
+**Topic:** Microprocessor & Computer Architecture — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## General
+
+**Q1: Consider a disk with a sector size of 512 bytes, 2000 tracks pér surface, 50 sectors per track, five double-sided platters, and average seek time of 10 msec. What is the capacity of a track in bytes? What is the capacity of each surface? What is the capacity of the disk?**
+
+**Answer:** Bytes per Track = Bytes per Sector × Sectors per Track
+
+**Explanation:** **Capacity of a Track**
+
+Bytes per Track = Bytes per Sector × Sectors per Track
+
+Bytes per Track = 512 × 50 = 25,600 bytes
+
+**Capacity of a Surface**
+
+Bytes per Surface = Bytes per Track × Tracks per Surface
+
+Bytes per Surface = 25,600 × 2000 = 51,200,000 bytes (50,000 KB)
+
+**Capacity of the Disk**
+
+Bytes per Disk = Bytes per Surface × Number of Surfaces
+
+Number of Surfaces = 5 Platters × 2 Surfaces per Platter = 10 Surfaces
+
+Bytes per Disk = 51,200,000 × 10 = 512,000,000 bytes (500,000 KB)
+
+**Related info:** CB, SO(IT), 22
+
+**Q2: Hits ratio 75%, RAM time 10 ns , SSD time 10 ms for each instruction. Calcualte access time.**
+
+**Answer:** Hit Ratio = 75% = 0.75
+
+**Explanation:** **Given:**
+
+- Hit Ratio = 75% = 0.75
+- RAM Access Time = 10 ns = 10 × 10⁻⁹ seconds
+- SSD Access Time = 10 ms = 10 × 10⁻³ seconds
+
+**We Know**
+
+*Average Access Time = (Hit Ratio × RAM Time) + (Miss Ratio × SSD Time)*
+
+*Miss Ratio = 1 - Hit Ratio = 1 - 0.75 = 0.25*
+
+**Calculation:**
+
+*Average Access Time = *(0.75 × 10 × 10⁻⁹) + (0.25 × 10 × 10⁻³)
+
+= 7.5 × 10⁻⁹ + 2.5 × 10⁻³
+
+= 0.0000000075 + 0.0025 = 0.0025000075 seconds
+
+=0.0025000075 × 1000 = 2.5000075 ms
+
+**Average Access Time ≈ 2.5 milliseconds**
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q3: Consider a hard disk with: 4 surfaces, 64 tracks/surface, 128 sectors/track, 256 ytes/sector, what is the capacity of the hard disk?**
+
+**Answer:** Surfaces = 4
+
+**Explanation:** **Given:**
+
+Surfaces = 4
+
+Tracks per surface = 64
+
+Sectors per track = 128
+
+Bytes per sector = 256 bytes
+
+**Disk Capacity Formula:**
+
+Capacity = *Surfaces × Tracks per surface × Sectors per track × Bytes per sector*
+
+Total sectors = 4 × 64 × 128
+
+= 256 × 128
+
+= 32,768 sectors
+
+Total capacity = 32,768 × 256 bytes
+
+= **8,388,608 bytes**
+
+**Convert to MB:**
+
+1 MB = 1,048,576 bytes
+
+8,388,608 ÷ 1,048,576 = **8 MB**
+
+**Answer:**
+
+Disk Capacity ≈ **8 MB**
+
+**Related info:** Janata, ASA, 21
+
+**Q4: Consider disk pack with the following specification- 16 surfaces, 128 tracks per surfavce, 256 sectors per track and 512 bytes per sector. Answer the follwoing question. (i) What is the capacity of disk pack?(ii) If the format overhead is 32 bytes per sector, what is the formatted disk space?(iii)If the disk is rotating at 3600 RPM, what is the data transfer rate?**
+
+**Answer:** Data:
+
+**Explanation:** **Solution:**
+
+**Data:**
+Number of surfaces = 16 = 2⁴
+Number of tracks per surface = 128 = 2⁷
+Number of sectors per track = 256 = 2⁸
+Number of bytes per sector = 512 = 2⁹
+Format overhead = 32 bytes per sector
+Rotation speed = 3600 RPM
+
+**(i) Capacity of the Disk Pack:**
+
+Capacity of the disk = Number of surfaces × Number of tracks × Number of sectors × Number of bytes per sector
+
+= 2⁴ × 2⁷ × 2⁸ × 2⁹
+
+= 2²⁸ bytes
+
+= **268,435,456 bytes**
+
+= **256 MB**
+
+**Therefore, the capacity of the disk pack = 256 MB.**
+
+**Number of Sectors:**
+
+Number of sectors = Number of surfaces × Number of tracks × Number of sectors per track
+
+= 2⁴ × 2⁷ × 2⁸
+
+= 2¹⁹ sectors
+
+Therefore, **19 bits** are required to address all the sectors.
+
+**(ii) Formatted Disk Space:**
+
+Format overhead per sector = 32 bytes
+
+Usable bytes per sector = 512 − 32 = **480 bytes**
+
+Formatted disk space = Total number of sectors × Usable bytes per sector
+
+= 2¹⁹ × 480
+
+= **251,658,240 bytes**
+
+= **240 MB**
+
+**Therefore, the formatted disk space = 251,658,240 bytes ≈ 240 MB.**
+
+**(iii) Data Transfer Rate:**
+
+Rotation speed = 3600 RPM
+
+Number of rotations in one second = 3600 ÷ 60 = **60 rotations/sec**
+
+Data transfer rate = Number of heads × Capacity of one track × Number of rotations in one second
+
+= 16 × (256 × 512) × 60 bytes/sec
+
+= 2⁴ × 2⁸ × 2⁹ × 60 bytes/sec
+
+= 60 × 2²¹ bytes/sec
+
+= **125,829,120 bytes/sec**
+
+= **120 MB/sec**
+
+Therefore, the **Data Transfer Rate = 120 MB/sec**.
+
+**Related info:** Rupali, ANE, 21
+
+**Q5: A system uses 16-bit logical address and a page size of 1 KB. (i) How many pages are in the logical address space? (ii) How many bits are used for the page number and offset?**
+
+**Answer:** Logical Address Size = 16 bits
+
+**Explanation:** **16-bit Logical Address and 1 KB Page Size**
+
+**Given:**
+
+- Logical Address Size = 16 bits
+- Page Size = 1 KB = 2¹⁰ bytes
+
+**(i) How many pages are in the logical address space?**
+
+First, calculate the total logical address space:
+
+Total Address Space = 2¹⁶ bytes
+
+Since each page contains 2¹⁰ bytes:
+
+Number of Pages = 2¹⁶ / 2¹⁰
+
+= 2¹⁶ − ¹⁰
+
+= 2⁶ = **64 pages**
+
+Therefore, the logical address space contains **64 pages**.
+
+**(ii) How many bits are used for the page number and offset?**
+
+The logical address is divided into two parts:
+
+- **Page Number:** Identifies which page the address belongs to.
+- **Offset:** Identifies the exact location within that page.
+
+Since there are 64 pages:
+
+Page Number Bits = log₂(64) = **6 bits**
+
+Since the page size is 1 KB = 2¹⁰ bytes:
+
+Offset Bits = log₂(2¹⁰) = **10 bits**
+
+**Therefore:**
+
+- **Page Number = 6 bits**
+- **Page Offset = 10 bits**
+- **Total = 6 + 10 = 16 bits**
+
+**Final Answer:**
+
+- **Number of Pages = 64**
+- **Page Number Bits = 6**
+- **Offset Bits = 10**
+
+**Related info:** Dwasa,AME,25
+
+**Q6: Why Heterogeneous Multicore Processor (HMP) gaining more popularity?**
+
+**Answer:** A Heterogeneous Multicore Processor (HMP) contains different types of CPU cores, typically high-performance cores and power-efficient cores.
+
+**Explanation:** A **Heterogeneous Multicore Processor (HMP)** contains different types of CPU cores, typically high-performance cores and power-efficient cores. It is becoming more popular because it provides a better balance between performance and energy efficiency.
+
+**1. Better Performance:**
+
+High-performance cores can handle demanding applications and computationally intensive tasks efficiently.
+
+**2. Lower Power Consumption:**
+
+Power-efficient cores can handle lightweight tasks using less energy, which reduces overall power consumption.
+
+**3. Improved Energy Efficiency:**
+
+The processor can assign each task to the most suitable type of core, providing high performance when needed while saving energy for less demanding tasks.
+
+**4. Better Thermal Management:**
+
+Using efficient cores for lighter workloads reduces heat generation and helps maintain suitable operating temperatures.
+
+**5. Suitable for Modern Devices:**
+
+HMP is especially useful in smartphones, laptops, servers, and embedded systems where both high performance and long battery life or lower operating cost are important.
+
+**Conclusion:**
+
+HMP is gaining popularity because it provides **high performance, lower power consumption, better energy efficiency, and improved thermal management** by using different types of processor cores according to workload requirements.
+
+**Related info:** CB, SO(IT), 20
+
+**Q7: What is block and page? Draw simple block and page diagram in SSD (Solid State Drive).**
+
+**Answer:** In a Solid State Drive (SSD), data is stored in flash memory.
+
+**Explanation:** In a **Solid State Drive (SSD)**, data is stored in flash memory. The flash memory is organized into **Pages** and **Blocks**.
+
+**1. Page:**
+
+A **Page** is the smallest unit of data that can normally be **read or programmed (written)** in NAND flash memory. A page typically contains several KB of data.
+
+**2. Block:**
+
+A **Block** is a group of multiple pages. The **erase operation** in NAND flash memory is normally performed at the block level.
+
+SSD (NAND Flash Memory)
+|
++----------------+----------------+
+| |
+BLOCK 1 BLOCK 2
+| |
++----+----+ +----+----+
+| | | | | |
+Page 1 Page 2 Page 3 ... Page 1 Page 2 Page 3 ...
+| | | | | |
+4 KB 4 KB 4 KB 4 KB 4 KB 4 KB
+
+**Page:** A Page is the basic unit for reading and writing data in NAND flash memory.
+
+**Block:** A Block is a group of multiple Pages and is the basic unit for erase operations.
+
+**Related info:** CB, SO(IT), 20
+
+**Q8: Write are the parameters that are being used to evaluate the performance of memory?**
+
+**Answer:** The performance of a computer memory is evaluated using several important parameters:
+
+**Explanation:** **Parameters Used to Evaluate Memory Performance**
+
+The performance of a computer memory is evaluated using several important parameters:
+
+**1. Access Time:**
+
+It is the time required to locate and access a particular data item from memory. Lower access time means faster memory.
+
+**2. Memory Cycle Time:**
+
+It is the minimum time interval required between two successive memory operations.
+
+**3. Transfer Rate:**
+
+It indicates the amount of data that can be transferred between memory and the processor per unit of time. Higher transfer rate means better performance.
+
+**4. Memory Capacity:**
+
+It represents the total amount of data that the memory can store, usually measured in KB, MB, GB, or TB.
+
+**5. Cost per Bit:**
+
+It represents the cost of storing one bit of information. A lower cost per bit generally makes a memory technology more economical.
+
+**6. Bandwidth:**
+
+It represents the amount of data that can be transferred by the memory in a given period, usually expressed in bytes per second.
+
+**Conclusion:**
+
+The major parameters used to evaluate memory performance are **Access Time, Memory Cycle Time, Transfer Rate, Capacity, Cost per Bit,** and **Bandwidth**.
+
+**Related info:** CB, SO(IT), 20
+
+## Basic
+
+**Q9: A server has a fast CPU and abundant RAM, but despite low CPU and memory utilization, the system suffers from severe instruction execution delays and high latency during processing tasks. What needs to be updated, and what is the solution?**
+
+**Answer:** When CPU and RAM utilization are low but system latency is high, the bottleneck is not compute or memory, but input/output performance.
+
+**Explanation:** **Step 1: Identify bottleneck**
+
+- Low CPU usage → not compute-bound
+- Low memory usage → not memory-bound
+- High latency → likely I/O-bound system
+
+**Step 2: Root cause**
+
+Slow disk storage (HDD), high I/O wait time, and limited throughput are common causes.
+
+**Solution:**
+
+Upgrade storage subsystem to SSD or NVMe and optimize I/O scheduling.
+
+**Conclusion:** I/O subsystem is the critical bottleneck, not CPU or RAM.
+
+**Related info:** ICB, AP, 26
+
+**Q10: What exactly is a microcontroller? What distinguishes a microprocessor from a microcontroller? Mention the differences between RISC and CISC microprocessors.**
+
+**Answer:** A microcontroller is a small, low-cost microcomputer designed to perform specific tasks in embedded systems.
+
+**Explanation:** It integrates a processor, memory (RAM, ROM, EPROM), and peripherals such as timers, counters, and serial ports into a single chip. Microcontrollers are commonly used in applications like microwave ovens, remote controls, and IoT devices.
+
+**Difference Between Microprocessor and Microcontroller**
+
+**Differences Between RISC and CISC Microprocessors**
+
+CISC_vs_RISC
+
+**📖 For More Details about this topic**
+
+**Related info:** Combined Bank, SO(IT), 24
+
+**Q11: Difference between 32 bit Microprocessor and 64 bit Microprocessor with example. What is the meaning of 2.40GHz Microprocessor? Differentiate among Core Indel i3, i5 and i7 processor. Why do you prefer SSD instead of HDD? 10**
+
+**Answer:** Supports maximum 4 GB RAM.
+
+**Explanation:** **Difference between 32-bit and 64-bit Microprocessor**
+
+**32-bit Microprocessor**
+
+- Supports maximum **4 GB RAM**.
+- Uses **32-bit address space**.
+- Limited support for modern software.
+- Lower performance compared to 64-bit.
+- Less expensive.
+- **Examples:** Motorola 68020, HP FOCUS.
+
+**64-bit Microprocessor**
+
+- Supports **very large RAM** (terabytes).
+- Uses **64-bit address space**.
+- Better performance and multitasking.
+- Supports modern 64-bit software.
+- More expensive.
+- **Examples:** AMD Opteron, Intel x64 series.
+
+**Meaning of 2.40 GHz Microprocessor**
+
+2.40 GHz means the processor can execute **2.40 billion clock cycles per second**, indicating higher processing speed.
+
+**Difference among Intel Core i3, i5, and i7**
+
+**Intel Core i3**
+
+- Entry-level processor.
+- Usually 2–4 cores.
+- No Turbo Boost.
+- Best for basic tasks.
+
+**Intel Core i5**
+
+- Mid-range processor.
+- 4–6 cores.
+- Supports Turbo Boost.
+- Good for multitasking.
+
+**Intel Core i7**
+
+- High-performance processor.
+- 6–8+ cores.
+- Supports Hyper-Threading and Turbo Boost.
+- Best for heavy applications.
+
+**Why prefer SSD instead of HDD?**
+
+SSD provides **faster speed, better durability, low power consumption**, and silent operation. HDD is cheaper but slower and less reliable.
+
+**Related info:** CB, SO(IT), 23
+
+**Q12: Differentiate among CPU register, Cache memory, Main memory and Secondary memory. 10**
+
+**Answer:** CPU Register: Registers are small and extremely fast storage locations inside the CPU.
+
+**Explanation:** **CPU Register:** Registers are small and extremely fast storage locations inside the CPU. They temporarily hold data and instructions that are currently being processed, enabling faster execution. Examples include **Data Register, Address Register,** and **Accumulator**.
+
+**Cache Memory:** Cache memory is a high-speed memory located close to the CPU. It stores frequently used data and instructions to reduce access time and improve system performance. Cache memory is faster than RAM but smaller in size.
+
+**Main Memory:** Main memory, commonly known as RAM, stores data and programs that are actively in use. It is larger than cache memory but slower. Main memory is volatile, meaning data is lost when power is turned off. Examples include **RAM, ROM, PROM,** and **EPROM**.
+
+**Secondary Memory:** Secondary memory is used for permanent data storage. It is slower than main memory and not directly accessed by the CPU. Data must first be loaded into main memory before processing. Examples include **Hard Disk, SSD, Flash Drive,** and **Optical Disk**.
+
+**Related info:** CB, SO(IT), 23
+
+**Q13: Compare RAM, ROM, cache memory, and secondary storage in terms of speed and usage.**
+
+**Answer:** RAM is the primary memory of a computer used to temporarily store data and programs currently being processed by the CPU.
+
+**Explanation:** **RAM (Random Access Memory)**
+
+- RAM is the primary memory of a computer used to temporarily store data and programs currently being processed by the CPU.
+- It is volatile memory, meaning its data is lost when the power is turned off.
+- RAM provides fast read and write operations, allowing applications and the operating system to run efficiently.
+
+**Usage:** Running applications, operating systems, and temporary data processing.
+
+**ROM (Read Only Memory)**
+
+- ROM is non-volatile memory that permanently stores instructions required for booting and hardware initialization.
+- The data stored in ROM remains even after power is turned off.
+- ROM usually contains firmware or BIOS programs.
+
+**Usage:** System startup and firmware storage.
+
+**Cache Memory**
+
+- Cache memory is a very small but extremely fast memory located inside or close to the CPU.
+- It stores frequently used instructions and data so the CPU can access them quickly without waiting for RAM.
+- Cache memory improves processor speed and overall system performance.
+
+**Usage:** Temporary storage of frequently accessed CPU data and instructions.
+
+**Secondary Storage**
+
+- Secondary storage is non-volatile storage used for permanent data storage.
+- It stores files, operating systems, software, videos, documents, and backups for long-term use.
+
+Examples include HDD, SSD, DVD, memory cards, and pen drives.
+
+**Usage:** Permanent storage of data and applications.
+
+Cache Memory → RAM → ROM → Secondary Storage
+
+**Related info:** Combined Bank, O(IT-23), 26
+
+**Q14: Discuss the factors that affect the Speed of a CPU.**
+
+**Answer:** The speed of a CPU determines how fast a computer can process instructions.
+
+**Explanation:** **Factors Affecting the Speed of a CPU**
+
+The speed of a CPU determines how fast a computer can process instructions. Several hardware and architectural factors influence CPU speed.
+
+**1. Clock Speed**
+
+Clock speed, measured in GHz, indicates how many cycles a CPU can perform per second. Higher clock speed generally means faster processing.
+
+**2. Number of Cores**
+
+Modern CPUs have multiple cores, allowing them to execute multiple tasks simultaneously. More cores improve multitasking and performance.
+
+**3. Cache Memory**
+
+Cache memory stores frequently used data close to the CPU. Larger cache size reduces access time and increases processing speed.
+
+**4. Word Length**
+
+Word length refers to the number of bits a CPU can process at a time. A 64-bit CPU can handle more data than a 32-bit CPU.
+
+**5. Bus Speed**
+
+Bus speed determines how fast data is transferred between the CPU, memory, and other components. Higher bus speed improves overall performance.
+
+**6. CPU Architecture**
+
+Efficient architecture, such as pipelining and instruction-level parallelism, allows the CPU to execute instructions faster.
+
+**Related info:** Rupali, ANE, 23
+
+## Pipelining
+
+**Q15: Why do modern processor designs favor a multi-stage pipelined approach over a single-cycle implementation?**
+
+**Answer:** Modern processors favor a Multi-Stage Pipelined Architecture because it improves performance by allowing multiple instructions to be executed simultaneously.
+
+**Explanation:** Modern processors favor a **Multi-Stage Pipelined Architecture** because it improves performance by allowing multiple instructions to be executed simultaneously. Instead of completing one instruction in a single long clock cycle, the processor divides instruction execution into several stages, such as **Instruction Fetch (IF)**, **Instruction Decode (ID)**, **Execute (EX)**, **Memory Access (MEM)**, and **Write Back (WB)**.
+
+**Reasons for Using Multi-Stage Pipelining**
+
+- **Higher Throughput:** Multiple instructions are processed simultaneously in different pipeline stages.
+- **Shorter Clock Cycle:** Each stage performs a smaller task, allowing a higher clock frequency.
+- **Better CPU Utilization:** Different hardware units remain active instead of waiting for one instruction to complete.
+- **Higher Performance:** After the pipeline is filled, ideally one instruction completes in every clock cycle.
+- **Improved Scalability:** Supports deeper pipelines and advanced processor optimizations in modern CPUs.
+
+**Comparison**
+
+| Single-Cycle Processor | Multi-Stage Pipelined Processor |
+|---|---|
+| Executes one instruction in one long clock cycle. | Executes multiple instructions simultaneously in different pipeline stages. |
+| Long clock cycle. | Short clock cycle. |
+| Lower throughput. | Higher throughput. |
+| Lower hardware utilization. | Higher hardware utilization. |
+| Lower overall performance. | Higher overall performance. |
+
+Modern processors use **Multi-Stage Pipelining** because it increases throughput, improves CPU utilization, supports higher clock speeds, and provides significantly better performance than a **Single-Cycle** implementation.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+**Q16: Why do modern processor designs favor multistage pipeline approach over single cycle implementation? Explain with appropriate reasoning.**
+
+**Answer:** All steps of an instruction (fetch, decode, execute, memory, write back) are completed in one clock cycle.
+
+**Explanation:** **Single Cycle Processor :**
+
+- All steps of an instruction (fetch, decode, execute, memory, write back) are completed in **one clock cycle**.
+- Clock cycle must be long enough to complete the **slowest instruction**.
+
+**Multistage Pipeline Processor :**
+
+- Instruction execution is divided into **multiple stages** (fetch, decode, execute, etc.).
+- Multiple instructions are processed **simultaneously in different stages**.
+
+**Why Modern Processors Prefer Multistage Pipeline:**
+
+- **Higher Throughput:** Multiple instructions execute in parallel → more work done in less time.
+- **Faster Clock Speed:** Each stage does small work → shorter clock cycle.
+- **Efficient Hardware Usage:** Different units work at the same time → better utilization.
+- **Less Idle Time:** Hardware is continuously active unlike single cycle.
+- **Supports Parallelism:** Enables instruction-level parallelism (ILP).
+- **Better Performance:** Overall execution is faster than single cycle design.
+
+**Related info:** Combined Bank, AE(IT)/AME, 26
+
+## Cache Memory
+
+**Q17: Explain the difference between a "Compulsory Miss" (Cold Miss) and a "Capacity Miss" in cache memory.**
+
+**Answer:** A Cache Miss occurs when the required data is not found in the Cache Memory, forcing the processor to fetch the data from the slower Main Memory.
+
+**Explanation:** A **Cache Miss** occurs when the required data is not found in the **Cache Memory**, forcing the processor to fetch the data from the slower **Main Memory**. Two common types of cache misses are **Compulsory Miss (Cold Miss)** and **Capacity Miss**.
+
+**Difference between Compulsory Miss and Capacity Miss**
+
+| Compulsory Miss (Cold Miss) | Capacity Miss |
+|---|---|
+| Occurs when data is accessed for the first time. | Occurs when the cache is too small to hold all the required data. |
+| Happens even if the cache is empty. | Happens because previously stored data is replaced due to limited cache size. |
+| Cannot be avoided during the first access. | Can be reduced by increasing the cache size. |
+| Also called Cold Start Miss. | Also called Cache Capacity Miss. |
+
+**Example**
+
+**Compulsory Miss:** When a program accesses an array element for the first time, the data is not yet in the cache, resulting in a **Compulsory Miss**.
+
+**Capacity Miss:** If a program processes a very large array that cannot fit entirely in the cache, old data is continuously replaced by new data, causing **Capacity Misses**.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+## Memory Management
+
+**Q18: A system has a very fast CPU but slow main memory, explain how memory hierarchy helps reduce the performance gap between CPU and memory.**
+
+**Answer:** Memory hierarchy is an arrangement of different types of memory (Cache, RAM, Secondary Storage) based on speed, cost, and size.
+
+**Explanation:** **Memory Hierarchy :**
+
+- Memory hierarchy is an arrangement of different types of memory (Cache, RAM, Secondary Storage) based on **speed, cost, and size**.
+- Faster memory is placed closer to CPU and slower memory is placed farther away.
+
+**How It Reduces CPU–Memory Gap:**
+
+- **Use of Cache Memory:** Frequently used data is stored in **Cache** (very fast) → CPU accesses data quickly.
+- **Temporal Locality:** Recently used data is likely to be used again → kept in cache.
+- **Spatial Locality:** Nearby data is also loaded → reduces repeated memory access.
+- **Reduced Access Time:** CPU mostly accesses cache instead of slow main memory.
+- **Layered Access:** If data not in cache → check RAM → then secondary storage.
+- **Improved Performance:** Overall system speed increases by minimizing slow memory access.
+
+**Related info:** Combined Bank, AE(IT)/AME, 26
+
+## Others
+
+**Q19: Difference between Multi Computer System and Multi Processor System. What is Pipelining? Explain the four stages of a Pipeline. Describe PPI.**
+
+**Answer:** Definition: Multiprocessor = multiple CPUs sharing a single memory; Multicomputer = multiple independent computers connected via network.
+
+**Explanation:** **Difference Between Multiprocessor System and Multicomputer System**
+
+- **Definition:** Multiprocessor = multiple CPUs sharing a single memory; Multicomputer = multiple independent computers connected via network.
+- **Memory:** Multiprocessor uses **shared memory**; Multicomputer uses **distributed memory**.
+- **Communication:** Multiprocessor uses shared memory; Multicomputer uses **message passing**.
+- **Coupling:** Multiprocessor is **tightly coupled**; Multicomputer is **loosely coupled**.
+- **Example:** Multiprocessor → Multi-core CPU system; Multicomputer → Cluster system.
+
+**Pipelining (Definition)**
+
+- Pipelining is a technique where multiple instructions are processed **simultaneously in different stages** of execution.
+- It increases **throughput** by overlapping instruction execution.
+
+**4 Stages of Pipeline**
+
+- **1. Instruction Fetch (IF):** Fetch instruction from memory.
+- **2. Instruction Decode (ID):** Decode instruction and identify operands.
+- **3. Execute (EX):** Perform operation (ALU processing).
+- **4. Write Back (WB):** Store result back to register/memory.
+
+**PPI (Parallel Processing Interface)**
+
+- PPI is a system where multiple processors or units work **simultaneously** to perform tasks.
+- It improves **performance and speed** by dividing tasks into smaller parts.
+- Used in applications like **scientific computing, data processing**.
+
+**Related info:** CB, AE(IT)/AME, 24
+
+**Q20: Define Amdahl's law. How does it mathematically dictate the absolute maximum performance speedup a system can achieve when adding more cpu cores.**
+
+**Answer:** Amdahl's Law is a formula that determines the theoretical maximum speedup of a system when only part of the system is improved.
+
+**Explanation:** **Amdahl's Law**
+
+Amdahl's Law is a formula that determines the theoretical maximum speedup of a system when only part of the system is improved. It highlights that overall performance is limited by the portion of a program that cannot be parallelized, regardless of how many processors are added.
+
+**Mathematical Formula**
+
+Speedup = 1 / [(1 − P) + (P / N)]
+
+**Where:**
+
+- **P:** Fraction of the program that can be parallelized (0 to 1)
+- **(1 − P):** Sequential portion that cannot be parallelized
+- **N:** Number of CPU cores (processors)
+
+**How It Limits Maximum Speedup**
+
+Amdahl's Law shows that even if we use infinite cores, the maximum speedup is limited by 1 / (1 − P). The sequential part of the program becomes the performance bottleneck.
+
+- **If P = 0.9:** Maximum speedup = 1 / 0.1 = **10×**
+- **If P = 0.5:** Maximum speedup = 1 / 0.5 = **2×**
+- **If P = 0.99:** Maximum speedup = 1 / 0.01 = **100×**
+
+**Example Calculation**
+
+Given: P = 0.7, N = 8
+
+Speedup = 1 / [(1 − 0.7) + (0.7 / 8)]
+
+Speedup = 1 / [0.3 + 0.0875]
+
+Speedup = 1 / 0.3875 = **2.58×**
+
+Even with 8 cores, performance gain is limited because the 30% sequential portion cannot be parallelized.
+
+**Key Insight:**
+
+Adding more cores leads to diminishing returns. To achieve higher speedup, the sequential portion of the program must be minimized.
+
+**Related info:** RAKUB, ANSE, 26
+
+## Memory Organisation
+
+**Q21: What do you mean by memory organization? Write the different between SRAM and DRAM.**
+
+**Answer:** Memory organization refers to the way different types of memory are arranged, managed, and accessed within a computer system.
+
+**Explanation:** **Memory Organization**
+
+**Memory organization** refers to the way different types of memory are arranged, managed, and accessed within a computer system. It defines how data and instructions are stored, retrieved, and transferred between the CPU and memory units.
+
+Memory organization helps in efficient utilization of memory, faster data access, and smooth execution of programs. It includes the structure of primary memory (registers, cache, RAM) and secondary memory (hard disk, SSD).
+
+**Related info:** CB, AME/AHE, 23
+
+## Characteristics
+
+**Q22: ১ (খ) Clock cycle কী? একটি মাইক্রো-প্রসেসরের speed 3.5 GHz বলতে কী বোঝায়?**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC_MoHA_AP, 26
+
+## Difference mp and mc
+
+**Q23: ৫. (ক) Microprocessor এবং Microcontroller এর মাঝে দুইটি পার্থক্য লিখুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC_MoHA_AP, 26
+
+## Instruction Set
+
+**Q24: ৭ (খ) নিচের instruction দুটির মাঝে পার্থক্য লিখুন। MOV AX, A534H এবং MOV AX, [A534H]**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC_MoHA_AP, 26
+
+## Addressing
+
+**Q25: Explain the difference between direct, immediate, and register addressing modes in the 8086 microprocessor.**
+
+**Answer:** In immediate addressing mode, the actual data (operand) is specified directly in the instruction itself.
+
+**Explanation:** **Addressing Modes in 8086 Microprocessor**
+
+**1) Immediate Addressing Mode**
+
+In immediate addressing mode, the **actual data (operand)** is specified directly in the instruction itself.
+
+**Example:**
+
+`MOV AX, 1234H`
+
+Here, **1234H** is the immediate data loaded directly into the AX register.
+
+**2) Register Addressing Mode**
+
+In register addressing mode, the operand is stored in a **CPU register**, and the instruction specifies the register name.
+
+**Example:**
+
+`MOV BX, AX`
+
+Here, data is moved from register AX to register BX.
+
+**3) Direct Addressing Mode**
+
+In direct addressing mode, the **memory address** of the operand is directly specified in the instruction.
+
+**Example:**
+
+`MOV AX, [2000H]`
+
+Here, the data stored at memory location **2000H** is loaded into the AX register.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+## Other
+
+**Q26: A cloud service provider must choose between ARM-based processors and x86 processors for a new data center deployment. Compare the RISC and CISC architectures and recommend the most suitable option for large-scale cloud infrastructure.[assume]**
+
+**Answer:** Cloud providers must balance performance, power efficiency, cost, and scalability when choosing between ARM-based processors (RISC architecture) and x86…
+
+**Explanation:** Cloud providers must balance performance, power efficiency, cost, and scalability when choosing between ARM-based processors (RISC architecture) and x86 processors (CISC architecture) for data center deployment.
+
+**1. RISC (ARM) Architecture**
+
+RISC (Reduced Instruction Set Computer) uses a small, highly optimized set of simple instructions. Each instruction executes in one clock cycle. ARM processors are the dominant RISC implementation in mobile and increasingly in servers.
+
+- **Simple instructions:** Fewer instruction types, each completing in a single cycle.
+- **More registers:** ARM uses more general-purpose registers to reduce memory access.
+- **Power efficiency:** Lower power consumption per instruction, generating less heat.
+- **Pipelining friendly:** Uniform instruction size makes prediction and parallel execution easier.
+
+**2. CISC (x86) Architecture**
+
+CISC (Complex Instruction Set Computer) uses a large set of complex instructions. A single instruction can perform multi-step operations. Intel and AMD processors use x86, the dominant CISC architecture in desktops and traditional servers.
+
+- **Complex instructions:** One instruction can handle multiple low-level operations.
+- **Fewer registers:** More work is done through memory access and complex addressing modes.
+- **Backward compatibility:** Decades of software, especially legacy enterprise applications, are built for x86.
+- **High single-thread performance:** Complex instructions reduce instruction count for certain workloads.
+
+**Recommendation for Large-Scale Cloud Infrastructure**
+
+ARM-based processors are the most suitable choice for modern large-scale cloud deployments, with specific exceptions.
+
+**Justification:**
+
+- **Power efficiency at scale:** Data centers spend more on electricity and cooling than hardware. ARM cores deliver more performance per watt, directly reducing operational costs for thousands of servers.
+- **High core density:** ARM chips pack more cores per socket. Cloud workloads scale horizontally across many lightweight threads.
+- **Cost per compute unit:** ARM servers cost less to purchase and operate, improving margins for cloud providers.
+- **Modern software alignment:** Kubernetes, Docker, Linux, Python, Go, Java already support ARM.
+- **Real-world validation:** AWS Graviton and Ampere Altra demonstrate ARM viability in production cloud environments.
+
+**When x86 Remains Necessary:**
+
+- Legacy Windows Server or enterprise software without ARM support.
+- High-frequency trading or scientific workloads requiring single-thread performance.
+- Workloads optimized for x86 vector instructions (e.g., AVX-512).
+
+**Related info:** Combined Bank, ADA-23, 26
+
+## Caching
+
+**Q27: Suppose we have a 16 KB of data in a direct mapped cache with 4 word blocks. Determine the size of the tag, index and offset fields if we are using a 32-bit architecture.**
+
+**Answer:** In direct mapping physical address is divided into three parts i.e., Tag bits, Cache Line Number and Byte offset.
+
+**Explanation:** | Tag | Number of Cache Lines/Index bit | Offset Bit |
+|---|---|---|
+
+Given:-
+
+**Cache size:** 16 KB
+
+**Block size:** 4 words
+
+**Word size:** 4 bytes (assuming a typical 32-bit architecture where each word is 4 bytes)
+
+**Address size**: 32 bits
+
+**Calculate the Block Size in Bytes:**
+
+Since each block contains 4 words and each word is 4 bytes:
+
+Block size = 4 words × 4 bytes/word = 16 = 2⁴ bytes
+
+Number of offset bits = log₂ 2⁴ = 4 bits
+
+**Calculate the Number of Cache Blocks:**
+
+Block size = Line size = 2⁴ bytes
+
+The total cache size is 16 KB = 2¹⁴ bytes *[ 1 KB* = *2*¹⁰B]
+
+Number of Lines = (Total cache size)/(Line size) = (2¹⁴)/(2⁴) = 2¹⁰ lines
+
+**Number of Lines in the cache:**
+
+Number of index bits = log₂ (Number of lines) = log₂ 2¹⁰ = 10 bits
+
+Number of tag bits = Total Address bit − (Index bits + Offset bits) = 32 – (10 + 4) = 18 bits.
+
+**Related info:** BB, AME, 23

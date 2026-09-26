@@ -1,0 +1,721 @@
+---
+title_en: "Structured Query Language (SQL) — Solved Questions & PYQ"
+title_bn: "স্ট্রাকচার্ড কোয়েরি ল্যাংগুয়েজ (এসকিউএল) — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "24 questions from the IT Job QnS Structured Query Language (SQL) topic — 22 with worked answers and explanations, 2 without a text solution in the source."
+summary_bn: "IT Job QnS-এর Structured Query Language (SQL) টপিকের 24টি প্রশ্ন — 22টির সমাধান ও ব্যাখ্যা, 2টির টেক্সট সমাধান সোর্সে নেই।"
+---
+
+<Callout type="info">
+**Topic:** Structured Query Language (SQL) — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Structure Query Language
+
+**Q1: An institute wants to create a database table named STUDENT to store student information. The table should include the columns Roll Number, Name, Department, Email, and Admission Date. Specify the most appropriate SQL data type for each column and identify which column should be defined as the Primary Key, giving a brief justification for your choice.**
+
+**Answer:** | Column Name | SQL Data Type | Reason |
+
+**Explanation:** **Table Structure with Appropriate SQL Data Types**
+
+| Column Name | SQL Data Type | Reason |
+|---|---|---|
+| RollNumber | INT | Stores numeric roll numbers efficiently. |
+| Name | VARCHAR(100) | Stores student names of variable length. |
+| Department | VARCHAR(50) | Stores department names such as CSE, EEE, BBA, etc. |
+| Email | VARCHAR(100) | Stores email addresses of varying lengths. |
+| AdmissionDate | DATE | Stores only the admission date in YYYY-MM-DD format. |
+
+**Primary Key**
+
+**RollNumber** should be defined as the **Primary Key** because it uniquely identifies each student record, does not allow duplicate values, and cannot contain **NULL** values.
+
+**Sample SQL Statement**
+
+`
+CREATE TABLE STUDENT (
+RollNumber INT PRIMARY KEY,
+Name VARCHAR(100),
+Department VARCHAR(50),
+Email VARCHAR(100),
+AdmissionDate DATE
+);
+`
+
+**Related info:** CB, O(IT-24), 26
+
+**Q2: What happened after executing the following SQL Statement: CREATE TABLE t (Val INT); INSERT INTO t(val) VALUES (1,2,2,3, "null", "null",4,5); SELECT COUNT (val) FROM t; SELECT COUNT DISTICT (val) FROM t;**
+
+**Answer:** CREATE TABLE:
+
+**Explanation:** **CREATE TABLE**: A table `t` is created with one column `val` of type `INTEGER`.
+
+**INSERT INTO**: The values `1, 2, 2, 3, NULL, NULL, 4, 5` are inserted into the column `val`.
+
+**SELECT COUNT(val)**: This query counts all non-NULL values in the `val` column.
+
+Total non-NULL values: `1, 2, 2, 3, 4, 5`
+
+**Result: 6**
+
+**SELECT COUNT(DISTINCT val)**: This query counts only the unique non-NULL values in the `val` column.
+
+Unique values: `1, 2, 3, 4, 5`
+
+**Result: 5**
+
+**Related info:** CB, SO(IT), 22
+
+**Q3: Given Student(sid, name, dept) and Course(sid, cid, cname, marks), Find the student name, department, course name, and marks where marks are greater than 80. Find department-wise and subject-wise students where marks are not less than 30.**
+
+**Answer:** We are given two relations:
+
+**Explanation:** Student(sid, name, dept) and Course(sid, cid, cname, marks). The common attribute sid is used to join both tables.
+
+**1. Students with marks greater than 80:**
+
+This query retrieves high-performing students by applying a selection condition on marks.
+
+SELECT S.name, S.dept, C.cname, C.marks
+FROM Student S
+JOIN Course C ON S.sid = C.sid
+WHERE C.marks > 80;
+
+**2. Department-wise and subject-wise students (marks ≥ 30):**
+
+This query filters moderately passed students and organizes output by department and course.
+
+SELECT S.dept, C.cname, S.name, C.marks
+FROM Student S
+JOIN Course C ON S.sid = C.sid
+WHERE C.marks ≥ 30;
+
+**Conclusion:** JOIN operation is essential to combine student identity with course performance data.
+
+**Related info:** ICB, AP, 26
+
+**Q4: Consider the following relation:Employee (EmpID, Name, Department, Salary)Write an SQL query to retrieve the Department, the total number of employees, and the average salary for each department. The output should display one record for each department.**
+
+**Answer:** SELECT Department, COUNT(EmpID) AS TotalEmployees, AVG(Salary) AS AverageSalary FROM Employee GROUP BY Department;
+
+**Explanation:** `
+SELECT
+Department,
+COUNT(EmpID) AS TotalEmployees,
+AVG(Salary) AS AverageSalary
+FROM Employee
+GROUP BY Department;
+`
+
+**Explanation**
+
+**Department** → Displays the department name.
+**COUNT(EmpID)** → Counts the total number of employees in each department.
+**AVG(Salary)** → Calculates the average salary of employees in each department.
+**GROUP BY Department** → Groups all employees by department and returns one record for each department.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+**Q5: Write an SQL query to retrieve the department name and the average salary from two tables named Department and Employee.**
+
+**Answer:** SELECT d.dept_name, AVG(e.salary) AS average_salary
+
+**Explanation:** **SELECT d.dept_name, AVG(e.salary) AS average_salary
+FROM department d
+JOIN employee e ON d.dept_id = e.dept_id
+GROUP BY d.dept_name;
+
+**
+
+**Related info:** Islami, QA(Engineer), 25
+
+**Q6: 7. Write SQL command from the following tables. Employee (ename, street, city) Works (ename, cname, salary, joindate) Company (cname, city) Manages (ename, mname)(a) Find name, street, city who work for First Corporation Bank and earn more than 30000(b) Find name of all employees, who live in the same city and company for which they work.(c) Give all employees of First Century Bank 10 percent salary raise.(d) Find the company with payroll less than 100000.**
+
+**Answer:** a) answer:
+
+**Explanation:** `SELECT cname
+FROM Works
+GROUP BY cname
+HAVING SUM(salary) \< 100000;
+`
+
+b)answer:
+
+`SELECT e.ename
+FROM Employee e, Works w, Company c
+WHERE e.city = c.city
+AND w.cname = c.cname
+AND e.ename = w.ename
+AND e.city = w.city;
+`
+
+c)answer:
+
+`UPDATE Works
+SET salary = salary + salary * 0.1
+WHERE cname = 'First Century Bank';
+`
+
+d)answer:
+
+`SELECT cname
+FROM Works
+GROUP BY cname
+HAVING SUM(salary) \< 100000;
+`
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q7: A transaction consists of a sequence of query and/or update statements. SQL statement must be required to end the transaction. List the SQL statements, required to end the transaction and also write their functions.**
+
+**Answer:** A Transaction is a sequence of one or more SQL statements executed as a single logical unit of work.
+
+**Explanation:** A **Transaction** is a sequence of one or more SQL statements executed as a single logical unit of work. A transaction must be terminated using SQL transaction control statements.
+
+**SQL Statements to End a Transaction**
+
+| SQL Statement | Function |
+|---|---|
+| COMMIT | Permanently saves all changes made during the current transaction to the database. |
+| ROLLBACK | Undoes all changes made during the current transaction since the last COMMIT or SAVEPOINT. |
+| SAVEPOINT | Creates a checkpoint within a transaction so that the transaction can be rolled back to that point if needed. |
+| ROLLBACK TO SAVEPOINT | Restores the transaction to a previously created SAVEPOINT without cancelling the entire transaction. |
+
+**COMMIT** saves the transaction permanently, **ROLLBACK** cancels the transaction, and **SAVEPOINT** allows partial rollback within a transaction.
+
+**Related info:** CB, O(IT), 20
+
+**Q8: Consider the following relation: Sales(sales_id, salesman, region, sale_amount, sale_date) ,Write an SQL query to display the region, average sale amount, and total number of sales for each region where: The average sale amount exceeds BDT 50,000 and the total number of sales in that region is at least 5.**
+
+**Answer:** The following query displays the region, average sale amount, and total number of sales for each region where the average sale amount is greater than BDT…
+
+**Explanation:** **SQL Query**
+
+The following query displays the **region**, **average sale amount**, and **total number of sales** for each region where the average sale amount is greater than **BDT 50,000** and the total number of sales is at least **3**.
+
+`SELECT region,
+
+AVG(sale_amount) AS avg_sale_amount,
+
+COUNT(*) AS total_sales
+
+FROM Sales
+
+GROUP BY region
+
+HAVING AVG(sale_amount) > 50000
+
+AND COUNT(*) ≥ 3;`
+
+**Related info:** Combined Bank, SO-IT, 25
+
+**Q9: Below tables are given,Employee (employee_id, name, salary, department)Leave (employee_id, date, reason, no_leaves)Holiday (Date, description)(i) Write mapping cardinality between 'Employee' and 'Holiday' table. (ii) Write query to show all employee's leave count. (iii) Write query to show employees who are in 'HR' department and have taken at least 5 leaves.**
+
+**Answer:** (i)
+
+**Explanation:** (ii)
+
+`SELECT employee_id, COUNT(employee_id)
+FROM Leave
+GROUP BY employee_id;
+`
+
+iii)
+
+`SELECT *
+FROM employee
+WHERE employee_id IN (
+SELECT employee_id
+FROM leave
+GROUP BY employee_id
+HAVING COUNT(employee_id) > 5
+);
+`
+
+**Related info:** Rupali, ANE, 21
+
+**Q10: Database Query: Four table is given.(table missing)a) Write a query for find the Publisher name which location is 'Dhaka' and which book is published after 1980 year.**
+
+**Answer:** Apprx..
+
+**Explanation:** `SELECT p_name
+FROM publication
+WHERE loc = 'dhaka'
+AND p_date > 1980;
+`
+
+**Related info:** Sonali, O(it), 21
+
+**Q11: Write a query to change the type of Book name 'Science' to 'Computer Science' which branch name is 'Dhaka' city**
+
+**Answer:** Apprx..
+
+**Explanation:** `
+UPDATE BOOK
+SET Book_name = 'Computer Science'
+WHERE Book_name = 'Science';
+`
+
+**Related info:** Sonali, O(it), 21
+
+**Q12: A database contains a table named Hospital(HospitalID, HospitalName, Specialization, PatientCount). Write an SQL query to display the names of the five hospitals that specialize in accident treatment and have treated the highest number of patients.[assume]**
+
+**Answer:** FROM Hospital
+
+**Explanation:** `
+SELECT HospitalName
+
+FROM Hospital
+
+WHERE Specialization = 'Accident Treatment'
+
+ORDER BY PatientCount DESC
+
+LIMIT 5;
+`
+
+**Explanation:**
+
+- **WHERE** filters hospitals specializing in accident treatment.
+- **ORDER BY PatientCount DESC** sorts hospitals from highest to lowest patient count.
+- **LIMIT 5** returns the top five hospitals.
+
+**Related info:** Combined Bank, ADA-23, 26
+
+**Q13: A developer writes the SQL statement SELECT EmployeeName, Salary FROM Employees WHERE Salary > AVG(Salary);, but the query generates an error. Identify the problem and write a corrected SQL query.[assume]**
+
+**Answer:** Problem Identification: The query is incorrect because AVG(Salary) is an aggregate function and cannot be used directly in the WHERE clause.
+
+**Explanation:** **Problem Identification:** The query is incorrect because **AVG(Salary)** is an aggregate function and cannot be used directly in the WHERE clause. Aggregate functions must be computed using a subquery.
+
+**Incorrect Query:**
+
+`
+SELECT EmployeeName, Salary
+
+FROM Employees
+
+WHERE Salary > AVG(Salary);`
+
+**Why it fails:**
+
+- WHERE clause is evaluated before aggregation.
+- AVG(Salary) requires grouped or subquery context.
+
+**Correct Query:**
+
+SELECT EmployeeName, Salary
+
+FROM Employees
+
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+
+**Explanation:**
+
+- The subquery calculates the average salary first.
+- Main query compares each employee salary with the computed average.
+
+**Related info:** Combined Bank, ADA-23, 26
+
+**Q14: From an Employee table, write SQL statements according to the following question: (a) Find out the employees who join on the same date. (b) Find those employees whose salary is greater than 8,000 and less than 25,000.**
+
+**Answer:** Assume the Employee table contains the following columns:
+
+**Explanation:** **SQL Queries for the Employee Table**
+
+Assume the **Employee** table contains the following columns:
+
+- employee_id — Employee ID
+- employee_name — Employee Name
+- join_date — Joining Date
+- salary — Employee Salary
+
+**(a) Find the employees who joined on the same date.**
+
+First, identify the joining dates that occur more than once, then retrieve the employees having those dates:
+
+SELECT *
+FROM Employee
+WHERE join_date IN (
+SELECT join_date
+FROM Employee
+GROUP BY join_date
+HAVING COUNT(*) > 1
+);
+
+**Explanation:**
+
+- GROUP BY join_date → Groups employees according to their joining date.
+- HAVING COUNT(*) > 1 → Selects dates on which more than one employee joined.
+- The outer query displays all employees whose joining date matches those dates.
+
+**(b) Find employees whose salary is greater than 8,000 and less than 25,000.**
+
+SELECT *
+FROM Employee
+WHERE salary > 8000
+AND salary \< 25000;
+
+**Explanation:**
+
+- salary > 8000 → The salary must be greater than 8,000.
+- salary \< 25000 → The salary must be less than 25,000.
+- AND → Both conditions must be true.
+
+**Alternative for (b):**
+
+SELECT *
+FROM Employee
+WHERE salary BETWEEN 8001 AND 24999;
+
+**Important:** BETWEEN is inclusive. Therefore, for the exact condition **greater than 8,000 and less than 25,000**, using **\> 8000** and **\< 25000** is clearer and safer.
+
+**Related info:** Dwasa,AME,25
+
+**Q15: You have tables EMPLOYEES (ID, Name, DeptID) and DEPARTMENTS (DeptID, DeptName). Write pseudo-SQL logic to get employee names who work in 'IT'.**
+
+**Answer:** Given Tables:
+
+**Explanation:** **Given Tables:**
+EMPLOYEES (ID, Name, DeptID)
+DEPARTMENTS (DeptID, DeptName)**Objective:**
+To get the list of employee names who work in the **IT** department.**Logical Steps:**
+
+- Identify the DeptID of the department where DeptName is **IT**.
+- Match this DeptID with the DeptID in the EMPLOYEES table.
+- Select the Name of employees who belong to the IT department.
+
+**Pseudo-SQL Logic:**
+
+`SELECT E.Name
+FROM EMPLOYEES E
+JOIN DEPARTMENTS D
+ON E.DeptID = D.DeptID
+WHERE D.DeptName = 'IT'`
+
+**Related info:** Combined Bank, O(IT-22), 26
+
+**Q16: Four queries(table client, salesman, sale, order etc) (unable to collect this question)**
+
+**Answer:** **Not available in source**
+
+**Related info:** SB & JB, ADA, 22
+
+## Others
+
+**Q17: Let a database has two tables, Customers and Orders. The following figure shows the partial data of these two tables. Based on this partial data, explain Inner, Left, Right and Full join. Show the result set of each join operation**
+
+**Answer:** An Inner Join returns only the rows that have matching values in both tables.
+
+**Explanation:** **Inner Join:**
+
+An Inner Join returns only the rows that have matching values in both tables.
+
+`SELECT Customers.ID, Customers.FirstName, Orders.OrderID, Orders.Amount
+FROM Customers
+INNER JOIN Orders ON Customers.ID = Orders.CustomerID;`
+
+**Result Set:**
+
+| ID | First Name | Order ID | Amount |
+|---|---|---|---|
+| 3 | Belal | 2 | 500 |
+| 5 | Helal | 4 | 800 |
+
+**Left Join (or Left Outer Join):**
+
+A Left Join returns all rows from the left table (Customers), and the matched rows from the right table (Orders). If there is no match, the result is NULL on the right side.
+
+`SELECT Customers.ID, Customers.FirstName, Orders.OrderID, Orders.Amount
+FROM Customers
+LEFT JOIN Orders ON Customers.ID = Orders.CustomerID;`
+
+**Result Set:**
+
+| ID | First Name | Order ID | Amount |
+|---|---|---|---|
+| 1 | Rahim | NULL | NULL |
+| 2 | Karim | NULL | NULL |
+| 3 | Belal | 2 | 500 |
+| 4 | Rony | NULL | NULL |
+| 5 | Helal | 4 | 800 |
+
+**Right Join (or Right Outer Join):**
+
+A Right Join returns all rows from the right table (Orders), and the matched rows from the left table (Customers). If there is no match, the result is NULL on the left side.
+
+`SELECT Customers.ID, Customers.FirstName, Orders.OrderID, Orders.Amount
+FROM Customers
+RIGHT JOIN Orders ON Customers.ID = Orders.CustomerID;`
+
+**Result Set:**
+
+| ID | First Name | Order ID | Amount |
+|---|---|---|---|
+| NULL | NULL | 1 | 200 |
+| 3 | Belal | 2 | 500 |
+| NULL | NULL | 3 | 300 |
+| 5 | Helal | 4 | 800 |
+| NULL | NULL | 5 | 150 |
+
+**Full Join (or Full Outer Join):**
+
+A Full Join returns all rows when there is a match in either the left (Customers) or right (Orders) table. Rows without a match in one of the tables will have NULLs in the corresponding columns.
+
+`SELECT Customers.ID, Customers.FirstName, Orders.OrderID, Orders.Amount
+FROM Customers
+FULL OUTER JOIN Orders ON Customers.ID = Orders.CustomerID;`
+
+**Result Set:**
+
+| ID | First Name | Order ID | Amount |
+|---|---|---|---|
+| 1 | Rahim | NULL | NULL |
+| 2 | Karim | NULL | NULL |
+| 3 | Belal | 2 | 500 |
+| 4 | Rony | NULL | NULL |
+| 5 | Helal | 4 | 800 |
+| NULL | NULL | 1 | 200 |
+| NULL | NULL | 3 | 300 |
+| NULL | NULL | 5 | 150 |
+
+**Related info:** Combined Bank, SO(IT), 24
+
+**Q18: Explain the distinct filtering behaviors of a WHERE clause versus a HAVING clause withing a SQL statement containing an aggregate execution layout.**
+
+**Answer:** In SQL, both WHERE and HAVING are used to filter data, but they operate at different stages of query execution and serve different purposes.
+
+**Explanation:** **WHERE vs HAVING Clause in SQL**
+
+In SQL, both WHERE and HAVING are used to filter data, but they operate at different stages of query execution and serve different purposes. Understanding their behavior is essential when working with aggregate functions like SUM, COUNT, AVG, MIN, and MAX.
+
+**1. WHERE Clause**
+
+The WHERE clause filters **individual rows** before any grouping or aggregation takes place. It works directly on raw table data.
+
+- **Stage:** Executes before GROUP BY and aggregate functions
+- **Scope:** Filters individual rows based on column values
+- **Aggregate functions:** Cannot be used directly in WHERE
+- **Performance:** Reduces row count early, improving efficiency of later operations
+
+**Example:**
+
+Select only employees from the Sales department before calculating average salary.
+
+`SELECT dept, AVG(salary)
+FROM employees
+WHERE dept = 'Sales'
+GROUP BY dept;
+`
+
+Here, WHERE first filters rows where dept = 'Sales', and then AVG is calculated on the filtered dataset.
+
+**2. HAVING Clause**
+
+The HAVING clause filters **groups of rows** after grouping and aggregation are completed. It works on aggregated results.
+
+- **Stage:** Executes after GROUP BY and aggregation
+- **Scope:** Filters grouped results
+- **Aggregate functions:** Can be used in HAVING
+- **Performance:** Works after aggregation, so it cannot reduce initial row processing
+
+**Example:**
+
+Show only departments where the average salary is greater than 50,000.
+
+`SELECT dept, AVG(salary)
+FROM employees
+GROUP BY dept
+HAVING AVG(salary) > 50000;
+`
+
+Here, GROUP BY creates department groups, AVG calculates the average, and HAVING filters groups based on the aggregated value.
+
+**3. Execution Order in SQL**
+
+| Order | Clause | Action |
+|---|---|---|
+| 1 | FROM | Identify source table |
+| 2 | WHERE | Filter individual rows |
+| 3 | GROUP BY | Group filtered rows |
+| 4 | Aggregate | Apply SUM, COUNT, AVG, etc. |
+| 5 | HAVING | Filter grouped results |
+| 6 | SELECT | Select columns for output |
+| 7 | ORDER BY | Sort final output |
+
+**4. Combined Example**
+
+Find departments in the Sales region where total sales exceed 100,000.
+
+`SELECT region, SUM(sales) AS total
+FROM orders
+WHERE region = 'Sales'
+GROUP BY region
+HAVING SUM(sales) > 100000;
+`
+
+- **WHERE region = 'Sales':** Filters individual rows belonging to Sales region
+- **GROUP BY region:** Groups remaining rows by region
+- **SUM(sales):** Computes total sales per group
+- **HAVING SUM(sales) > 100000:** Filters groups based on aggregated result
+
+**Related info:** RAKUB, ANSE, 26
+
+## SQL
+
+**Q19: Analize the following code:SELECT d.department_name, AVG(e.salary) AS average_salary FROM employees e JOIN department d ON e.department_id = d.department_id WHERE e.salary > (SELECT AVG(salary) FROM employees) GROUP BY d.department_name HAVING COUNT(*) > 2 ORDER BY average_salary DESC;**
+
+**Answer:** This clause selects the department name and calculates the average salary of employees in each department.
+
+**Explanation:** **`SELECT d.department_name, AVG(e.salary) AS average_salary`**
+
+This clause selects the department name and calculates the average salary of employees in each department.
+
+**`FROM employees e`**
+
+This clause specifies the `employees` table as the main data source and uses `e` as an alias.
+
+**`JOIN department d ON e.department_id = d.department_id`**
+
+This join links employees with their departments using the common `department_id`.
+
+**`WHERE e.salary > (SELECT AVG(salary) FROM employees)`**
+
+This condition filters employees whose salary is higher than the overall average salary of all employees.
+
+**`GROUP BY d.department_name`**
+
+This clause groups records by department name to calculate aggregate values.
+
+**`HAVING COUNT(*) > 2`**
+
+This condition ensures that only departments with more than two employees are included.
+
+**`ORDER BY average_salary DESC`**
+
+This clause sorts the result in descending order based on average salary.
+
+**Related info:** CB, O(IT), 23
+
+**Q20: Suppose we have a relational database with five tables. table key Attributes S(sid, A)Sid T(tid, B) Tid U(uid, C) Uid R(sid, tid, D) sid, tid Q(tid, uid, E) tid, uid Here R implements a many-to-many relationship between the entities implemented with tables S and T, and Q implements a many-to-many relationship between the entities implemented with tables T and U. (a) Write an SQL query that returns all records of the form sid, uid where sid is the key of an S- record and uid is the key of a U-record and these two records are related through the relations R and Q. Use SELECT and not SELECT DISTINCT in your query.(b) Write an SQL query that returns records of the form A, C where the A-value is from an S- record and the C-value is from a U-record and these two records are related through the relations R and Q. Use SELECT and not SELECT DISTINCT in your query.**
+
+**Answer:** a) answer:
+
+**Explanation:** **We need to retrieve sid from table R and uid from table Q, where the two tables are related through the common column tid.**
+
+SELECT R.sid, Q.uid
+FROM R
+JOIN Q ON R.tid = Q.tid;
+
+**Explanation**:
+
+- **R.sid:** Selects the sid from table R.
+- **Q.uid:** Selects the uid from table Q.
+- The **JOIN** connects **R** and **Q** through their **tid** columns, which establish the relationship between the two tables.
+
+b) answer:
+
+**Here, we need to select A from table S and C from table U, connecting them through the relations R and Q.**
+
+SELECT S.A, U.C
+FROM S
+JOIN R ON S.sid = R.sid
+JOIN Q ON R.tid = Q.tid
+JOIN U ON Q.uid = U.uid;
+
+**Explanation**:
+
+- **S.A:** Selects the A-value from the S table (which corresponds to sid).
+- The first **JOIN** connects table **S** with table **R** through **sid**.
+- The second **JOIN** connects **R** and **Q** on **tid**.
+- Finally, **Q** is connected to **U** via **uid**, allowing us to select **C** from **U**.
+
+**Related info:** CB, AP, 23
+
+**Q21: What is the full meaning of SQL? List of the aggregate function. Write SQL Query of a table and its output.**
+
+**Answer:** **Not available in source**
+
+**Related info:** CB, AP, 20
+
+**Q22: Consider you are given a database of a pet society with the following relations: Animals (ID: integer, Name: string, PrevOwner: string, DateAdmitted: date, Type: string) Adopter (PSIN: integer, Name: string, Address: string, OtherAnimals: integer) Adoption (AnimalID: integer, PSIN: integer, AdoptDate: date, chipNo: integer) Give an SQL query that lists the total number of adoptions on June 30, 2024, for each animal type.**
+
+**Answer:** SELECT A.Type AS AnimalType,
+
+**Explanation:** COUNT(*) AS TotalAdoptions
+FROM Animals A
+JOIN Adoption AD ON A.ID = AD.AnimalID
+WHERE AD.AdoptDate = '2024-06-30'
+GROUP BY A.Type;
+
+**Related info:** Combined Bank, O(IT), 24
+
+**Q23: Analyze the output of the following SQL : SELECT department_name, AVG(salary) AS average_salary FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE salary > ( SELECT AVG(salary) FROM employees WHERE department_id = d.department_id ) GROUP BY department_name HAVING COUNT(*) > 2 ORDER BY average_salary DESC;**
+
+**Answer:** SELECT Clause: The SELECT clause specifies which columns or calculated values will appear in the result.
+
+**Explanation:** **Explanation of SQL Query Clauses**
+
+**SELECT Clause:** The SELECT clause specifies which columns or calculated values will appear in the result.
+
+- `department_name` selects the department name from the `departments` table.
+- `AVG(salary) AS average_salary` calculates the average salary of selected employees and renames it as `average_salary`.
+
+**FROM Clause:** The FROM clause specifies the tables used in the query.
+
+- `employees e` selects the employees table with alias `e`.
+- `JOIN departments d ON e.department_id = d.department_id` joins employees with departments using `department_id`.
+
+**WHERE Clause:** The WHERE clause filters rows before grouping.
+
+- `salary > (SELECT AVG(salary) FROM employees WHERE department_id = d.department_id)` selects employees whose salary is greater than the average salary of their department.
+
+**GROUP BY Clause:** The GROUP BY clause groups rows to perform aggregate calculations.
+
+- `GROUP BY department_name` groups employees by department name.
+
+**HAVING Clause:** The HAVING clause filters groups after aggregation.
+
+- `HAVING COUNT(*) > 2` selects only departments with more than two qualifying employees.
+
+**ORDER BY Clause:** The ORDER BY clause sorts the final result.
+
+- `ORDER BY average_salary DESC` sorts departments by average salary in descending order.
+
+**Related info:** Rupali, ANE, 23
+
+## Misc
+
+**Q24: Consider a STUDENTS table with the following attributes: StudentID, Name, Department, and Marks.(i) Write an SQL query to display only StudentID, Name, and Marks for students scoring more than 80 marks.(ii) Write an SQL query to count how many students scored more than 80 marks in each Department.**
+
+**Answer:** SELECT StudentID, Name, Marks FROM STUDENTS WHERE Marks > 80;
+
+**Explanation:** **(i) SQL Query to Display StudentID, Name, and Marks for Students Scoring More Than 80 Marks**
+
+`SELECT StudentID, Name, Marks
+FROM STUDENTS
+WHERE Marks > 80;
+`
+
+**Explanation:**
+
+- **SELECT** chooses the required columns.
+- **FROM STUDENTS** specifies the table name.
+- **WHERE Marks > 80** filters students who scored more than 80 marks.
+
+**(ii) SQL Query to Count Students Scoring More Than 80 Marks in Each Department**
+
+`SELECT Department, COUNT(*) AS Total_Students
+FROM STUDENTS
+WHERE Marks > 80
+GROUP BY Department;
+`
+
+**Explanation:**
+
+- **COUNT(*)** counts the number of students.
+- **GROUP BY Department** groups records department-wise.
+- **WHERE Marks > 80** considers only students scoring above 80.
+
+**Related info:** Combined Bank, O(IT-23), 26

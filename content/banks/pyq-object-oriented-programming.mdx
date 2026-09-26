@@ -1,0 +1,923 @@
+---
+title_en: "Object Oriented Programming (OOP) — Solved Questions & PYQ"
+title_bn: "অবজেক্ট-ওরিয়েন্টেড প্রোগ্রামিং (ওওপি) — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "46 questions from the IT Job QnS Object Oriented Programming (OOP) topic — 15 with worked answers and explanations, 1 without a text solution in the source, 30 previous-year questions with exam tags."
+summary_bn: "IT Job QnS-এর Object Oriented Programming (OOP) টপিকের 46টি প্রশ্ন — 15টির সমাধান ও ব্যাখ্যা, 1টির টেক্সট সমাধান সোর্সে নেই, 30টি পূর্ববর্তী পরীক্ষার প্রশ্ন।"
+---
+
+<Callout type="info">
+**Topic:** Object Oriented Programming (OOP) — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Object Oriented Programming
+
+**Q1: Explain the concepts of Inheritance and Polymorphism in Java. Write a Java program to demonstrate method overriding.**
+
+**Answer:** Inheritance is an Object-Oriented Programming (OOP) feature in which one class (child/subclass) acquires the properties and methods of another class…
+
+**Explanation:** **Inheritance**
+
+**Inheritance** is an Object-Oriented Programming (OOP) feature in which one class (child/subclass) acquires the properties and methods of another class (parent/superclass). It promotes **Code Reusability**, **Extensibility**, and easier maintenance.
+
+**Polymorphism**
+
+**Polymorphism** means "many forms." It allows the same method to perform different behaviors depending on the object that invokes it. In Java, **Method Overriding** is an example of **Runtime Polymorphism**.
+
+**Java Program: Demonstration of Method Overriding**
+
+`
+class Animal \{
+void sound() \{
+System.out.println("Animal makes a sound");
+\}
+\}
+
+class Dog extends Animal \{
+@Override
+void sound() \{
+System.out.println("Dog barks");
+\}
+\}
+
+public class Main \{
+public static void main(String[] args) \{
+Animal obj = new Dog();
+obj.sound();
+\}
+\}
+`
+
+**Output**
+
+Dog barks
+
+**Explanation**
+
+The **Dog** class inherits the **Animal** class and overrides the **sound()** method. At runtime, the overridden method of the **Dog** class is executed, demonstrating **Method Overriding** and **Runtime Polymorphism**.
+
+**Related info:** CB, O(IT-24), 26
+
+**Q2: An Abstract class Player with two sub class Bowler and Batsman, Abstract class have me abstract method average, also have constructor and a string function that display ame bowler or batsman. Batsman class implement abstract function average and isplay result, Batsman class have run and number match data. Now write a Java rogram and show Batsman average run.**
+
+**Answer:** abstract class Player \{
+
+**Explanation:** `abstract class Player \{
+String name;
+
+// Constructor
+Player(String name) \{
+this.name = name;
+\}
+
+// Abstract method
+abstract double average();
+
+// Display player type
+String displayType(String type) \{
+return "Player Type: " + type;
+\}
+\}
+
+// Batsman class
+class Batsman extends Player \{
+int runs;
+int matches;
+
+// Constructor
+Batsman(String name, int runs, int matches) \{
+super(name);
+this.runs = runs;
+this.matches = matches;
+\}
+
+// Implement abstract method
+@Override
+double average() \{
+return (double) runs / matches;
+\}
+
+// Display Batsman result
+void displayResult() \{
+System.out.println(displayType("Batsman"));
+System.out.println("Name: " + name);
+System.out.println("Total Runs: " + runs);
+System.out.println("Number of Matches: " + matches);
+System.out.println("Batting Average: " + average());
+\}
+\}
+
+// Bowler class
+class Bowler extends Player \{
+
+Bowler(String name) \{
+super(name);
+\}
+
+// Implement abstract method
+@Override
+double average() \{
+return 0;
+\}
+
+// Display Bowler result
+void displayResult() \{
+System.out.println(displayType("Bowler"));
+System.out.println("Name: " + name);
+System.out.println("Bowler average is not calculated here.");
+\}
+\}
+
+// Main class
+public class Main \{
+public static void main(String[] args) \{
+
+// Create Batsman object
+Batsman batsman = new Batsman("Rahim", 500, 10);
+
+// Display batsman information
+batsman.displayResult();
+\}
+\}
+`
+
+Player Type: Batsman
+Name: Rahim
+Total Runs: 500
+Number of Matches: 10
+Batting Average: 50.0
+
+**Related info:** Janata, ASA, 21
+
+**Q3: Describe Dynamic memory allocation in programming in C.**
+
+**Answer:** Dynamic memory allocation in C refers to allocating memory at runtime using standard library functions.
+
+**Explanation:** **Dynamic Memory Allocation in C**
+
+**Dynamic memory allocation** in C refers to allocating memory at **runtime** using standard library functions. Unlike static memory, dynamic memory can be allocated and freed as needed during program execution.
+
+**Functions used:**
+
+- **malloc():** Allocates a block of memory.
+- **calloc():** Allocates memory and initializes it to zero.
+- **realloc():** Changes the size of previously allocated memory.
+- **free():** Releases allocated memory.
+
+**Example:**
+
+`int *ptr;
+ptr = (int*)malloc(5 * sizeof(int));`
+
+Here, memory for 5 integers is allocated dynamically.
+
+**Related info:** SPCBL, SAP, 22
+
+## Basic
+
+**Q4: What is the difference between object oriented programming and procedural object programming.**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q5: Explain Method Overloading and Method Overriding.**
+
+**Answer:** Method Overloading is an Object-Oriented Programming (OOP) feature that allows a class to have multiple methods with the same name but different parameter…
+
+**Explanation:** **Method Overloading and Method Overriding**
+
+**Method Overloading**
+
+**Method Overloading** is an Object-Oriented Programming (OOP) feature that allows a class to have multiple methods with the same name but different parameter lists. The methods must differ in the number, type, or order of parameters. This enables the same method name to perform different tasks based on the arguments passed to it. Method Overloading is an example of **Compile-time Polymorphism (Static Polymorphism)**.
+
+**Characteristics of Method Overloading**
+
+- Methods have the same name.
+
+- Methods must have different parameter lists (number, type, or order of parameters).
+
+- Return type alone cannot distinguish overloaded methods.
+
+- It occurs within the same class.
+
+- It is resolved during compile time.
+
+**Example**
+
+Suppose a class has a method named **add()**.
+
+add(int a, int b) → Adds two integers.
+
+add(int a, int b, int c) → Adds three integers.
+
+add(double a, double b) → Adds two decimal numbers.
+
+Although all methods have the same name **add()**, they perform different operations depending on the parameters supplied.
+
+**Method Overriding**
+
+**Method Overriding** is an Object-Oriented Programming (OOP) feature in which a subclass provides its own implementation of a method that is already defined in its superclass. The overriding method must have the same name, same parameter list, and compatible return type as the parent method. Method Overriding is an example of **Run-time Polymorphism (Dynamic Polymorphism)**.
+
+**Characteristics of Method Overriding**
+
+- Occurs between a superclass and a subclass.
+
+- The method name, parameters, and return type remain the same.
+
+- The child class provides a new implementation of the inherited method.
+
+- It is resolved during runtime using dynamic method dispatch.
+
+**Example**
+
+Suppose a parent class **Animal** contains a method named **sound()** that prints "Animal makes a sound".
+
+A child class **Dog** overrides the **sound()** method to print "Dog barks".
+
+When the **sound()** method is called using a Dog object, the overridden method in the Dog class is executed.
+
+**Difference Between Method Overloading and Method Overriding**
+
+| Feature | Method Overloading | Method Overriding |
+|---|---|---|
+| Definition | Same method name with different parameters. | Child class redefines a parent class method. |
+| Inheritance | Not required. | Required. |
+| Parameters | Must be different. | Must be the same. |
+| Return Type | Can be different, but not only difference. | Must be the same or compatible. |
+| Polymorphism | Compile-time (Static). | Run-time (Dynamic). |
+| Binding | Early Binding. | Late Binding. |
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q6: What is Object-Oriented Programming (OOP)? What are the main principles of OOP? What is the difference between Method Overloading and Method Overriding?**
+
+**Answer:** Object-Oriented Programming (OOP) is a programming style where the code is built around objects.
+
+**Explanation:** An object is a self-contained unit that holds both data (called attributes or properties) and the actions that can be performed on that data (called methods or functions). OOP helps organize large programs by breaking them into smaller, reusable, and manageable pieces.
+
+**Main Principles of OOP**
+
+**1. Encapsulation**
+
+Encapsulation means hiding the internal details of an object and only showing the necessary parts to the outside world. It protects data from being changed directly and keeps the code safe.
+
+**Example:** A bank account class hides the balance variable and only allows deposit or withdraw methods to change it.
+
+**2. Abstraction**
+
+Abstraction means showing only the essential features of an object while hiding the complex background details. It helps reduce complexity and makes the program easier to use.
+
+**Example:** When you drive a car, you only use the steering and brakes. You do not need to know how the engine works inside.
+
+**3. Inheritance**
+
+Inheritance is a mechanism where a new class can take on the properties and methods of an existing class. It promotes code reuse and builds a relationship between parent and child classes.
+
+**Example:** A Dog class inherits from an Animal class. Dog gets all properties like name and age, plus its own method like bark().
+
+**4. Polymorphism**
+
+Polymorphism means the same method name can behave differently in different situations. It allows one interface to be used for different data types or classes.
+
+**Example:** A Shape class has a draw() method. Circle, Square, and Triangle classes override draw() to show different shapes.
+
+**Difference Between Method Overloading and Method Overriding**
+
+| Point | Method Overloading | Method Overriding |
+|---|---|---|
+| Definition | Using the same method name multiple times in the same class with different parameters. | Redefining a parent class method in a child class with the same name and parameters. |
+| Class | Occurs within the same class. | Occurs between parent class and child class. |
+| Parameters | Parameters must be different (number, type, or order). | Parameters must be exactly the same. |
+| Return Type | Return type can be different. | Return type must be the same or compatible. |
+| Binding | Compile-time (static) polymorphism. | Run-time (dynamic) polymorphism. |
+| Example | add(int a, int b) and add(double a, double b). | Parent class show() and child class show() with same signature. |
+
+**Code Example of Method Overloading:**
+
+`class Calculator \{int add(int a, int b) \{
+return a + b;
+\}
+double add(double a, double b) \{
+return a + b;
+\}
+\}`
+
+**Code Example of Method Overriding:**
+
+class Animal \{
+void sound() \{
+System.out.println("Animal makes sound");
+\}
+\}
+
+class Dog extends Animal \{
+void sound() \{
+System.out.println("Dog barks");
+\}
+\}
+
+**Related info:** Combined Bank, SO(IT-23), 26
+
+**Q7: Write the definition of Inheritance, Polymorphism with coding example.**
+
+**Answer:** Inheritance is an important concept of Object-Oriented Programming (OOP) where one class (child class) can acquire the properties and methods of another…
+
+**Explanation:** **Inheritance:**
+
+**Inheritance** is an important concept of **Object-Oriented Programming (OOP)** where one class (child class) can acquire the properties and methods of another class (parent class). It helps in **code reuse** and creates a relationship between classes.
+
+**Example (C++):**
+
+`\#include \<iostream>
+using namespace std;
+
+class Animal \{
+public:
+void eat() \{
+cout \<\< "Animal is eating" \<\< endl;
+\}
+\};
+
+class Dog : public Animal \{
+public:
+void bark() \{
+cout \<\< "Dog is barking" \<\< endl;
+\}
+\};
+
+int main() \{
+Dog d;
+d.eat(); // inherited function
+d.bark(); // own function
+\}`
+
+In this example, the **Dog** class inherits the **eat()** function from the **Animal** class.
+
+**Polymorphism:**
+
+**Polymorphism** means “many forms”. It allows the same function name to perform different tasks depending on the situation. It improves flexibility and reusability in programs.
+
+**Example (Function Overloading in C++):**
+
+`\#include \<iostream>
+using namespace std;
+
+class Math \{
+public:
+int add(int a, int b) \{
+return a + b;
+\}
+
+double add(double a, double b) \{
+return a + b;
+\}
+\};
+
+int main() \{
+Math m;
+cout \<\< m.add(5, 3) \<\< endl;
+cout \<\< m.add(4.5, 2.3) \<\< endl;
+\}`
+
+Here the function **add()** works in different ways depending on the data type of the arguments. This is an example of polymorphism.
+
+**Related info:** 6 Bank & FI, AP, 21
+
+**Q8: ৫ (খ) কোন object-oriented programming language ব্যবহার করে একটি program লিখুন, যা recursive function ব্যবহার করে Fibonacci series প্রদান করবে।**
+
+**Answer:** \#include \<iostream>
+
+**Explanation:** `\#include \<iostream>
+using namespace std;
+
+// Recursive function
+int fibonacci(int n)
+\{
+if (n == 0)
+return 0;
+
+if (n == 1)
+return 1;
+
+return fibonacci(n - 1) + fibonacci(n - 2);
+\}
+
+int main()
+\{
+int n;
+
+cout \<> n;
+
+cout \<\< "Fibonacci Series: ";
+
+for (int i = 0; i \< n; i++)
+\{
+cout \<\< fibonacci(i) \<\< " ";
+\}
+
+return 0;
+\}
+
+`
+
+Enter the number of terms: 10
+Fibonacci Series: 0 1 1 2 3 5 8 13 21 34
+
+**Related info:** BPSC_MoHA_AP, 26
+
+**Q9: Explain the concept of inheritance in Object-Oriented Programming. Name and briefly describe three common types of inheritance used in OOP.**
+
+**Answer:** Inheritance is an OOP concept where a child (derived) class inherits properties and behaviors from a parent (base) class.
+
+**Explanation:** **Inheritance in Object-Oriented Programming (OOP)**
+
+Inheritance is an OOP concept where a **child (derived) class** inherits properties and behaviors from a **parent (base) class**. It helps reuse existing code and represents real-world hierarchical relationships (like Animal → Dog).
+
+**Types of Inheritance**
+
+**1) Single Inheritance**
+
+One child class inherits from one parent class.
+
+Animal
+|
+Dog
+
+Here, **Dog** inherits features (like eating, breathing) from **Animal**.
+
+**2) Multiple Inheritance**
+
+One child class inherits from more than one parent class.
+
+Printer Scanner
+\ /
+\ /
+AllInOne
+
+Here, **AllInOne** inherits features of both **Printer** and **Scanner**.
+
+**3) Multilevel Inheritance**
+
+A class is derived from another derived class, forming a chain.
+
+Vehicle
+|
+Car
+|
+ElectricCar
+
+Here, **ElectricCar** indirectly inherits features from **Vehicle** through **Car**.
+
+**Related info:** Combined Bank, AP-22, 26
+
+**Q10: Write down the advantages of OOP over traditional structured programming language.**
+
+**Answer:** Object-Oriented Programming (OOP) provides several advantages over traditional structured programming languages, especially for developing large and complex…
+
+**Explanation:** **Advantages of Object-Oriented Programming (OOP) over Structured Programming**
+
+Object-Oriented Programming (OOP) provides several advantages over traditional structured programming languages, especially for developing large and complex software systems.
+
+- **Modularity:** OOP organizes programs into objects, making code easier to manage and understand.
+- **Reusability:** Classes and objects can be reused through inheritance, reducing code duplication.
+- **Encapsulation:** Data and methods are bundled together, improving data security and control.
+- **Abstraction:** OOP hides complex implementation details and shows only essential features.
+- **Maintainability:** Programs are easier to update, debug, and modify.
+- **Scalability:** OOP supports the development of large-scale applications efficiently.
+- **Real-World Modeling:** OOP closely represents real-world entities using objects.
+
+**Related info:** CB, O(IT), 23
+
+**Q11: What is programming? Give 4 example. Difference between structured and OOP programming**
+
+**Answer:** Programming is the process of writing instructions (code) that a computer follows to perform specific tasks.
+
+**Explanation:** **Programming**
+
+Programming is the process of writing **instructions (code)** that a computer follows to perform specific tasks.
+
+**Examples of Programming Languages**
+
+- **C**
+- **Java**
+- **Python**
+- **C++**
+
+**Difference Between Structured Programming and OOP**
+
+| Feature | Structured Programming | Object-Oriented Programming (OOP) |
+|---|---|---|
+| Approach | Function-based | Object-based |
+| Focus | Procedures/Functions | Objects & Classes |
+| Data Handling | Data and functions are separate | Data and methods are combined (Encapsulation) |
+| Reusability | Limited | High (Inheritance, Polymorphism) |
+| Examples | C | Java, C++, Python |
+
+**Related info:** Sonali Bank, ADA, 26
+
+**Q12: What is Polymorphism? Discuss different types of Polymorphism with examples.**
+
+**Answer:** Polymorphism means “having many forms.” It allows the same method or function to perform different tasks based on the context.
+
+**Explanation:** In simpler terms, it enables a single interface to represent different functionalities.
+
+*Polymorphism can be broadly categorized into two types:*
+
+- Compile-time Polymorphism (Static Polymorphism)
+- Runtime Polymorphism (Dynamic Polymorphism)
+
+**1. Compile-time Polymorphism (Static Polymorphism)**
+
+Compile-time polymorphism is achieved through method overloading and operator overloading. The method to be executed is determined at compile time based on the method signature.
+
+**2. Runtime Polymorphism (Dynamic Polymorphism)**
+
+Runtime polymorphism is achieved through method overriding. The method to be executed is determined at runtime based on the object being referred to.
+
+**🎥 Video Solution:**  Polymorphism & its types.
+
+**Related info:** Combined Bank, AP, 24
+
+**Q13: Difference between Compile time error & Runtime Error**
+
+**Answer:** Errors in programming can occur at two main stages:
+
+**Explanation:** when the code is being translated into machine language (compile-time) and when the program is actually running (runtime). Understanding the difference helps in faster debugging and writing more reliable code.
+
+**1. Compile-Time Error**
+
+A compile-time error is detected by the compiler before the program is executed. It means the code violates the rules of the programming language and cannot be translated into an executable program.
+
+- **When detected:** During compilation, before the program runs
+- **Cause:** Syntax mistakes, type mismatches, missing declarations, or incorrect language structure
+- **Fix:** The programmer must correct the code and recompile
+- **Program state:** No executable file is generated
+
+**Examples:**
+
+- Missing semicolon at the end of a statement
+- Using a variable that is not declared
+- Calling a method with incorrect arguments
+- Type mismatch (e.g., assigning a string to an integer variable)
+
+**Code Example:**
+
+`int x = "hello"; // Type mismatch
+System.out.println(y); // y is not declared
+`
+
+**2. Runtime Error**
+
+A runtime error occurs while the program is executing. The code compiles successfully, but execution fails due to unexpected conditions or invalid operations.
+
+- **When detected:** During program execution
+- **Cause:** Invalid operations, unexpected input, missing resources, or logic errors
+- **Fix:** Add error handling, validate input, or correct logic
+- **Program state:** Program may crash or behave unexpectedly during execution
+
+**Examples:**
+
+- Division by zero
+- Accessing an invalid array index
+- Opening a file that does not exist
+- Running out of memory
+
+**Code Example:**
+
+`int[] arr = \{1, 2, 3\};
+System.out.println(arr[5]); // ArrayIndexOutOfBoundsException
+
+int result = 10 / 0; // ArithmeticException
+`
+
+**Comparison Table:**
+
+| Aspect | Compile-Time Error | Runtime Error |
+|---|---|---|
+| Detection time | Before execution (compilation) | During execution |
+| Cause | Syntax or language rule violation | Invalid operation or unexpected condition |
+| Program runs? | No, compilation fails | Yes, but may crash or misbehave |
+| Fix method | Correct code and recompile | Add error handling or fix logic |
+| Examples | Missing semicolon, undeclared variable | Division by zero, null pointer |
+
+**Related info:** RAKUB, ANSE, 26
+
+**Q14: Explain how encapsulation and inheritance are advantageous in Object Oriented Programming?**
+
+**Answer:** Data Security: It hides internal details, preventing unauthorized access and misuse.
+
+**Explanation:** **Advantages of Encapsulation:**
+
+**Data Security:** It hides internal details, preventing unauthorized access and misuse.
+
+**Easy Maintenance:** Since data access is controlled, changes in the code don’t affect other parts.
+
+**Better Flexibility:** Internal workings of a class can be modified without affecting how others interact with it.
+
+**Less Complexity:** Users only need to know how to use the class, not its internal details.
+
+Improved Debugging: Restricting access to data makes it easier to find and fix bugs.
+
+**Advantages of Inheritance:**
+
+**Code Reusability:** A new class can use the properties and methods of an existing class, reducing duplicate code.
+
+**Clear Structure:** It helps in organizing code by creating a hierarchy of classes.
+
+**Easy Expansion:** New functionality can be added to a class without modifying existing code.
+
+**Simplifies Management:** Subclasses inherit properties from the parent class, making code more organized and efficient.
+
+**🎥 Video Solution:** How encapsulation and inheritance are advantageous in OOP
+
+**Related info:** Combined Bank, O(IT), 24
+
+**Q15: Determine overloading method, overridden method and hide super class method?**
+
+**Answer:** Method overloading occurs when multiple methods in the same class have the same method name but different parameter lists (different number, type, or order…
+
+**Explanation:** **Method Overloading, Method Overriding, and Method Hiding**
+
+**1. Method Overloading**
+
+Method overloading occurs when multiple methods in the **same class** have the **same method name** but **different parameter lists** (different number, type, or order of parameters).
+
+- Resolved at **compile time**
+- Improves code readability and flexibility
+
+**Example:**
+
+`int add(int a, int b)
+int add(int a, int b, int c)`
+
+**2. Method Overriding**
+
+Method overriding happens when a **subclass provides a new implementation** of a method that is already defined in its **superclass** with the **same method signature**.
+
+- Occurs in **inheritance**
+- Resolved at **runtime** (runtime polymorphism)
+- Method must be **non-static**
+
+**Example:**
+
+`class Parent \{
+void show() \{ \}
+\}
+class Child extends Parent \{
+void show() \{ \}
+\}`
+
+**3. Method Hiding (Hiding Superclass Method)**
+
+Method hiding occurs when a **static method** in a subclass has the **same name and signature** as a static method in the superclass.
+
+- Applies only to **static methods**
+- Resolved at **compile time**
+- Not true overriding
+
+**Example:**
+
+`class Parent \{
+static void display() \{ \}
+\}
+class Child extends Parent \{
+static void display() \{ \}
+\}`
+
+**Summary Comparison**
+
+- **Overloading:** Same class, same method name, different parameters
+- **Overriding:** Subclass redefines superclass method (non-static)
+- **Hiding:** Static method in subclass hides static method of superclass
+
+**Related info:** BB, AP, 23
+
+## Inheritance
+
+**Q16: Inheritance is one of important issues for any object oriented programming language. The main advantage of Inheritance is the ability to reuse the code.Explain in brief different types of Inheritance.**
+
+**Answer:** Inheritance is one of the fundamental concepts of Object-Oriented Programming (OOP).
+
+**Explanation:** **Inheritance** is one of the fundamental concepts of **Object-Oriented Programming (OOP)**. It allows a new class (Derived Class) to inherit the properties and methods of an existing class (Base Class). This promotes **Code Reusability**, reduces code duplication, and improves maintainability.
+
+**Types of Inheritance**
+
+**1. Single Inheritance**
+A single **Derived Class** inherits from one **Base Class**.
+
+**Example:**
+Animal → Dog
+
+**2. Multiple Inheritance**
+A single **Derived Class** inherits from more than one **Base Class**. This type is supported in C++ but not directly in Java.
+
+**Example:**
+Teacher + Researcher → Professor
+
+**3. Multilevel Inheritance**
+A class inherits from another derived class, forming a chain of inheritance.
+
+**Example:**
+Animal → Mammal → Dog
+
+**4. Hierarchical Inheritance**
+Multiple **Derived Classes** inherit from a single **Base Class**.
+
+**Example:**
+Animal → Dog, Cat, Cow
+
+**5. Hybrid Inheritance**
+A combination of two or more inheritance types (such as Multiple and Multilevel Inheritance). It is commonly implemented using virtual inheritance in C++.
+
+**Example:**
+Combination of Single + Multiple + Multilevel Inheritance.
+
+**Inheritance** improves **Code Reusability**, reduces redundancy, simplifies maintenance, and supports efficient software development by allowing classes to reuse existing features.
+
+**Related info:** CB, O(IT), 20
+
+## Previous-year questions (no solutions in source)
+
+**Q17: Define Method Overloading and Method Overriding with examples.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — BPSC AP, 17th NTRCA(ICT) 2023; Bank SO(AME), RAKUB Programmer, BPSC AME 2021; NU AP 2020
+
+**Q18: Write the differences between structured programming and object-oriented programming.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — 45th BCS CSE 2024; Bank SO(AME) 2021
+
+**Q19: Inheritance is one of important issues of any object oriented programming language. Explain in brief different types of inheritance.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — officer(SBL-JBL-IT)-2020 | Combined Bank, Officer(IT) 2020
+
+**Q20: What is the Inheritance? What are the types of Inheritance in Java?**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — IBBL(Software)-2019
+
+**Q21: What is a constructor? How many types of constructors are used in Java?**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — IBBL(Software)-2019
+
+**Q22: What are the basic Concepts used in the Object oriented Programming language?**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — Uttara Bank(AP)-2019 | Pally Sa.-2018
+
+**Q23: Differentiate constructor and destructor with example.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — Pally Sa.-2018
+
+**Q24: Difference between method overloading and overriding in java.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — Agrani (o.)-2017 | DBBL-2016
+
+**Q25: What is polymorphism in the context of an object-oriented paradigm? Explain the method of overloading and method of overriding with suitable examples.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — Ministry of Food, Network/Website Manager(ICT)2025
+
+**Q26: What are the basic features of object-oriented concepts? Give example code for each of them.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — BPSC(AME)-24
+
+**Q27: What is the diamond problem of multiple Inheritance in C++?**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — BPSC AP 2023
+
+**Q28: Problem solving technique এর সংজ্ঞা দিন। Structured programming এবং object-oriented programming এর পার্থক্যগুলো লিখুন**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — 45 BCS, Computer Science
+
+**Q29: What are the various Access Specification in C++? Explain their purpose with example.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — BPSC, ADA 2022
+
+**Q30: Write the differences between structured programming and object-oriented programming.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — 45th BCS CSE 2024; Bank SO(AME) 2021
+
+**Q31: Object oriented programming এর যে কোন দুটি বৈশিষ্ট্য উদাহরণসহ ব্যাখ্যা করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — BPSC-(M.o.Commercee)-2021
+
+**Q32: Write down the Principle of OOP. What is Polymorphism? Write the name of 3 OOP language.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — DESCO SAE 2023; 40th BCS 2021
+
+**Q33: Object oriented programming এ Static binding ও Dynamic binding কি? ব্যাখ্যা করুন?**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — BPSC-(M.o.Commercee)-2021
+
+**Q34: Differences between Structured &amp; object oriented programming? write down 2 examples of both language.**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — AP ICT ministry-2021
+
+**Q35: Difference between Class and Structure.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BCIC(AP-25)
+
+**Q36: Explain OOP features.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — DPDC(AE)-25
+
+**Q37: You have three access specifiers in java object oriented language. Public, Private and Protected Mode (Y/N).**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — PetroBangla (AE-24)
+
+**Q38: Properties of OOP.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — TSS-AP-2023
+
+**Q39: কী কী ধারণার উপর ভিত্তি করে OOP প্রতিষ্ঠিত? ধারণাগুলো ব্যাখ্যা করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — 17th NTRCA(CSE) 2023
+
+**Q40: What is virtual function with example?**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BITAC AP 2023
+
+**Q41: Inheritance কী? উদাহরণসহ ব্যাখ্যা করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — 17th NTRCA(CSE) 2023
+
+**Q42: How many classes can be used in Hybrid Inheritance?**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BCC AP 2023
+
+**Q43: উদাহরণসহ Class এবং Object এর মধ্যে পার্থক্য ব্যাখ্যা করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — 17th NTRCA(CSE), (ICT) 2023
+
+**Q44: What is Polymorphism? Java language এর আলোকে ব্যাখ্যা কর।**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BTCL, JAM 2022
+
+**Q45: Briefly describe Abstraction, Encapsulation, Inheritance and polymorphism.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — Competition Commition(P)-2019
+
+**Q46: Briefly Describe Abstraction, Encapsulation.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BCC Programmer 2019

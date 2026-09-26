@@ -1,0 +1,1114 @@
+---
+title_en: "49th BCS Computer Science 2025 — MCQ Solutions"
+title_bn: "৪৯তম বিসিএস কম্পিউটার বিজ্ঞান ২০২৫ — এমসিকিউ সমাধান"
+summary_en: "All 100 MCQs of 49th BCS — Computer Science (2025) with options, correct answers and explanations where the source provides them."
+summary_bn: "49th BCS — Computer Science (2025) এর 100টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।"
+---
+
+<Callout type="info">
+**Paper:** Bangladesh Public Service Commission — 49th BCS — Computer Science (2025)
+
+**Source:** IT Job QnS — MCQ Job Solution. Every question shows its options; the answer line marks the correct option. Explanations are included when the source provides them.
+</Callout>
+
+## Multiple choice questions (Q1–Q100)
+
+**Q1: Which one is not an ACID property?**
+
+- **(A)** Authenticity
+- **(B)** Consistency
+- **(C)** Isolation
+- **(D)** Durability
+
+**Answer:** **(A) Authenticity**
+
+**Explanation:** ACID stands for: Atomicity – Transaction is all-or-nothing Consistency – Database remains valid before and after transaction Isolation – Concurrent transactions do not interfere Durability – Committed data is permanent Note: Authenticity relates to security, not transaction management. Therefore, it is not part of ACID.
+
+**Q2: Which of the following is a guided transmission medium?**
+
+- **(A)** Radiowave
+- **(B)** Microwave
+- **(C)** Coaxial Cable
+- **(D)** Infrared
+
+**Answer:** **(C) Coaxial Cable**
+
+**Explanation:** Guided media use physical cables to transmit signals. Coaxial cable is a physical wired medium. Radiowave, Microwave, and Infrared are wireless (unguided) media.
+
+**Q3: In C, to retain the values of variables between function calls, we should use:**
+
+- **(A)** auto
+- **(B)** extern
+- **(C)** static
+- **(D)** register
+
+**Answer:** **(C) static**
+
+**Explanation:** A static variable inside a function: Is initialized only once Retains its value between function calls Stored in static memory area Note: auto and register are temporary. extern is used for global variables across files.
+
+**Q4: Thrashing in memory management occurs when:**
+
+- **(A)** Page size is too small
+- **(B)** The system spends more time swapping pages than executing processes
+- **(C)** CPU utilization is very high
+- **(D)** Page table is too large
+
+**Answer:** **(B) The system spends more time swapping pages than executing processes**
+
+**Explanation:** Thrashing occurs when: Too many page faults happen RAM is insufficient System continuously swaps pages between disk and memory CPU stays busy swapping instead of executing programs.
+
+**Q5: _____ is used to store web addresses for future use?**
+
+- **(A)** Routing
+- **(B)** DNS resolution
+- **(C)** Caching
+- **(D)** ARP resolution
+
+**Answer:** **(C) Caching**
+
+**Explanation:** Caching stores frequently accessed web data locally (browser/proxy cache). This allows faster future access. DNS resolution translates domain names. Routing and ARP handle network addressing.
+
+**Q6: Which one is false with respect to a VLAN?**
+
+- **(A)** Provides a logical separation on Layer 2
+- **(B)** Improves security
+- **(C)** VLAN tag can distinguish traffic
+- **(D)** Increases network management complexity
+
+**Answer:** **(D) Increases network management complexity**
+
+**Explanation:** VLAN: Creates logical separation at Layer 2 Improves security by isolating traffic Uses VLAN tagging to distinguish traffic Actually simplifies management, not increases complexity So the false statement is that it increases complexity.
+
+**Q7: In virtual memory, TLB is used to:**
+
+- **(A)** Store instructions
+- **(B)** Control data transfers
+- **(C)** Handle cache misses
+- **(D)** Translate virtual address to physical address quickly
+
+**Answer:** **(D) Translate virtual address to physical address quickly**
+
+**Explanation:** TLB (Translation Lookaside Buffer): Caches recent virtual-to-physical address mappings Reduces memory access time Speeds up address translation
+
+**Q8: A router processes packets at 1 Gbps; if 10 packets (1200 bytes each) arrive at once, queuing delay for the 10th packet is:**
+
+- **(A)** 96
+- **(B)** 86.4
+- **(C)** 115.2
+- **(D)** 120
+
+**Answer:** **(B) 86.4**
+
+**Explanation:** 1200 bytes × 8 = 9600 bits Transmission time per packet: 9600 / 10⁹ = 9.6 microseconds 10th packet waits for 9 packets: 9 × 9.6 = 86.4 microseconds
+
+**Q9: _____ method is a first order optimization method.**
+
+- **(A)** Quasi-Newton
+- **(B)** Gradient descent
+- **(C)** Conjugate gradient
+- **(D)** Newton
+
+**Answer:** **(B) Gradient descent**
+
+**Explanation:** First-order methods use only first derivatives (gradient). Gradient descent uses gradient. Newton and Quasi-Newton use second derivatives (second-order).
+
+**Q10: Which criterion is not mandatory for a solution of critical section problem?**
+
+- **(A)** Mutual exclusion
+- **(B)** Bounded waiting
+- **(C)** Circular waiting
+- **(D)** Progress
+
+**Answer:** **(C) Circular waiting**
+
+**Explanation:** Critical section requirements: Mutual exclusion Progress Bounded waiting Circular waiting is related to deadlock, not critical section solution criteria.
+
+**Q11: For a n-element min-Heap:**
+
+- **(A)** The smallest element can be found anywhere in the heap
+- **(B)** It is a type of binary search tree
+- **(C)** Accessing an arbitrary element is an O(n) operation
+- **(D)** The largest element is always at the root
+
+**Answer:** **(C) Accessing an arbitrary element is an O(n) operation**
+
+**Explanation:** In a min-heap: Smallest element is at the root It is NOT a BST Searching arbitrary element requires scanning → O(n)
+
+**Q12: Cache hit rate = 80%; cache access time = 5 ns; memory access time = 50 ns. Effective access time is:**
+
+- **(A)** 15
+- **(B)** 45
+- **(C)** 50
+- **(D)** 55
+
+**Answer:** **(A) 15**
+
+**Explanation:** EAT = h × Cache + (1 − h) × (Cache + Memory) = 0.8 × 5 + 0.2 × (5 + 50) = 4 + 11 = 15 ns
+
+**Q13: What will be the time complexity of the following algorithm? sum = 0; for (i=1; i ≤ n; i=i*2) for (j=1; j\<n; j++) sum+=i*j;**
+
+- **(A)** O(n)
+- **(B)** O(log n)
+- **(C)** O(n²)
+- **(D)** O(n log n)
+
+**Answer:** **(D) O(n log n)**
+
+**Explanation:** Outer loop: i = 1, 2, 4, 8, ... → O(log n) Inner loop: Runs n times → O(n) Total = O(n log n)
+
+**Q14: What output will be generated by the compiler after lexical and syntax analyses, respectively?**
+
+- **(A)** Tokens and a parse tree
+- **(B)** A parse tree and tokens
+- **(C)** A syntax tree and intermediate codes
+- **(D)** Tokens and error messages
+
+**Answer:** **(A) Tokens and a parse tree**
+
+**Explanation:** Lexical analysis → Produces tokens Syntax analysis → Produces parse tree (syntax tree)
+
+**Q15: Which one is a compile time polymorphism?**
+
+- **(A)** Virtual function
+- **(B)** Operator overloading
+- **(C)** Function overriding
+- **(D)** Dynamic binding
+
+**Answer:** **(B) Operator overloading**
+
+**Explanation:** Compile-time polymorphism: Function overloading Operator overloading Runtime polymorphism: Virtual function Function overriding Dynamic binding
+
+**Q16: A relation R on a set B is an equivalence relation if it is:**
+
+- **(A)** Reflexive and symmetric
+- **(B)** Reflexive and transitive
+- **(C)** Symmetric and transitive
+- **(D)** Reflexive, symmetric and transitive
+
+**Answer:** **(D) Reflexive, symmetric and transitive**
+
+**Explanation:** An equivalence relation must satisfy: Reflexive Symmetric Transitive All three are required.
+
+**Q17: _____ operates at the network layer and is used to connect different networks?**
+
+- **(A)** Hub
+- **(B)** Switch
+- **(C)** Router
+- **(D)** Repeater
+
+**Answer:** **(C) Router**
+
+**Explanation:** Hub → Physical layer Switch → Data link layer Router → Network layer Router connects different networks using IP addresses.
+
+**Q18: The chromatic index of a bipartite graph with at least one e**
+
+- **(A)** 1
+- **(B)** 2
+- **(C)** 3
+- **(D)** 4
+
+**Answer:** **(B) 2**
+
+**Explanation:** For bipartite graphs: Edge chromatic number = 2 (if at least one edge exists in basic exam context).
+
+**Q19: Which loop is an exit-controlled loop?**
+
+- **(A)** For loop
+- **(B)** While loop
+- **(C)** Do while loop
+- **(D)** None of the above
+
+**Answer:** **(C) Do while loop**
+
+**Explanation:** Exit-controlled loop checks condition after execution. Do-while executes body first, then checks condition.
+
+**Q20: Hyper-threading:**
+
+- **(A)** Creates multiple physical cores
+- **(B)** Allows a single physical core to execute multiple threads simultaneously
+- **(C)** Reduces cache size
+- **(D)** Only applied to GPU
+
+**Answer:** **(B) Allows a single physical core to execute multiple threads simultaneously**
+
+**Explanation:** Hyper-threading: Creates logical cores One physical core runs multiple threads Improves CPU utilization
+
+**Q21: For BFS of a graph, we should use:**
+
+- **(A)** Queue
+- **(B)** Stack
+- **(C)** Priority queue
+- **(D)** Deque
+
+**Answer:** **(A) Queue**
+
+**Explanation:** Breadth First Search (BFS): Visits nodes level by level Uses FIFO structure Queue ensures first discovered node is processed first Stack is used in DFS, not BFS.
+
+**Q22: In Agile, backlog refers to the list of:**
+
+- **(A)** Completed tasks
+- **(B)** Pending bugs
+- **(C)** Features and tasks to be developed
+- **(D)** Rejected requirements
+
+**Answer:** **(C) Features and tasks to be developed**
+
+**Explanation:** Product backlog contains: Features Enhancements User stories Tasks waiting to be implemented It is not a list of completed or rejected items.
+
+**Q23: _____ uses disk space as an extension of RAM.**
+
+- **(A)** Caching
+- **(B)** Virtual memory
+- **(C)** Spooling
+- **(D)** Buffer
+
+**Answer:** **(B) Virtual memory**
+
+**Explanation:** Virtual memory: Uses disk space (swap/page file) Acts as additional RAM Allows large programs to run with limited physical memory Caching and buffering are different memory technique
+
+**Q24: Newton's backward interpolation formula is most effective when:**
+
+- **(A)** Interpolation point is near the beginning
+- **(B)** Interpolation point is near the end
+- **(C)** Data points are not equally spaced
+- **(D)** Function is non-polynomial
+
+**Answer:** **(B) Interpolation point is near the end**
+
+**Explanation:** Backward interpolation: Uses backward differences Best when interpolation value is near the end of the table Forward interpolation is used near the beginning.
+
+**Q25: The address block 192.168.16.0/20 contains _____ IP addresses.**
+
+- **(A)** 1024
+- **(B)** 4096
+- **(C)** 2048
+- **(D)** 65536
+
+**Answer:** **(B) 4096**
+
+**Explanation:** /20 means: 32 − 20 = 12 host bits Total IPs = 2¹² = 4096
+
+**Q26: In Huffman coding, the algorithm repeatedly picks two nodes and merges those two nodes that are:**
+
+- **(A)** With the highest frequency
+- **(B)** With the lowest frequency
+- **(C)** One highest and one lowest frequency
+- **(D)** Picked arbitrarily
+
+**Answer:** **(B) With the lowest frequency**
+
+**Explanation:** Huffman coding: Greedy algorithm Selects two minimum frequency nodes Merges them into a new node This produces optimal prefix codes.
+
+**Q27: Direct Memory Access allows:**
+
+- **(A)** CPU to execute instructions while I/O transfers data directly to memory
+- **(B)** Only CPU controlled data transfer
+- **(C)** Memory to execute instructions independently
+- **(D)** Reducing cache hits
+
+**Answer:** **(A) CPU to execute instructions while I/O transfers data directly to memory**
+
+**Explanation:** DMA: Allows I/O device to access memory directly CPU does not handle each byte transfer Improves performance and parallelism
+
+**Q28: _____ testing is performed without knowledge of internal implementation.**
+
+- **(A)** White box
+- **(B)** Unit
+- **(C)** Black box
+- **(D)** Integration
+
+**Answer:** **(C) Black box**
+
+**Explanation:** Black-box testing: Tests functionality No knowledge of internal code Based on input-output behavior White-box testing checks internal structure.
+
+**Q29: Which one is not an addressing mode?**
+
+- **(A)** Immediate
+- **(B)** Directx
+- **(C)** Indirect
+- **(D)** Sequential
+
+**Answer:** **(D) Sequential**
+
+**Explanation:** Addressing modes define how CPU instructions identify operand locations (data). Key types include Immediate (constant value), Register (data in register), Direct (absolute memory address), and Indirect (pointer to address). Sequential is not a standard addressing mode.
+
+**Q30: Assuming P1, P2, P3 have burst time 6, 8, 3 ms respectively, which statement is true about SJF?**
+
+- **(A)** Waiting time of P1 is 3 ms
+- **(B)** Turn-around time of P3 is 9 ms
+- **(C)** Waiting time for P2 is 6 ms
+- **(D)** Turn-around time of P1 is 8 ms
+
+**Answer:** **(A) Waiting time of P1 is 3 ms**
+
+**Explanation:** SJF order: P3 (3) → P1 (6) → P2 (8) Timeline: P3: 0–3, P1: 3–9, P2: 9–17 P1 waits from 0 to 3 → 3 ms
+
+**Q31: Using _____ order we can delete tree nodes in such a way that a child node is deleted before its parent.**
+
+- **(A)** Pre-order
+- **(B)** Post-order
+- **(C)** In-order
+- **(D)** Level-order
+
+**Answer:** **(B) Post-order**
+
+**Explanation:** Post-order traversal: Left → Right → Root Children are processed before parent Used for deleting tree safely
+
+**Q32: During a phone conversation, which mode of communication takes place?**
+
+- **(A)** Simplex
+- **(B)** Full-duplex
+- **(C)** Half-duplex
+- **(D)** Multiplex
+
+**Answer:** **(B) Full-duplex**
+
+**Explanation:** Communication types: Simplex → One-way only (e.g., TV broadcast) Half-duplex → Both directions but not at the same time (e.g., walkie-talkie) Full-duplex → Both directions at the same time (e.g., phone call) In a phone call, both persons can speak and listen simultaneously → Full-duplex.
+
+**Q33: A priority queue is best implemented using a:**
+
+- **(A)** Stack
+- **(B)** Linked list
+- **(C)** Array
+- **(D)** Heap
+
+**Answer:** **(D) Heap**
+
+**Explanation:** A priority queue needs fast insertion and fast deletion of highest/lowest priority element. Using a binary heap: Insert → O(log n), Delete → O(log n), Access highest/lowest → O(1). Other structures are slower for maintaining priority order, so Heap is the best implementation.
+
+**Q34: Which protocol is used to send an email over the Internet?**
+
+- **(A)** FTP
+- **(B)** SMTP
+- **(C)** HTTP
+- **(D)** SNMP
+
+**Answer:** **(B) SMTP**
+
+**Explanation:** Email system uses: SMTP (Simple Mail Transfer Protocol) → Sending emails POP3 / IMAP → Receiving emails Other options: FTP → File transfer, HTTP → Web browsing, SNMP → Network management
+
+**Q35: What does the 'continue' statement do inside a loop?**
+
+- **(A)** Exits the loop entirely
+- **(B)** Terminates the program
+- **(C)** Re-executes the loop twice
+- **(D)** Skip the rest of the current iteration and move to the next
+
+**Answer:** **(D) Skip the rest of the current iteration and move to the next**
+
+**Explanation:** continue: Skips remaining statements in current loop iteration Control moves to next iteration break exits loop entirely.
+
+**Q36: In Agile, software is delivered:**
+
+- **(A)** At the end of the project
+- **(B)** In small incremental iterations
+- **(C)** After complete documentation
+- **(D)** Only when all features are implemented
+
+**Answer:** **(B) In small incremental iterations**
+
+**Explanation:** Agile methodology: Delivers working software in short sprints Incremental releases Continuous feedback
+
+**Q37: Intel 8086 (16-bit) microprocessor has a _____ bit address bus.**
+
+- **(A)** 8
+- **(B)** 16
+- **(C)** 20
+- **(D)** 32
+
+**Answer:** **(C) 20**
+
+**Explanation:** 8086: Has 20-bit address bus Can address 2²⁰ = 1 MB memory
+
+**Q38: OS system calls perform the following basic operations on files:**
+
+- **(A)** Read, Write, Delete
+- **(B)** Write, Print, Reposition
+- **(C)** Delete, Truncate, Sort data
+- **(D)** Modify, Update, Sort data
+
+**Answer:** **(A) Read, Write, Delete**
+
+**Explanation:** Basic file operations: Read Write Delete Reposition Truncate Sorting is not a basic system call operation.
+
+**Q39: The bisection method is used to:**
+
+- **(A)** Find eigenvalue of a matrix
+- **(B)** Solve a system of linear equations
+- **(C)** Find roots of non-linear equations
+- **(D)** Perform numerical integration
+
+**Answer:** **(C) Find roots of non-linear equations**
+
+**Explanation:** Bisection method: Root-finding method Requires f(a) × f(b) \< 0 Repeatedly halves interval Used only for non-linear equation roots.
+
+**Q40: In an array-based implementation of a complete binary tree (zero-based indexing), the index of left child of node at index i is:**
+
+- **(A)** 2i
+- **(B)** 2i + 1
+- **(C)** i + 1
+- **(D)** i − 1
+
+**Answer:** **(B) 2i + 1**
+
+**Explanation:** For zero-based indexing: Left child = 2i + 1 Right child = 2i + 2
+
+**Q41: Which optimization technique is not used for eliminating redundant codes?**
+
+- **(A)** Dead code elimination
+- **(B)** Partial redundancy elimination
+- **(C)** Common subexpression elimination
+- **(D)** Constant folding
+
+**Answer:** **(D) Constant folding**
+
+**Explanation:** Dead code elimination removes unused code Common subexpression elimination removes repeated expressions Partial redundancy elimination removes partially repeated computations Constant folding evaluates constants at compile time, but does not remove redundant code.
+
+**Q42: Which register in a CPU points to the next instruction to be executed?**
+
+- **(A)** Accumulator
+- **(B)** Flags
+- **(C)** Stack Pointer
+- **(D)** Program Counter
+
+**Answer:** **(D) Program Counter**
+
+**Explanation:** Program Counter (PC): Holds the memory address of the next instruction to be fetched and executed. After fetching, it automatically increments to the next instruction. During jumps, calls, or branches, it is updated with a new target address. Other options are incorrect because Accumulator stores arithmetic/logic results, Flags store condition codes, and Stack Pointer points to the top of the stack.
+
+**Q43: _____ layer of the TCP/IP model is responsible for port binding.**
+
+- **(A)** Application
+- **(B)** Internet
+- **(C)** Transport
+- **(D)** Network
+
+**Answer:** **(C) Transport**
+
+**Explanation:** Port binding is handled by the Transport layer (TCP/UDP). It uses port numbers to identify specific processes or services (e.g., HTTP → 80, HTTPS → 443) and delivers data using the IP address + Port number combination (socket). Other options are incorrect because Application layer provides services like HTTP/FTP but does not manage ports, Internet layer handles IP addressing and routing, and Network layer (OSI term) deals with routing, not port numbers.
+
+**Q44: The main difference between a latch and a flip-flop is**
+
+- **(A)** FF is level-triggered, L is edge-triggered
+- **(B)** FF is edge-triggered, L is level-triggered
+- **(C)** FF cannot store data but L can
+- **(D)** L can store more data than FF
+
+**Answer:** **(B) FF is edge-triggered, L is level-triggered**
+
+**Explanation:** Latch vs Flip-Flop: A Latch is level-triggered: its output changes whenever the enable signal is active and it is sensitive to the level of the clock/enable input. A Flip-Flop (FF) is edge-triggered: it changes output only at a specific clock transition (rising or falling edge) and is not continuously sensitive to clock level. Other options are incorrect because both latch and flip-flop store 1 bit of data; the real difference is the triggering mechanism (level vs edge).
+
+**Q45: Which phase in compiler design performs data type checking?**
+
+- **(A)** Lexical analysis
+- **(B)** Syntax analysis
+- **(C)** Semantic analysis
+- **(D)** Code generation
+
+**Answer:** **(C) Semantic analysis**
+
+**Explanation:** Semantic analysis: Checks the meaning of the program after syntax analysis and performs type checking. Ensures variables are declared before use, operands are compatible with operators, function arguments match parameter types, and no improper type mismatch occurs. Other phases do not perform type checking: Lexical analysis converts code into tokens, Syntax analysis builds the parse tree, and Code generation produces machine or intermediate code.
+
+**Q46: Which one below is an example of a NoSQL database?**
+
+- **(A)** MySQL
+- **(B)** MongoDB
+- **(C)** Oracle
+- **(D)** PostgreSQL
+
+**Answer:** **(B) MongoDB**
+
+**Explanation:** MongoDB is a NoSQL database because it stores data in JSON-like documents (BSON), does not use traditional relational tables, and supports a flexible schema. Other options are relational (SQL) databases: MySQL, Oracle, and PostgreSQL are all relational DBMS. NoSQL databases are typically document-based, key-value, column-family, or graph-based systems, and MongoDB is document-based.
+
+**Q47: The space complexity of a recursive algorithm is mainly due to:**
+
+- **(A)** Input size
+- **(B)** Output size
+- **(C)** Variables inside loops
+- **(D)** Function call stack
+
+**Answer:** **(D) Function call stack**
+
+**Explanation:** In recursion, every function call is stored in the call stack and each call adds a new stack frame containing local variables, parameters, and the return address. If recursion depth is large, stack memory usage increases. Other options are not the main reason: input size mainly affects time complexity, output size depends on the problem, and loop variables are reused and do not accumulate like recursive calls. Therefore, recursive space complexity mainly comes from the function call stack.
+
+**Q48: What is the role of an index in a database?**
+
+- **(A)** To store large binary objects
+- **(B)** To store data integrity constraints
+- **(C)** To boost the speed of data retrieval operations
+- **(D)** To group the related table together
+
+**Answer:** **(C) To boost the speed of data retrieval operations**
+
+**Explanation:** An index is a data structure (like B-tree or hash) that improves the speed of searching and retrieving records from a table. It allows faster lookup using key values, reduces full table scans, and improves performance of SELECT queries especially with WHERE, JOIN, and ORDER BY. Other options are incorrect because BLOBs are stored in table fields not indexes, data integrity is enforced using PRIMARY KEY/FOREIGN KEY/UNIQUE constraints, and grouping related tables is done using relationships not indexes.
+
+**Q49: _____ is a non-preemptive algorithm.**
+
+- **(A)** FCFS
+- **(B)** Round Robin
+- **(C)** Shortest Remaining Time
+- **(D)** None of the above
+
+**Answer:** **(A) FCFS**
+
+**Explanation:** FCFS (First Come First Serve): Non-preemptive scheduling Once a process starts, it runs until completion Round Robin and Shortest Remaining Time are preemptive.
+
+**Q50: Which one below is an iterative method?**
+
+- **(A)** Gauss elimination
+- **(B)** Gauss-Seidel
+- **(C)** Cramer’s rule
+- **(D)** Matrix inversion
+
+**Answer:** **(B) Gauss-Seidel**
+
+**Explanation:** Gauss-Seidel: Iterative method Refines solution step-by-step Gauss elimination and Cramer’s rule are direct methods.
+
+**Q51: A primary key:**
+
+- **(A)** Can have NULL
+- **(B)** Uniquely identifies each row
+- **(C)** Must be a foreign key
+- **(D)** Can have duplicates
+
+**Answer:** **(B) Uniquely identifies each row**
+
+**Explanation:** Primary key: Uniquely identifies each record Cannot contain NULL Cannot contain duplicates
+
+**Q52: A page fault occurs when:**
+
+- **(A)** Deadlock happens
+- **(B)** Segmentation starts
+- **(C)** Page is found in memory
+- **(D)** Page is not found in memory
+
+**Answer:** **(D) Page is not found in memory**
+
+**Explanation:** Explanation: A page fault occurs when a process tries to access a page that is not currently loaded in RAM. The operating system then loads the required page from disk into memory and updates the page table. If the page is already in memory, no page fault occurs.
+
+**Q53: OSI _____ Layer establishes, manages & terminates logical connections between applications.**
+
+- **(A)** Transport
+- **(B)** Network
+- **(C)** Session
+- **(D)** Data link
+
+**Answer:** **(C) Session**
+
+**Explanation:** The Session layer (Layer 5 of OSI) establishes, manages, and terminates communication sessions between applications. It controls dialog, session checkpoints, and connection synchronization. Transport layer ensures end-to-end delivery, while Network handles routing, and Data Link handles framing and error detection.
+
+**Q54: Which of the following is the simplified version of boolean function F = Y'(X + X'Y)?**
+
+- **(A)** X·Y
+- **(B)** X'·Y
+- **(C)** X·Y'
+- **(D)** X'·Y'
+
+**Answer:** **(C) X·Y'**
+
+**Explanation:** F = Y'(X + X'Y) = Y'X + Y'X'Y (Using distributive law) Since Y'Y = 0, the second term becomes 0. So F = Y'X Therefore, the simplified expression is X·Y'.
+
+**Q55: Which one is true for a DFA?**
+
+- **(A)** DFA can have ε-transitions
+- **(B)** DFA accepts all context-free languages
+- **(C)** DFA accepts regular languages
+- **(D)** DFA can have multiple transitions for same input
+
+**Answer:** **(C) DFA accepts regular languages**
+
+**Explanation:** A Deterministic Finite Automaton (DFA) recognizes exactly the class of regular languages. It cannot have ε-transitions and cannot have more than one transition for the same input from a state. Context-free languages require a Pushdown Automaton, not a DFA.
+
+**Q56: _____ combines multiple signals over a single medium by assigning different time slots.**
+
+- **(A)** FDM
+- **(B)** TDM
+- **(C)** WDM
+- **(D)** SDM
+
+**Answer:** **(B) TDM**
+
+**Explanation:** Time Division Multiplexing (TDM) divides a communication channel into fixed time slots. Each signal is transmitted during its assigned time interval in a repeating cycle. FDM uses different frequencies, WDM uses different wavelengths, and SDM uses separate physical paths.
+
+**Q57: Data _____ is the ability to modify a schema definition in a level without affecting the next higher level.**
+
+- **(A)** Binding
+- **(B)** Abstraction
+- **(C)** Mapping
+- **(D)** Independence
+
+**Answer:** **(D) Independence**
+
+**Explanation:** Data independence allows changes in one level of the database schema without affecting the next higher level. For example, physical changes should not affect the logical schema, and logical changes should not affect external views. This is a key advantage of the three-schema architecture in DBMS.
+
+**Q58: In OOP, _____ is used to restrict access to certain details of an object.**
+
+- **(A)** Inheritance
+- **(B)** Polymorphism
+- **(C)** Abstraction
+- **(D)** Encapsulation
+
+**Answer:** **(D) Encapsulation**
+
+**Explanation:** Encapsulation restricts direct access to an object's internal data by using access modifiers like private, protected, and public. It hides the internal implementation details and allows controlled access through methods. Inheritance enables reuse, polymorphism allows multiple forms, and abstraction hides complexity but does not directly control access like encapsulation
+
+**Q59: Garbage collection is required in SSD because:**
+
+- **(A)** SSD cells must be erased before being written
+- **(B)** SSDs cannot store large files
+- **(C)** SSDs do not support random access
+- **(D)** It reduces read latency
+
+**Answer:** **(A) SSD cells must be erased before being written**
+
+**Explanation:** In SSDs, data cannot be directly overwritten; a memory block must first be erased before new data is written. Garbage collection removes invalid or unused data blocks to free space for future writes. SSDs support random access and can store large files, and garbage collection is mainly related to write management, not read latency.
+
+**Q60: Which one is a supervised learning algorithm?**
+
+- **(A)** K-means
+- **(B)** Apriori
+- **(C)** DBSCAN
+- **(D)** Decision tree
+
+**Answer:** **(D) Decision tree**
+
+**Explanation:** Supervised learning uses labeled training data where both input and correct output are provided. A Decision Tree learns from labeled examples to perform classification or regression. K-means and DBSCAN are unsupervised clustering algorithms, and Apriori is used for association rule mining, not supervised learning.
+
+**Q61: Contrapositive of "If it rains, the home team wins":**
+
+- **(A)** If the home team wins, then it rains
+- **(B)** If the home team does not win, it does not rain
+- **(C)** If it does not rain, then the home team does not win
+- **(D)** The home team wins whenever it rains
+
+**Answer:** **(B) If the home team does not win, it does not rain**
+
+**Explanation:** The original statement is: If P then Q (If it rains → the home team wins). The contrapositive of “If P then Q” is “If not Q then not P”. Here, not Q = home team does not win, and not P = it does not rain. Therefore, the correct contrapositive is: If the home team does not win, it does not rain.
+
+**Q62: Pushdown automata (PDA) is equivalent in power to:**
+
+- **(A)** Regular expressions
+- **(B)** Context-free grammars
+- **(C)** Context-sensitive grammars
+- **(D)** Turing machines
+
+**Answer:** **(B) Context-free grammars**
+
+**Explanation:** A Pushdown Automaton (PDA) recognizes exactly the class of context-free languages. Context-free grammars (CFG) generate the same class of languages that a PDA can recognize. Regular expressions are less powerful, while context-sensitive grammars and Turing machines are more powerful than PDA.
+
+**Q63: OSI model Data Link Layer's primary function:**
+
+- **(A)** Packet routing
+- **(B)** Error detection & correction
+- **(C)** End-to-end communication
+- **(D)** Data encryption
+
+**Answer:** **(B) Error detection & correction**
+
+**Explanation:** The Data Link Layer is responsible for reliable node-to-node delivery of frames. Its main functions include framing, error detection (e.g., CRC), error correction, and flow control. Packet routing is handled by the Network layer, end-to-end communication by the Transport layer, and encryption is typically handled at higher layers.
+
+**Q64: Which command can we use to save all transactions?**
+
+- **(A)** Save point
+- **(B)** Save
+- **(C)** Commit
+- **(D)** Rollback
+
+**Answer:** **(C) Commit**
+
+**Explanation:** COMMIT permanently saves all changes made during the current transaction to the database. After COMMIT, the changes cannot be undone using ROLLBACK. SAVEPOINT creates a partial checkpoint, and ROLLBACK undoes changes.
+
+**Q65: Intel 8085 microprocessor is a _____ bit microprocessor.**
+
+- **(A)** 8
+- **(B)** 16
+- **(C)** 32
+- **(D)** 64
+
+**Answer:** **(A) 8**
+
+**Explanation:** The Intel 8085 is an 8-bit microprocessor because it has an 8-bit data bus and an 8-bit ALU. It can process 8 bits of data at a time. Although it has a 16-bit address bus (allowing 64 KB memory addressing), its data processing capability is 8-bit.
+
+**Q66: "Either all of its operations are executed or none." refers to:**
+
+- **(A)** Consistency
+- **(B)** Isolation
+- **(C)** Atomicity
+- **(D)** Durability
+
+**Answer:** **(C) Atomicity**
+
+**Explanation:** Atomicity is the ACID property that ensures a transaction is treated as a single unit. If any part of the transaction fails, the entire transaction is rolled back. Consistency ensures valid state, Isolation prevents interference, and Durability guarantees permanent storage after commit.
+
+**Q67: Interrupt-driven I/O is preferred over polling because it:**
+
+- **(A)** Reduces CPU idle time
+- **(B)** Slower
+- **(C)** Uses more memory
+- **(D)** Requires fewer devices
+
+**Answer:** **(A) Reduces CPU idle time**
+
+**Explanation:** In interrupt-driven I/O, the CPU continues executing other tasks and is interrupted only when the I/O device is ready. Polling continuously checks device status, which wastes CPU cycles. Therefore, interrupt-driven I/O improves CPU utilization and reduces idle waiting time.
+
+**Q68: What is the output of the following C code? #include int main() \{ int arr[5]=\{1,2,3,4,5\}; int *p = (arr+2); printf("%d", p[-1]); return 0 \}**
+
+- **(A)** 2
+- **(B)** 3
+- **(C)** Undefined behaviour
+- **(D)** Compilation error
+
+**Answer:** **(A) 2**
+
+**Explanation:** arr = \{1, 2, 3, 4, 5\} p = arr + 2 → points to arr[2], which is 3. p[-1] means *(p - 1). p - 1 points to arr[1], which is 2. So the output printed is 2.
+
+**Q69: In machine learning, supervised learning means:**
+
+- **(A)** Training with unlabeled data
+- **(B)** No training required
+- **(C)** Training with labeled data
+- **(D)** Only reinforcement signals are used
+
+**Answer:** **(C) Training with labeled data**
+
+**Explanation:** Supervised learning uses labeled datasets where each input is paired with the correct output. The model learns a mapping from inputs to outputs to make predictions on new data. Unlabeled data is used in unsupervised learning, and reinforcement signals are used in reinforcement learning.
+
+**Q70: A 16-bit address bus can address a maximum of _____ KB memory.**
+
+- **(A)** 16
+- **(B)** 32
+- **(C)** 64
+- **(D)** 128
+
+**Answer:** **(C) 64**
+
+**Explanation:** A 16-bit address bus can generate 2¹⁶ unique addresses. 2¹⁶ = 65,536 bytes. Since 1 KB = 1024 bytes, 65,536 ÷ 1024 = 64 KB. Therefore, the maximum addressable memory is 64 KB.
+
+**Q71: A* search algorithm is:**
+
+- **(A)** Only complete but not optimal
+- **(B)** Only optimal but not complete
+- **(C)** Complete and optimal if heuristic is admissible
+- **(D)** Neither optimal nor complete
+
+**Answer:** **(C) Complete and optimal if heuristic is admissible**
+
+**Explanation:** A* search is complete and optimal when the heuristic function is admissible (never overestimates the true cost). An admissible heuristic guarantees that A* will always find the shortest path if one exists. If the heuristic overestimates, optimality is not guaranteed.
+
+**Q72: To solve a problem using recursion we should use a:**
+
+- **(A)** Linked list
+- **(B)** Stack
+- **(C)** Queue
+- **(D)** Array
+
+**Answer:** **(B) Stack**
+
+**Explanation:** Recursion uses the call stack to keep track of function calls. Each recursive call creates a new stack frame that stores parameters, local variables, and return address. When a function finishes, its stack frame is removed (LIFO order), which is why recursion is based on a stack.
+
+**Q73: _____ sort uses a divide and conquer approach?**
+
+- **(A)** Insertion
+- **(B)** Quick
+- **(C)** Bubble
+- **(D)** Selection
+
+**Answer:** **(B) Quick**
+
+**Explanation:** Divide and Conquer is a strategy where a problem is divided into smaller subproblems, each subproblem is solved recursively, and then the solutions are combined to get the final result. Examples include Merge Sort (divides array into halves and merges them), Binary Search (repeatedly halves the search space),
+
+**Q74: Which of the following is a combinational circuit?**
+
+- **(A)** Counter
+- **(B)** Flip flop
+- **(C)** Multiplexer
+- **(D)** Register
+
+**Answer:** **(C) Multiplexer**
+
+**Explanation:** A combinational circuit produces output based only on present input values and does not store any previous state. A Multiplexer (MUX) selects one input from multiple inputs based on selection lines, and its output depends only on current inputs. Counter, Flip-flop, and Register are sequential circuits because they store data and depend on previous states.
+
+**Q75: The number of binary strings of length 5 is:**
+
+- **(A)** 10
+- **(B)** 25
+- **(C)** 32
+- **(D)** 64
+
+**Answer:** **(C) 32**
+
+**Explanation:** Each bit has 2 choices Total = 2⁵ = 32
+
+**Q76: A half-adder circuit has:**
+
+- **(A)** 1 input, 2 outputs
+- **(B)** 2 inputs, 2 outputs
+- **(C)** 2 inputs, 1 output
+- **(D)** 3 inputs, 2 outputs
+
+**Answer:** **(B) 2 inputs, 2 outputs**
+
+**Explanation:** A half-adder adds two single-bit binary inputs (A and B). It produces two outputs: Sum and Carry. Sum = A ⊕ B and Carry = A · B. Therefore, it has 2 inputs and 2 outputs.
+
+**Q77: _____ reduces redundancy and improves integrity.**
+
+- **(A)** Indexing
+- **(B)** Normalization
+- **(C)** Denormalization
+- **(D)** Partitioning
+
+**Answer:** **(B) Normalization**
+
+**Explanation:** Normalization organizes database tables to eliminate redundant data and prevent anomalies (update, insert, delete). It improves data integrity by ensuring dependencies are properly structured. Indexing improves search speed, denormalization increases redundancy for performance, and partitioning divides large tables for management.
+
+**Q78: Which one is correct to declare & initialize array in C?**
+
+- **(A)** int arr(5) = \{1,2,3,4,5\};
+- **(B)** int arr[5] = \{1,2,3,4,5\};
+- **(C)** nt arr() = 1,2,3,4,5;
+- **(D)** Array arr(5) = \{1,2,3,4,5\};
+
+**Answer:** **(B) int arr[5] = \{1,2,3,4,5\};**
+
+**Explanation:** n C, arrays are declared using square brackets to specify size. The correct syntax is: data_type array_name[size] = \{values\};
+
+**Q79: A complete graph of n vertices has _____ edges.**
+
+- **(A)** n
+- **(B)** n(n+1)/2
+- **(C)** n(n−1)/2
+- **(D)** n²
+
+**Answer:** **(C) n(n−1)/2**
+
+**Explanation:** In a complete graph, every vertex is connected to every other vertex. Each of the n vertices connects to (n−1) vertices, giving n(n−1) total connections. Since each edge is counted twice, divide by 2. Therefore, total edges = n(n−1)/2.
+
+**Q80: _____ algorithm is used to find shortest path in a positive weighted graph.**
+
+- **(A)** Prim’s
+- **(B)** Kruskal’s
+- **(C)** Dijkstra’s
+- **(D)** DFS
+
+**Answer:** **(C) Dijkstra’s**
+
+**Explanation:** Dijkstra’s algorithm finds the shortest path from a source vertex to all other vertices in a graph with non-negative (positive) edge weights. Prim’s and Kruskal’s are used to find Minimum Spanning Trees, not shortest paths. DFS is a traversal algorithm and does not guarantee shortest paths in weighted graphs.
+
+**Q81: The register SP in a microprocessor:**
+
+- **(A)** Points to the first instruction
+- **(B)** Points to the top of the stack
+- **(C)** Holds base address of memory
+- **(D)** Holds I/O port
+
+**Answer:** **(B) Points to the top of the stack**
+
+**Explanation:** SP stands for Stack Pointer. It stores the address of the top of the stack in memory. It is updated automatically during PUSH and POP operations. The Program Counter points to the next instruction, not the SP.
+
+**Q82: Consider 3 processes and 2 resources... minimum additional resource units to avoid deadlock:**
+
+- **(A)** 0 unit
+- **(B)** 1 unit of R1 or 1 unit of R2
+- **(C)** 2 units (1 of R1 & 1 of R2)
+- **(D)** Not enough information
+
+**Answer:** **(B) 1 unit of R1 or 1 unit of R2**
+
+**Explanation:** Deadlock occurs due to circular wait when each process holds one resource and waits for another. By adding one extra unit of either R1 or R2, at least one process can complete its execution and release resources. This breaks the circular wait condition and prevents deadlock.
+
+**Q83: UDP is a _____ protocol.**
+
+- **(A)** Connection-less
+- **(B)** Connection-oriented
+- **(C)** Application layer
+- **(D)** Network access layer
+
+**Answer:** **(A) Connection-less**
+
+**Explanation:** UDP (User Datagram Protocol) is connection-less because it sends data without establishing a connection first. There is no handshake, no acknowledgment, and no guarantee of delivery. It operates at the Transport layer, not the Application or Network access layer.
+
+**Q84: Which of the following is not a characteristic of Dynamic Programming?**
+
+- **(A)** Overlapping subproblems
+- **(B)** Optimal substructure
+- **(C)** Independent subproblems
+- **(D)** Repeated computation of SP
+
+**Answer:** **(C) Independent subproblems**
+
+**Explanation:** Dynamic Programming is used when a problem has overlapping subproblems and optimal substructure. It avoids repeated computation by storing solutions (memoization or tabulation). Independent subproblems are a characteristic of divide and conquer, not dynamic programming.
+
+**Q85: _____ is used in C to write a single character to a file.**
+
+- **(A)** fputs()
+- **(B)** fprintf()
+- **(C)** putc()
+- **(D)** write()
+
+**Answer:** **(C) putc()**
+
+**Explanation:** putc() writes a single character to a file stream. fputs() writes a string, fprintf() writes formatted output, and write() is a system call, not a standard C library function for formatted file output.
+
+**Q86: What is the hexadecimal value of (1111101)₂?**
+
+- **(A)** 3DB
+- **(B)** 3CB
+- **(C)** 3DA
+- **(D)** 7D
+
+**Answer:** **(D) 7D**
+
+**Explanation:** 1. Group the binary number into 4-bit parts from right: 0111 1101 2. Convert first group: 0111₂ = 7₁₆ 3. Convert second group: 1101₂ = 13₁₀ = D₁₆ 4. Combine the two hex digits: 7D
+
+**Q87: The minimum number of NAND gates required to implement an OR gate is:**
+
+- **(A)** 1
+- **(B)** 2
+- **(C)** 3
+- **(D)** 4
+
+**Answer:** **(C) 3**
+
+**Explanation:** Using De Morgan’s theorem: A + B = (A' · B')'. First, use two NAND gates as NOT gates to get A' and B' (by connecting inputs together). Then use one more NAND gate to combine A' and B'. Total NAND gates required = 3.
+
+**Q88: Which data structure allows insertion at one end and deletion at the other end?**
+
+- **(A)** Stack
+- **(B)** Tree
+- **(C)** Queue
+- **(D)** Graph
+
+**Answer:** **(C) Queue**
+
+**Explanation:** A Queue follows FIFO (First In First Out) principle. Insertion happens at the rear, and deletion happens at the front. Stack follows LIFO, while Tree and Graph are non-linear data structures.
+
+**Q89: Which protocol is used together with HTTP in HTTPS?**
+
+- **(A)** SHA
+- **(B)** SSH
+- **(C)** TLS
+- **(D)** VPN
+
+**Answer:** **(C) TLS**
+
+**Explanation:** HTTPS stands for HyperText Transfer Protocol Secure. It is created by combining HTTP with TLS (Transport Layer Security). TLS provides encryption, data integrity, and secure communication over the internet.
+
+**Q90: _____ refers to information about data.**
+
+- **(A)** Hyper data
+- **(B)** Tera data
+- **(C)** Meta data
+- **(D)** Big data
+
+**Answer:** **(C) Meta data**
+
+**Explanation:** Metadata means “data about data.” It describes properties of data such as type, size, format, author, and creation date. It helps in organizing, managing, and retrieving data efficiently.
+
+**Q91: Principle of Locality helps to:**
+
+- **(A)** Reduce CPU clock cycles
+- **(B)** Improve cache performance
+- **(C)** Increase instruction length
+- **(D)** Reduce I/O latency
+
+**Answer:** **(B) Improve cache performance**
+
+**Explanation:** The Principle of Locality states that programs tend to access the same memory locations repeatedly (temporal locality) or nearby locations (spatial locality). This behavior increases cache hits, which improves overall cache performance and system efficiency.
+
+**Q92: Adaptive maintenance is required when:**
+
+- **(A)** Errors found in software
+- **(B)** User requirements stable
+- **(C)** Documentation missing
+- **(D)** Environment such as OS/hardware changes
+
+**Answer:** **(D) Environment such as OS/hardware changes**
+
+**Explanation:** Adaptive maintenance is performed when the software must be updated to work in a changed environment. Examples include changes in operating system, hardware platform, database, or external interfaces. Fixing errors is corrective maintenance, not adaptive maintenance.
+
+**Q93: Alpha-Beta pruning can:**
+
+- **(A)** Change final minimax result
+- **(B)** Only reduce number of nodes evaluated
+- **(C)** Increase depth of tree
+- **(D)** Increase branching factor
+
+**Answer:** **(B) Only reduce number of nodes evaluated**
+
+**Explanation:** Alpha-Beta pruning is an optimization of the Minimax algorithm. It eliminates branches that cannot affect the final decision, reducing the number of nodes evaluated. It does not change the final minimax result and does not increase tree depth or branching factor.
+
+**Q94: Which one is true for a B+ tree?**
+
+- **(A)** Internal nodes store actual data
+- **(B)** Does not maintain sorted data
+- **(C)** Leaf nodes store actual data
+- **(D)** Retrieval is slower
+
+**Answer:** **(C) Leaf nodes store actual data**
+
+**Explanation:** In a B+ tree, internal nodes store only keys used for navigation, while all actual data records are stored in the leaf nodes. The leaf nodes are linked and maintain sorted order, which allows efficient range queries and fast retrieval.
+
+**Q95: Which will delete all records but keep table structure?**
+
+- **(A)** ALTER
+- **(B)** DELETE
+- **(C)** DROP
+- **(D)** TRUNCATE
+
+**Answer:** **(D) TRUNCATE**
+
+**Explanation:** RUNCATE removes all rows from a table but keeps the table structure intact. DROP deletes the entire table structure. DELETE removes rows but can be used with conditions and logs each row deletion, while TRUNCATE is faster and removes all rows at once.
+
+**Q96: Which is a numerical method for eigenvalue problems?**
+
+- **(A)** Gauss elimination
+- **(B)** Power method
+- **(C)** Newton interpolation
+- **(D)** Trapezoidal rule
+
+**Answer:** **(B) Power method**
+
+**Explanation:** The Power Method is an iterative numerical technique used to find the dominant (largest) eigenvalue of a matrix. Gauss elimination solves linear systems, Newton interpolation is for polynomial approximation, and the Trapezoidal rule is used for numerical integration.
+
+**Q97: _____ replaces the page not used for the longest time.**
+
+- **(A)** MRU
+- **(B)** LRU
+- **(C)** FIFO
+- **(D)** LIFO
+
+**Answer:** **(B) LRU**
+
+**Explanation:** LRU (Least Recently Used) replaces the page that has not been accessed for the longest time. It assumes that pages not used recently are less likely to be used soon. FIFO replaces the oldest page, MRU replaces the most recently used page, and LIFO follows stack order.
+
+**Q98: Greedy methods guarantee optimal solution when:**
+
+- **(A)** Overlapping subproblems exist
+- **(B)** Problems have optimal substructure and greedy choice property
+- **(C)** Divide and conquer applied
+- **(D)** Subproblems independent
+
+**Answer:** **(B) Problems have optimal substructure and greedy choice property**
+
+**Explanation:** Greedy algorithms produce optimal solutions only when the problem has optimal substructure and satisfies the greedy choice property. Optimal substructure means the optimal solution can be built from optimal solutions of subproblems. Greedy choice property means making a locally optimal choice leads to a globally optimal solution.
+
+**Q99: For a connected acyclic graph with v vertices and e edges:**
+
+- **(A)** v = e
+- **(B)** v = e +1
+- **(C)** v = e + 2
+- **(D)** v +1= e
+
+**Answer:** **(B) v = e +1**
+
+**Explanation:** A connected acyclic graph is a tree. For any tree with v vertices, the number of edges is e = v − 1. Rearranging gives v = e + 1.
+
+**Q100: Find the output of the following code snippet: #include \<stdio.h> #define MULTIPLY(a,b) a/b int main() \{ int x = 5, y = 2, result; result = MULTIPLY(y+x, y+x); printf("%d", result); return 0; \}**
+
+- **(A)** 1
+- **(B)** 7
+- **(C)** 9
+- **(D)** Runtime error
+
+**Answer:** **(C) 9**
+
+**Explanation:** The macro is defined as: MULTIPLY(a,b) → a/b. So MULTIPLY(y+x, y+x) expands to: y + x / y + x (no parentheses). With x = 5 and y = 2, this becomes: 2 + 5 / 2 + 5. Division happens first: 5 / 2 = 2 (integer division). So expression becomes: 2 + 2 + 5 = 9.

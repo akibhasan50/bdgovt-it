@@ -1,0 +1,910 @@
+---
+title_en: "Theory of Computation — Solved Questions & PYQ"
+title_bn: "কম্পিউটেশনের তত্ত্ব — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "15 questions from the IT Job QnS Theory of Computation topic — 14 with worked answers and explanations, 1 without a text solution in the source."
+summary_bn: "IT Job QnS-এর Theory of Computation টপিকের 15টি প্রশ্ন — 14টির সমাধান ও ব্যাখ্যা, 1টির টেক্সট সমাধান সোর্সে নেই।"
+---
+
+<Callout type="info">
+**Topic:** Theory of Computation — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Introduction to Autometa Theory
+
+**Q1: What is Theory of Computation and Why we need it?**
+
+**Answer:** Automata Theory, also known as the Theory of Computation (TOC), is a branch of Computer Science and Mathematics that studies abstract machines (Automata) to…
+
+**Explanation:** **Automata Theory (Theory of Computation)**
+
+Automata Theory, also known as the **Theory of Computation (TOC)**, is a branch of Computer Science and Mathematics that studies abstract machines (Automata) to understand the capabilities and limitations of computation. It analyzes mathematical models to explain how machines process information and perform computations.
+
+The **Theory of Computation (TOC)** focuses on determining which problems computers can solve, how they solve them, and how efficiently they can perform those computations.
+
+**Key Objectives of Theory of Computation**
+
+- Studies simple abstract machines and helps in designing compilers and language processors.
+
+- Identifies which problems can and cannot be solved by a computer.
+
+- Analyzes the time and memory required to solve problems and compares their efficiency.
+
+- Provides a theoretical foundation for understanding the capabilities and limitations of computers and computation.
+
+**Why We Need Theory of Computation**
+
+- Understand the limitations of computational systems.
+
+- Design faster and more efficient algorithms and programs.
+
+- Build a strong foundation in programming, algorithms, and computer science concepts.
+
+- Improve the performance, efficiency, and reliability of computing systems.
+
+**Example**
+
+The Theory of Computation can help a computer verify whether a password entered by a user is correct or incorrect. This demonstrates how computational problems are solved step by step using mathematical models.
+
+**Q2: Some Term Used in Autometa Theory**
+
+**Answer:** A Symbol (also called a Character) is the smallest unit in Automata Theory.
+
+**Explanation:** **Basic Terminologies of Automata Theory**
+
+**1. Symbol**
+
+A **Symbol** (also called a **Character**) is the smallest unit in **Automata Theory**. A symbol may be a letter, digit, special character, or any other individual element used to build strings. Symbols cannot be divided into smaller meaningful parts.
+
+**Example**
+
+If Σ = \{a, b\}, then **a** and **b** are symbols.
+
+If Σ = \{0,1\}, then **0** and **1** are symbols.
+
+**2. Alphabet (Σ)**
+
+An **Alphabet**, denoted by **Σ (Sigma)**, is a finite and non-empty set of symbols. All strings in a language are formed using the symbols of an alphabet.
+
+**Example**
+
+Σ = \{a, b\}
+
+Σ = \{0,1\}
+
+Σ = \{A, B, C\}
+
+The set \{a, b\} is an alphabet containing two symbols, while \{0,1\} is called the binary alphabet.
+
+**3. String**
+
+A **String** is a finite sequence of symbols taken from an alphabet. A string is usually represented by **w**, and its length is denoted by **|w|**. The length of a string is equal to the number of symbols it contains.
+
+An **Empty String** is a string that contains no symbols. It is represented by **ε (epsilon)**, and its length is zero.
+
+**Examples of Strings**
+
+If Σ = \{a, b\}, then possible strings are:
+
+a
+
+b
+
+aa
+
+ab
+
+ba
+
+bb
+
+aba
+
+bab
+
+For the string **w = abbab**:
+
+|w| = 5
+
+For the empty string:
+
+w = ε
+
+|ε| = 0
+
+**Example: Number of Strings of Length 2**
+
+Suppose the alphabet is:
+
+Σ = \{a, b\}
+
+The possible strings of length 2 are:
+
+aa
+
+ab
+
+ba
+
+bb
+
+Length of each string = 2
+
+Total number of strings = 4
+
+Since the alphabet contains 2 symbols, the total number of strings of length **n** is:
+
+Number of Strings = 2n
+
+For n = 2:
+
+2² = 4 strings
+
+For n = 3:
+
+2³ = 8 strings
+
+**Importance of Automata Theory**
+
+Automata Theory is widely used for modeling computational problems. It provides the theoretical foundation for designing **Compilers**, **Interpreters**, **Programming Languages**, **Pattern Matching Systems**, **Digital Circuits**, and many other computing applications. It also helps analyze whether a problem can be solved by a computer and how efficiently it can be solved.
+
+**Q3: Closure Representation in TOC**
+
+**Answer:** In Theory of Computation (TOC), Closure Operations describe how new strings can be generated from a given language.
+
+**Explanation:** In **Theory of Computation (TOC)**, **Closure Operations** describe how new strings can be generated from a given language. The two most common closure operations are **Positive Closure (L⁺)** and **Kleene Closure (L*)**.
+
+**1. Positive Closure (L⁺)**
+
+**Positive Closure**, denoted by **L⁺**, represents the set of all possible strings that can be formed by repeating the strings of a language **one or more times**. Since at least one occurrence is required, the **Empty String (ε)** is **not included**.
+
+**Mathematical Representation**
+
+L⁺ = L¹ ∪ L² ∪ L³ ∪ ...
+
+**Example**
+
+Let Σ = \{g\}.
+
+Regular Expression: **g+**
+
+L⁺ = \{g, gg, ggg, gggg, ggggg, ...\}
+
+Here, every string contains at least one **g**. The **Empty String (ε)** is not included.
+
+**2. Kleene Closure (L*)**
+
+**Kleene Closure**, denoted by **L***, represents the set of all possible strings that can be formed by repeating the strings of a language **zero or more times**. Since zero repetitions are allowed, the **Empty String (ε)** is included.
+
+**Kleene Closure** is also known as the **Kleene Star** or **Kleene Operator**. It is a **Unary Operator** used extensively in **Regular Expressions**, **Finite Automata**, **Compiler Design**, and **Pattern Matching**.
+
+**Mathematical Representation**
+
+L* = ε ∪ L⁺
+
+Therefore,
+
+L* = \{ε\} ∪ L⁺
+
+**Example**
+
+Let Σ = \{g\}.
+
+Regular Expression: **g***
+
+L* = \{ε, g, gg, ggg, gggg, ggggg, ...\}
+
+Unlike **Positive Closure**, the **Empty String (ε)** is included because zero occurrences are allowed.
+
+**Difference Between L⁺ and L***
+
+| Feature | L⁺ (Positive Closure) | L* (Kleene Closure) |
+|---|---|---|
+| Minimum Occurrence | One | Zero |
+| Includes ε | No | Yes |
+| Regular Expression | g+ | g* |
+| Generated Strings | \{g, gg, ggg, ...\} | \{ε, g, gg, ggg, ...\} |
+
+**Example of Kleene Star**
+
+Suppose the input string is **"GFG"**.
+
+Using **Kleene Star**, possible strings include:
+
+Σ* = \{ε, "GFG", "GGFG", "GGGFG", "GFGGG", "GGGGGGGGFFFFFFFFFGGGGGGGG", ...\}
+
+The set generated by **Kleene Star** is theoretically infinite because strings can be repeated any number of times. However, when grammar rules or language constraints are applied, the generated set may become finite.
+
+**Applications of Kleene Closure**
+
+- Designing **Regular Expressions**.
+
+- Constructing **Finite Automata**.
+
+- **Compiler** and **Lexical Analyzer** design.
+
+- Pattern matching and text searching.
+
+- Formal language processing.
+
+**Q4: Language in Theory of Computation (TOC)**
+
+**Answer:** In Theory of Computation (TOC), a Language is a collection (set) of Strings formed using the symbols of a given Alphabet (Σ).
+
+**Explanation:** In **Theory of Computation (TOC)**, a **Language** is a collection (set) of **Strings** formed using the symbols of a given **Alphabet (Σ)**. Every string in a language is created by combining one or more symbols from the alphabet according to specific rules.
+
+Mathematically, a language is defined as a subset of **Σ***, where **Σ*** represents the set of all possible strings (including the **Empty String (ε)**) that can be formed from the alphabet **Σ**.
+
+Therefore,
+
+L ⊆ Σ*
+
+**Example**
+
+If Σ = \{a, b\}, then:
+
+Σ* = \{ε, a, b, aa, ab, ba, bb, aaa, aab, aba, ...\}
+
+A possible language can be:
+
+L = \{ab, ba, bb\}
+
+Since all these strings are formed using the symbols **a** and **b**, L is a valid language over the alphabet Σ.
+
+**Examples of Languages**
+
+**1. Finite Language**
+
+A **Finite Language** contains a limited (finite) number of strings.
+
+Example:
+
+L = \{xy, yx, xx, yy\}
+
+This language contains only four strings, so it is a finite language.
+
+**2. Infinite Language**
+
+An **Infinite Language** contains an unlimited (infinite) number of strings.
+
+Example:
+
+L = \{All strings that start with 'b'\}
+
+Possible strings are:
+
+ba
+
+bb
+
+baa
+
+babb
+
+baab
+
+bbbb
+
+...
+
+Since new strings can be generated indefinitely, this language is infinite.
+
+**Types of Languages in Theory of Computation**
+
+**1. Regular Language**
+
+A **Regular Language** is the simplest type of formal language. It can be described using **Regular Expressions** and recognized by **Finite Automata (FA)**.
+
+Example:
+
+L = \{an | n ≥ 0\}
+
+Strings: \{ε, a, aa, aaa, aaaa, ...\}
+
+**2. Context-Free Language (CFL)**
+
+A **Context-Free Language** is generated using a **Context-Free Grammar (CFG)** and recognized by a **Pushdown Automaton (PDA)**. These languages are more powerful than regular languages because they can represent nested structures.
+
+Example:
+
+L = \{anbn | n ≥ 0\}
+
+Strings: \{ε, ab, aabb, aaabbb, aaaabbbb, ...\}
+
+**3. Context-Sensitive Language (CSL)**
+
+A **Context-Sensitive Language** is generated using a **Context-Sensitive Grammar (CSG)** and accepted by a **Linear Bounded Automaton (LBA)**. These languages are more expressive than Context-Free Languages.
+
+**4. Recursive and Recursively Enumerable Language**
+
+These languages are recognized using a **Turing Machine (TM)**.
+
+A **Recursive Language** always halts and decides whether a string belongs to the language.
+
+A **Recursively Enumerable Language** accepts valid strings, but it may not halt for invalid strings.
+
+**Summary**
+
+| Language Type | Generated By | Recognized By |
+|---|---|---|
+| Regular Language | Regular Expression | Finite Automata (FA) |
+| Context-Free Language | Context-Free Grammar (CFG) | Pushdown Automaton (PDA) |
+| Context-Sensitive Language | Context-Sensitive Grammar (CSG) | Linear Bounded Automaton (LBA) |
+| Recursive / Recursively Enumerable | Turing Machine | Turing Machine (TM) |
+
+## Finite Autometa
+
+**Q5: What is Finite Autometa and explain it features?**
+
+**Answer:** Finite Automata (FA) is an abstract mathematical model used in Theory of Computation (TOC) to recognize patterns in input strings.
+
+**Explanation:** **Finite Automata (FA)** is an abstract mathematical model used in **Theory of Computation (TOC)** to recognize patterns in input strings. It is one of the simplest computational models and forms the foundation for understanding **Regular Languages**. A Finite Automaton processes an input string one symbol at a time and determines whether the string belongs to a particular language.
+
+A **Finite Automaton** consists of a finite number of **States**, **Transitions**, and **Input Symbols**. It starts from an initial state, processes each input symbol sequentially, and moves from one state to another according to predefined transition rules.
+
+After processing the complete input string, if the automaton reaches an **Accepting (Final) State**, the input string is accepted. Otherwise, the string is rejected.
+
+There are two main types of **Finite Automata**: **Deterministic Finite Automata (DFA)** and **Non-deterministic Finite Automata (NFA)**. Although they work differently, both can recognize exactly the same set of **Regular Languages**.
+
+Finite Automata are widely used in **Compiler Design**, **Lexical Analysis**, **Pattern Matching**, **Text Processing**, **Network Protocols**, **Digital Circuit Design**, and many other computer science applications.
+
+**Features of Finite Automata**
+
+**1. Input**
+
+The **Input** is a sequence of symbols or characters taken from an **Alphabet (Σ)**. The automaton reads one symbol at a time until the entire string has been processed.
+
+**Example**
+
+If Σ = \{0,1\}, then possible input strings are:
+
+1010
+
+111
+
+00101
+
+**2. Output**
+
+After processing the input string, the automaton produces one of two outputs:
+
+- **Accept** – The input belongs to the language.
+
+- **Reject** – The input does not belong to the language.
+
+**3. States of Automata**
+
+A **State** represents the current condition or configuration of the automaton while processing an input string. Every Finite Automaton contains one **Start State**, one or more intermediate states, and one or more **Accepting (Final) States**.
+
+**Example**
+
+States = \{q0, q1, q2\}
+
+Start State = q0
+
+Final State = q2
+
+**4. State Transition**
+
+A **State Transition** defines how the automaton moves from one state to another when an input symbol is read. These transitions are determined by the **Transition Function**.
+
+**Example**
+
+Current State = q0
+
+Input = a
+
+Next State = q1
+
+**5. Output Relation**
+
+The final decision depends on the state where the automaton stops after reading the entire input string.
+
+If the final state is an **Accepting State**, the string is accepted.
+
+If the final state is not an accepting state, the string is rejected.
+
+**Working Example**
+
+Suppose a Finite Automaton accepts all strings ending with **1** over the alphabet Σ = \{0,1\}.
+
+Accepted Strings:
+
+1
+
+01
+
+101
+
+111
+
+Rejected Strings:
+
+0
+
+10
+
+1100
+
+The automaton accepts a string only if the last symbol is **1**.
+
+**Q6: Definition & Types of Finite Automata**
+
+**Answer:** A Finite Automaton (FA) is formally defined as a mathematical model consisting of five components.
+
+**Explanation:** A **Finite Automaton (FA)** is formally defined as a mathematical model consisting of five components. These components describe how the automaton processes input symbols, changes states, and determines whether an input string is accepted or rejected.
+
+A **Finite Automaton** is represented by the 5-tuple:
+
+FA = \{Q, Σ, q₀, F, δ\}
+
+Each component of the tuple has a specific meaning and plays an important role in the operation of the automaton.
+
+**Components of Finite Automata**
+
+**1. Q – Finite Set of States**
+
+**Q** represents the finite collection of states in the automaton. A state indicates the current condition of the machine while processing an input string.
+
+**Example**
+
+Q = \{q0, q1, q2\}
+
+Here, the automaton has three states: **q0**, **q1**, and **q2**.
+
+**2. Σ – Input Alphabet**
+
+**Σ (Sigma)** is the finite set of input symbols that the automaton can read. Every input string must be formed using symbols from this alphabet.
+
+**Example**
+
+Σ = \{0,1\}
+
+Σ = \{a,b\}
+
+**3. q₀ – Initial State**
+
+**q₀** is the **Start State** from which the automaton begins processing every input string. There is only one initial state in a finite automaton.
+
+**Example**
+
+q₀ = q0
+
+**4. F – Set of Final States**
+
+**F** is the set of one or more **Accepting (Final) States**. If the automaton reaches any state in **F** after processing the entire input string, the string is accepted.
+
+**Example**
+
+F = \{q2\}
+
+or
+
+F = \{q1, q3\}
+
+**5. δ – Transition Function**
+
+The **Transition Function (δ)** defines how the automaton moves from one state to another after reading an input symbol.
+
+Mathematically,
+
+δ : Q × Σ → Q
+
+**Example**
+
+δ(q0, a) = q1
+
+δ(q1, b) = q2
+
+This means the automaton moves from **q0** to **q1** when it reads **a**, and from **q1** to **q2** when it reads **b**.
+
+**Summary of the 5-Tuple**
+
+| Symbol | Description |
+|---|---|
+| Q | Finite set of states |
+| Σ | Input alphabet |
+| q₀ | Initial (Start) state |
+| F | Set of accepting (Final) states |
+| δ | Transition function |
+
+**Types of Finite Automata**
+
+There are two major types of **Finite Automata**.
+
+**1. Deterministic Finite Automata (DFA)**
+
+In a **DFA**, every state has exactly one transition for each input symbol. Therefore, for every input, the next state is uniquely determined.
+
+**Characteristics**
+
+- Only one possible next state for each input symbol.
+
+- No ε-transition is allowed.
+
+- Easy to implement and analyze.
+
+- Recognizes all Regular Languages.
+
+**2. Non-Deterministic Finite Automata (NFA)**
+
+In an **NFA**, a state may have multiple possible transitions for the same input symbol, or even an ε-transition. The automaton accepts the string if at least one possible path reaches an accepting state.
+
+**Characteristics**
+
+- Multiple transitions for the same input are allowed.
+
+- ε-transition may exist.
+
+- More flexible than DFA.
+
+- Every NFA can be converted into an equivalent DFA.
+
+**Q7: Deterministic Finite Automata (DFA)**
+
+**Answer:** A Deterministic Finite Automata (DFA) is a type of Finite Automata (FA) in which, for every state and every input symbol, there is exactly one possible next…
+
+**Explanation:** A **Deterministic Finite Automata (DFA)** is a type of **Finite Automata (FA)** in which, for every state and every input symbol, there is exactly one possible next state. Since the next state is uniquely determined, the automaton behaves in a deterministic manner. DFA is widely used for recognizing **Regular Languages**.
+
+A **DFA** does not allow **ε (Null) Transitions**. Therefore, every state must have a defined transition for each input symbol in the alphabet.
+
+**Formal Definition of DFA**
+
+A **DFA** is represented by the following 5-tuple:
+
+DFA = \{Q, Σ, q₀, F, δ\}
+
+Each component has a specific meaning in the operation of the automaton.
+
+**Components of DFA**
+
+**1. Q – Finite Set of States**
+
+**Q** is the finite collection of all states in the automaton.
+
+**Example**
+
+Q = \{q0, q1, q2\}
+
+**2. Σ – Input Alphabet**
+
+**Σ (Sigma)** is the finite set of input symbols accepted by the automaton.
+
+**Example**
+
+Σ = \{0,1\}
+
+Σ = \{a,b\}
+
+**3. q₀ – Initial State**
+
+**q₀** is the starting state from which the DFA begins processing every input string.
+
+**Example**
+
+q₀ = q0
+
+**4. F – Set of Final States**
+
+**F** is the set of one or more **Accepting (Final) States**. If the DFA stops in any of these states after reading the complete input, the string is accepted.
+
+**Example**
+
+F = \{q2\}
+
+**5. δ – Transition Function**
+
+The **Transition Function (δ)** defines how the DFA moves from one state to another for every input symbol.
+
+Mathematically,
+
+δ : Q × Σ → Q
+
+This means that for every combination of a state and an input symbol, there is exactly one next state.
+
+**Example**
+
+δ(q0, a) = q1
+
+δ(q0, b) = q2
+
+If the current state is **q0** and the input symbol is **a**, the DFA always moves to **q1**. There is no alternative path.
+
+**Characteristics of DFA**
+
+- Every state has exactly one transition for each input symbol.
+
+- ε (Null) Transition is not allowed.
+
+- Only one possible computation path exists for every input string.
+
+- The next state is always uniquely determined.
+
+- DFA recognizes all **Regular Languages**.
+
+**Example**
+
+Suppose Σ = \{0,1\}. A DFA accepts all binary strings ending with **1**.
+
+Accepted Strings:
+
+1
+
+01
+
+101
+
+1111
+
+Rejected Strings:
+
+0
+
+10
+
+1000
+
+The DFA accepts a string only when the last input symbol is **1**.
+
+**Advantages of DFA**
+
+- Easy to implement and understand.
+
+- Faster string recognition because only one path is followed.
+
+- Commonly used in **Lexical Analysis**, **Compiler Design**, **Pattern Matching**, and **Text Processing**.
+
+**Q8: Non-Deterministic Finite Automata (NFA)**
+
+**Answer:** A Non-Deterministic Finite Automata (NFA) is a type of Finite Automata (FA) in which a state may have one, multiple, or no transitions for the same input…
+
+**Explanation:** A **Non-Deterministic Finite Automata (NFA)** is a type of **Finite Automata (FA)** in which a state may have one, multiple, or no transitions for the same input symbol. Unlike a **Deterministic Finite Automata (DFA)**, an NFA can have more than one possible path while processing an input string.
+
+Another important feature of an **NFA** is the use of **ε (Epsilon or Null) Transition**. An ε-transition allows the automaton to move from one state to another without reading any input symbol.
+
+Although an NFA may have multiple computation paths, an input string is accepted if **at least one path** ends in an **Accepting (Final) State**.
+
+**Formal Definition of NFA**
+
+An **NFA** is represented by the following 5-tuple:
+
+NFA = \{Q, Σ, q₀, F, δ\}
+
+The components of an NFA are the same as those of a DFA, but the transition function is different.
+
+**Components of NFA**
+
+**Q** – Finite set of states.
+
+**Σ** – Finite set of input symbols.
+
+**q₀** – Initial (Start) State.
+
+**F** – Set of Accepting (Final) States.
+
+**δ** – Transition Function.
+
+The transition function of an NFA is defined as:
+
+δ : Q × (Σ ∪ \{ε\}) → 2Q
+
+This means that for a given state and input symbol, the NFA may move to zero, one, or multiple next states. It may also move using an **ε-transition** without consuming any input.
+
+**Characteristics of NFA**
+
+- A state may have multiple transitions for the same input symbol.
+
+- ε (Null) Transition is allowed.
+
+- Multiple computation paths may exist for a single input string.
+
+- A string is accepted if at least one path reaches an Accepting State.
+
+- Every NFA has an equivalent DFA.
+
+**Example**
+
+Construct an NFA that accepts all strings ending with **a**.
+
+Given:
+
+Σ = \{a, b\}
+
+Q = \{q0, q1\}
+
+Start State = q0
+
+Final State = \{q1\}
+
+**Transition Table**
+
+| Current State | Input = a | Input = b |
+|---|---|---|
+| → q0 | \{q0, q1\} | \{q0\} |
+| * q1 | \{ \} | \{ \} |
+
+Here,
+
+→ indicates the **Start State**.
+
+* indicates the **Accepting (Final) State**.
+
+**Working Example**
+
+Input String = "bba"
+
+q0 --b→ q0
+
+q0 --b→ q0
+
+q0 --a→ \{q0, q1\}
+
+Since one possible path reaches the final state **q1**, the string **"bba"** is accepted.
+
+Input String = "abb"
+
+The last symbol is **b**, so no computation path ends in **q1**. Therefore, the string is rejected.
+
+**Q9: DFA vs NFA**
+
+**Answer:** The major differences between DFA and NFA are given below.
+
+**Explanation:** The major differences between **DFA** and **NFA** are given below.
+
+| Feature | DFA | NFA |
+|---|---|---|
+| Full Form | Deterministic Finite Automata | Non-Deterministic Finite Automata |
+| State Transition | Exactly one transition exists for each input symbol from every state. | Zero, one, or multiple transitions may exist for the same input symbol. |
+| ε (Epsilon) Transition | Not allowed. | Allowed. |
+| Machine Behavior | Acts like a single machine with one execution path. | Acts like multiple machines exploring different paths simultaneously. |
+| Next State | Uniquely determined. | May have multiple possible next states. |
+| Construction | More difficult to construct. | Easier to construct. |
+| Acceptance | Accepts only if the single execution path ends in an Accepting State. | Accepts if at least one execution path reaches an Accepting State. |
+| Execution Time | Generally faster because only one path is followed. | May take more time because multiple paths are considered. |
+| Relationship | Every DFA is also an NFA. | Not every NFA is a DFA. |
+| Memory Requirement | Usually requires more states and more memory. | Generally requires fewer states and less memory. |
+| Dead Configuration | Not allowed. Every state must define a transition for every input symbol. | Allowed. Some transitions may be undefined. |
+| Transition Function | δ : Q × Σ → Q | δ : Q × (Σ ∪ \{ε\}) → 2Q |
+| Regular Expression Conversion | Converting a Regular Expression directly into a DFA is relatively difficult. | Converting a Regular Expression into an NFA is simpler. |
+| Possible Transitions | Only one transition for each input symbol. | Multiple transitions for the same input symbol are allowed. |
+
+## Exercise
+
+**Q10: Draw a deterministic and non-deterministic finite automate which either starts with 01 or end with 01 of a string containing 0, 1 in it.**
+
+**Answer:** NFA Answer:
+
+**Q11: Consider a DFA that accept sets of all string over \{0,1\} which start with 0.**
+
+**Answer:** DFA Example 1
+
+## General
+
+**Q12: Construct a DFA of the following language. (W⊂ (a, b)* | every a in W is followed by at least two b's\}**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, SO(IT), 22
+
+**Q13: Give regular expressions that generate, The language \{w|w contains at least two a's, or exactly two b's\}.**
+
+**Answer:** The language is:
+
+**Explanation:** **\{ w | w contains at least two a's, OR exactly two b's \}**
+
+**Regular Expressions:**
+
+**Strings with at least two a's:**
+
+(b|a)* a (b|a)* a (b|a)*
+
+**Strings with exactly two b's:**
+
+a* b a* b a*
+
+**Combined Regular Expression (Union):**
+
+((a|b)*a(a|b)*a(a|b)*) | (a*b a*b a*)
+
+**Related info:** Janata, ASA, 21
+
+## CFG
+
+**Q14: Consider the grammar:E-E+E E* Eid Show that the grammar is ambiguous for the string: id + id * idT**
+
+**Answer:** E → E + E
+
+**Explanation:** **Ambiguity of the Grammar**
+
+**Given Grammar:**
+
+E → E + E
+E → E * E
+E → id
+
+**String:**
+
+**id + id * id**
+
+A grammar is **Ambiguous** if the same string can have more than one **Parse Tree** (or more than one **Leftmost/Rightmost Derivation**).
+
+**Parse Tree 1: '+' evaluated first**
+
+E
+/ | \
+E + E
+| /|\
+id E * E
+| |
+id id
+
+Expression: **(id + id) * id**
+
+**Parse Tree 2: '*' evaluated first**
+
+E
+/ | \
+E * E
+/ | \ |
+E + E id
+| |
+id id
+
+Expression: **id + (id * id)**
+
+**Conclusion**
+
+Since the string **id + id * id** has **two different Parse Trees**, the grammar is **Ambiguous**.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+## DFA
+
+**Q15: State diagram of DFA using binary strings having 0 with multiple of 3 on input \{0,1\}. Also showing regular expression.**
+
+**Answer:** For binary strings over the alphabet Σ = \{0,1\} that contain a number of 0's which is a multiple of 3, the regular expression is:
+
+**Explanation:** **Regular Expression**
+
+For binary strings over the alphabet **Σ = \{0,1\}** that contain a number of **0's which is a multiple of 3**, the regular expression is:
+
+**1*(01*01*01*)*1***
+
+**Explanation**
+
+- **1*** allows any number of **1's** (including none) before, between, and after the zeros.
+
+- **01*01*01*** represents exactly **three 0's**, where each pair of 0's may be separated by any number of **1's**.
+
+- **(01*01*01*)*** repeats this group any number of times, ensuring the total number of **0's** is always a multiple of **3**.
+
+**Examples**
+
+Accepted Strings:
+
+ε
+
+111
+
+000
+
+010010
+
+101001010111
+
+000111000
+
+Rejected Strings:
+
+0
+
+00
+
+0000
+
+10001
+
+**Related info:** 6 Bank & FI, AP, 21

@@ -1,0 +1,878 @@
+---
+title_en: "Operating System — Solved Questions & PYQ"
+title_bn: "অপারেটিং সিস্টেম — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "32 questions from the IT Job QnS Operating System topic — 29 with worked answers and explanations, 3 without a text solution in the source."
+summary_bn: "IT Job QnS-এর Operating System টপিকের 32টি প্রশ্ন — 29টির সমাধান ও ব্যাখ্যা, 3টির টেক্সট সমাধান সোর্সে নেই।"
+---
+
+<Callout type="info">
+**Topic:** Operating System — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Process Scheduling Algorithm
+
+**Q1: A system has three processes with the following arrival times and CPU burst times:ProcessArrival Time (ms)Burst Time (ms)P105P213P322 Using the First-Come, First-Served (FCFS) CPU scheduling algorithm, calculate the average waiting time and the average turnaround time.**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, O(IT-24), 26
+
+**Q2: Why is a Circular Queue preferred over a Linear Queue in many operating systems? Explain with one example.**
+
+**Answer:** A Circular Queue is preferred over a Linear Queue because it utilizes memory more efficiently.
+
+**Explanation:** A **Circular Queue** is preferred over a **Linear Queue** because it utilizes memory more efficiently. In a **Linear Queue**, once the **Rear** reaches the last position, no new element can be inserted even if there are empty spaces at the beginning of the queue. A **Circular Queue** overcomes this limitation by connecting the last position to the first, allowing the freed spaces to be reused.
+
+**Advantages of Circular Queue**
+
+- Efficient utilization of memory.
+
+- Eliminates wasted space created after deletion.
+
+- No need to shift elements after deletion.
+
+- Faster insertion and deletion operations.
+
+- Widely used in Operating Systems for scheduling and buffering.
+
+**Example**
+
+In **CPU Scheduling** using the **Round Robin Algorithm**, processes are stored in a **Circular Queue**. After a process completes its allocated time slice (**Time Quantum**), it is moved to the rear of the queue, and the next process gets the CPU. This continues until all processes are executed.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+**Q3: Operating System Round Robin: (Quantum number =3), 4 job (job1, job2, job3, job4), Arrival time: 0,2,8,5; Burst time: 9, 7, 2, 3. What is the average waiting time?**
+
+**Answer:** *
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q4: Operating System (OS) scheduling is the key concept of multiprogramming. List and briefly define the major types of OS scheduling.**
+
+**Answer:** OS Scheduling is the process of selecting which process will execute on the CPU.
+
+**Explanation:** **Major Types of Operating System (OS) Scheduling**
+
+**Answer:**
+
+**OS Scheduling** is the process of selecting which process will execute on the CPU. It is a key concept of **Multiprogramming** because it improves CPU utilization and system performance.
+
+**Major Types of OS Scheduling**
+
+| Scheduling Type | Definition |
+|---|---|
+| Long-Term Scheduler (Job Scheduler) | Selects jobs from secondary storage and loads them into main memory for execution. |
+| Short-Term Scheduler (CPU Scheduler) | Selects a process from the ready queue and allocates the CPU to it. |
+| Medium-Term Scheduler | Temporarily removes (swaps out) processes from memory and later brings them back to improve system performance. |
+
+The **Long-Term Scheduler** controls the degree of multiprogramming, the **Short-Term Scheduler** allocates the CPU, and the **Medium-Term Scheduler** manages memory efficiently through swapping.
+
+**Related info:** CB, O(IT), 20
+
+**Q5: Calculate The Average Waiting Time of SJF scheduling algorithm.ProcessBurst TimeArrival TimeP1103P211P323P414P552 (i) Average waiting time for FCFS (ii) Preemptive SJF(iii) Round Robin (Quantum time: 3) scheduling algorithm**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** Janata, ASA, 21
+
+**Q6: ১ (গ) নিচের সারণীটি দেখুন-ProcessBurst Time (milli second)PriorityP1153P221P343P424P582সমস্থ process একই সাথে 0 সময়ে এসে পৌঁছে।i) FCFS এবং SJF Scheduling algorithm ব্যবহার করে Gantt Chart এর মাধ্যমে process গুলোর execution দেখান।ii) উপরের উভয় algorithm এর জন্য প্রত্যেকটি process এর turnaround সময় নির্ণয় করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC_MoHA_AP, 26
+
+**Q7: Job arrival time and execution time of Operating system tasks table is given, find outJobArrival TimeExecution TimeA010B37C53 Average waiting time (i) FCFS (ii) Preemptive SJF (iii) Round Robin (Quantum time: 3)**
+
+**Answer:** (i) FCFS:
+
+**Related info:** Rupali, ANE, 21
+
+## Paging
+
+**Q8: Differentiate between Logical Address and Physical Address in context of Operating System.**
+
+**Answer:** Definition: Logical Address is generated by CPU; Physical Address is the actual location in memory (RAM).
+
+**Explanation:** **Difference Between Logical Address and Physical Address**
+
+- **Definition:** Logical Address is generated by CPU; Physical Address is the actual location in memory (RAM).
+- **Visibility:** Logical Address is visible to the user/program; Physical Address is not directly visible to the user.
+- **Generation:** Logical Address is created during program execution; Physical Address is obtained after address translation.
+- **Translation:** Logical Address is converted to Physical Address using **MMU (Memory Management Unit)**.
+- **Address Space:** Logical Address Space is virtual; Physical Address Space is real memory.
+- **Access:** CPU uses Logical Address; Memory hardware uses Physical Address.
+
+**Related info:** Combined Bank, AE(IT)/AME, 26
+
+**Q9: Consider a machine with 64 MB physical memory and a 32 bit virtual address space. If the page size is 4 KB, what is the approximate size of the page table.**
+
+**Answer:** Physical Address Space = 64MB = 2²⁶B
+
+**Explanation:** Virtual Address = 32-bits, ∴ Virtual Address Space = 2³²B
+
+Page Size = 4KB = 2¹²B
+
+Number of pages = (2³²)/(2¹²) = 2²⁰ pages.
+
+Number of frames = (2²⁶)/(2¹²) = 2¹⁴ frames.
+
+∴ Page Table Size = 2²⁰ × 14-bits ≈ 2²⁰ × 16-bits ≈ 2²⁰ × 2B = 2MB .
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q10: A system utilizes a 32-bit logical address space and a page size of 220 bytes. If each entry (block) in the Translation Lookaside Buffer (TLB) requires 6 bytes, calculate the total memory required for the TLB to map the entire logical address space.**
+
+**Answer:** Logical address space = 32-bit
+
+**Explanation:** **Given:**
+
+- Logical address space = 32-bit
+- Page size = 2²⁰ bytes
+- TLB entry size = 6 bytes per entry
+
+**Step 1: Calculate Total Logical Address Space**
+
+A 32-bit address can reference 2³² unique bytes.
+
+Total logical address space = **2³² bytes**
+
+**Step 2: Calculate Number of Pages**
+
+Number of pages = Total address space ÷ Page size
+
+Number of pages = 2³² ÷ 2²⁰ = 2(³² − ²⁰) = 2¹² = **4096 pages**
+
+**Step 3: Calculate Total TLB Memory**
+
+Each page requires one TLB entry to map the entire logical address space.
+
+Total TLB memory = Number of pages × Entry size
+
+Total TLB memory = 4096 × 6 = **24576 bytes**
+
+In kilobytes: 24576 ÷ 1024 = **24 KB**
+
+**Related info:** Combined Bank, AP-23, 26
+
+**Q11: Consider a logical address space of 512 pages, each of 2-KB page size, mapped onto a physical memory containing 128 frames. a. How many bits are required in the logical address? b. How many bits are required in the physical address? (10 Marks)**
+
+**Answer:** Logical address space = 512 pages
+
+**Explanation:** **Given**
+
+Logical address space = 512 pages
+
+Page size = 2 KB = 2048 bytes
+
+Physical memory = 128 frames
+
+**a) Bits required in the Logical Address**
+
+Number of pages = 512 = 2⁹ → Page number bits = **9 bits**
+
+Page size = 2048 bytes = 2¹¹ → Offset bits = **11 bits**
+
+So, Logical address bits = Page number bits + Offset bits = 9 + 11 = **20 bits**
+
+**b) Bits required in the Physical Address**
+
+Number of frames = 128 = 2⁷ → Frame number bits = **7 bits**
+
+Offset remains same = **11 bits**
+
+So, Physical address bits = Frame number bits + Offset bits = 7 + 11 = **18 bits**
+
+**Related info:** Combined Bank, SO-IT, 25
+
+## Page Fault & Thrashing
+
+**Q12: Define Socket, Kernel, Process, Program, Multiprogramming, and Context Switching. Discuss the LRU and NRU Page Replacement Algorithms. Illustrate Preemptive Priority Scheduling.**
+
+**Answer:** Socket: Endpoint for communication between two systems over a network (IP + Port).
+
+**Explanation:** **Basic Definitions**
+
+- **Socket:** Endpoint for communication between two systems over a network (IP + Port).
+- **Kernel:** Core part of OS that manages hardware, memory, and processes.
+- **Program:** A set of instructions stored on disk.
+- **Process:** A program in **execution state**.
+- **Multiprogramming:** Multiple programs kept in memory and CPU switches among them to maximize utilization.
+- **Context Switching:** Saving and loading process state when CPU switches from one process to another.
+
+**LRU (Least Recently Used) Page Replacement**
+
+- Replaces the page that was **least recently used**.
+- Uses past usage to predict future behavior.
+- **Advantage:** Good performance, low page fault rate.
+- **Disadvantage:** Requires tracking usage → overhead.
+
+**NRU (Not Recently Used) Page Replacement**
+
+- Classifies pages based on **Referenced (R)** and **Modified (M)** bits.
+- Selects a page from lowest priority class (not recently used).
+- **Advantage:** Simple and efficient.
+- **Disadvantage:** Less accurate than LRU.
+
+**Preemptive Priority Scheduling**
+
+- CPU is assigned to process with **highest priority**.
+- If a new process with higher priority arrives, current process is **preempted**.
+
+**Example:**
+
+- P1 (Priority 2) is running
+- P2 (Priority 1, higher) arrives → P1 is stopped
+- P2 gets CPU immediately
+
+**Related info:** CB, AE(IT)/AME, 24
+
+**Q13: Explain the concept of thrashing in an operating system, describing how it occurs in a demand-paged virtual memory system and how it impacts CPU utilization and overall system performance. (10 Marks)**
+
+**Answer:** Thrashing is a condition in an operating system where the system spends most of its time swapping pages in and out of memory instead of executing actual…
+
+**Explanation:** **Thrashing in Operating System**
+
+Thrashing is a condition in an operating system where the system spends most of its time swapping pages in and out of memory instead of executing actual processes. It mainly occurs in a demand-paged virtual memory system when there are not enough frames to support the working sets of active processes.
+
+**How Thrashing Occurs in Demand Paging**
+
+In demand paging, pages are loaded into memory only when they are needed. If too many processes are running and physical memory is insufficient, frequent page faults occur. The OS continuously replaces pages, but the required pages are again needed immediately, causing excessive paging activity. This situation leads to thrashing.
+
+**Impact on CPU Utilization**
+
+During thrashing, CPU utilization becomes very low because the CPU waits for disk I/O operations caused by page faults. Even though many processes are active, the CPU remains mostly idle.
+
+**Impact on System Performance**
+
+Overall system performance degrades severely. Response time increases, throughput decreases, and the system becomes slow and inefficient. To handle thrashing, the OS may reduce the degree of multiprogramming or use working set and page fault frequency control techniques.
+
+**Related info:** Combined Bank, SO-IT, 25
+
+**Q14: Consider page reference string 1, 3, 0, 3, 5, 6, 3 with 3 page frames.Find the number of page faults.**
+
+**Answer:** Given:
+
+**Explanation:** - Page reference string: 1, 3, 0, 3, 5, 6, 3
+- Number of page frames: 3
+
+Step-by-Step Analysis:page_fault_mathExplanation:
+
+- 1 causes a page fault as it's not in memory, so it's loaded into frame 1.
+- 3 causes a page fault and is loaded into frame 2.
+- 0 causes a page fault and is loaded into frame 3. All three frames are now full.
+- 3 is already in memory, so no page fault occurs (Hit).
+- 5 causes a page fault and replaces the oldest page in memory, which is 1.
+- 6 causes a page fault and replaces the oldest page in memory, which is 3.
+- 3 causes a page fault and replaces the oldest page in memory, which is 0.
+
+Total Page Faults:
+
+- 6 Page Faults
+
+**Related info:** CB, AP, 23
+
+## Memory Management
+
+**Q15: What is Swapping from virtual memory in the primary memory.**
+
+**Answer:** Swapping is a memory management technique used by an operating system to efficiently manage the limited primary memory (RAM) and the larger but slower…
+
+**Explanation:** **Swapping in Operating System**
+
+**Swapping** is a memory management technique used by an operating system to efficiently manage the limited **primary memory (RAM)** and the larger but slower **secondary memory** such as a hard disk or SSD.
+
+**What is Swapping?**
+
+Swapping is the process of moving entire processes between **primary memory (RAM)** and **secondary memory**. When the RAM becomes full and the system needs memory to run active programs, the operating system moves some inactive or low-priority processes from RAM to secondary memory. This process is called **swapping out**.
+
+Later, when the swapped-out process is required again, the operating system brings the process back into RAM from secondary memory. This process is called **swapping in**.
+
+Through this back-and-forth movement of processes between RAM and secondary memory, the operating system can run more processes than the physical memory can normally support.
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q16: In the given example, let us assume the jobs and the memory requirements as the following: Job1 = 90k, Job2 = 20k, Job350k, Job4=200k. Let the free pace memory allocation blocks be: Block1= 50k, Block2= 100k, Block3=90k, Block4=200k, Block5 50k. Now show Best Fit Method and first fit method memory allocation. [Similar Question but value cannot exactly remember.]**
+
+**Answer:** Given:
+
+**Explanation:** **Given:**
+Jobs: J1 = 90K, J2 = 20K, J3 = 50K, J4 = 200K
+
+Blocks: B1 = 50K, B2 = 100K, B3 = 90K, B4 = 200K, B5 = 50K
+
+**1) First Fit Method**
+
+In First Fit, each job is placed in the **first block** that is large enough.
+
+**Step by step:**
+
+J1 = 90K → first block that fits is B2 = 100K
+
+Remaining in B2 = 10K
+
+J2 = 20K → first block that fits is B1 = 50K
+
+Remaining in B1 = 30K
+
+J3 = 50K → first block that fits is B3 = 90K
+
+Remaining in B3 = 40K
+
+J4 = 200K → first block that fits is B4 = 200K
+
+Remaining in B4 = 0K
+
+**First Fit Allocation Table:**
+
+| Job | Size | Allocated Block | Block Size | Unused Space |
+|---|---|---|---|---|
+| J1 | 90K | B2 | 100K | 10K |
+| J2 | 20K | B1 | 50K | 30K |
+| J3 | 50K | B3 | 90K | 40K |
+| J4 | 200K | B4 | 200K | 0K |
+
+**2) Best Fit Method**
+
+In Best Fit, each job is placed in the **smallest block** that can hold it.
+
+**Step by step:**
+
+J1 = 90K → best block is B3 = 90K
+
+Remaining in B3 = 0K
+
+J2 = 20K → best block is B1 = 50K
+
+Remaining in B1 = 30K
+
+J3 = 50K → best block is B5 = 50K
+
+Remaining in B5 = 0K
+
+J4 = 200K → best block is B4 = 200K
+
+Remaining in B4 = 0K
+
+**Best Fit Allocation Table:**
+
+| Job | Size | Allocated Block | Block Size | Unused Space |
+|---|---|---|---|---|
+| J1 | 90K | B3 | 90K | 0K |
+| J2 | 20K | B1 | 50K | 30K |
+| J3 | 50K | B5 | 50K | 0K |
+| J4 | 200K | B4 | 200K | 0K |
+
+**Final Answer:**
+
+First Fit allocation:
+
+J1 → B2, J2 → B1, J3 → B3, J4 → B4
+
+Best Fit allocation:
+
+J1 → B3, J2 → B1, J3 → B5, J4 → B4
+
+**Related info:** Janata, ASA, 21
+
+## Segmentation & Virtual memory
+
+**Q17: Difference between physical memory and virtual memory, also describe the advantages and disadvantages of virtual memory.**
+
+**Answer:** | Aspect | Physical Memory | Virtual Memory |
+
+**Explanation:** **Physical Memory vs Virtual Memory**
+
+| Aspect | Physical Memory | Virtual Memory |
+|---|---|---|
+| Definition | Actual RAM installed in the computer; directly accessed by the CPU. | Uses secondary storage (hard disk/SSD) as an extension of RAM. |
+| Speed | Very fast | Slower due to disk access |
+| Size | Limited by installed RAM | Can be much larger than physical memory |
+| Cost | More expensive | Cheaper because it uses disk space |
+
+**Advantages of Virtual Memory**
+
+- Allows execution of large programs.
+- Better memory utilization.
+- Supports multiprogramming.
+- Reduces the need for large RAM.
+
+**Disadvantages of Virtual Memory**
+
+- Slower performance due to disk access.
+- Page faults may degrade performance.
+- Complex memory management.
+- Excessive use may cause thrashing.
+
+**Related info:** CB, AME/AHE, 23
+
+## Processes Management
+
+**Q18: Two separate threads are initialized with the exact same instance of CounterSubsystem and run concurrently to completion. State definitively whether the final value of transactionCounter is guaranteed to be exactly 2000. Name the specific multithreading hazard that occurs here and explain the low-level mechanical steps that cause this behavior.class CounterSubsystem implements Runnable \{public int transactionCounter = 0;@Overridepublic void run() \{for (int i = 0; i \< 1000; i++) \{transactionCounter++;\}\}\}**
+
+**Answer:** No, the final value of transactionCounter is NOT guaranteed to be exactly 2000.
+
+**Explanation:** **Multithreading Analysis: CounterSubsystem**
+
+**Is the final value guaranteed to be 2000?**
+
+No, the final value of **transactionCounter** is **NOT guaranteed** to be exactly 2000. The actual result could be any value between 1000 and 2000, but it will most likely be less than 2000.
+
+**Specific Multithreading Hazard**
+
+The hazard is a **Race Condition**, specifically a **Data Race** or **Read-Modify-Write Race Condition**. It occurs because multiple threads access and modify the same shared variable without synchronization.
+
+**Low-Level Execution Steps**
+
+The statement **transactionCounter++** is not atomic. It breaks into three steps:
+
+- **READ:** Load value from memory into CPU register
+- **MODIFY:** Increment the value in the register
+- **WRITE:** Store updated value back to memory
+
+Because both threads execute these steps concurrently, their operations can interleave, causing **lost updates**.
+
+**Lost Update Example:**
+
+| Time Step | Thread 1 | Thread 2 | Memory Value |
+|---|---|---|---|
+| 1 | READ: 0 | | 0 |
+| 2 | | READ: 0 | 0 |
+| 3 | MODIFY: 1 | | 0 |
+| 4 | | MODIFY: 1 | 0 |
+| 5 | WRITE: 1 | | 1 |
+| 6 | | WRITE: 1 | 1 |
+
+Both threads overwrite each other’s updates, so increments are lost. Repeated many times, this reduces the final count below 2000.
+
+**How to Fix It**
+
+- **synchronized:** Protect increment using a lock to ensure mutual exclusion
+- **AtomicInteger:** Use `incrementAndGet()` for atomic updates
+- **volatile:** Not sufficient because it does not make compound operations atomic
+
+**Related info:** Combined Bank, AP-23, 26
+
+**Q19: What hyper-threading is and its uses?**
+
+**Answer:** Hyper-Threading (HT) is a technology developed by Intel that allows a single physical CPU core to function as two logical (virtual) cores.
+
+**Explanation:** **Hyper-Threading (HT)** is a technology developed by **Intel** that allows a single physical CPU core to function as two logical (virtual) cores. This enables the processor to execute multiple threads simultaneously, improving CPU utilization and overall system performance.
+
+**How Does Hyper-Threading Work?**
+
+In **Hyper-Threading**, each physical CPU core appears as two logical processors to the **Operating System**. When one thread is waiting for data or resources, the CPU can execute another thread, reducing idle time and increasing efficiency.
+
+**Uses of Hyper-Threading**
+
+- Improves multitasking performance by running multiple threads simultaneously.
+
+- Increases CPU utilization and overall system efficiency.
+
+- Enhances the performance of multi-threaded applications such as video editing, 3D rendering, and software development.
+
+- Improves virtualization by allowing more virtual machines to run efficiently.
+
+- Reduces CPU idle time by executing another thread while one thread is waiting.
+
+**Related info:** Pubali, JHE, 23
+
+**Q20: Explain the fundamental difference between a Process and a Thread. Provide two distinct advantages of using threads over processes.**
+
+**Answer:** A process is an independent program in execution with its own memory space, system resources, and execution context.
+
+**Explanation:** **Difference between Process and Thread**
+
+A **process** is an independent program in execution with its own memory space, system resources, and execution context. A **thread** is the smallest unit of execution within a process and shares the same memory and resources with other threads of that process.
+
+**Advantages of Threads over Processes**
+
+**1) Faster Communication:** Threads within the same process share memory, making inter-thread communication faster than inter-process communication.
+
+**2) Lower Resource Overhead:** Threads require less memory and fewer system resources compared to processes, leading to better performance and efficiency.
+
+**Related info:** Combined Bank, AP-22, 26
+
+**Q21: Explain the "Producer-Consumer" problem in operating systems. What specific synchronization issue must be solved?**
+
+**Answer:** The Producer-Consumer problem is a classic synchronization problem in operating systems.
+
+**Explanation:** **Producer-Consumer Problem**
+
+The Producer-Consumer problem is a classic **synchronization problem** in operating systems. In this problem, one or more **producer processes** generate data items and place them into a shared buffer, while one or more **consumer processes** remove and use those data items from the same buffer.
+
+The shared buffer has a limited size, so coordination between producers and consumers is required to ensure correct operation.
+
+**Specific Synchronization Issue**
+
+The main synchronization issue that must be solved is **race condition** while accessing the shared buffer. The system must ensure:
+
+- A producer does not add data when the buffer is **full**.
+
+- A consumer does not remove data when the buffer is **empty**.
+
+- Only one process accesses the buffer at a time (**mutual exclusion**).
+
+To solve this problem, synchronization mechanisms such as **semaphores, mutex locks, or monitors** are used to coordinate access to the shared buffer.
+
+**Related info:** Combined Bank, AP-22, 26
+
+**Q22: What is Multithreading programming? Why is Multithreading used in programming?**
+
+**Answer:** Multithreading programming is a technique where a single program is divided into multiple threads that can run at the same time.
+
+**Explanation:** **Multithreading Programming**
+
+Multithreading programming is a technique where a single program is divided into multiple threads that can run at the same time. Each thread represents a small unit of execution, allowing the program to perform multiple tasks concurrently within the same process.
+
+**Why Multithreading is Used**
+
+Multithreading is used to improve the performance and responsiveness of applications. It allows better utilization of CPU resources, enables tasks to run in parallel on multi-core processors, and helps keep programs responsive while performing time-consuming operations such as file processing or network communication.
+
+**Related info:** Combined Bank, AP, 24
+
+## Booting
+
+**Q23: Write about Boot Process.**
+
+**Answer:** The Boot Process is the sequence of steps a computer follows to start up after it is powered on or restarted.
+
+**Explanation:** The **Boot Process** is the sequence of steps a computer follows to start up after it is powered on or restarted. During this process, the hardware is initialized, the operating system is loaded into memory, and the computer becomes ready for use.
+
+**Steps of the Boot Process**
+
+**1. Power On:** The user turns on the computer, and the CPU begins executing instructions stored in the firmware (BIOS or UEFI).
+
+**2. POST (Power-On Self-Test):** The **BIOS/UEFI** checks hardware components such as RAM, CPU, keyboard, storage devices, and other peripherals to ensure they are functioning correctly.
+
+**3. Boot Loader Execution:** The **Boot Loader** (e.g., GRUB, Windows Boot Manager) is loaded from the bootable storage device.
+
+**4. Operating System Loading:** The Boot Loader loads the **Operating System Kernel** into the main memory (RAM).
+
+**5. Kernel Initialization:** The Kernel initializes device drivers, memory management, file systems, and other essential system services.
+
+**6. User Login:** The operating system starts system services and displays the login screen or desktop, making the computer ready for use.
+
+**Related info:** Pubali, JHE, 23
+
+**Q24: Describe the booting process in windows system.**
+
+**Answer:** The booting process in a Windows system is the sequence of steps that starts when the computer is powered on and ends when the Windows operating system is…
+
+**Explanation:** **Booting Process in Windows System**
+
+The booting process in a Windows system is the sequence of steps that starts when the computer is powered on and ends when the Windows operating system is fully loaded and ready for use.
+
+**Step 1: Power On and POST**
+
+When the system is powered on, BIOS or UEFI performs POST (Power-On Self Test) to check hardware components such as CPU, RAM, keyboard, and storage devices.
+
+**Step 2: BIOS/UEFI Initialization**
+
+After POST, BIOS or UEFI initializes hardware components and identifies the bootable device based on the boot order configuration.
+
+**Step 3: Boot Loader Execution**
+
+The boot loader (Windows Boot Manager – bootmgr) is loaded from the boot device, which locates and prepares the Windows operating system to start.
+
+**Step 4: Windows Kernel Loading**
+
+The Windows kernel (ntoskrnl.exe) is loaded into memory along with essential drivers required for system operation.
+
+**Step 5: System Initialization**
+
+Windows initializes system services, device drivers, and registry settings needed for system functionality.
+
+**Step 6: User Logon**
+
+The Windows logon screen appears, allowing the user to enter credentials and access the system.
+
+**Step 7: Desktop Ready**
+
+After successful login, the Windows desktop is displayed and the system is ready for use.
+
+**Related info:** Pubali, HE, 23
+
+## Deadlock
+
+**Q25: What is Deadlock? Explain two situations where deadlock condition occurs.**
+
+**Answer:** Deadlock is a situation in an Operating System where two or more processes are unable to continue execution because each process is waiting for a resource…
+
+**Explanation:** **Deadlock** is a situation in an Operating System where two or more processes are unable to continue execution because each process is waiting for a resource that is held by another process.
+
+**Two Situations Where Deadlock Occurs**
+
+- **Mutual Exclusion:** A resource can be used by only one process at a time. If another process requests the same resource, it must wait until the resource is released.
+- **Circular Wait:** Deadlock occurs when a group of processes form a circular chain where each process is waiting for a resource held by the next process in the chain.
+
+**Related info:** Janata, ASA, 21
+
+**Q26: Briefly explain Circular Wait. In a Resource Allocation Graph (RAG), if a cycle exists, does it absolutely guarantee that a Deadlock has occurred? Explain briefly.**
+
+**Answer:** Circular wait is one of the necessary conditions for deadlock.
+
+**Explanation:** **Circular Wait**
+
+- Circular wait is one of the necessary conditions for deadlock.
+- It occurs when a group of processes are waiting for resources in a circular chain.
+- In this situation, each process holds at least one resource and waits for another resource held by the next process in the cycle.
+
+**Example:**
+
+- Process P1 holds Resource R1 and waits for R2.
+- Process P2 holds Resource R2 and waits for R3.
+- Process P3 holds Resource R3 and waits for R1.
+
+This creates a circular waiting condition.
+
+**Cycle in Resource Allocation Graph (RAG)**
+
+If a cycle exists in a Resource Allocation Graph, it does not always guarantee deadlock.
+
+- If each resource type has only one instance, then a cycle definitely indicates deadlock.
+- If resource types have multiple instances, then a cycle may exist without deadlock.
+
+So, a cycle is:
+
+- A necessary condition for deadlock
+- But not always a sufficient condition
+
+**Deadlock Detection using Resource Allocation Graph**
+
+To detect deadlock using Resource Allocation Graph (RAG), we follow these steps −
+
+- If RAG contains no cycles, then there is no deadlock in the system.
+- If RAG is of single instance resources and it contains a cycle, then there is a deadlock in the system.
+- If RAG is of multiple instance resources and it contains a cycle, then deadlock may or may not exist. To check for deadlock, we need convert multiple instance RAG to single instance RAG, by treating each instance of a resource as a separate resource type.
+
+In the graph:
+
+- Resource **R1** has only one instance.
+- Resource **R2** has two instances.
+- **P1** is holding R1 and requesting R2.
+- **P2** is holding one instance of R2 and requesting R1.
+- **P3** is using another instance of R2.
+
+A cycle exists in the graph: P1 → R2 → P2 → R1 → P1
+
+But this graph does **not** indicate deadlock.
+
+**Reason:**
+
+Resource R2 has multiple instances. One instance of R2 is currently allocated to P3.
+
+If P3 finishes its work and releases R2, then:
+
+- P1 can obtain R2 and complete execution.
+- After P1 completes, it releases R1.
+- Then P2 can obtain R1 and continue execution.
+
+Since the processes can still proceed and resources can eventually be released, the system is not permanently blocked.
+
+**Related info:** CB, AME/AE(IT-23), 26
+
+**Q27: Consider the following snapshot of a system where maximum instance of A, B, C and D are 3, 14, 12 and 12. Answer the following Question using the Bankers algorithm, a) Calculate the need matrix from the above table?b) Is the system in the safe state? Find out the safe sequence if no, justify the reason.**
+
+**Answer:** a) answer:
+
+**Explanation:** The Need matrix is calculated as: *Need = Max - Allocation* For each process, we subtract the Allocation from the Max to get the Need Matrix.
+
+b) answer:
+
+**Step-by-step checking for our system:**
+
+- **P0:** Needs [0, 0, 0, 0] ≤ Available [1, 5, 2, 0] → yes, so finish P0.
+- Update Available by adding P0's allocation: [1, 5, 2, 0] + [0, 0, 1, 2] = [1, 5, 3, 2]
+- **P1:** Needs [0, 7, 5, 0] ≤ Available [1, 5, 3, 2] → no, cannot finish yet.
+- **P2:** Needs [1, 0, 0, 2] ≤ Available [1, 5, 3, 2] → yes, finish P2.
+- Update Available : [1, 5, 3, 2] + [1, 3, 5, 4] = [2, 8, 8, 6]
+- **P3:** Needs [0, 0, 2, 0] ≤ Available [2, 8, 8, 6] → yes, finish P3.
+- Update Available : [2, 8, 8, 6] + [0, 6, 3, 2] = [2, 14, 11, 8]
+- **P4:** Needs [0, 6, 4, 2] ≤ Available [2, 14, 11, 8] → yes, finish P4.
+- Update Available : [2, 14, 11, 8] + [0, 0, 1, 4] = [2, 14, 12, 12]
+- **P1 (rechecked):** Needs [0, 7, 5, 0] ≤ Available [2, 14, 12, 12] → yes, finish P1.
+- Update Available : [2, 14, 12, 12] + [1, 0, 0, 0] = [3, 14, 12, 12]
+
+Since all processes can finish in this order, the system is in a safe state.
+
+**Safe sequence:** \<P0, P2, P3, P4, P1>
+
+**🎥 Video Solution:**
+Deadlock Handling (Deadlock Avoidance - Banker's Algorithm)
+
+**Related info:** BB, AD(ICT), 25
+
+**Q28: Give the necessary condition for deadlock occur. Is it possible to have deadlock involving only a single process ? Explain your answer?**
+
+**Answer:** Deadlock in an operating system occurs when two or more processes are stuck and cannot proceed because they are each waiting for a resource that another…
+
+**Explanation:** **Deadlock** in an operating system occurs when two or more processes are stuck and cannot proceed because they are each waiting for a resource that another process holds. Essentially, the processes are in a "waiting loop," and none can continue because they are all waiting for each other to release resources.
+
+**Example:** Imagine two people on a narrow staircase. One is going up, and the other is going down. Neither can move because the other person is blocking their path, and neither is willing to back up. They are stuck, waiting for the other to move first, which will never happen.
+
+**Necessary condition for occuring deadlock / Coffman Conditions**
+
+For a deadlock to happen, four conditions must all be true at the same time. These are called the Coffman conditions, named after the researchers who explained them.
+
+- **Mutual Exclusion**: A resource can only be used by one process at a time. If a process is using a resource, no other process can use it until the first process releases it.
+- **Hold and Wait**: A process is holding at least one resource and is waiting for additional resources that are currently held by other processes.
+- **No Preemption**: Resources cannot be taken away from a process forcefully. A process can only release resources voluntarily when it is no longer needed.
+- **Circular Wait**: A cycle exists where each process in the cycle is waiting for a resource that the next process holds. For example, Process A is waiting for Process B's resource, Process B is waiting for Process C's resource, and Process C is waiting for Process A's resource.
+
+🎥 Video Solution: Deadlock & its Necessary Condition
+
+**✅ Can Deadlock Involve Only a Single Process?**
+
+In general, a deadlock cannot occur with only one process. The key characteristic of deadlock is that multiple processes are waiting for each other to release resources. A single process cannot create circular waiting, which is required for deadlock.
+
+**Related info:** Combined Bank, O(IT), 24
+
+## General
+
+**Q29: You friend device is slow performing so what should you take step in your task manager**
+
+**Answer:** Open Task Manager: Press Ctrl + Shift + Esc.
+
+**Explanation:** **Steps to Fix Slow Device Using Task Manager**
+
+- **Open Task Manager:** Press **Ctrl + Shift + Esc**.
+- **Check CPU Usage:** Identify processes using high CPU.
+- **Check Memory (RAM):** Find apps consuming too much memory.
+- **End Unnecessary Tasks:** Select heavy apps → click **End Task**.
+- **Startup Programs:** Go to **Startup tab** → disable unnecessary apps.
+- **Disk Usage:** Check if disk is 100% → stop heavy processes.
+- **Background Apps:** Close unused background applications.
+
+**Related info:** Sonali Bank, ADA, 26
+
+## Basic Introduction, Types, Kernel
+
+**Q30: A high traffic web application suddenly begins failing with database connection timeouts under peak load. At the same time, the underlying Linux OS kernel hosting the database reports "too many open files" error and network socket exhaustion. Explain the root cause of this failure at the linux os kernel level.**
+
+**Answer:** The failure is caused by resource exhaustion at the Linux kernel level, specifically involving file descriptors and network sockets under high load.
+
+**Explanation:** The failure is caused by **resource exhaustion at the Linux kernel level**, specifically involving file descriptors and network sockets under high load.
+
+**Key Root Causes:**
+
+**File Descriptor Exhaustion:**
+
+In Linux, everything like files, sockets, and network connections is handled using file descriptors. The error **"too many open files"** indicates that the process or system has exceeded the **ulimit (open file descriptor limit)** configured in the kernel.
+
+**Socket Exhaustion:**
+
+Each database connection uses a TCP socket, which also consumes file descriptors. Under heavy load, too many simultaneous connections can exhaust available kernel socket resources.
+
+**Kernel Resource Limits (ulimit / sysctl constraints):**
+
+The Linux kernel enforces several limits such as:
+
+- Maximum open files per process (ulimit -n)
+- System-wide file descriptor limit
+- TCP socket backlog limits
+
+When these limits are reached, the system can no longer accept new connections, causing failures or timeouts.
+
+**Connection Leak / Poor Connection Pooling:**
+
+If the application does not properly close database connections or lacks efficient connection pooling, open sockets accumulate over time, eventually exhausting available resources.
+
+**Why Timeouts Occur:**
+
+- New TCP connections cannot be created due to resource limits
+- Connection requests remain in SYN queue or wait state
+- Database requests fail, leading to timeout errors
+
+Overall, the root cause is **Linux kernel-level resource exhaustion**, mainly due to hitting file descriptor and socket limits under peak load, often worsened by poor connection management at the application level.
+
+**Related info:** RAKUB, ANSE, 26
+
+## Caching
+
+**Q31: How many total bits are required of a Direct-Mapped cache with 16 KB of data and 4-word blocks, assuming a 32-bit address (word addressable) and 32-bit words?**
+
+**Answer:** 16 KB = 16 × 1024 = 16384 bytes
+
+**Explanation:** **Step 1: Calculate the number of words**
+
+16 KB = 16 × 1024 = 16384 bytes
+
+Since 1 word = 4 bytes,
+
+Number of words = 16384 ÷ 4 = **4096 words**
+
+**Step 2: Calculate the number of blocks**
+
+Block size = 4 words
+
+Number of blocks = 4096 ÷ 4 = **1024 blocks** = 2¹⁰ blocks
+
+**Step 3: Determine the number of bits for index and block offset**
+
+- Index bits (n) = 10 bits (since 2¹⁰ = 1024 blocks)
+
+- Block offset bits (m) = 2 bits (since 4 words per block = 2²)
+
+- Byte offset bits = 2 bits (since 4 bytes per word = 2²)
+
+**Step 4: Calculate the tag size**
+
+Tag size = 32 - (n + m + 2)
+
+= 32 - (10 + 2 + 2)
+
+= **18 bits**
+
+**Step 5: Calculate the total bits required**
+
+Each block stores:
+
+- Data bits = 4 words × 32 bits = 128 bits
+
+- Tag bits = 18 bits
+
+- Valid bit = 1 bit
+
+Total bits per block = 128 + 18 + 1 = **147 bits**
+
+Total bits for the cache = Number of blocks × Bits per block
+
+= 1024 × 147
+
+= **150528 bits**
+
+**Final Answer:**
+
+**150,528 bits** are required for the Direct-Mapped cache.
+
+Source: Computer Science Stack Exchange
+
+**Related info:** Combined Bank, O(IT), 24
+
+## Boot Process
+
+**Q32: Arrange the following in correct chronological order of computer boot process: OS Kernel Load, BIOS/UEFI POST, MBR/GPT Lookup, User Login, Driver initialization.**
+
+**Answer:** The correct sequence of events during a computer’s boot process is:
+
+**Explanation:** **Correct Chronological Order of a Computer Boot Process**
+
+The correct sequence of events during a computer’s boot process is:
+
+- **BIOS/UEFI POST:** The system firmware performs Power-On Self Test to check hardware components.
+- **MBR/GPT Lookup:** The firmware locates the bootloader information from the disk.
+- **OS Kernel Load:** The operating system kernel is loaded into memory.
+- **Driver Initialization:** Essential hardware drivers are initialized to make devices usable.
+- **User Login:** The system displays the login screen for user authentication.
+
+**Final Order:**
+
+BIOS/UEFI POST → MBR/GPT Lookup → OS Kernel Load → Driver Initialization → User Login
+
+**Related info:** Combined Bank, O(IT-22), 26

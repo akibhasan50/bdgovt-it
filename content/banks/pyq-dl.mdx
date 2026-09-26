@@ -1,0 +1,687 @@
+---
+title_en: "Digital Logic Design — Solved Questions & PYQ"
+title_bn: "ডিজিটাল লজিক ডিজাইন — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "50 questions from the IT Job QnS Digital Logic Design topic — 13 with worked answers and explanations, 8 without a text solution in the source, 9 previous-year questions with exam tags, 20 MCQ practice-quiz questions with answer keys."
+summary_bn: "IT Job QnS-এর Digital Logic Design টপিকের 50টি প্রশ্ন — 13টির সমাধান ও ব্যাখ্যা, 8টির টেক্সট সমাধান সোর্সে নেই, 9টি পূর্ববর্তী পরীক্ষার প্রশ্ন, 20টি এমসিকিউ প্র্যাকটিস কুইজ।"
+---
+
+<Callout type="info">
+**Topic:** Digital Logic Design — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## Universal Gate
+
+**Q1: Draw the circuit schematic diagrams to build an Exclusive-OR (XOR) logic function using only universal NAND gates.**
+
+**Answer:** XOR gate:
+
+**Explanation:** ** XOR gate: (Using 4 NAND Gates)** [ Previous Buet Pattern Question]
+
+**Related info:** CB, O(IT-24), 26
+
+**Q2: What is a Universal Gate? Prove that the NAND Gate is a Universal Gate.**
+
+**Answer:** A Universal Gate is a logic gate that can be used to implement any Boolean function (i.e., any logic circuit).
+
+**Explanation:** **Universal Gate**
+
+A **Universal Gate** is a logic gate that can be used to implement **any Boolean function** (i.e., any logic circuit). If we can build the basic gates **NOT**, **AND**, and **OR** using only one type of gate, then that gate is called a universal gate.
+
+**Proof: NAND is a Universal Gate**
+
+To prove NAND is universal, we show that we can construct **NOT**, **AND**, and **OR** using only NAND gates.
+
+Since we can build **NOT**, **AND**, and **OR** using only NAND gates, we can build any Boolean expression. Therefore, the **NAND gate is a Universal Gate**.
+
+**Related info:** Combined Bank, AP-22, 26
+
+**Q3: Explain how any Boolean function can be implemented using only universal gates.**
+
+**Answer:** Universal gates are logic gates that can implement any Boolean function without using any other type of gate.
+
+**Explanation:** The two universal gates are:
+
+- NAND Gate
+- NOR Gate
+
+Using only NAND gates or only NOR gates, all basic logic gates such as AND, OR, and NOT can be constructed. Since any Boolean function is built using these basic gates, any Boolean function can also be implemented using universal gates.
+
+**Implementation Using NAND Gate**
+
+**1. NOT Gate using NAND**
+
+When both inputs of a NAND gate are connected together:
+
+Y=overline(A· A)=overline(A)
+
+**2. AND Gate using NAND**
+
+First NAND operation gives:
+
+`(A · B)'
+`
+
+Applying another NAND as NOT operation:
+
+Y=overline(overline(A· B))=A· B
+
+**3. OR Gate using NAND**
+
+Using De Morgan’s theorem:
+
+A+B=overline(overline(A)·overline(B))
+
+So OR gate can also be implemented using only NAND gates.
+
+**Implementation Using NOR Gate**
+
+**1. NOT Gate using NOR**
+
+When both inputs are same:
+
+Y=overline(A+A)=overline(A)
+
+**2. OR Gate using NOR**
+
+First NOR operation gives:
+
+`(A + B)'
+`
+
+Applying another NOR as NOT operation:
+
+Y=overline(overline(A+B))=A+B
+
+**3. AND Gate using NOR**
+
+Using De Morgan’s theorem:
+
+A· B=overline(overline(A)+overline(B))
+
+Since NAND and NOR gates can create all basic logic gates, and all Boolean functions are formed using basic gates, any Boolean function can be implemented using only NAND gates or only NOR gates.
+
+**Related info:** Combined Bank, O(IT-23), 26
+
+## Multiplexer/Demultiplexer
+
+**Q4: What is the difference between a Multiplexer and a Demultiplexer? Explain one practical application of each in digital systems.**
+
+**Answer:** | Multiplexer (MUX) | Demultiplexer (DEMUX) |
+
+**Explanation:** **Difference Between Multiplexer (MUX) and Demultiplexer (DEMUX)**
+
+| Multiplexer (MUX) | Demultiplexer (DEMUX) |
+|---|---|
+| A Multiplexer (MUX) is a digital circuit that selects one input from multiple input lines and forwards it to a single output line. | A Demultiplexer (DEMUX) is a digital circuit that receives data from one input line and routes it to one of multiple output lines. |
+| Many Inputs → One Output. | One Input → Many Outputs. |
+| Uses Select Lines to choose one input. | Uses Select Lines to choose the destination output. |
+| Acts as a Data Selector. | Acts as a Data Distributor. |
+| Reduces the number of communication lines. | Distributes data to different devices or destinations. |
+
+**Practical Applications**
+
+**Multiplexer (MUX):**
+Used in **Communication Systems** to transmit multiple signals over a single communication channel, reducing wiring and transmission cost.
+
+**Demultiplexer (DEMUX):**
+Used at the receiving end of **Communication Systems** to separate the received data and deliver it to the correct output device or destination.
+
+**Conclusion**
+
+A **Multiplexer** combines multiple input signals into one output, whereas a **Demultiplexer** distributes one input signal to one of many outputs. They are widely used together in digital communication and data transmission systems.
+
+**Related info:** CB, O(IT-24), 26
+
+## Kmap
+
+**Q5: Solve the following function using K-map. F (w, x, y, z)= ∑(0,4,5,6,12,14,15)**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, SO(IT), 22
+
+**Q6: Simplify the following boolean expression using 4 variable K-map F (A, B, C, D) = ∑ m(0,3,5,7,8,10,11,12,13,14,15). Draw the K-map grid, clearly show your groupings (loops), and write the final simplified Sum-of-Products (SOP) expression**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** Combined Bank, SO(IT-24), 26
+
+**Q7: Make a boolean expression using Karnaugh map: ∑m = (3,5,7,9,11,13,14,15)**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, AE(IT)/AHME/SO, 21
+
+**Q8: Simplify the following boolean expression using 4 variable K-map F(A, B,C,D)=m(0,3,5,7,8,10,11,12,13,14,15).**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** Combined Bank, AE(IT)/AME, 26
+
+## Basic
+
+**Q9: Determine whether the logical statement (P -> Q) -> (P' -> Q') is a tautology, contradiction, or contingency.**
+
+**Answer:** (P → Q) → (P' → Q')
+
+**Explanation:** **Determine whether the logical statement:**
+
+(P → Q) → (P' → Q')
+
+**Apply implication rules**
+
+P → Q ≡ ¬P ∨ Q
+
+P' = ¬P
+
+Q' = ¬Q
+
+Therefore,
+
+P' → Q' = ¬P → ¬Q
+
+**Construct the Truth Table**
+
+| P | Q | P → Q | P' → Q' | (P → Q) → (P' → Q') |
+|---|---|---|---|---|
+| T | T | T | T | T |
+| T | F | F | T | T |
+| F | T | T | F | F |
+| F | F | T | T | T |
+
+**Conclusion**
+
+Final column values: **T, T, F, T**
+
+Since the statement is **true in some cases** and **false in one case**, it is neither a tautology nor a contradiction.
+
+**Therefore, the logical statement (P → Q) → (P' → Q') is a Contingency.**
+
+In discrete mathematics, a contingency is a compound proposition whose truth value is neither always true (a tautology) nor always false (a contradiction). Its final outcome depends entirely on the specific truth values of its individual variables, meaning its truth table contains at least one True (T) and at least one False (F).
+
+**Related info:** ICB, AP, 26
+
+**Q10: Describe the important characteristics of digital IC's.**
+
+**Answer:** Binary Representation: Digital ICs operate using binary values (0 and 1), which form the basis of digital data processing.
+
+**Explanation:** **Important Characteristics of Digital Integrated Circuits (ICs)**
+
+- **Binary Representation:** Digital ICs operate using binary values (0 and 1), which form the basis of digital data processing.
+- **Boolean Logic:** They are designed using Boolean algebra operations such as AND, OR, and NOT to perform logical functions.
+- **Compactness and Integration:** A large number of components can be integrated into a single chip, saving space and improving efficiency.
+- **Low Power Consumption:** Digital ICs consume less power than analog circuits, making them suitable for portable and battery-powered devices.
+- **Noise Immunity:** Binary signals provide better resistance to noise and interference, ensuring reliable operation.
+- **High Speed:** Digital ICs offer fast switching between logic states, enabling high-speed data processing.
+- **Reliability:** They provide stable, accurate, and consistent performance over long periods.
+
+**Related info:** CB, AME/AHE, 23
+
+**Q11: Construct a Truth Table for a system that triggers an Alarm (Output 1) if: (Motion is Detected AND it is Night Time) OR (Panic Button is Pressed).**
+
+**Answer:** Truth Table for Alarm System
+
+**Explanation:** **Truth Table for Alarm System**
+**Inputs:**
+Motion Detected (M), Night Time (N), Panic Button Pressed (P)
+**Output:**
+Alarm (A)
+
+| M | N | P | Alarm (A) |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 |
+| 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 0 |
+| 1 | 0 | 1 | 1 |
+| 1 | 1 | 0 | 1 |
+| 1 | 1 | 1 | 1 |
+
+**Boolean Expression:**
+A = (M ∧ N) ∨ P
+
+**Related info:** Combined Bank, O(IT-22), 26
+
+## Basic Gate
+
+**Q12: Draw the logic circuit for the Boolean expression Q = (A'B + BC(B + C)')'. Find the value of Q when (A, B, C) = (1, 0, 1).**
+
+**Answer:** (A'B+BC(B+C)')'
+
+**Explanation:** ∘ Substitute the values A = 1, B = 0, C = 1 into the equation.
+
+= (1'·0+0·1(0+1)')'
+
+= (0·0+0·1(0+1)')'
+
+= (0·0+0·1·1')'
+
+= (0·0+0·1·0)'
+
+= (0+0·1·0)'
+
+= (0+0)'
+
+= 0'
+
+= 1
+
+**Related info:** CB, AE(IT)/AME, 24
+
+**Q13: Given a logical function, find out the truth table of AB· (A+B).C**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** BB, AD(ICT), 25
+
+## Basic Gates
+
+**Q14: Draw the truth table from the follwoing circuit (2 bit input A,B full adder with carry bit Cin)**
+
+**Answer:** | Inputs | Outputs | | | |
+
+**Explanation:** |---|---|---|---|---|
+| A | B | Cin | S (Sum) | Cout (Carry) |
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 0 |
+| 0 | 1 | 0 | 1 | 0 |
+| 0 | 1 | 1 | 0 | 1 |
+| 1 | 0 | 0 | 1 | 0 |
+| 1 | 0 | 1 | 0 | 1 |
+| 1 | 1 | 0 | 0 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
+
+**
+S= A⊕B⊕Cin
+
+Cout= AB+Cin(A⊕B)**
+
+**Related info:** Sonali Bank, ADA, 24
+
+**Q15: Simplify the Boolean algebra: Q = C' + A'B + BC'(B' + C) and draw a logic circuit.**
+
+**Answer:** Logic Circuit:
+
+**Related info:** Sonali Bank, ADA, 24
+
+## Number System
+
+**Q16: There are different number systems.(i) Convert (10010.101)2=(?)10 (ii) Convert (543)10 =(?)16**
+
+**Answer:** Binary Number = (10010.101)₂
+
+**Explanation:** **(i) Convert (10010.101)₂ to Decimal**
+
+Binary Number = **(10010.101)₂**
+
+Integer Part:
+= (1 × 2⁴) + (0 × 2³) + (0 × 2²) + (1 × 2¹) + (0 × 2⁰)
+= 16 + 0 + 0 + 2 + 0
+= 18
+
+Fractional Part:
+= (1 × 2⁻¹) + (0 × 2⁻²) + (1 × 2⁻³)
+= 0.5 + 0 + 0.125
+= 0.625
+
+Therefore,
+**(10010.101)₂ = (18.625)₁₀**
+
+**(ii) Convert (543)₁₀ to Hexadecimal**
+
+Successive Division by 16:
+
+| Division | Quotient | Remainder |
+|---|---|---|
+| 543 ÷ 16 | 33 | 15 (F) |
+| 33 ÷ 16 | 2 | 1 |
+| 2 ÷ 16 | 0 | 2 |
+
+Read the remainders from bottom to top:
+
+**(543)₁₀ = (21F)₁₆**
+
+**Related info:** CB, O(IT), 20
+
+## General
+
+**Q17: For 7 segments display the input is abcdefg. When a decimal digit or value is display then its equivalent segment is high.(i) Find out the logical expression in Sum of product for 2bit binary input.**
+
+**Answer:** i) For 2 bit binary, we can find 00, 01, 10, 11 and the equivalent decimal value is 0,1,2,3.
+
+**Explanation:** Now, For Binary= 00 (Decimal= 0)= abcdef is high
+
+For Binary= 01 (Decimal=1)= bc is high
+
+For Binary= 10 (Decimal=2) = abged is high For
+
+Binary=11 (Decimal=3)= abgcd is high
+
+**Related info:** Rupali, ANE, 21
+
+**Q18: Simplify the Boolean equation using K-map: F(A,B,C,D) = Σ(0,3,5,7,8,10,11,12,13,14,15).**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, AME/AE(IT-23), 26
+
+**Q19: Design a three-input XOR gate with the output function X=A⊕B⊕C using 2-input multiplexers.**
+
+**Answer:** 3-input XOR gate using 2:1 muxes:
+
+**Explanation:** A 3-input XOR gate returns "1" when the odd number of inputs are "1". The truth table for 3-input XOR gate is shown in figure below.
+
+| A | B | C | O |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 |
+| 0 | 1 | 0 | 1 |
+| 0 | 1 | 1 | 0 |
+| 1 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 1 |
+
+Truth table for 3-input XOR gate
+Let us choose A to be the select of mux closest to output. When A is "0", output is a function of B and C. So, we need another mux, let us choose B to be the select of this mux. Among the rows with A = 0, when B is "0", output is equal to C and when B is "1", output is equal to C'.
+
+Similarly among the rows with A = "1", when B is "0", output is equal to C' and when B is "1", output is equal to C. The implementation of 3-input XOR gate using 2:1 muxes is shown in figure below.
+
+**Related info:** Dwasa,AME,25
+
+## Decoder
+
+**Q20: (ii) Draw logic circuit for 2to4 Line decoder/Demulltiplexer.**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** Rupali, ANE, 21
+
+## Adder Circuit
+
+**Q21: Draw a Full Adder circuit using two half adders.**
+
+**Answer:** **Not available in source**
+
+**Explanation:** The source provides this solution only as an image; a text version is not available.
+
+**Related info:** CB, SO(IT), 20
+
+## Previous-year questions (no solutions in source)
+
+**Q22: Simplify boolean equation using k-map: F (A,B,C,D) = ∑(0,3,5,7, 8,10,11,12,13,14,15)**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — BB, AME/AE(it),26
+
+**Q23: Given a logical function, find out the truth table of overline(AB)· overline((A+B)).C**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — BB, AD(ict),25
+
+**Q24: Draw the truth table from the follwoing circuit (2 bit input A,B full adder with carry bit Cin)**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — Sonali Bank, ADA, 24
+
+**Q25: Draw logic circuit for the Boolean Expression Q= (A’B + BC (B+C)’)’ and find value of Q when (A, B, C) = (1, 0, 1).**
+
+**Answer:** **Not available in source**
+
+**Related info:** Bank — CB , AME/AE(it), 2024
+
+**Q26: Use the Karnaugh Map to simplify the following function. f(A,B,C)=A'B'C'+A'B'C+A'BC+A'BC+ABC'+ABC**
+
+**Answer:** **Not available in source**
+
+**Related info:** BPSC — Food min., network/website Manager(ICT),25
+
+**Q27: 2×4 Decoder ও একটি OR Gate ব্যবহার করে Half Adder Design করুন।**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — BTCL, JAM,24
+
+**Q28: What is the purpose of priority encoder in digital systems? State the operation of Decimal to BCD encoder.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — NTMC, AME(CSE),22
+
+**Q29: Explain the operations of serial adder and parallel adder with examples.**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — NTMC, AME(CSE),22
+
+**Q30: Simplify the following expression using K-Map for 5 Variables Σm (0, 2, 4, 7, 8, 10, 12, 16, 18, 20, 23, 24, 25, 26, 27, 28).**
+
+**Answer:** **Not available in source**
+
+**Related info:** Others — NTMC, AME(CSE),22
+
+## MCQ practice quiz
+
+**Q31: Which of the following is a type of digital logic circuit?**
+
+- **(A)** Combinational logic circuits
+- **(B)** Sequential logic circuits
+- **(C)** None of the mentioned
+- **(D)** Both Combinational & Sequential logic circuits
+
+**Answer:** **(D) Both Combinational & Sequential logic circuits**
+
+**Q32: Which of the following digital logic circuits can be used to add more than 1 – bit simultaneously?**
+
+- **(A)** Full – adder
+- **(B)** Ripple – carry adder
+- **(C)** Half – adder
+- **(D)** Serial adder
+
+**Answer:** **(B) Ripple – carry adder**
+
+**Explanation:** A Ripple – carry adder is a parallel binary adder in which the addition of more than 1 – bit data can be done simultaneously. The inputs to a parallel circuit can be sent and processed at once unlike series circuits in which inputs are sent one by one.
+
+**Q33: Which gates in Digital Circuits are required to convert a NOR-based SR latch to an SR flip-flop?**
+
+- **(A)** Two 2 input AND gates
+- **(B)** Two 3 input AND gates
+- **(C)** Two 2 input OR gates
+- **(D)** Two 3 input OR gates
+
+**Answer:** **(A) Two 2 input AND gates**
+
+**Explanation:** Two 2 input AND gates are placed with a NOR – based S – R latch to convert it to an S – R flip – flop. One AND gate is given R in one input and clock in the other. Similarly the second AND gate is given S in one input and clock in the other.
+
+**Q34: When does a negative level triggered flip-flop in Digital Electronics changes its state?**
+
+- **(A)** When the clock is negative
+- **(B)** When the clock is positive
+- **(C)** When the inputs are all zero
+- **(D)** When the inputs are all one
+
+**Answer:** **(A) When the clock is negative**
+
+**Explanation:** A negative level triggered flip-flop (also called active-low level triggered) changes its state when the clock signal is at LOW level (0). “Negative level” means the flip-flop is enabled during the LOW (0) state of the clock As long as the clock is 0, the flip-flop can respond to input changes When the clock goes HIGH (1), it stops responding (holds its state)
+
+**Q35: Which of the following options represent the synchronous control inputs in an S – R flip flop?**
+
+- **(A)** S
+- **(B)** R
+- **(C)** Clock
+- **(D)** Both S and R
+
+**Answer:** **(D) Both S and R**
+
+**Explanation:** In an S–R flip-flop, the inputs are: S (Set) R (Reset) Clock (for clocked flip-flops)
+
+**Q36: What must be used along with synchronous control inputs to trigger a change in the flip flop?**
+
+- **(A)** 0
+- **(B)** 1
+- **(C)** Clock
+- **(D)** Previous output
+
+**Answer:** **(C) Clock**
+
+**Q37: What will be the output from a D flip – flop if the clock is low and D = 0?**
+
+- **(A)** 0
+- **(B)** 1
+- **(C)** No change
+- **(D)** Toggle between 0 and 1
+
+**Answer:** **(C) No change**
+
+**Q38: What will be the output from a D flip-flop if D = 1 and the clock is low?**
+
+- **(A)** No change
+- **(B)** Toggle between 0 and 1
+- **(C)** 0
+- **(D)** 1
+
+**Answer:** **(A) No change**
+
+**Explanation:** When the clock is low, the input given to D will have no effect. The set and reset pins of the NAND gates are high. When a NAND gate is given 1 as an input to any of the pins, the output will always be 0.
+
+**Q39: What input should be given to “S” when SR flip – flop is converted to JK flip – flop?**
+
+- **(A)** K.Q'
+- **(B)** K.Q
+- **(C)** J.Q
+- **(D)** J.Q'
+
+**Answer:** **(D) J.Q'**
+
+**Explanation:** For SR flip-flop: S (Set input) must behave like J but only when current output is 0 So, we use: 👉 S = J · Q' R (Reset input) becomes: 👉 R = K · Q
+
+**Q40: What value is to be considered for a “don’t care condition”?**
+
+- **(A)** 0
+- **(B)** 1
+- **(C)** Either 0 or 1
+- **(D)** Any number except 0 and 1
+
+**Answer:** **(C) Either 0 or 1**
+
+**Q41: In Digital Circuits, which of the following options represent the synchronous control inputs in a T flip flop?**
+
+- **(A)** T
+- **(B)** 0
+- **(C)** Clock
+- **(D)** 1
+
+**Answer:** **(A) T**
+
+**Explanation:** The input at which the flip flop changes its state when synchronized with the clock is called the synchronous control inputs. For T flip flop T is the synchronous control input.
+
+**Q42: Which of these flip – flops cannot be used to construct a serial shift register?**
+
+- **(A)** D – flip flop
+- **(B)** SR flip – flop
+- **(C)** T flip – flop
+- **(D)** JK flip – flop
+
+**Answer:** **(C) T flip – flop**
+
+**Explanation:** SR, D, and JK flip flops can be used to construct a serial shift register. A T flip – flop gives the output 0 when input 1 is given and gives output 1 when input 0 is given. Thus, it cannot be used as a serial shift register.
+
+**Q43: How many AND gates are required to construct a 4 – bit parallel multiplier if four 4 – bit parallel binary adders are given?**
+
+- **(A)** Four 2 – input AND gates
+- **(B)** Sixteen 2 – input AND gates
+- **(C)** Eight 2 – input AND gates
+- **(D)** Two 2 – input AND gates
+
+**Answer:** **(B) Sixteen 2 – input AND gates**
+
+**Explanation:** Four 4 – bit parallel binary adders along with 16 number of 2 – input AND gates will be required to construct a 4 – bit parallel multiplier. The AND gate helps in getting the partial products while the parallel – adder are used to add the partial products.
+
+**Q44: What kind of operation occurs in a J – K flip flop when both inputs J and K are equal to 1?**
+
+- **(A)** Preset operation
+- **(B)** Reset operation
+- **(C)** Clear operation
+- **(D)** Toggle operation
+
+**Answer:** **(D) Toggle operation**
+
+**Q45: The result “X + XY = X” follows which of these laws?**
+
+- **(A)** Consensus law
+- **(B)** Distributive law
+- **(C)** Duality law
+- **(D)** Absorption law
+
+**Answer:** **(D) Absorption law**
+
+**Explanation:** It means that X already “absorbs” XY, so adding XY doesn’t change the result.
+
+**Q46: Which gate is called the anti – coincidence and coincidence gate respectively?**
+
+- **(A)** XNOR and XOR
+- **(B)** AND and OR
+- **(C)** OR and AND
+- **(D)** XOR and XNOR
+
+**Answer:** **(D) XOR and XNOR**
+
+**Explanation:** 🔹 XOR (Coincidence Gate) Output = 1 when inputs are different (not equal) It detects difference, sometimes called coincidence in switching sense 🔹 XNOR (Anti-coincidence Gate) Output = 1 when inputs are same (equal) It detects equality (no change / anti-difference)
+
+**Q47: Which of the following options represent the correct reduction of XY'Z + X'Y'Z ?**
+
+- **(A)** 0
+- **(B)** Y'Z
+- **(C)** X + X'
+- **(D)** 2Y'Z
+
+**Answer:** **(B) Y'Z**
+
+**Q48: A priority encoder has four inputs I₀, I₁, I₂, and I₃ where I₃ has the highest priority and I₀ has the least priority. If I₂ = 1, what will be the output?**
+
+- **(A)** 00
+- **(B)** 01
+- **(C)** 10
+- **(D)** 11
+
+**Answer:** **(C) 10**
+
+**Explanation:** Output = 10 কারণ এটি একটি priority encoder। এখানে I2 = 1 এবং I3 = 0, তাই highest active input হলো I2। সেজন্য I1 এবং I0 কে don't care (x) ধরা হয়, এবং output হয় 10.
+
+**Q49: Which of the following options are correct for a 4×1 multiplexer?**
+
+- **(A)** It has four 3 – input AND gates
+- **(B)** It has four 2 – input AND gates
+- **(C)** It has one 3 – input AND gate
+- **(D)** It has two 3 – input AND gate
+
+**Answer:** **(A) It has four 3 – input AND gates**
+
+**Q50: What determines the output from the combinational logic circuit in Digital Electronics?**
+
+- **(A)** Input signals from the past condition
+- **(B)** Input signals at the present moment
+- **(C)** Input signals from both past and present
+- **(D)** Input signals expected in future
+
+**Answer:** **(B) Input signals at the present moment**

@@ -1,0 +1,125 @@
+---
+title_en: "Linux Command — Solved Questions & PYQ"
+title_bn: "লিনাক্স কমান্ড — সমাধান ও পূর্ববর্তী প্রশ্ন"
+summary_en: "6 questions from the IT Job QnS Linux Command topic — 6 with worked answers and explanations."
+summary_bn: "IT Job QnS-এর Linux Command টপিকের 6টি প্রশ্ন — 6টির সমাধান ও ব্যাখ্যা।"
+---
+
+<Callout type="info">
+**Topic:** Linux Command — collected from IT Job QnS topic-wise pages.
+
+**Layout:** each subtopic section carries worked answers; previous-year questions show their exam tags; an **Explanation** block appears whenever the source provides a solution.
+</Callout>
+
+## General
+
+**Q1: (a)Write Shell command which make a folder name 'A' with read permission access only.**
+
+**Answer:** mkdir A; chmod 400 A
+
+**Related info:** Janata, ASA, 21
+
+**Q2: (b)Write Shell command which copy folder 'A' all information into folder 'P'. Folder 'A' and folder 'P's parent folder is same.**
+
+**Answer:** cp -r A P
+
+**Related info:** Janata, ASA, 21
+
+**Q3: Linux Command in ownership and group permission.**
+
+**Answer:** The chown command is used to change the owner and group of files or directories.
+
+**Explanation:** **Linux Ownership and Group Permissions**
+
+**1. `chown` (Change Ownership)**
+
+The `chown` command is used to change the **owner** and **group** of files or directories.
+
+**Syntax:**
+
+`chown [owner]:[group] [file/directory]`
+
+**Examples:**
+
+- Change the **owner** of a file:
+
+`chown username file.txt`
+
+- Change **both owner and group** of a file:
+
+`chown username:groupname file.txt`
+
+- **Recursively** change ownership for all files and subdirectories:
+
+`chown -R username:groupname /path/to/directory`
+
+**2. `chgrp` (Change Group Ownership)**
+
+The `chgrp` command changes only the **group** ownership of a file or directory.
+
+**Syntax:**
+
+`chgrp [group] [file/directory]`
+
+**Examples:**
+
+- Change the **group** of a file:
+
+`chgrp groupname file.txt`
+
+- **Recursively** change the group for all files in a directory:
+
+`chgrp -R groupname /path/to/directory`
+
+**Related info:** Pubali, HE, 23
+
+**Q4: Write a Linux command to count the total number of characters and words from the first 10 lines of a file named wasacustomers.txt.**
+
+**Answer:** head -10 wasacustomers.txt | wc -mw
+
+**Explanation:** **Command:**
+
+head -10 wasacustomers.txt | wc -mw
+
+**Explanation:**
+
+- head -10 wasacustomers.txt → Extracts the first 10 lines of the file.
+- wc -m → Counts the total number of characters.
+- wc -w → Counts the total number of words.
+- | → Pipes the output of the head command to wc.
+
+**Therefore:**
+
+head -10 wasacustomers.txt | wc -mw
+
+This command counts the **characters and words** from the **first 10 lines** of wasacustomers.txt.
+
+**Related info:** Dwasa,AME,25
+
+**Q5: Unix command (directory listing with hidden files).**
+
+**Answer:** $ ls -al
+
+**Related info:** SB & JB, ADA, 22
+
+## Others
+
+**Q6: State the exact administrative active performed by running the command chmod 755 script.sh on a linux target file.**
+
+**Answer:** 755 means:
+
+**Explanation:** **Permission Breakdown:**
+
+755 means:
+
+- **Owner:** 7 = read (r) + write (w) + execute (x)
+- **Group:** 5 = read (r) + execute (x)
+- **Others:** 5 = read (r) + execute (x)
+
+**Administrative Action:**
+
+- Grants full control (rwx) to the file owner
+- Grants read and execute permission to group users
+- Grants read and execute permission to all other users
+
+**Related info:** RAKUB, ANSE, 26

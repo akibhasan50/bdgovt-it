@@ -13,6 +13,823 @@ export type BankPaper = {
 
 export const bankPapers: BankPaper[] = [
   {
+    slug: "combined-bank-officer-it-2026-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank Officer (IT) 2026 (Based Year 2022) — MCQ Solutions",
+      bn: "কম্বাইন্ড ব্যাংক অফিসার (আইটি) ২০২৬ (বেসড বছর ২০২২) — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 99 MCQs of Combined Bank Officer (IT) (2026) with options, correct answers and explanations where the source provides them.",
+      bn: "Combined Bank Officer (IT) (2026) এর 99টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2026,
+    exam: "Combined Bank Officer (IT)",
+    organization: {
+      en: "Combined Bank",
+      bn: "কম্বাইন্ড ব্যাংক",
+    },
+    questionCount: 99,
+  },
+  {
+    slug: "49-bcs-computer-science-2025-mcq",
+    bank: "bpsc-it",
+    title: {
+      en: "49th BCS Computer Science 2025 — MCQ Solutions",
+      bn: "৪৯তম বিসিএস কম্পিউটার বিজ্ঞান ২০২৫ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 100 MCQs of 49th BCS — Computer Science (2025) with options, correct answers and explanations where the source provides them.",
+      bn: "49th BCS — Computer Science (2025) এর 100টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2025,
+    exam: "49th BCS — Computer Science",
+    organization: {
+      en: "Bangladesh Public Service Commission",
+      bn: "বাংলাদেশ সরকারি কর্ম কমিশন",
+    },
+    questionCount: 100,
+  },
+  {
+    slug: "bangladesh-bank-assistant-director-ict-2025-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Bangladesh Bank Assistant Director (ICT) 2025 — MCQ Solutions",
+      bn: "বাংলাদেশ ব্যাংক সহকারী পরিচালক (আইসিটি) ২০২৫ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 49 MCQs of Bangladesh Bank Assistant Director (ICT) (2025) with options, correct answers and explanations where the source provides them.",
+      bn: "Bangladesh Bank Assistant Director (ICT) (2025) এর 49টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2025,
+    exam: "Bangladesh Bank Assistant Director (ICT)",
+    organization: {
+      en: "Bangladesh Bank",
+      bn: "বাংলাদেশ ব্যাংক",
+    },
+    questionCount: 49,
+  },
+  {
+    slug: "combined-bank-senior-officer-it-2025-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank Senior Officer (IT) 2025 — MCQ Solutions",
+      bn: "কম্বাইন্ড ব্যাংক সিনিয়র অফিসার (আইটি) ২০২৫ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 25 MCQs of Combined Bank Senior Officer (IT) (2025) with options, correct answers and explanations where the source provides them.",
+      bn: "Combined Bank Senior Officer (IT) (2025) এর 25টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2025,
+    exam: "Combined Bank Senior Officer (IT)",
+    organization: {
+      en: "Combined Bank",
+      bn: "কম্বাইন্ড ব্যাংক",
+    },
+    questionCount: 25,
+  },
+  {
+    slug: "combined-bank-assistant-programmer-2024-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank Assistant Programmer 2024 — MCQ Solutions",
+      bn: "কম্বাইন্ড ব্যাংক সহকারী প্রোগ্রামার ২০২৪ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 43 MCQs of Combined Bank Assistant Programmer (2024) with options, correct answers and explanations where the source provides them.",
+      bn: "Combined Bank Assistant Programmer (2024) এর 43টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2024,
+    exam: "Combined Bank Assistant Programmer",
+    organization: {
+      en: "Combined Bank",
+      bn: "কম্বাইন্ড ব্যাংক",
+    },
+    questionCount: 43,
+  },
+  {
+    slug: "combined-bank-senior-officer-it-2024-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank Senior Officer (IT) 2024 — MCQ Solutions",
+      bn: "কম্বাইন্ড ব্যাংক সিনিয়র অফিসার (আইটি) ২০২৪ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 100 MCQs of Combined Bank Senior Officer (IT) (2024) with options, correct answers and explanations where the source provides them.",
+      bn: "Combined Bank Senior Officer (IT) (2024) এর 100টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2024,
+    exam: "Combined Bank Senior Officer (IT)",
+    organization: {
+      en: "Combined Bank",
+      bn: "কম্বাইন্ড ব্যাংক",
+    },
+    questionCount: 100,
+  },
+  {
+    slug: "bangladesh-bank-assistant-maintenance-engineer-2023-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Bangladesh Bank Assistant Maintenance Engineer 2023 — MCQ Solutions",
+      bn: "বাংলাদেশ ব্যাংক সহকারী মেইনটেন্যান্স ইঞ্জিনিয়ার ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 26 MCQs of Bangladesh Bank Assistant Maintenance Engineer (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "Bangladesh Bank Assistant Maintenance Engineer (2023) এর 26টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "Bangladesh Bank Assistant Maintenance Engineer",
+    organization: {
+      en: "Bangladesh Bank",
+      bn: "বাংলাদেশ ব্যাংক",
+    },
+    questionCount: 26,
+  },
+  {
+    slug: "bangladesh-bank-assistant-programmer-2023-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Bangladesh Bank Assistant Programmer 2023 — MCQ Solutions",
+      bn: "বাংলাদেশ ব্যাংক সহকারী প্রোগ্রামার ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 25 MCQs of Bangladesh Bank Assistant Programmer (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "Bangladesh Bank Assistant Programmer (2023) এর 25টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "Bangladesh Bank Assistant Programmer",
+    organization: {
+      en: "Bangladesh Bank",
+      bn: "বাংলাদেশ ব্যাংক",
+    },
+    questionCount: 25,
+  },
+  {
+    slug: "bdccl-assistant-manager-transmission-2023-mcq",
+    bank: "others",
+    title: {
+      en: "BDCCL Assistant Manager (Transmission) 2023 — MCQ Solutions",
+      bn: "বিডিসিসিএল সহকারী ব্যবস্থাপক (ট্রান্সমিশন) ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 26 MCQs of BDCCL Assistant Manager (Transmission) (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "BDCCL Assistant Manager (Transmission) (2023) এর 26টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "BDCCL Assistant Manager (Transmission)",
+    organization: {
+      en: "BDCCL",
+      bn: "বিডিসিসিএল",
+    },
+    questionCount: 26,
+  },
+  {
+    slug: "bpdb-assistant-engineer-cse-2023-mcq",
+    bank: "power-sector-it",
+    title: {
+      en: "BPDB Assistant Engineer (CSE) 2023 — MCQ Solutions",
+      bn: "বিপিডিবি সহকারী প্রকৌশলী (সিএসই) ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 23 MCQs of BPDB Assistant Engineer (CSE) (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "BPDB Assistant Engineer (CSE) (2023) এর 23টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "BPDB Assistant Engineer (CSE)",
+    organization: {
+      en: "Bangladesh Power Development Board",
+      bn: "বাংলাদেশ পাওয়ার ডেভেলপমেন্ট বোর্ড",
+    },
+    questionCount: 23,
+  },
+  {
+    slug: "breb-assistant-programmer-2023-mcq",
+    bank: "power-sector-it",
+    title: {
+      en: "BREB Assistant Programmer 2023 — MCQ Solutions",
+      bn: "বিআরইবি সহকারী প্রোগ্রামার ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 18 MCQs of BREB Assistant Programmer (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "BREB Assistant Programmer (2023) এর 18টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "BREB Assistant Programmer",
+    organization: {
+      en: "Bangladesh Rural Electrification Board",
+      bn: "বাংলাদেশ গ্রামীণ বিদ্যুৎায়ন বোর্ড",
+    },
+    questionCount: 18,
+  },
+  {
+    slug: "npcbl-executive-trainee-software-2023-mcq",
+    bank: "power-sector-it",
+    title: {
+      en: "NPCBL Executive Trainee (Software) 2023 — MCQ Solutions",
+      bn: "এনপিসিবিএল এক্সিকিউটিভ ট্রেইনি (সফটওয়্যার) ২০২৩ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 41 MCQs of NPCBL Executive Trainee (Software) (2023) with options, correct answers and explanations where the source provides them.",
+      bn: "NPCBL Executive Trainee (Software) (2023) এর 41টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2023,
+    exam: "NPCBL Executive Trainee (Software)",
+    organization: {
+      en: "NPCBL",
+      bn: "এনপিসিবিএল",
+    },
+    questionCount: 41,
+  },
+  {
+    slug: "bcic-assistant-programmer-2022",
+    bank: "others",
+    title: {
+      en: "BCIC Assistant Programmer 2022 — MCQ Solutions",
+      bn: "বিসিআইসি সহকারী প্রোগ্রামার ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 46 MCQs of BCIC Assistant Programmer (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BCIC Assistant Programmer (2022) এর 46টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BCIC Assistant Programmer",
+    organization: {
+      en: "BCIC",
+      bn: "বিসিআইসি",
+    },
+    questionCount: 46,
+  },
+  {
+    slug: "bcpcl-assistant-engineer-2022",
+    bank: "others",
+    title: {
+      en: "BCPCL Assistant Engineer 2022 — MCQ Solutions",
+      bn: "বিসিপিসিএল সহকারী প্রকৌশলী ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 16 MCQs of BCPCL Assistant Engineer (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BCPCL Assistant Engineer (2022) এর 16টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BCPCL Assistant Engineer",
+    organization: {
+      en: "BCPCL",
+      bn: "বিসিপিসিএল",
+    },
+    questionCount: 16,
+  },
+  {
+    slug: "bdccl-assistant-manager-cloud-2022",
+    bank: "others",
+    title: {
+      en: "BDCCL Assistant Manager (Cloud) 2022 — MCQ Solutions",
+      bn: "বিডিসিসিএল সহকারী ব্যবস্থাপক (ক্লাউড) ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 14 MCQs of BDCCL Assistant Manager (Cloud) (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BDCCL Assistant Manager (Cloud) (2022) এর 14টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BDCCL Assistant Manager (Cloud)",
+    organization: {
+      en: "BDCCL",
+      bn: "বিডিসিসিএল",
+    },
+    questionCount: 14,
+  },
+  {
+    slug: "bdccl-assistant-manager-transmission-2022",
+    bank: "others",
+    title: {
+      en: "BDCCL Assistant Manager (Transmission) 2022 — MCQ Solutions",
+      bn: "বিডিসিসিএল সহকারী ব্যবস্থাপক (ট্রান্সমিশন) ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 26 MCQs of BDCCL Assistant Manager (Transmission) (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BDCCL Assistant Manager (Transmission) (2022) এর 26টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BDCCL Assistant Manager (Transmission)",
+    organization: {
+      en: "BDCCL",
+      bn: "বিডিসিসিএল",
+    },
+    questionCount: 26,
+  },
+  {
+    slug: "bpsc-different-ministry-ame-2022",
+    bank: "bpsc-it",
+    title: {
+      en: "BPSC Different Ministry AME 2022 — MCQ Solutions",
+      bn: "বিপিএসসি বিভিন্ন মন্ত্রণালয় এএমই ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 100 MCQs of BPSC Different Ministry — AME (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BPSC Different Ministry — AME (2022) এর 100টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BPSC Different Ministry — AME",
+    organization: {
+      en: "Bangladesh Public Service Commission",
+      bn: "বাংলাদেশ সরকারি কর্ম কমিশন",
+    },
+    questionCount: 100,
+  },
+  {
+    slug: "bpsc-different-ministry-ap-2022",
+    bank: "bpsc-it",
+    title: {
+      en: "BPSC Different Ministry AP 2022 — MCQ Solutions",
+      bn: "বিপিএসসি বিভিন্ন মন্ত্রণালয় এপি ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 100 MCQs of BPSC Different Ministry — AP (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BPSC Different Ministry — AP (2022) এর 100টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BPSC Different Ministry — AP",
+    organization: {
+      en: "Bangladesh Public Service Commission",
+      bn: "বাংলাদেশ সরকারি কর্ম কমিশন",
+    },
+    questionCount: 100,
+  },
+  {
+    slug: "bpsc-instructor-technical-training-centers-2022",
+    bank: "bpsc-it",
+    title: {
+      en: "BPSC Instructor (Technical Training Centers) 2022 — MCQ Solutions",
+      bn: "বিপিএসসি ইন্সট্রাক্টর (টেকনিক্যাল ট্রেনিং সেন্টার) ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 96 MCQs of BPSC Instructor — Technical Training Centers (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BPSC Instructor — Technical Training Centers (2022) এর 96টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BPSC Instructor — Technical Training Centers",
+    organization: {
+      en: "Bangladesh Public Service Commission",
+      bn: "বাংলাদেশ সরকারি কর্ম কমিশন",
+    },
+    questionCount: 96,
+  },
+  {
+    slug: "btcl-junior-assistant-manager-2022",
+    bank: "others",
+    title: {
+      en: "BTCL Junior Assistant Manager 2022 — MCQ Solutions",
+      bn: "বিটিসিএল জুনিয়র সহকারী ব্যবস্থাপক ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 44 MCQs of BTCL Junior Assistant Manager (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "BTCL Junior Assistant Manager (2022) এর 44টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "BTCL Junior Assistant Manager",
+    organization: {
+      en: "BTCL",
+      bn: "বিটিসিএল",
+    },
+    questionCount: 44,
+  },
+  {
+    slug: "npcbl-assistant-engineer-2022",
+    bank: "power-sector-it",
+    title: {
+      en: "NPCBL Assistant Engineer 2022 — MCQ Solutions",
+      bn: "এনপিসিবিএল সহকারী প্রকৌশলী ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 10 MCQs of NPCBL Assistant Engineer (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "NPCBL Assistant Engineer (2022) এর 10টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "NPCBL Assistant Engineer",
+    organization: {
+      en: "NPCBL",
+      bn: "এনপিসিবিএল",
+    },
+    questionCount: 10,
+  },
+  {
+    slug: "petrobangla-assistant-engineer-2022",
+    bank: "gas-field-it",
+    title: {
+      en: "PetroBangla Assistant Engineer 2022 — MCQ Solutions",
+      bn: "পেট্রোবাংলা সহকারী প্রকৌশলী ২০২২ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 12 MCQs of PetroBangla Assistant Engineer (2022) with options, correct answers and explanations where the source provides them.",
+      bn: "PetroBangla Assistant Engineer (2022) এর 12টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2022,
+    exam: "PetroBangla Assistant Engineer",
+    organization: {
+      en: "PetroBangla",
+      bn: "পেট্রোবাংলা",
+    },
+    questionCount: 12,
+  },
+  {
+    slug: "6-banks-financial-institutions-assistant-programmer-2021-mcq",
+    bank: "bank-it",
+    title: {
+      en: "6 Bank & Financial Institution Assistant Programmer 2021 — MCQ Solutions",
+      bn: "৬টি ব্যাংক ও আর্থিক প্রতিষ্ঠান সহকারী প্রোগ্রামার ২০২১ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 40 MCQs of 6 Bank & Financial Institution Assistant Programmer (2021) with options, correct answers and explanations where the source provides them.",
+      bn: "6 Bank & Financial Institution Assistant Programmer (2021) এর 40টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2021,
+    exam: "6 Bank & Financial Institution Assistant Programmer",
+    organization: {
+      en: "Bangladesh Bank & Associates",
+      bn: "বাংলাদেশ ব্যাংকসহ অন্যান্য",
+    },
+    questionCount: 40,
+  },
+  {
+    slug: "rupali-bank-ane-2021-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Rupali Bank ANE 2021 — MCQ Solutions",
+      bn: "রূপালী ব্যাংক এএনই ২০২১ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 40 MCQs of Rupali Bank ANE (2021) with options, correct answers and explanations where the source provides them.",
+      bn: "Rupali Bank ANE (2021) এর 40টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2021,
+    exam: "Rupali Bank ANE",
+    organization: {
+      en: "Rupali Bank",
+      bn: "রূপালী ব্যাংক",
+    },
+    questionCount: 40,
+  },
+  {
+    slug: "sonali-janata-bank-ada-2021-mcq",
+    bank: "bank-it",
+    title: {
+      en: "Sonali & Janata Bank ADA 2021 — MCQ Solutions",
+      bn: "সোনালী ও জনতা ব্যাংক এডিএ ২০২১ — এমসিকিউ সমাধান",
+    },
+    description: {
+      en: "All 56 MCQs of Sonali & Janata Bank ADA (2021) with options, correct answers and explanations where the source provides them.",
+      bn: "Sonali & Janata Bank ADA (2021) এর 56টি এমসিকিউ — অপশন, সঠিক উত্তর এবং যেখানে সোর্সে আছে ব্যাখ্যাসহ।",
+    },
+    year: 2021,
+    exam: "Sonali & Janata Bank ADA",
+    organization: {
+      en: "Sonali & Janata Bank",
+      bn: "সোনালী ও জনতা ব্যাংক",
+    },
+    questionCount: 56,
+  },
+  {
+    slug: "pyq-cloud-computing",
+    bank: "others",
+    title: {
+      en: "Cloud Computing — Solved Questions & PYQ",
+      bn: "ক্লাউড কম্পিউটিং — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "8 questions from the IT Job QnS Cloud Computing topic — 8 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Cloud Computing টপিকের 8টি প্রশ্ন — 8টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Cloud Computing (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 8,
+  },
+  {
+    slug: "pyq-computer-network",
+    bank: "others",
+    title: {
+      en: "Computer Network — Solved Questions & PYQ",
+      bn: "কম্পিউটার নেটওয়ার্ক — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "85 questions from the IT Job QnS Computer Network topic — 80 with worked answers and explanations, 5 without a text solution in the source.",
+      bn: "IT Job QnS-এর Computer Network টপিকের 85টি প্রশ্ন — 80টির সমাধান ও ব্যাখ্যা, 5টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Computer Network (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 85,
+  },
+  {
+    slug: "pyq-computer-security",
+    bank: "others",
+    title: {
+      en: "Computer Security — Solved Questions & PYQ",
+      bn: "কম্পিউটার সিকিউরিটি — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "39 questions from the IT Job QnS Computer Security topic — 39 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Computer Security টপিকের 39টি প্রশ্ন — 39টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Computer Security (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 39,
+  },
+  {
+    slug: "pyq-data-center-and-virtualization",
+    bank: "others",
+    title: {
+      en: "Data Center & Virtualization — Solved Questions & PYQ",
+      bn: "ডেটা সেন্টার ও ভার্চুয়ালাইজেশন — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "30 questions from the IT Job QnS Data Center & Virtualization topic — 30 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Data Center & Virtualization টপিকের 30টি প্রশ্ন — 30টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Data Center & Virtualization (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 30,
+  },
+  {
+    slug: "pyq-data-structure",
+    bank: "others",
+    title: {
+      en: "Data Structure — Solved Questions & PYQ",
+      bn: "ডেটা স্ট্রাকচার — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "25 questions from the IT Job QnS Data Structure topic — 25 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Data Structure টপিকের 25টি প্রশ্ন — 25টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Data Structure (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 25,
+  },
+  {
+    slug: "pyq-database-management-system",
+    bank: "others",
+    title: {
+      en: "Database Management System (DBMS) — Solved Questions & PYQ",
+      bn: "ডেটাবেস ম্যানেজমেন্ট সিস্টেম (ডিবিএমএস) — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "14 questions from the IT Job QnS Database Management System (DBMS) topic — 14 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Database Management System (DBMS) টপিকের 14টি প্রশ্ন — 14টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Database Management System (DBMS) (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 14,
+  },
+  {
+    slug: "pyq-design-and-analysis-of-algorithm",
+    bank: "others",
+    title: {
+      en: "Design & Analysis of Algorithm — Solved Questions & PYQ",
+      bn: "অ্যালগরিদম ডিজাইন ও অ্যানালাইসিস — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "9 questions from the IT Job QnS Design & Analysis of Algorithm topic — 9 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Design & Analysis of Algorithm টপিকের 9টি প্রশ্ন — 9টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Design & Analysis of Algorithm (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 9,
+  },
+  {
+    slug: "pyq-dl",
+    bank: "others",
+    title: {
+      en: "Digital Logic Design — Solved Questions & PYQ",
+      bn: "ডিজিটাল লজিক ডিজাইন — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "50 questions from the IT Job QnS Digital Logic Design topic — 13 with worked answers and explanations, 8 without a text solution in the source, 9 previous-year questions with exam tags, 20 MCQ practice-quiz questions with answer keys.",
+      bn: "IT Job QnS-এর Digital Logic Design টপিকের 50টি প্রশ্ন — 13টির সমাধান ও ব্যাখ্যা, 8টির টেক্সট সমাধান সোর্সে নেই, 9টি পূর্ববর্তী পরীক্ষার প্রশ্ন, 20টি এমসিকিউ প্র্যাকটিস কুইজ।",
+    },
+    year: 2026,
+    exam: "Digital Logic Design (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 50,
+  },
+  {
+    slug: "pyq-linux-command",
+    bank: "others",
+    title: {
+      en: "Linux Command — Solved Questions & PYQ",
+      bn: "লিনাক্স কমান্ড — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "6 questions from the IT Job QnS Linux Command topic — 6 with worked answers and explanations.",
+      bn: "IT Job QnS-এর Linux Command টপিকের 6টি প্রশ্ন — 6টির সমাধান ও ব্যাখ্যা।",
+    },
+    year: 2026,
+    exam: "Linux Command (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 6,
+  },
+  {
+    slug: "pyq-microprocessor-and-computer-architecture",
+    bank: "others",
+    title: {
+      en: "Microprocessor & Computer Architecture — Solved Questions & PYQ",
+      bn: "মাইক্রোপ্রসেসর ও কম্পিউটার আর্কিটেকচার — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "27 questions from the IT Job QnS Microprocessor & Computer Architecture topic — 24 with worked answers and explanations, 3 without a text solution in the source.",
+      bn: "IT Job QnS-এর Microprocessor & Computer Architecture টপিকের 27টি প্রশ্ন — 24টির সমাধান ও ব্যাখ্যা, 3টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Microprocessor & Computer Architecture (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 27,
+  },
+  {
+    slug: "pyq-ml-ai-big-data",
+    bank: "others",
+    title: {
+      en: "Machine Learning, AI & Big Data — Solved Questions & PYQ",
+      bn: "মেশিন লার্নিং, এআই ও বিগ ডেটা — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "17 questions from the IT Job QnS Machine Learning, AI & Big Data topic — 10 with worked answers and explanations, 7 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Machine Learning, AI & Big Data টপিকের 17টি প্রশ্ন — 10টির সমাধান ও ব্যাখ্যা, 7টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Machine Learning, AI & Big Data (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 17,
+  },
+  {
+    slug: "pyq-object-oriented-programming",
+    bank: "others",
+    title: {
+      en: "Object Oriented Programming (OOP) — Solved Questions & PYQ",
+      bn: "অবজেক্ট-ওরিয়েন্টেড প্রোগ্রামিং (ওওপি) — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "46 questions from the IT Job QnS Object Oriented Programming (OOP) topic — 15 with worked answers and explanations, 1 without a text solution in the source, 30 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Object Oriented Programming (OOP) টপিকের 46টি প্রশ্ন — 15টির সমাধান ও ব্যাখ্যা, 1টির টেক্সট সমাধান সোর্সে নেই, 30টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Object Oriented Programming (OOP) (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 46,
+  },
+  {
+    slug: "pyq-operating-system",
+    bank: "others",
+    title: {
+      en: "Operating System — Solved Questions & PYQ",
+      bn: "অপারেটিং সিস্টেম — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "32 questions from the IT Job QnS Operating System topic — 29 with worked answers and explanations, 3 without a text solution in the source.",
+      bn: "IT Job QnS-এর Operating System টপিকের 32টি প্রশ্ন — 29টির সমাধান ও ব্যাখ্যা, 3টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Operating System (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 32,
+  },
+  {
+    slug: "pyq-programming-question",
+    bank: "others",
+    title: {
+      en: "Programming Question — Solved Questions & PYQ",
+      bn: "প্রোগ্রামিং প্রশ্ন — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "45 questions from the IT Job QnS Programming Question topic — 41 with worked answers and explanations, 4 without a text solution in the source.",
+      bn: "IT Job QnS-এর Programming Question টপিকের 45টি প্রশ্ন — 41টির সমাধান ও ব্যাখ্যা, 4টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Programming Question (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 45,
+  },
+  {
+    slug: "pyq-software-engineering",
+    bank: "others",
+    title: {
+      en: "Software Engineering — Solved Questions & PYQ",
+      bn: "সফটওয়্যার ইঞ্জিনিয়ারিং — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "20 questions from the IT Job QnS Software Engineering topic — 20 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Software Engineering টপিকের 20টি প্রশ্ন — 20টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Software Engineering (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 20,
+  },
+  {
+    slug: "pyq-structured-query-language",
+    bank: "others",
+    title: {
+      en: "Structured Query Language (SQL) — Solved Questions & PYQ",
+      bn: "স্ট্রাকচার্ড কোয়েরি ল্যাংগুয়েজ (এসকিউএল) — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "24 questions from the IT Job QnS Structured Query Language (SQL) topic — 22 with worked answers and explanations, 2 without a text solution in the source.",
+      bn: "IT Job QnS-এর Structured Query Language (SQL) টপিকের 24টি প্রশ্ন — 22টির সমাধান ও ব্যাখ্যা, 2টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Structured Query Language (SQL) (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 24,
+  },
+  {
+    slug: "pyq-theory-of-computation",
+    bank: "others",
+    title: {
+      en: "Theory of Computation — Solved Questions & PYQ",
+      bn: "কম্পিউটেশনের তত্ত্ব — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "15 questions from the IT Job QnS Theory of Computation topic — 14 with worked answers and explanations, 1 without a text solution in the source.",
+      bn: "IT Job QnS-এর Theory of Computation টপিকের 15টি প্রশ্ন — 14টির সমাধান ও ব্যাখ্যা, 1টির টেক্সট সমাধান সোর্সে নেই।",
+    },
+    year: 2026,
+    exam: "Theory of Computation (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 15,
+  },
+  {
+    slug: "pyq-web-technologies",
+    bank: "others",
+    title: {
+      en: "Web Technologies — Solved Questions & PYQ",
+      bn: "ওয়েব টেকনোলজিস — সমাধান ও পূর্ববর্তী প্রশ্ন",
+    },
+    description: {
+      en: "9 questions from the IT Job QnS Web Technologies topic — 9 previous-year questions with exam tags.",
+      bn: "IT Job QnS-এর Web Technologies টপিকের 9টি প্রশ্ন — 9টি পূর্ববর্তী পরীক্ষার প্রশ্ন।",
+    },
+    year: 2026,
+    exam: "Web Technologies (topic-wise)",
+    organization: {
+      en: "IT Job QnS (topic-wise)",
+      bn: "আইটি জবকিউএনএস (টপিক-ওয়াইজ)",
+    },
+    questionCount: 9,
+  },
+  {
     slug: "bkkb-ap-2026",
     bank: "bank-it",
     title: {
