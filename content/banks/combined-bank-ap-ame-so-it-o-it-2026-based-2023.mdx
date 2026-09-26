@@ -1,0 +1,3795 @@
+---
+title_en: "Combined Bank AP/AME/SO-IT/O-IT 2026 (Based Year 2023) — Full Solution"
+title_bn: "কম্বাইন্ড ব্যাংক (এপি/এএমই/এসও-আইটি/ও-আইটি) ২০২৬ (বেসড বছর ২০২৩) — সম্পূর্ণ সমাধান"
+summary_en: "Combined Bank AP/AME/SO-IT/O-IT 2026 (based year 2023): 65 solved technical questions across four posts with Answer → Explanation → Related info → Exam tip."
+summary_bn: "কম্বাইন্ড ব্যাংক (এপি/এএমই/এসও-আইটি/ও-আইটি) ২০২৬ (বেসড বছর ২০২৩): চারটি পদের ৬৫টি সমাধায় প্রশ্ন — উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ।"
+---
+
+<Callout type="info">
+**Paper:** Combined Bank — AP / AME / SO-IT / O-IT, 2026 (Based Year 2023)  
+**Posts:** Senior Officer (IT) · Officer (IT) · AME/AE (IT) · Assistant Programmer · Assistant DBA (collected questions)  
+**Source:** jobqns released solutions for this page — every item is **Answer → Explanation → Related info → Exam tip**.  
+**Notes:** Non-technical essay/translation blocks are out of scope; original jobqns figures are replaced with text and tables; questions are numbered continuously Q1–Q65 because jobqns numbers each post separately.
+</Callout>
+
+## Senior Officer (IT)
+
+**Q1: What is Object-Oriented Programming (OOP)? What are the main principles of OOP? What is the difference between Method Overloading and Method Overriding?**
+
+**Answer:** **Objects + four pillars; overloading = compile-time, overriding = runtime**
+
+**Explanation:**
+
+Object-Oriented Programming (OOP) is a programming style where the code is built around objects. An object is a self-contained unit that holds both data (called attributes or properties) and the actions that can be performed on that data (called methods or functions). OOP helps organize large programs by breaking them into smaller, reusable, and manageable pieces.
+
+Main Principles of OOP
+
+1. Encapsulation
+
+Encapsulation means hiding the internal details of an object and only showing the necessary parts to the outside world. It protects data from being changed directly and keeps the code safe.
+
+Example: A bank account class hides the balance variable and only allows deposit or withdraw methods to change it.
+
+2. Abstraction
+
+Abstraction means showing only the essential features of an object while hiding the complex background details. It helps reduce complexity and makes the program easier to use.
+
+Example: When you drive a car, you only use the steering and brakes. You do not need to know how the engine works inside.
+
+3. Inheritance
+
+Inheritance is a mechanism where a new class can take on the properties and methods of an existing class. It promotes code reuse and builds a relationship between parent and child classes.
+
+Example: A Dog class inherits from an Animal class. Dog gets all properties like name and age, plus its own method like bark().
+
+4. Polymorphism
+
+Polymorphism means the same method name can behave differently in different situations. It allows one interface to be used for different data types or classes.
+
+Example: A Shape class has a draw() method. Circle, Square, and Triangle classes override draw() to show different shapes.
+
+Difference Between Method Overloading and Method Overriding
+
+| Point | Method Overloading | Method Overriding |
+| --- | --- | --- |
+| Definition | Using the same method name multiple times in the same class with different parameters. | Redefining a parent class method in a child class with the same name and parameters. |
+| Class | Occurs within the same class. | Occurs between parent class and child class. |
+| Parameters | Parameters must be different (number, type, or order). | Parameters must be exactly the same. |
+| Return Type | Return type can be different. | Return type must be the same or compatible. |
+| Binding | Compile-time (static) polymorphism. | Run-time (dynamic) polymorphism. |
+| Example | add(int a, int b) and add(double a, double b). | Parent class show() and child class show() with same signature. |
+
+Code Example of Method Overloading:
+
+```java
+class Calculator {int add(int a, int b) {
+return a + b;
+}
+double add(double a, double b) {
+return a + b;
+}
+}
+```
+
+Code Example of Method Overriding:
+
+```java
+class Animal {
+void sound() {
+System.out.println("Animal makes sound");
+}
+}
+```
+
+```java
+class Dog extends Animal {
+void sound() {
+System.out.println("Dog barks");
+}
+}
+```
+
+**Related info:** Java resolves overloads by parameter list at compile time; overrides dispatch on the object's runtime type — interviewers often follow up with `super.method()` and `@Override`.
+
+**Exam tip:** Name the four pillars first: Encapsulation, Abstraction, Inheritance, Polymorphism. Overloading = same name, different signature; overriding = same signature, child class redefines it.
+
+---
+
+**Q2: Define Computer Network. Describe different types of Computer Networks.**
+
+**Answer:** **Connected devices sharing resources; classify by scale (LAN/MAN/WAN) or tech (WLAN/SAN)**
+
+**Explanation:**
+
+A Computer Network is a group of two or more computers or devices that are connected together to share resources, exchange data, and communicate with each other. The connection can be made using cables, wireless signals, or optical fibers. Networks allow users to share files, printers, internet connections, and applications easily and efficiently.
+
+Key Features:
+
+- Resource sharing: Multiple users can share hardware and software resources.
+
+- Communication: Devices can send messages, emails, and data to each other.
+
+- Cost saving: Reduces the need for separate devices for each user.
+
+- Reliability: Data can be stored in multiple locations for backup.
+
+Different Types of Computer Networks
+
+1. PAN (Personal Area Network)
+
+A PAN is a very small network that connects devices around a single person. It covers a short range, usually within a few meters.
+
+Range: Up to 10 meters.
+
+Example: A smartphone connected to wireless earbuds via Bluetooth, or a laptop connected to a wireless mouse.
+
+2. LAN (Local Area Network)
+
+A LAN connects computers and devices within a limited area such as a home, school, or office building. It is privately owned and offers high-speed data transfer.
+
+Range: Up to 1 kilometer.
+
+Example: Computers in a university lab connected to the same printer and internet connection.
+
+3. MAN (Metropolitan Area Network)
+
+A MAN covers a larger area than a LAN, such as a city or a large campus. It connects multiple LANs together using high-speed connections.
+
+Range: Up to 50 kilometers.
+
+Example: A cable TV network that serves an entire city, or a university connecting all its branches across town.
+
+4. WAN (Wide Area Network)
+
+A WAN spans a very large geographical area, such as a country, continent, or even the entire world. It connects multiple LANs and MANs together.
+
+Range: Unlimited, across countries and continents.
+
+Example: The Internet is the largest WAN. A bank connecting all its branches across different countries.
+
+5. WLAN (Wireless Local Area Network)
+
+A WLAN is a type of LAN that uses wireless technology (Wi-Fi) instead of cables to connect devices within a local area.
+
+Range: Similar to LAN, but without wires.
+
+Example: Laptops and phones connected to Wi-Fi in a coffee shop or home.
+
+6. SAN (Storage Area Network)
+
+A SAN is a specialized network that provides access to consolidated block-level storage. It is mainly used in data centers and enterprises.
+
+Example: A company storing all its data on a central server that multiple departments can access securely.
+
+Summary Table:
+
+| Type | Full Form | Range | Example |
+| --- | --- | --- | --- |
+| PAN | Personal Area Network | Up to 10 meters | Bluetooth earphones with phone |
+| LAN | Local Area Network | Up to 1 km | Office computers sharing printer |
+| MAN | Metropolitan Area Network | Up to 50 km | City-wide cable TV network |
+| WAN | Wide Area Network | Unlimited | The Internet |
+| WLAN | Wireless Local Area Network | Up to 1 km (wireless) | Home Wi-Fi network |
+| SAN | Storage Area Network | Data center level | Central enterprise data storage |
+
+**Related info:** Bank branch offices are typically WAN/MPLS links; a data centre uses a SAN for block-level storage — both were introduced as technology-based types in the same table.
+
+**Exam tip:** Answer geography first (LAN building, MAN city, WAN country), then add WLAN and SAN as technology-based types with one example each.
+
+---
+
+**Q3: What is Cloud Computing? What are its characteristics? Briefly describe the types of cloud computing and its applications.**
+
+**Answer:** **On-demand computing over the internet; IaaS/PaaS/SaaS split provider vs user work**
+
+**Explanation:**
+
+Cloud Computing is a technology that delivers computing services like servers, storage, databases, networking, software, and analytics over the internet ("the cloud"). Instead of owning and maintaining physical data centers and servers, users can access these resources on-demand from a cloud provider and pay only for what they use.
+
+Characteristics of Cloud Computing
+
+- On-demand self-service: Users can access computing resources automatically without needing human interaction with the provider.
+
+- Broad network access: Services are available over the internet through standard devices like laptops, tablets, and phones.
+
+- Resource pooling: The provider shares computing resources among multiple users dynamically based on demand.
+
+- Rapid elasticity: Resources can be scaled up or down quickly as needed, often automatically.
+
+- Measured service: Usage is monitored and billed according to actual consumption, like electricity or water.
+
+Types of Cloud Computing
+
+1. Public Cloud
+
+Public cloud services are owned and operated by third-party providers over the public internet. Anyone can purchase and use them.
+
+Example: AWS (Amazon Web Services), Google Cloud Platform, Microsoft Azure.
+
+2. Private Cloud
+
+Private cloud is used exclusively by a single organization. It can be hosted on-site or by a third-party vendor, but the infrastructure is not shared.
+
+Example: A bank running its own data center for customer records and internal applications.
+
+3. Hybrid Cloud
+
+Hybrid cloud combines public and private clouds, allowing data and applications to move between them. It gives businesses greater flexibility and more deployment options.
+
+Example: A company stores sensitive data on a private cloud but uses a public cloud for high-traffic marketing campaigns.
+
+4. Community Cloud
+
+Community cloud is shared among several organizations with common goals or requirements, such as government agencies or research institutions
+
+Example: Universities sharing a cloud platform for joint research projects.
+
+Applications of Cloud Computing
+
+- Data Storage and Backup: Services like Google Drive, Dropbox, and iCloud store files securely online.
+
+- Software as a Service (SaaS): Applications like Gmail, Microsoft 365, and Zoom run directly from the cloud without local installation.
+
+- Platform as a Service (PaaS): Developers use cloud platforms like Heroku and Google App Engine to build and deploy applications.
+
+- Infrastructure as a Service (IaaS): Companies rent virtual servers and storage from providers like AWS and Azure instead of buying hardware.
+
+- Big Data Analytics: Cloud tools process and analyze massive amounts of data for business insights.
+
+- Disaster Recovery: Cloud backup ensures business continuity after hardware failure or cyberattacks.
+
+**Related info:** Bank core systems often run hybrid: private cloud for regulated data, public cloud for analytics. The shared-responsibility model divides security duties between provider and bank.
+
+**Exam tip:** Give the three service models with a giveaway each — VMs = IaaS, deploy-your-code = PaaS, log-in-to-app = SaaS — plus the four cloud characteristics.
+
+---
+
+**Q4: What are Compiler and Interpreter? Briefly describe their role and differences. Write some key points on the advantages and disadvantages of Open Source Software.**
+
+**Answer:** **Compiler translates the whole program once; interpreter runs line by line; OSS = source available, support weak**
+
+**Explanation:**
+
+Compiler:
+
+A compiler is a program that translates the entire source code of a high-level language into machine code at once.
+
+It produces an executable file after compilation.
+
+Interpreter:
+
+An interpreter translates and executes the source code line by line.
+
+It does not produce a separate executable file.
+
+Difference between Compiler and Interpreter:
+
+- Execution: Compiler translates whole program at once; Interpreter translates line by line.
+
+- Speed: Compiled programs run faster; Interpreted programs run slower.
+
+- Error Handling: Compiler shows all errors after compilation; Interpreter shows errors line by line.
+
+- Output: Compiler produces executable file; Interpreter does not produce file.
+
+Open Source Software
+
+Advantages:
+
+- Free of cost
+
+- Source code is available for modification
+
+- High flexibility and customization
+
+- Large community support
+
+- Fast bug fixing and updates
+
+Disadvantages:
+
+- Less official technical support
+
+- May have security risks if not maintained properly
+
+- Not always user-friendly
+
+- Compatibility issues with some proprietary software
+
+**Related info:** GCC and the JVM sit in between: Java compiles to bytecode, then the JVM interprets/JIT-compiles it — a common follow-up example.
+
+**Exam tip:** Compare on four axes: when translation happens, output produced, error timing, speed — then two pros and two cons of open-source software.
+
+---
+
+**Q5: What is OSI model? Explain the functions of each layer with examples.**
+
+**Answer:** **Seven-layer reference model; PDUs are bits → frames → packets → segments → messages**
+
+**Explanation:**
+
+The OSI (Open Systems Interconnection) Model is a reference framework that explains how data travels from one device to another over a network. It divides the entire communication process into seven layers. Each layer has its own specific job and passes data to the next layer. It helps developers and network engineers understand and troubleshoot network problems easily.
+
+The Seven Layers of the OSI Model
+
+1. Physical Layer
+
+This is the lowest layer. It deals with the actual physical connection between devices. It transmits raw bits (0s and 1s) through cables, switches, and hubs.
+
+Function: Bit transmission, voltage levels, cable types, and signal timing.
+
+Devices: Cables, hubs, repeaters, and network interface cards (NIC).
+
+Example: An Ethernet cable carrying electrical signals between a computer and a router.
+
+2. Data Link Layer
+
+This layer handles data transfer between two directly connected devices on the same network. It makes sure data is delivered without errors.
+
+Function: Framing, MAC addressing, error detection, and flow control.
+
+Devices: Switches and bridges.
+
+Example: A switch uses MAC addresses to send data to the correct computer in a local network.
+
+3. Network Layer
+
+This layer is responsible for moving data from one network to another. It finds the best path (routing) for the data to reach its destination.
+
+Function: Logical addressing (IP), routing, and path selection.
+
+Devices: Routers.
+
+Example: A router uses IP addresses to send a packet from your home network to a website server on the internet.
+
+4. Transport Layer
+
+This layer ensures data is delivered completely and correctly. It breaks large data into smaller segments and reassembles them at the other end.
+
+Function: Segmentation, error recovery, and flow control.
+
+Protocols: TCP and UDP.
+
+Example: TCP breaks an email into small parts, sends them, and puts them back together in the right order at the receiver.
+
+5. Session Layer
+
+This layer creates, manages, and ends communication sessions between two devices. It keeps the conversation active and organized.
+
+Function: Session establishment, maintenance, and termination.
+
+Example: When you log into a video call, the session layer sets up and keeps the call active until you hang up.
+
+6. Presentation Layer
+
+This layer acts like a translator. It formats, encrypts, and compresses data so the application layer can understand it.
+
+Function: Data translation, encryption, decryption, and compression.
+
+Example: SSL/TLS encryption on a website that keeps your password safe during login.
+
+7. Application Layer
+
+This is the top layer where users directly interact with the network. It provides services like email, file transfer, and web browsing.
+
+Function: User interface and network services for applications.
+
+Protocols: HTTP, FTP, SMTP, DNS.
+
+Example: A web browser using HTTP to load a webpage when you type www.google.com.
+
+Summary Table:
+
+| Layer | Name | Main Function | Example |
+| --- | --- | --- | --- |
+| 7 | Application | User services like web and email | Browser loading a website |
+| 6 | Presentation | Encryption and data formatting | SSL encrypting login password |
+| 5 | Session | Manage connection sessions | Keeping a video call active |
+| 4 | Transport | Reliable data delivery | TCP sending email in parts |
+| 3 | Network | Routing and IP addressing | Router sending packet to server |
+| 2 | Data Link | Error-free local delivery | Switch using MAC address |
+| 1 | Physical | Raw bit transmission | Ethernet cable carrying signal |
+
+**Related info:** TCP/IP collapses the model to four layers; switch = layer 2, router = layer 3 — the two marks magnets in almost every network exam.
+
+**Exam tip:** Memorise layer order with a mnemonic and state the PDU plus one real device/example per layer — that is how the marks split.
+
+---
+
+**Q6: Draw and clearly describe a step-by-step flowchart for a User Login system. Your login must include: Taking a Username and Password as input. Checking the database. If correct: Granting access. If wrong: Adding 1 to a failed attempts counter. Access denied and block the account if the counter reaches 3.**
+
+**Answer:** **Input → DB check → on success grant access; on failure increment counter → block after 3 tries**
+
+**Explanation:**
+
+The flowchart has two decision points — *credentials match?* and *failed attempts ≥ 3?* — and three terminals:
+
+```text
+              [ Start ]
+                  |
+                  v
+     [ Input username & password ]
+                  |
+                  v
+   [ Check credentials in database ]
+                  |
+          +-------+--------+
+          | match?          |
+       NO |                 | YES
+          v                 v
+   [ failedAttempts++ ]  [ GRANT ACCESS ]
+          |                    |
+          v                    v
+ { failedAttempts >= 3? }     [ End ]
+       /               YES          NO
+      |            |
+      v            v
+ [ DENY & BLOCK ]  [ back to input step ]
+      |
+      v
+    [ End ]
+```
+
+1. Start → take **username** and **password** as input.
+2. Check the credentials against the database.
+3. **Correct** → grant access → End.
+4. **Wrong** → add 1 to the failed-attempts counter and loop back to the input step.
+5. When the counter **reaches 3** → access denied and the account is blocked → End.
+
+**Related info:** Real login flows add lockout delay, CAPTCHA and audit logging after the threshold; account lockout is a standard banking control against brute force.
+
+**Exam tip:** Draw proper flowchart symbols (terminator, process, decision), branch both ways from the database check, and show the counter comparison as its own decision.
+
+---
+
+**Q7: A bank has the network block 192.168.10.0/24. The IT manager wants to divide this into 4 equal subnets. (a) How many bits do you need to borrow to make 4 subnets? (b) What is the new Subnet Mask in dotted-decimal format? (c) Write down the Network Address, the First Usable IP, and the Broadcast Address for the second subnet created. Show your calculation.**
+
+**Answer:** **Borrow 2 bits → /26, mask 255.255.255.192; 2nd subnet = .64–.127 (.65 usable, .127 broadcast)**
+
+**Explanation:**
+
+(a) Number of bits to borrow
+
+To create 4 subnets, we use the formula: 2ⁿ = 4
+
+So, n = 2 bits must be borrowed from the host part.
+
+(b) New Subnet Mask
+
+Original network: /24
+
+Borrowed bits: 2
+
+New prefix: /26
+
+Subnet mask = 255.255.255.192
+
+(c) Second Subnet Details
+
+Block size = 256 - 192 = 64
+
+Subnets are:
+
+1st: 192.168.10.0 - 192.168.10.63
+
+2nd: 192.168.10.64 - 192.168.10.127
+
+So for the second subnet:
+
+Network Address: 192.168.10.64
+
+First Usable IP: 192.168.10.65
+
+Broadcast Address: 192.168.10.127
+
+**Related info:** Block size 64 gives subnets at .0, .64, .128 and .192; usable range is always network address + 1 to broadcast − 1.
+
+**Exam tip:** Show the formula (2ⁿ = 4 → n = 2), the new prefix (/24 + 2 = /26) and the mask — three separate steps, three marks.
+
+---
+
+**Q8: Why is cyber security important? What are the common types of cyber threats? Explain cyber security measures.**
+
+**Answer:** **Protects CIA; threats = malware, phishing, DoS, insider; defences = layered technical + human controls**
+
+**Explanation:**
+
+Cyber Security is the practice of protecting computers, servers, networks, and data from digital attacks. It is important because our daily lives, businesses, and governments all depend heavily on technology and the internet.
+
+- Protects sensitive data: Keeps personal information, financial records, and business secrets safe from thieves.
+
+- Prevents financial loss: Stops hackers from stealing money or causing costly damage to systems.
+
+- Maintains privacy: Ensures that private conversations, photos, and documents remain confidential.
+
+- Ensures business continuity: Helps companies keep running even when facing cyber attacks.
+
+- Builds trust: Customers feel safe using services that protect their information properly.
+
+Common Types of Cyber Threats
+
+1. Malware
+
+Malware is harmful software designed to damage or gain unauthorized access to a system. It includes viruses, worms, and trojans.
+
+Example: A virus that spreads through email attachments and corrupts files on the computer.
+
+2. Phishing
+
+Phishing is a trick where attackers send fake emails or messages that look real to steal login credentials or personal details.
+
+Example: An email pretending to be from a bank asks the user to click a link and enter their password on a fake website.
+
+3. Ransomware
+
+Ransomware locks or encrypts the victim's files and demands money to unlock them.
+
+Example: A hospital's patient records are encrypted by ransomware, and attackers demand payment to restore access.
+
+4. DDoS Attack (Distributed Denial of Service)
+
+A DDoS attack floods a website or server with massive traffic to make it crash and unavailable to real users.
+
+Example: An online shopping site becomes unreachable during a sale because hackers overload it with fake requests.
+
+5. Man-in-the-Middle (MitM) Attack
+
+In this attack, the hacker secretly intercepts communication between two parties to steal or alter data.
+
+Example: A hacker on public Wi-Fi intercepts login details sent between a user and a website.
+
+6. SQL Injection
+
+SQL Injection is a technique where attackers insert malicious code into a database query to access or destroy data.
+
+Example: A hacker enters special code into a login form to bypass authentication and access the entire database.
+
+Cyber Security Measures
+
+- Strong passwords and MFA: Use complex passwords and Multi-Factor Authentication to add extra layers of protection.
+
+- Firewalls: Install firewalls to block unauthorized access to networks and systems.
+
+- Antivirus software: Use updated antivirus programs to detect and remove malware.
+
+- Regular updates: Keep operating systems and applications patched to fix security holes.
+
+- Data encryption: Encrypt sensitive files so even if stolen, they cannot be read without the key.
+
+- Regular backups: Create copies of important data to recover quickly after an attack.
+
+- User awareness training: Teach employees and users to recognize phishing and avoid risky behavior.
+
+**Related info:** Bangladesh Bank's IT-security guidelines require layered controls — firewall/IDS, encryption, backups and staff awareness are the usual four pillars of the answer.
+
+**Exam tip:** Structure as three blocks: why it matters → 4–5 threat types → measures split into technical and human.
+
+---
+
+**Q9: What is Encryption? What are the types? Explain the role of Encryption in security.**
+
+**Answer:** **Plaintext ↔ ciphertext with keys; symmetric = one shared key, asymmetric = public/private pair**
+
+**Explanation:**
+
+Encryption
+
+Encryption is the process of converting readable plain text into unreadable scrambled text called cipher text. Only authorized parties who have the correct key can convert it back into readable form. It acts like a digital lock that protects sensitive information from being read by unauthorized people.
+
+Types of Encryption
+
+1. Symmetric Encryption
+
+In symmetric encryption, the same key is used to both encrypt (lock) and decrypt (unlock) the data. It is fast and efficient but requires both sender and receiver to share the secret key safely.
+
+Example: AES (Advanced Encryption Standard) is used to protect Wi-Fi passwords and file storage.
+
+2. Asymmetric Encryption
+
+In asymmetric encryption, two different keys are used: a public key to encrypt the data and a private key to decrypt it. The public key can be shared openly, but the private key is kept secret by the owner. It is slower than symmetric encryption but much safer for sharing over the internet.
+
+Example: RSA is used in SSL certificates to secure website connections and in email encryption.
+
+Role of Encryption in Security
+
+- Data privacy: Even if hackers steal encrypted data, they cannot read it without the key.
+
+- Authentication: Digital signatures use encryption to prove the identity of the sender.
+
+- Data integrity: Encryption helps detect if data was altered or tampered with during transfer.
+
+- Legal compliance: Many laws require businesses to encrypt personal and financial data.
+
+- Secure communication: Online banking, messaging apps, and emails use encryption to keep conversations private.
+
+**Related info:** TLS uses both: asymmetric (RSA/ECDHE) to agree the session key, then symmetric AES for bulk data — HTTPS is the everyday example.
+
+**Exam tip:** One example per type (AES vs RSA) and name key distribution as symmetric encryption's weakness.
+
+---
+
+**Q10: What is Normalization? How do 1NF and 2NF work in a database? Give examples.**
+
+**Answer:** **1NF = atomic cells, no repeating groups; 2NF = no partial dependency on part of a composite key**
+
+**Explanation:**
+
+Normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves dividing large tables into smaller ones and defining relationships between them. The main goal is to eliminate duplicate data and ensure that data dependencies make sense. Normalization follows a set of rules called normal forms, such as 1NF, 2NF, 3NF, and so on.
+
+1NF (First Normal Form)
+
+1NF is the first step in normalization. A table is in 1NF when it follows these rules:
+
+- Atomic values: Each table cell must contain only a single value, not multiple values or lists.
+
+- Same data type: Each column should hold values of the same type.
+
+- Unique rows: Every row must be different from others. No repeating groups are allowed.
+
+- Unique column names: Each column must have a distinct name.
+
+Example of 1NF:
+
+Before (Not in 1NF):
+
+| StudentID | Name | Subjects |
+| --- | --- | --- |
+| 101 | Alice | Math, Physics |
+| 102 | Bob | Chemistry |
+
+The "Subjects" column has two values in one cell, which breaks the atomic rule.
+
+After (In 1NF):
+
+| StudentID | Name | Subject |
+| --- | --- | --- |
+| 101 | Alice | Math |
+| 101 | Alice | Physics |
+| 102 | Bob | Chemistry |
+
+Now each cell holds a single value, and the table follows 1NF rules.
+
+2NF (Second Normal Form)
+
+A table is in 2NF when it is already in 1NF and has no partial dependency. This means a non-key column must depend on the entire primary key, not just a part of it. 2NF is especially important when the primary key is made of two or more columns (composite key).
+
+Must be in 1NF first.
+
+- No partial dependency: Every non-key attribute must depend on the whole primary key.
+
+Example of 2NF:
+
+Before (Not in 2NF):
+
+Primary key = (StudentID + SubjectID).
+
+Problem: StudentName depends only on StudentID, not on the full key. This is partial dependency.
+
+After (In 2NF):
+
+Student Table:
+
+| StudentID | StudentName |
+| --- | --- |
+| 101 | Alice |
+
+Subject Table:
+
+| SubjectID | SubjectName |
+| --- | --- |
+| S01 | Math |
+| S02 | Physics |
+
+Enrollment Table:
+
+| StudentID | SubjectID | Marks |
+| --- | --- | --- |
+| 101 | S01 | 85 |
+| 101 | S02 | 90 |
+
+Now each non-key attribute depends on the full primary key of its own table, and partial dependency is removed.
+
+**Related info:** 3NF removes transitive dependency (non-key → non-key); reporting systems sometimes denormalise back on purpose for read speed.
+
+**Exam tip:** State the violation, then the fix — examiners look for the exact phrases *repeating groups* (1NF) and *partial dependency* (2NF).
+
+---
+
+**Q11: What is a Linked List? What is searching? Explain Binary Search.**
+
+**Answer:** **Nodes linked by pointers; linear search O(n); binary search O(log n) but only on sorted data**
+
+**Explanation:**
+
+Linked List
+
+A linked list is a linear data structure where elements (nodes) are stored in separate memory locations and connected using pointers.
+
+Each node contains two parts: data and a pointer to the next node.
+
+Searching
+
+Searching is the process of finding a specific element in a data structure such as an array, linked list, or database.
+
+It helps to check whether a value exists and locate its position.
+
+Binary Search
+
+Binary search is an efficient searching algorithm used on a sorted array.
+
+It works by repeatedly dividing the search interval into half.
+
+Steps of Binary Search:
+
+- Find the middle element of the array.
+
+- Compare the target value with the middle element.
+
+- If equal, search is complete.
+
+- If the target is smaller, search in the left half.
+
+- If the target is larger, search in the right half.
+
+- Repeat until the element is found or the interval becomes empty.
+
+Condition: Binary search works only on sorted data.
+
+Time Complexity: O(log n)
+
+**Related info:** Linked lists gain cheap insertion but lose random access — that is also why binary search cannot run directly on them (no indexable midpoint).
+
+**Exam tip:** Never quote binary search without its precondition: **the data must be sorted** — that caveat is a favourite trap.
+
+---
+
+**Q12: What is Cryptocurrency? What is Bitcoin? What are the advantages of Blockchain Technology?**
+
+**Answer:** **Cryptography-secured digital money on a public ledger; Bitcoin was the first blockchain currency**
+
+**Explanation:**
+
+Cryptocurrency is a type of digital or virtual money that uses cryptography for security. It does not exist in physical form like paper notes or coins. Instead, it operates on a decentralized network of computers, meaning no single bank or government controls it. Transactions are verified and recorded on a public ledger called a blockchain. Popular examples include Bitcoin, Ethereum, and Ripple.
+
+Key Features:
+
+- Digital only: No physical coins or notes exist.
+
+- Decentralized: No central authority like a bank manages it.
+
+- Secure: Cryptography protects transactions from fraud.
+
+- Global: Can be sent anywhere in the world quickly.
+
+Bitcoin
+
+Bitcoin is the first and most well-known cryptocurrency. It was created in 2009 by an unknown person or group using the name Satoshi Nakamoto. Bitcoin allows people to send and receive payments directly without needing a bank or middleman. It uses blockchain technology to record all transactions in a transparent and tamper-proof way. The total supply of Bitcoin is limited to 21 million coins, making it scarce and valuable over time.
+
+How Bitcoin Works:
+
+- Mining: Powerful computers solve complex math problems to verify transactions and add them to the blockchain. Miners earn new Bitcoins as a reward.
+
+- Wallets: Users store Bitcoin in digital wallets using private keys, which act like passwords.
+
+- Transactions: When someone sends Bitcoin, the network validates it and records it permanently on the blockchain.
+
+Example: A person in the USA can send Bitcoin to a friend in Japan within minutes, without paying high bank fees or waiting days for processing.
+
+Advantages of Blockchain Technology
+
+Blockchain is the underlying technology behind Bitcoin and most cryptocurrencies. It is a chain of blocks, where each block contains a list of transactions. Once added, the data cannot be changed or deleted.
+
+- Transparency: All transactions are visible to everyone on the network, reducing fraud and corruption.
+
+- Immutability: Once data is recorded, it cannot be altered or deleted, making records trustworthy.
+
+- Decentralization: No single point of control means the system is harder to hack or shut down.
+
+- Security: Cryptography and consensus mechanisms make it extremely difficult to tamper with data.
+
+- Faster transactions: Cross-border payments happen in minutes instead of days.
+
+- Lower costs: Removing middlemen like banks reduces transaction fees significantly.
+
+- Traceability: Every transaction can be traced back to its origin, useful for supply chain and auditing.
+
+**Related info:** Blockchain advantages: immutability, transparency, no central authority, traceability — banks explore it for settlement rails, not for replacing core account systems.
+
+**Exam tip:** Stay factual: decentralisation, transparency, lower fees, traceability. Avoid hype; examiners want properties, not price talk.
+
+---
+
+**Q13: A database has a Managers table and an Employees table. The Employees table references the Managers table using a Foreign Key. The database is set to ON DELETE CASCADE. (a) Explain what ON DELETE CASCADE means in simple English. (b) If you delete one Manager from the database, what will automatically happen to all Employees under that manager? (c) Explain why this is very dangerous in a real banking system. What is the best practice and how does it fix this danger?**
+
+**Answer:** **ON DELETE CASCADE deletes child rows with the parent → deleting a Manager removes their Employees**
+
+**Explanation:**
+
+(a) Meaning of ON DELETE CASCADE
+
+ON DELETE CASCADE means that if a record in the parent table is deleted, all related records in the child table will also be automatically deleted.
+
+It maintains referential integrity automatically.
+
+(b) Effect of deleting a Manager
+
+If a Manager is deleted from the Managers table, then all Employees linked to that Manager via Foreign Key will also be automatically deleted from the Employees table.
+
+(c) Why it is dangerous in banking system & best practice
+
+Danger:
+
+In a banking system, deleting one Manager accidentally could delete all related employee records or dependent data.
+
+This can cause massive data loss, financial inconsistency, and system failure.
+
+Example risk:
+
+One wrong delete operation → many employee records permanently removed.
+
+Best Practice:
+
+Instead of ON DELETE CASCADE, use:
+
+- ON DELETE RESTRICT or NO ACTION
+
+- Soft delete (use a status field like "inactive" instead of deleting data)
+
+How it fixes the problem:
+
+- Prevents accidental mass deletion
+
+- Keeps historical data safe
+
+- Allows controlled data management and auditing
+
+**Related info:** RESTRICT/NO ACTION block the delete instead; production systems often prefer a soft delete (`status = 'inactive'`) to keep audit history.
+
+**Exam tip:** Phrase it as a referential-integrity rule and mention the sibling clause ON UPDATE CASCADE — cheap extra marks.
+
+---
+
+**Q14: Explain the basic idea of RAID. Why do servers use multiple hard drives instead of one big drive? If you have six drives of 2 TB each in a RAID 6 setup, calculate the total usable storage space.**
+
+**Answer:** **Striping + parity; RAID 6 reserves two drives' parity → (6 − 2) × 2 TB = 8 TB usable**
+
+**Explanation:**
+
+RAID is a technology that combines multiple hard drives into a single logical storage system.
+
+It improves performance, reliability, and fault tolerance using techniques like data striping, mirroring, and parity.
+
+Why servers use multiple drives instead of one big drive:
+
+- Higher reliability: If one drive fails, data can still be recovered (depending on RAID level).
+
+- Better performance: Data is read/write in parallel across multiple drives.
+
+- Scalability: Storage can be expanded easily by adding more drives.
+
+- Fault tolerance: RAID protects against data loss using redundancy.
+
+RAID 6 Storage Calculation
+
+Given:
+
+Number of drives = 6
+
+Capacity of each drive = 2 TB
+
+RAID 6 rule:
+
+RAID 6 uses the equivalent of 2 drives for parity.
+
+Usable drives:
+
+6 - 2 = 4 drives
+
+Total usable storage:
+
+4 × 2 TB = 8 TB
+
+**Related info:** RAID 5 reserves one drive (6 × 2 TB → 10 TB); RAID 10 mirrors pairs (→ 6 TB). RAID 6 survives two simultaneous failures, which matters during long rebuilds.
+
+**Exam tip:** Always show the working: raw 12 TB − parity 4 TB = 8 TB. The 'why not one big drive' part earns separate reliability/performance marks.
+
+## Officer (IT)
+
+**Q15: Explain how any Boolean function can be implemented using only universal gates.**
+
+**Answer:** **NAND or NOR alone can build NOT/AND/OR → therefore any Boolean function**
+
+**Explanation:**
+
+Universal gates are logic gates that can implement any Boolean function without using any other type of gate.
+
+The two universal gates are:
+
+- NAND Gate
+
+- NOR Gate
+
+Using only NAND gates or only NOR gates, all basic logic gates such as AND, OR, and NOT can be constructed. Since any Boolean function is built using these basic gates, any Boolean function can also be implemented using universal gates.
+
+Implementation Using NAND Gate
+
+1. NOT Gate using NAND
+
+When both inputs of a NAND gate are connected together:
+
+`Y=(A· A)'=(A)'`
+
+2. AND Gate using NAND
+
+First NAND operation gives:
+
+(A · B)'
+
+Applying another NAND as NOT operation:
+
+`Y=((A· B)')'=A· B`
+
+3. OR Gate using NAND
+
+Using De Morgan’s theorem:
+
+`A+B=((A)'·(B)')'`
+
+So OR gate can also be implemented using only NAND gates.
+
+Implementation Using NOR Gate
+
+1. NOT Gate using NOR
+
+When both inputs are same:
+
+`Y=(A+A)'=(A)'`
+
+2. OR Gate using NOR
+
+First NOR operation gives:
+
+(A + B)'
+
+Applying another NOR as NOT operation:
+
+`Y=((A+B)')'=A+B`
+
+3. AND Gate using NOR
+
+Using De Morgan’s theorem:
+
+`A· B=((A)'+(B)')'`
+
+Since NAND and NOR gates can create all basic logic gates, and all Boolean functions are formed using basic gates, any Boolean function can be implemented using only NAND gates or only NOR gates.
+
+**Related info:** Gate conversion order: NOT = NAND with tied inputs; AND = NAND + NOT; OR via De Morgan on NANDs — the same ladder works for NOR.
+
+**Exam tip:** Show the three basic conversions first, then compose them — the drawn circuits are where the marks sit.
+
+---
+
+**Q16: Differentiate between system software and application software. Give examples.**
+
+**Answer:** **System software drives hardware (OS, drivers); application software performs user tasks (Word, Chrome)**
+
+**Explanation:**
+
+System Software
+
+System software is a type of software that manages and controls computer hardware and provides a platform for application software to run.
+
+It works directly with the hardware and helps operate the computer system.
+
+Examples: Operating System, Device Driver, Compiler, Utility Programs
+
+Application Software
+
+Application software is software designed to perform specific tasks for users.
+
+It runs on top of system software and helps users complete different activities.
+
+Examples: Microsoft Word, Google Chrome, VLC Media Player, Adobe Photoshop
+
+Difference Between System Software and Application Software
+
+| System Software | Application Software |
+| --- | --- |
+| Manages and controls computer hardware. | Performs specific user tasks. |
+| Provides platform for application software. | Runs on top of system software. |
+| Essential for operating the computer. | Not essential for basic system operation. |
+| Usually starts automatically during booting. | Runs when user starts the program. |
+| Works closely with hardware. | Works mainly for user requirements. |
+| Examples: Windows, Linux, Device Drivers | Examples: MS Word, Chrome, Photoshop |
+
+**Related info:** Utilities and compilers are counted as system software; device drivers are the boundary case examiners like to ask about.
+
+**Exam tip:** Answer as a comparison table: purpose, examples, who starts it, contact with hardware — one row each.
+
+---
+
+**Q17: What are the main phases of the Software Development Life Cycle (SDLC)? Explain each phase briefly.**
+
+**Answer:** **Requirements → Design → Implementation → Testing → Deployment → Maintenance**
+
+**Explanation:**
+
+Software Development Life Cycle (SDLC)
+
+Software Development Life Cycle (SDLC) is a structured process used to design, develop, test, deploy, and maintain software systems efficiently and systematically.
+
+The main goal of SDLC is to produce high-quality software within time and budget.
+
+Main Phases of SDLC
+
+- Requirement Analysis
+
+- System Design
+
+- Implementation (Coding)
+
+- Testing
+
+- Deployment
+
+- Maintenance
+
+1. Requirement Analysis
+
+- In this phase, the requirements of the users and organization are collected and analyzed.
+
+- Developers, analysts, and clients discuss system objectives, features, and constraints.
+
+Purpose: Understand what the software should do.
+
+2. System Design
+
+- In this phase, the overall structure and architecture of the software are designed.
+
+- Database design, interface design, system flow, and technology selection are prepared.
+
+Purpose: Create a blueprint for software development.
+
+3. Implementation (Coding)
+
+- In this phase, programmers write the actual source code according to the design specifications.
+
+- Different modules and functionalities are developed.
+
+Purpose: Convert design into working software.
+
+4. Testing
+
+- The developed software is tested to identify and remove bugs, errors, and security issues.
+
+- Different testing methods such as unit testing, integration testing, and system testing are performed.
+
+Purpose: Ensure software quality and reliability.
+
+5. Deployment
+
+- After successful testing, the software is installed and delivered to users or clients.
+
+- It becomes available for real-world use.
+
+Purpose: Release the software into the production environment.
+
+6. Maintenance
+
+- After deployment, the software is monitored and updated regularly.
+
+- Bug fixing, performance improvement, and adding new features are done in this phase.
+
+Purpose: Keep the software functional and updated.
+
+SDLC Phases Summary
+
+| Phase | Main Purpose |
+| --- | --- |
+| Requirement Analysis | Collect and analyze requirements |
+| System Design | Create software architecture and design |
+| Implementation | Write program code |
+| Testing | Detect and fix errors |
+| Deployment | Release software to users |
+| Maintenance | Update and support software |
+
+SDLC provides a systematic approach for software development. It improves software quality, reduces development risks, and ensures efficient project management.
+
+**Related info:** Each phase has an artefact (SRS, design docs, test plans, release notes); naming one artefact per phase strengthens the answer.
+
+**Exam tip:** Order matters — testing must come before deployment — and mention maintenance is the longest, ongoing phase.
+
+---
+
+**Q18: What is a communication system? Describe the different types of transmission modes with examples.**
+
+**Answer:** **Sender–receiver–medium–protocol; simplex, half-duplex, full-duplex by direction of flow**
+
+**Explanation:**
+
+A communication system is a system used to transfer data or information from one device or place to another through a communication medium.
+
+- It consists of sender, receiver, transmission medium, and communication protocols.
+
+- The main purpose of a communication system is to enable reliable exchange of information between devices.
+
+Components of a Communication System
+
+- Sender: Device that sends data.
+
+- Receiver: Device that receives data.
+
+- Transmission Medium: Path through which data travels (cable, fiber, wireless).
+
+- Protocol: Rules for communication.
+
+Transmission mode defines the direction of data flow between two connected devices.
+
+There are three types of transmission modes:
+
+- Simplex Mode
+
+- Half-Duplex Mode
+
+- Full-Duplex Mode
+
+1. Simplex Mode
+
+- In simplex mode, communication occurs in only one direction.
+
+- One device only sends data and the other device only receives data.
+
+Example: Keyboard to Computer, Television Broadcast
+
+Characteristics:
+
+- One-way communication
+
+- No feedback from receiver
+
+- Simple and low cost
+
+2. Half-Duplex Mode
+
+- In half-duplex mode, communication occurs in both directions but not at the same time.
+
+- Both devices can send and receive data alternately.
+
+Example: Walkie-Talkie
+
+Characteristics:
+
+- Two-way communication
+
+- Only one device transmits at a time
+
+- More efficient than simplex
+
+3. Full-Duplex Mode
+
+- In full-duplex mode, communication occurs in both directions simultaneously.
+
+- Both devices can send and receive data at the same time.
+
+Example: Mobile Phone Call, Video Conferencing
+
+Characteristics:
+
+- Simultaneous two-way communication
+
+- Fast and efficient
+
+- Higher bandwidth requirement
+
+**Related info:** Keyboard = simplex, walkie-talkie = half-duplex, mobile call/video conference = full-duplex — the standard example trio.
+
+**Exam tip:** Draw the block diagram first, then a mode table with direction, example and use per mode.
+
+---
+
+**Q19: Explain the concepts of encryption and decryption with an example.**
+
+**Answer:** **Encryption: plaintext → ciphertext with a key; decryption reverses it with the same/related key**
+
+**Explanation:**
+
+Encryption: Encryption is the process of converting readable data, called plaintext, into an unreadable form called ciphertext using an encryption algorithm and a key.
+
+- The main purpose of encryption is to protect sensitive information from unauthorized access during storage or transmission.
+
+- Only authorized users who have the correct key can understand the encrypted data.
+
+Decryption: Decryption is the reverse process of encryption.
+
+- It converts the encrypted ciphertext back into the original readable plaintext using a decryption key.
+
+- Without the correct key, the encrypted data cannot be understood properly.
+
+How Encryption and Decryption Work
+
+- The sender encrypts the original message using an encryption key.
+
+- The encrypted message (ciphertext) is transmitted or stored.
+
+- The receiver uses the correct decryption key to recover the original message.
+
+Example
+
+Suppose the original message is:
+
+Plaintext: HELLO
+
+Using a simple encryption method where each letter is shifted by 3 positions:
+
+- H → K
+
+- E → H
+
+- L → O
+
+- L → O
+
+- O → R
+
+The encrypted message becomes:
+
+Ciphertext: KHOOR
+
+When the receiver applies decryption by shifting the letters back by 3 positions:
+
+- K → H
+
+- H → E
+
+- O → L
+
+- O → L
+
+- R → O
+
+The original plaintext is recovered:
+
+Decrypted Text: HELLO
+
+Applications of Encryption
+
+- Secure online banking
+
+- HTTPS web communication
+
+- Email security
+
+- Password protection
+
+- VPN communication
+
+Conclusion
+
+Encryption protects data by converting it into unreadable form, while decryption restores it back into readable form. Together, they ensure confidentiality and secure communication in computer networks and information systems.
+
+**Related info:** AES protects stored data (at rest), TLS/HTTPS protects data in transit — bank statements and inter-bank transfers rely on both together.
+
+**Exam tip:** One worked example plus the principle that key secrecy, not algorithm secrecy, is the guarantee.
+
+---
+
+**Q20: What is cloud computing? Why is it used? State the difference between cloud storage and traditional storage.**
+
+**Answer:** **On-demand internet computing (IaaS/PaaS/SaaS); cloud storage = remote, scalable, pay-as-you-go vs in-house capex**
+
+**Explanation:**
+
+Cloud computing is a technology that provides computing resources such as servers, storage, databases, networking, software, and processing power over the Internet instead of using local computers or physical infrastructure.
+
+- Users can access these resources anytime and from anywhere using an internet connection.
+
+- Popular examples of cloud computing services are Google Drive, Microsoft Azure, Amazon Web Services (AWS), and Dropbox.
+
+Why Cloud Computing is Used
+
+Cloud computing is widely used because it provides flexibility, scalability, cost efficiency, and easy access to resources.
+
+Main Reasons for Using Cloud Computing
+
+- Remote Access: Users can access data and applications from anywhere.
+
+- Scalability: Resources can be increased or decreased easily based on demand.
+
+- Cost Reduction: No need to purchase expensive hardware and infrastructure.
+
+- Data Backup and Recovery: Cloud providers offer backup and disaster recovery services.
+
+- Collaboration: Multiple users can work on the same files simultaneously.
+
+- High Availability: Services remain available most of the time.
+
+Cloud Storage vs Traditional Storage
+
+| Feature | Cloud Storage | Traditional Storage |
+| --- | --- | --- |
+| Storage Location | Stored on remote cloud servers | Stored on local hard drives or servers |
+| Access | Accessible via Internet from anywhere | Usually accessible only locally |
+| Scalability | Easy to increase storage capacity | Requires physical hardware upgrade |
+| Cost | Pay-as-you-use model | Higher initial hardware cost |
+| Maintenance | Managed by cloud provider | User or organization manages maintenance |
+| Backup and Recovery | Automatic backup facilities available | Manual backup often required |
+| Internet Requirement | Requires Internet connection | Can work without Internet |
+| Examples | Google Drive, OneDrive, Dropbox | Hard Disk, Pen Drive, Local Server |
+
+Cloud computing provides flexible and scalable computing services over the Internet. Cloud storage offers remote accessibility and easier management compared to traditional local storage systems.
+
+**Related info:** Cloud traits: on-demand self-service, pooled resources, elasticity, measured service — Drive/Azure/AWS are the examples jobqns itself cites.
+
+**Exam tip:** Split the answer in two: (1) definition + why used, (2) storage comparison covering cost, access, scaling and maintenance.
+
+---
+
+**Q21: Compare RAM, ROM, cache memory, and secondary storage in terms of speed and usage.**
+
+**Answer:** **Cache > RAM on speed; ROM = firmware; secondary = bulk. Volatile: cache/RAM; persistent: ROM/disk**
+
+**Explanation:**
+
+RAM (Random Access Memory)
+
+- RAM is the primary memory of a computer used to temporarily store data and programs currently being processed by the CPU.
+
+- It is volatile memory, meaning its data is lost when the power is turned off.
+
+- RAM provides fast read and write operations, allowing applications and the operating system to run efficiently.
+
+Usage: Running applications, operating systems, and temporary data processing.
+
+ROM (Read Only Memory)
+
+- ROM is non-volatile memory that permanently stores instructions required for booting and hardware initialization.
+
+- The data stored in ROM remains even after power is turned off.
+
+- ROM usually contains firmware or BIOS programs.
+
+Usage: System startup and firmware storage.
+
+Cache Memory
+
+- Cache memory is a very small but extremely fast memory located inside or close to the CPU.
+
+- It stores frequently used instructions and data so the CPU can access them quickly without waiting for RAM.
+
+- Cache memory improves processor speed and overall system performance.
+
+Usage: Temporary storage of frequently accessed CPU data and instructions.
+
+Secondary Storage
+
+- Secondary storage is non-volatile storage used for permanent data storage.
+
+- It stores files, operating systems, software, videos, documents, and backups for long-term use.
+
+Examples include HDD, SSD, DVD, memory cards, and pen drives.
+
+Usage: Permanent storage of data and applications.
+
+Cache Memory → RAM → ROM → Secondary Storage
+
+**Related info:** Cache is SRAM on the CPU path, RAM is DRAM for running programs, SSD/HDD are the persistent tier — price per byte runs opposite to speed.
+
+**Exam tip:** Give a table (volatility, speed, capacity, typical use) and quote the hierarchy as cache → RAM → secondary storage; ROM is firmware, not a performance tier.
+
+---
+
+**Q22: What is a phishing attack? Explain its types and discuss methods to prevent it.**
+
+**Answer:** **Phishing fakes trusted messages to steal secrets; email/spear/whaling/SMS types; verify links, 2FA, training**
+
+**Explanation:**
+
+A phishing attack is a type of cyber attack where attackers send fraudulent messages (emails, SMS, or fake websites) pretending to be from a trusted source to steal sensitive information such as passwords, credit card numbers, or personal data.
+
+Types of Phishing Attacks
+
+- Email Phishing: Attackers send fake emails that look like they come from legitimate companies to trick users into clicking malicious links or downloading attachments.
+
+- Spear Phishing: A targeted attack aimed at a specific individual or organization using personalized information.
+
+- Whaling: A form of spear phishing that targets high-profile executives or important individuals in a company.
+
+- Smishing: Phishing conducted through SMS or text messages containing malicious links.
+
+- Vishing: Phishing performed over voice calls, where attackers impersonate bank officials or tech support.
+
+- Clone Phishing: Attackers create a replica of a legitimate email with a malicious link or attachment.
+
+- Pharming: Redirects users to fake websites by manipulating DNS settings.
+
+Methods to Prevent Phishing Attacks
+
+- User Education: Train users to recognize suspicious emails, links, and attachments.
+
+- Email Filtering: Use spam filters and antivirus software to block phishing emails.
+
+- Multi-Factor Authentication (MFA): Adds an extra layer of security even if passwords are stolen.
+
+- Verify URLs: Always check the website address before entering login credentials.
+
+- HTTPS: Ensure websites use secure HTTPS connections.
+
+- Regular Software Updates: Keep operating systems and browsers updated to patch vulnerabilities.
+
+- Report Phishing: Report suspicious emails to the IT department or relevant authorities.
+
+**Related info:** Lookalike domains and OTP forwarding are the common local modus operandi; a report-to-IT flow turns users into sensors instead of victims.
+
+**Exam tip:** Name at least three types and three countermeasures, pairing one technical control (filters, 2FA) with one human control (awareness).
+
+---
+
+**Q23: What does CIA stand for in information security? Explain each component briefly.**
+
+**Answer:** **Confidentiality (no unauthorised read), Integrity (no unauthorised change), Availability (uptime)**
+
+**Explanation:**
+
+CIA in Information Security
+
+CIA stands for:
+
+- Confidentiality
+
+- Integrity
+
+- Availability
+
+The CIA Triad is a fundamental security model used to protect information systems and sensitive data.
+
+It helps organizations ensure that data remains secure, accurate, and accessible to authorized users.
+
+1. Confidentiality
+
+Confidentiality means protecting information from unauthorized access or disclosure.
+
+Only authorized users are allowed to view or access sensitive data.
+
+Methods Used to Ensure Confidentiality
+
+- Encryption
+
+- Password protection
+
+- Access control
+
+- Multi-Factor Authentication (MFA)
+
+Example:
+
+Online banking passwords and customer account details are encrypted so that unauthorized users cannot read them.
+
+2. Integrity
+
+Integrity means ensuring that data remains accurate, complete, and unmodified unless changed by authorized users.
+
+It prevents unauthorized alteration or corruption of information.
+
+Methods Used to Ensure Integrity
+
+- Hashing
+
+- Digital signatures
+
+- Checksums
+
+- Access permissions
+
+Example:
+
+During a bank transaction, the transferred amount should not be changed accidentally or maliciously.
+
+3. Availability
+
+Availability means ensuring that systems, applications, and data are accessible whenever authorized users need them.
+
+Systems should remain operational without unnecessary downtime.
+
+Methods Used to Ensure Availability
+
+- Data backup
+
+- Redundant systems
+
+- Disaster recovery plans
+
+- UPS and power backup
+
+Example:
+
+An ATM system should remain available 24/7 so customers can access banking services anytime.
+
+Summary of CIA Triad
+
+| Component | Main Goal | Example |
+| --- | --- | --- |
+| Confidentiality | Prevent unauthorized access | Password-protected banking data |
+| Integrity | Maintain data accuracy and consistency | Correct transaction records |
+| Availability | Ensure system accessibility | 24/7 ATM service |
+
+The CIA Triad forms the foundation of information security. Confidentiality protects privacy, integrity ensures data accuracy, and availability guarantees continuous access to systems and information.
+
+**Related info:** Encryption serves confidentiality, hashing/digital signatures serve integrity, redundancy and DR plans serve availability — one control per letter.
+
+**Exam tip:** One line per letter plus a control example each; the marks are awarded letter-by-letter.
+
+---
+
+**Q24: Consider a STUDENTS table with the following attributes: StudentID, Name, Department, and Marks. (i) Write an SQL query to display only StudentID, Name, and Marks for students scoring more than 80 marks. (ii) Write an SQL query to count how many students scored more than 80 marks in each Department.**
+
+**Answer:** **Filter: `SELECT StudentID, Name, Marks ... WHERE Marks > 80`; count: `COUNT(*) ... GROUP BY Department`**
+
+**Explanation:**
+
+(i) SQL Query to Display StudentID, Name, and Marks for Students Scoring More Than 80 Marks
+
+```sql
+SELECT StudentID, Name, Marks
+FROM STUDENTS
+WHERE Marks > 80;
+```
+
+Explanation:
+
+- SELECT chooses the required columns.
+
+- FROM STUDENTS specifies the table name.
+
+- WHERE Marks > 80 filters students who scored more than 80 marks.
+
+(ii) SQL Query to Count Students Scoring More Than 80 Marks in Each Department
+
+```sql
+SELECT Department, COUNT(*) AS Total_Students
+FROM STUDENTS
+WHERE Marks > 80
+GROUP BY Department;
+```
+
+Explanation:
+
+- COUNT(*) counts the number of students.
+
+- GROUP BY Department groups records department-wise.
+
+- WHERE Marks > 80 considers only students scoring above 80.
+
+**Related info:** WHERE filters rows before grouping, HAVING filters groups after — the standard follow-up question to this one.
+
+**Exam tip:** Write full statements with SELECT/FROM/WHERE/GROUP BY in order; remember aggregates need GROUP BY in the same query.
+
+---
+
+**Q25: Storage technology selection directly impacts banking operations. Server A will host the Core Banking Database. Server B will host 10 years of immutable archive data. Compare Hard Disk Drives (HDD) and Solid State Drives (SSD).**
+
+**Answer:** **SSD for the core banking database (IOPS/latency); HDD for the 10-year archive (cost per GB)**
+
+**Explanation:**
+
+Storage technology selection is very important in banking systems because performance, reliability, speed, and long-term storage requirements directly affect banking operations.
+
+In this scenario:
+
+- Server A hosts the Core Banking Database.
+
+- Server B stores 10 years of immutable archive data.
+
+Hard Disk Drive (HDD)
+
+HDD is a traditional storage device that stores data using rotating magnetic disks and mechanical moving parts.
+
+Data is read and written using a moving read/write head.
+
+Characteristics of HDD
+
+- Large storage capacity
+
+- Lower cost per GB
+
+- Slower read/write speed
+
+- Mechanical parts increase failure risk
+
+- Higher power consumption
+
+Solid State Drive (SSD)
+
+SSD is a modern storage device that stores data using flash memory chips without moving mechanical parts.
+
+It provides much faster data access and better performance.
+
+Characteristics of SSD
+
+- Very high read/write speed
+
+- Low latency
+
+- More reliable because no moving parts exist
+
+- Lower power consumption
+
+- Higher cost per GB
+
+Comparison Between HDD and SSD
+
+| Feature | HDD | SSD |
+| --- | --- | --- |
+| Storage Technology | Magnetic rotating disks | Flash memory |
+| Speed | Slower | Much faster |
+| Moving Parts | Yes | No |
+| Reliability | Lower | Higher |
+| Power Consumption | Higher | Lower |
+| Noise | Produces noise | Silent operation |
+| Cost | Cheaper | More expensive |
+| Best Use Case | Large archive storage | High-performance applications |
+
+Recommended Selection
+
+- Server A (Core Banking Database): SSD is the better choice because banking databases require very fast transaction processing, low latency, and high reliability.
+
+- Server B (10 Years Archive Data): HDD is more suitable because archive data requires large storage capacity at lower cost, and speed is less critical.
+
+SSD is ideal for high-speed critical banking systems, while HDD is more suitable for long-term archival storage due to its large capacity and lower cost.
+
+**Related info:** Hybrid tiering puts hot transactional data on SSD and cold immutable logs on HDD (or tape); no moving parts also removes a mechanical failure mode.
+
+**Exam tip:** Anchor on workload, not preference: TPS needs random I/O (SSD), archives need capacity economics (HDD).
+
+---
+
+**Q26: What are the different types of relationships in a relational database? Explain each with examples.**
+
+**Answer:** **1:1 (user–passport), 1:M (department–employees), M:N (students–courses via a junction table)**
+
+**Explanation:**
+
+Relationship in Relational Database
+
+A relationship in a relational database defines how tables are connected with each other using keys such as primary keys and foreign keys.
+
+Relationships help organize data efficiently and reduce data redundancy.
+
+Main Types of Relationships
+
+- One-to-One (1:1)
+
+- One-to-Many (1: M)
+
+- Many-to-Many (M: N)
+
+1. One-to-One Relationship (1:1)
+
+In a one-to-one relationship, one record in one table is related to only one record in another table.
+
+Example:
+
+A person can have only one passport, and one passport belongs to only one person.
+
+| Person Table | Passport Table |
+| --- | --- |
+| Person_ID | Passport_ID |
+| 101 | P5001 |
+
+Use Case:
+
+- Employee and Locker
+
+- Person and Passport
+
+2. One-to-Many Relationship (1: M)
+
+In a one-to-many relationship, one record in one table can be related to many records in another table.
+
+However, each record in the second table belongs to only one record in the first table.
+
+Example:
+
+One department can have many employees, but each employee belongs to only one department.
+
+| Department | Employee |
+| --- | --- |
+| IT | Rahim |
+| IT | Karim |
+
+Use Case:
+
+- Department and Employees
+
+- Customer and Orders
+
+3. Many-to-Many Relationship (M: N)
+
+In a many-to-many relationship, many records in one table can relate to many records in another table.
+
+This relationship is usually implemented using a junction table or bridge table.
+
+Example:
+
+A student can enroll in many courses, and a course can have many students.
+
+| Student | Course |
+| --- | --- |
+| Rahim | Database |
+| Rahim | Networking |
+| Karim | Database |
+
+Use Case:
+
+- Students and Courses
+
+- Doctors and Patients
+
+Summary of Relationships
+
+| Relationship Type | Description | Example |
+| --- | --- | --- |
+| One-to-One | One record relates to one record | Person and Passport |
+| One-to-Many | One record relates to many records | Department and Employees |
+| Many-to-Many | Many records relate to many records | Students and Courses |
+
+Relationships in relational databases help connect tables logically and efficiently. Proper relationships improve data integrity, reduce redundancy, and simplify database management.
+
+**Related info:** M:N is always implemented with a junction/bridge table holding both foreign keys — that implementation detail is often the second mark.
+
+**Exam tip:** Give an example per type and show how M:N is resolved; that is the complete answer pattern.
+
+---
+
+**Q27: Multi-Factor Authentication (MFA) is mandatory in modern banking infrastructure. (a) Define the concept of MFA and explicitly list the three globally recognized categories of authentication factors.**
+
+**Answer:** **MFA = two or more DIFFERENT factors: something you know, something you have, something you are**
+
+**Explanation:**
+
+Multi-Factor Authentication (MFA)
+
+Multi-Factor Authentication (MFA) is a security mechanism that requires a user to provide two or more different authentication factors to verify identity before accessing a system, application, or banking service.
+
+MFA improves security because even if one authentication factor is compromised, unauthorized users still cannot easily gain access without the other required factors.
+
+Modern banking systems widely use MFA to protect customer accounts, online transactions, and sensitive financial information.
+
+Three Globally Recognized Authentication Factors
+
+| Authentication Factor | Description | Examples |
+| --- | --- | --- |
+| Something You Know | Information known only to the user | Password, PIN, security question |
+| Something You Have | A physical object possessed by the user | ATM card, smartphone, OTP token |
+| Something You Are | Biological or behavioral characteristics | Fingerprint, face recognition, iris scan |
+
+Example of MFA in Banking
+
+When a customer logs into online banking:
+
+- The customer enters a password (Something You Know).
+
+- The bank sends an OTP to the customer’s mobile phone (Something You Have).
+
+- The banking app may also require fingerprint verification (Something You Are).
+
+Only after successful verification of multiple factors is access granted.
+
+Advantages of MFA
+
+- Provides stronger security.
+
+- Reduces risk of unauthorized access.
+
+- Protects sensitive banking information.
+
+- Helps prevent phishing and password theft attacks.
+
+MFA combines multiple authentication methods to improve security significantly. The three main authentication categories are something you know, something you have, and something you are.
+
+**Related info:** Password + OTP SMS = know + have; fingerprint = are. Banks commonly combine password and OTP; push approval adds a 'have' variant.
+
+**Exam tip:** Stress *different categories* — two passwords are still single-factor. List the three categories by name.
+
+---
+
+**Q28: Network Address Translation (NAT) maps internal networks to the public internet. (a) Explain the historical IP addressing limitation that made NAT a necessity globally. (b) Explain the step-by-step logical translation process that occurs at a branch router when an internal employee (IP 192.168.1.5) sends a web request to an external server, and how the router correctly handles the returning response packet.**
+
+**Answer:** **IPv4's ~4.3 billion addresses forced sharing; the router swaps private IP/port for public IP/port in a NAT table**
+
+**Explanation:**
+
+Historical Limitation Behind NAT
+
+NAT became necessary because of the limited number of available IPv4 addresses.
+
+IPv4 uses a 32-bit addressing system, which can provide approximately 4.3 billion unique IP addresses. During the early development of the Internet, this number seemed sufficient. However, as the number of computers, smartphones, servers, IoT devices, and internet users increased rapidly worldwide, IPv4 addresses started running out.
+
+Public IP addresses must be globally unique, but there were not enough addresses for every device connected to the Internet.
+
+To solve this problem, private IP addressing and NAT were introduced.
+
+Using NAT:
+
+- Many internal devices can share a single public IP address.
+
+- Private IP addresses can be reused in different organizations.
+
+- IPv4 address exhaustion is reduced significantly.
+
+Thus, NAT became an important solution for conserving public IPv4 addresses and enabling large-scale Internet growth.
+
+(b) Step-by-Step NAT Translation Process
+
+Scenario:
+
+- Internal Employee IP = 192.168.1.5
+
+- Branch Router Public IP = 203.0.113.10
+
+- External Web Server IP = 8.8.8.8
+
+Step 1: Employee Sends Request
+
+The employee's computer creates a web request packet.
+
+Source IP = 192.168.1.5
+
+Destination IP = 8.8.8.8
+
+Since 192.168.1.5 is a private IP address, it cannot travel directly over the Internet.
+
+Step 2: Packet Reaches the Branch Router
+
+The router receives the packet and checks its NAT table.
+
+The router replaces the private source IP address with its own public IP address.
+
+For example:
+
+Before NAT:
+
+Source = 192.168.1.5
+
+Destination = 8.8.8.8
+
+After NAT:
+
+Source = 203.0.113.10
+
+Destination = 8.8.8.8
+
+The router stores this mapping in its NAT translation table.
+
+Example NAT Table Entry:
+
+| Private IP | Public IP |
+| --- | --- |
+| 192.168.1.5 | 203.0.113.10 |
+
+Step 3: Packet Travels Across the Internet
+
+The modified packet is sent through the Internet to the external web server.
+
+The web server sees the request coming from the router’s public IP address instead of the private internal address.
+
+Step 4: External Server Sends Response
+
+The web server replies to:
+
+Destination IP = 203.0.113.10
+
+The response packet travels back to the branch router.
+
+Step 5: Router Performs Reverse Translation
+
+The router checks the NAT table and finds the matching internal device.
+
+It replaces the destination public IP address with the original private IP address.
+
+Before Reverse NAT:
+
+Destination = 203.0.113.10
+
+After Reverse NAT:
+
+Destination = 192.168.1.5
+
+Step 6: Response Delivered to Employee
+
+The router forwards the packet to the employee’s computer.
+
+The employee receives the web response correctly even though the internal private IP address was hidden from the Internet.
+
+NAT allows multiple internal devices using private IP addresses to communicate with external networks using a smaller number of public IP addresses. It conserves IPv4 addresses and provides an additional layer of network privacy.
+
+**Related info:** Private ranges (10/8, 172.16/12, 192.168/16) stay internal; PAT/NAT overload lets a whole branch share one public IP — translation reverses on the reply.
+
+**Exam tip:** Two parts: the limit (32-bit IPv4 exhaustion → RFC 1918 + NAT), then the step-by-step translation with the source rewrite and reverse mapping.
+
+---
+
+**Q29: Subnetting logic requires precise binary calculation. A network engineer is tasked with dividing the internal network 192.168.10.0/24 into exactly 4 equal subnets for four different bank branches. Show the mathematical calculation to determine how many bits must be borrowed to create 4 subnets, and state the New Subnet Mask in Both CIDR notation and decimal format**
+
+**Answer:** **Borrow 2 bits (2² = 4) → /26, subnet mask 255.255.255.192 (binary 11000000 in the last octet)**
+
+**Explanation:**
+
+Given:
+
+Network Address = 192.168.10.0/24
+
+Required Subnets = 4
+
+Step 1: Determine Borrowed Bits
+
+To create subnets, host bits are borrowed from the host portion.
+
+Formula:
+
+Number of subnets = 2ⁿ
+
+Here, required subnets = 4
+
+So,
+
+2ⁿ = 4
+
+2² = 4
+
+Therefore, 2 bits must be borrowed.
+
+Step 2: Find New CIDR Prefix
+
+Original prefix = /24
+
+Borrowed bits = 2
+
+So,
+
+New prefix = 24 + 2 = /26
+
+Step 3: Find New Subnet Mask
+
+A /26 subnet mask means first 26 bits are network bits.
+
+Binary subnet mask:
+
+11111111.11111111.11111111.11000000
+
+Convert to decimal:
+
+11111111 = 255
+
+11111111 = 255
+
+11111111 = 255
+
+11000000 = 192
+
+Final Answer:
+
+Borrowed Bits = 2
+
+New CIDR Notation = 192.168.10.0/26
+
+New Subnet Mask = 255.255.255.192
+
+**Related info:** Block size 256 − 192 = 64; the four subnets start at .0, .64, .128 and .192 — same answer as the Senior Officer subnetting item, different layout.
+
+**Exam tip:** Show formula, borrowed bits and the binary-to-decimal mask conversion — the marks split across those three steps.
+
+## AME/AE (IT)
+
+**Q30: A maintenance engineer is setting up a RAID 5 array with five hard drives, each having a capacity of 4 TB. What is the total usable storage capacity, and why is it not 20 TB?**
+
+**Answer:** **(5 − 1) × 4 TB = 16 TB usable; one drive's capacity is distributed parity, not data**
+
+**Explanation:**
+
+In RAID 5, the storage capacity of one drive is used for parity information.
+
+Parity is used for fault tolerance and data recovery if one drive fails.
+
+Given:
+
+Number of drives = 5
+Capacity of each drive = 4 TB
+
+Total Raw Capacity
+
+5 × 4 TB = 20 TB
+
+Usable RAID 5 Capacity Formula
+
+(Number of Drives − 1) × Drive Capacity
+
+Calculation
+
+(5 − 1) × 4 TB
+= 4 × 4 TB
+= 16 TB
+
+Answer
+
+Total Usable Storage Capacity = 16 TB
+
+It is not 20 TB because RAID 5 uses the equivalent capacity of one drive for storing parity data, which provides redundancy and allows recovery if a drive fails.
+
+**Related info:** RAID 5 tolerates one drive failure; RAID 6 here would give 12 TB (two parity drives), RAID 10 would give 10 TB.
+
+**Exam tip:** Write the formula, the raw total (20 TB) and the one-sentence 'parity overhead' reason — all three earn separate marks.
+
+---
+
+**Q31: Distinguish between Preventive and Corrective maintenance with a real-world example for each in a data center environment. A critical system consists of three components: Power Supply, Motherboard, and Storage, connected in a series configuration. If each component has a reliability of 0.95, what is the total reliability of the system?**
+
+**Answer:** **Preventive = before failure (fans, UPS), corrective = after failure; series reliability 0.95³ ≈ 0.8574 (85.74%)**
+
+**Explanation:**
+
+Preventive Maintenance: Preventive maintenance is the maintenance performed regularly before any failure occurs in order to reduce the chance of system breakdown. Its main goal is to prevent faults and improve system reliability.
+
+Real-World Example:
+
+In a data center, regularly cleaning server cooling fans and replacing UPS batteries before failure is an example of preventive maintenance.
+
+Corrective Maintenance: Corrective maintenance is the maintenance performed after a fault or failure has occurred to restore the system to normal operation. Its main goal is to repair failed components and resume service.
+
+Real-World Example:
+
+If a server hard disk suddenly fails in a data center and the technician replaces the failed disk to restore operation, it is corrective maintenance.
+
+Difference Between Preventive and Corrective Maintenance
+
+| Preventive Maintenance | Corrective Maintenance |
+| --- | --- |
+| Performed before failure occurs. | Performed after failure occurs. |
+| Reduces possibility of breakdown. | Restores failed system. |
+| Planned and scheduled maintenance. | Unplanned maintenance. |
+| Improves reliability and lifespan. | Focuses on repairing faults. |
+| Example: Cleaning cooling systems. | Example: Replacing failed hard disk. |
+
+Reliability Calculation of Series System: In a series configuration, total system reliability is the product of reliabilities of all components.
+
+Given:
+
+Reliability of Power Supply = 0.95
+
+Reliability of Motherboard = 0.95
+
+Reliability of Storage = 0.95
+
+Formula: R = R1 × R2 × R3
+
+Calculation:
+
+R = 0.95 × 0.95 × 0.95
+
+R = 0.857375
+
+Answer: Total Reliability of the System = 0.857375 ≈ 85.74%
+
+**Related info:** Series systems multiply reliabilities (all three must work); redundancy through RAID/UPS raises availability, preventive work lowers the failure rate itself.
+
+**Exam tip:** Two-part answer: definition plus a real data-centre example each, then show R = 0.95 × 0.95 × 0.95 = 0.857375.
+
+---
+
+**Q32: At which layer of the OSI model does a standard Router primarily operate, and what is the specific name of the Protocol Data Unit (PDU) at this layer? A router has four contiguous /24 routing table entries: 10.1.0.0/24, 10.1.1.0/24, 10.1.2.0/24, and 10.1.3.0/24. If you summarize these into a single route, what will be the new CIDR notation?**
+
+**Answer:** **Router = Network layer (L3), PDU = packet; four /24s aggregate to 10.1.0.0/22**
+
+**Explanation:**
+
+A standard router primarily operates at the Network Layer, which is Layer 3 of the OSI model.
+
+The Protocol Data Unit (PDU) at the Network Layer is called a Packet.
+
+Given Routing Entries:
+
+10.1.0.0/24
+
+10.1.1.0/24
+
+10.1.2.0/24
+
+10.1.3.0/24
+
+These four networks are continuous or contiguous because their network addresses increase sequentially.
+
+First Network: 10.1.0.0/24
+
+Range: 10.1.0.0 to 10.1.0.255
+
+Second Network: 10.1.1.0/24
+
+Range: 10.1.1.0 to 10.1.1.255
+
+Third Network: 10.1.2.0/24
+
+Range: 10.1.2.0 to 10.1.2.255
+
+Fourth Network: 10.1.3.0/24
+
+Range: 10.1.3.0 to 10.1.3.255
+
+Together, these four networks cover addresses from:
+
+10.1.0.0 to 10.1.3.255
+
+Each /24 network contains 256 addresses.
+
+So total addresses become:
+
+256 + 256 + 256 + 256 = 1024 addresses
+
+To represent 1024 addresses, 10 host bits are required.
+
+Since IPv4 address contains 32 bits:
+
+32 − 10 = 22
+
+Therefore, the summarized CIDR notation becomes:
+
+10.1.0.0/22
+
+Final Answer:
+
+Router Layer = Network Layer / Layer 3
+
+PDU Name = Packet
+
+Supernet = 10.1.0.0/22
+
+**Related info:** Supernetting (CIDR aggregation) shrinks router tables; the four blocks must be contiguous — 10.1.0.0–10.1.3.255 share their first 22 bits.
+
+**Exam tip:** Answer all three asks explicitly: layer, PDU name, supernet — with 32 − 10 = 22 shown for the summary prefix.
+
+---
+
+**Q33: What does the Consistency property in ACID guarantee during a bank fund transfer transaction? You are designing the schema for a Savings_Accounts table. Write the specific SQL constraint clause to ensure that the current_balance column can never drop below zero.**
+
+**Answer:** **Consistency keeps every rule true before/after the transfer; enforce with `CHECK (current_balance >= 0)`**
+
+**Explanation:**
+
+Consistency Property in ACID
+
+- Consistency ensures that a database always remains in a valid state before and after a transaction.
+
+- During a bank fund transfer transaction, consistency guarantees that all database rules and constraints are maintained properly.
+
+For example, if money is transferred from one account to another:
+
+- The amount deducted from one account must be added to the other account correctly.
+
+- The total balance in the system must remain consistent.
+
+- No account balance can become invalid or violate database rules.
+
+If any part of the transaction fails, the entire transaction is rolled back to preserve consistency.
+
+SQL Constraint Clause
+
+To ensure that the current_balance column never becomes negative, the following CHECK constraint can be used:
+
+CHECK (current_balance >= 0)
+
+Example in Table Schema
+
+```sql
+CREATE TABLE Savings_Accounts (
+account_id INT PRIMARY KEY,
+customer_name VARCHAR(100),
+current_balance DECIMAL(10,2),
+CHECK (current_balance >= 0)
+);
+```
+
+**Related info:** Companion constraints: NOT NULL, UNIQUE, FOREIGN KEY — and the other ACID letters: atomicity, isolation, durability.
+
+**Exam tip:** Show a CREATE TABLE fragment containing the CHECK clause — the code earns the second half of the marks.
+
+---
+
+**Q34: Briefly explain Circular Wait. In a Resource Allocation Graph (RAG), if a cycle exists, does it absolutely guarantee that a Deadlock has occurred? Explain briefly.**
+
+**Answer:** **Circular wait = closed chain of holders/waiters; a RAG cycle guarantees deadlock only for single-instance resources**
+
+**Explanation:**
+
+Circular Wait
+
+- Circular wait is one of the necessary conditions for deadlock.
+
+- It occurs when a group of processes are waiting for resources in a circular chain.
+
+- In this situation, each process holds at least one resource and waits for another resource held by the next process in the cycle.
+
+Example:
+
+- Process P1 holds Resource R1 and waits for R2.
+
+- Process P2 holds Resource R2 and waits for R3.
+
+- Process P3 holds Resource R3 and waits for R1.
+
+This creates a circular waiting condition.
+
+Cycle in Resource Allocation Graph (RAG)
+
+If a cycle exists in a Resource Allocation Graph, it does not always guarantee deadlock.
+
+- If each resource type has only one instance, then a cycle definitely indicates deadlock.
+
+- If resource types have multiple instances, then a cycle may exist without deadlock.
+
+So, a cycle is:
+
+- A necessary condition for deadlock
+
+- But not always a sufficient condition
+
+Deadlock Detection using Resource Allocation Graph
+
+To detect deadlock using Resource Allocation Graph (RAG), we follow these steps −
+
+- If RAG contains no cycles, then there is no deadlock in the system.
+
+- If RAG is of single instance resources and it contains a cycle, then there is a deadlock in the system.
+
+- If RAG is of multiple instance resources and it contains a cycle, then deadlock may or may not exist. To check for deadlock, we need convert multiple instance RAG to single instance RAG, by treating each instance of a resource as a separate resource type.
+
+In the graph:
+
+- Resource R1 has only one instance.
+
+- Resource R2 has two instances.
+
+- P1 is holding R1 and requesting R2.
+
+- P2 is holding one instance of R2 and requesting R1.
+
+- P3 is using another instance of R2.
+
+A cycle exists in the graph: P1 → R2 → P2 → R1 → P1
+
+But this graph does not indicate deadlock.
+
+Reason:
+
+Resource R2 has multiple instances. One instance of R2 is currently allocated to P3.
+
+If P3 finishes its work and releases R2, then:
+
+- P1 can obtain R2 and complete execution.
+
+- After P1 completes, it releases R1.
+
+- Then P2 can obtain R1 and continue execution.
+
+Since the processes can still proceed and resources can eventually be released, the system is not permanently blocked.
+
+**Related info:** With multiple instances per resource a cycle is necessary but not sufficient — the other three Coffman conditions must also hold (mutual exclusion, hold-and-wait, no preemption).
+
+**Exam tip:** Answer the yes/no directly: *not absolutely* for multi-instance graphs — that nuance is exactly what the question tests.
+
+---
+
+**Q35: A server suddenly starts sending abnormal traffic to external systems. Analyze the possible cause and suggest immediate actions.**
+
+**Answer:** **Likely compromise (malware/botnet) or misuse; isolate first, capture evidence, scan, then restore and report**
+
+**Explanation:**
+
+Possible Causes
+
+A server sending abnormal traffic may indicate security or system-related problems. Possible causes include:
+
+- Malware or Virus Infection: The server may be infected with malware, botnet software, or ransomware that is sending malicious traffic.
+
+- DDoS Attack Participation: The compromised server may be used to launch Distributed Denial of Service (DDoS) attacks.
+
+- Unauthorized Access: An attacker may have gained access using weak passwords, stolen credentials, or vulnerabilities.
+
+- Misconfigured Applications: Faulty software or incorrect network configuration may generate excessive traffic.
+
+- Data Breach or Data Exfiltration: Sensitive data may be transferred illegally to external systems.
+
+Immediate Actions
+
+- Isolate the Server: Disconnect the server from the network immediately to stop abnormal traffic.
+
+- Check System Logs: Analyze firewall, server, and application logs to identify suspicious activities.
+
+- Run Security Scan: Use antivirus and malware detection tools to scan the server.
+
+- Identify Active Connections: Check running processes and network connections using monitoring tools.
+
+- Change Credentials: Reset passwords and disable compromised accounts.
+
+- Apply Security Updates: Patch operating system and software vulnerabilities.
+
+- Notify Security Team: Inform administrators or incident response teams immediately.
+
+- Backup Important Data: Secure critical data before recovery actions.
+
+Abnormal outbound traffic is often a sign of compromise or malfunction. Quick isolation, investigation, and security response are necessary to protect the network and prevent further damage.
+
+**Related info:** Outbound spikes usually mean spam relay, DDoS participation or cryptomining; NetFlow/packet captures confirm command-and-control channels.
+
+**Exam tip:** Order matters: contain (segment, don't power off) → investigate → remediate → report — regulators require prompt incident disclosure.
+
+---
+
+**Q36: A financial services provider needs to handle massive streaming and historical log data to perform fraud analytics and ML-driven maintenance prediction. Identify five Hadoop ecosystem technologies appropriate for this use case and describe their roles.**
+
+**Answer:** **HDFS (store), Flume/Kafka (ingest), MapReduce/Spark (process), Hive/HBase (query), Mahout/MLlib (ML)**
+
+**Explanation:**
+
+To process large-scale streaming and historical log data, different Hadoop ecosystem technologies can be used together for storage, processing, querying, and machine learning.
+
+1. HDFS (Hadoop Distributed File System)
+
+- HDFS is used for distributed storage of massive amounts of data across multiple servers.
+
+- It stores historical logs, transaction records, and streaming data reliably with fault tolerance.
+
+Role: Large-scale distributed data storage.
+
+2. Apache Kafka
+
+- Kafka is used for real-time data streaming and message collection.
+
+- It collects continuous transaction logs, user activities, and system events from different sources.
+
+Role: Real-time streaming data ingestion.
+
+3. Apache Spark
+
+- Spark is a fast data processing framework used for big data analytics and machine learning.
+
+- It can process both streaming data and historical data efficiently.
+
+Role: Real-time analytics, fraud detection, and ML processing.
+
+4. Apache Hive
+
+- Hive is a data warehouse tool used to query large datasets using SQL-like language.
+
+- Analysts can generate reports and analyze fraud-related historical data easily.
+
+Role: SQL-based querying and data analysis.
+
+5. Apache Mahout
+
+- Mahout provides machine learning algorithms for big data applications.
+
+- It can be used for predictive analytics, anomaly detection, and maintenance prediction models.
+
+Role: Machine learning and predictive analytics.
+
+**Related info:** Streaming plus historical logs fit a Lambda-style setup: Kafka/Flume for the hot path, HDFS + Spark batch for history and model training.
+
+**Exam tip:** Name five DISTINCT components, each with one role line mapped to storage, ingestion, processing, query and ML.
+
+---
+
+**Q37: Read the three real-world web development scenarios below. For each scenario, identify the single most appropriate HTTP Status Code from the provided list that the server should return. Codes to choose from: 204, 301, 400, 403, 503 · i. Scenario A: A client sends a POST request to create a new user, but the JSON payload is malformed and missing a required bracket, making it impossible for the server to parse the data. · ii. Scenario B: A user is successfully logged in, but they attempt to access a /admin/settings endpoint. They only have standard user privileges, not administrator rights. · iii. Scenario C: A client successfully sends a DELETE request to remove a photo. The photo is deleted, and the server needs to acknowledge the success but has no actual data or message to send back in the response body.**
+
+**Answer:** **A → 400 (malformed JSON), B → 403 (authenticated but not allowed), C → 204 (DELETE succeeded, no body)**
+
+**Explanation:**
+
+Appropriate HTTP Status Codes for the Given Scenarios
+
+Answer:
+
+| Scenario | HTTP Status Code | Reason |
+| --- | --- | --- |
+| i. Scenario A | 400 Bad Request | The request contains malformed JSON, so the server cannot parse or process it. |
+| ii. Scenario B | 403 Forbidden | The user is authenticated but does not have permission to access the /admin/settings resource. |
+| iii. Scenario C | 204 No Content | The DELETE request is successful, and the server has no response body to return. |
+
+Final Answers
+
+i. 400 Bad Request
+
+ii. 403 Forbidden
+
+iii. 204 No Content
+
+**Related info:** 401 vs 403: not authenticated vs authenticated-but-unauthorised; 503 = temporarily unavailable — the usual distractor codes.
+
+**Exam tip:** Match code to cause precisely: parse failure = 400, authorisation = 403, success with empty body = 204.
+
+---
+
+**Q38: Design a scalable big data analytics pipeline for an e-commerce platform that ingests real-time logs, stores petabyte-scale data, supports batch and stream processing, delivers near real-time recommendations, and runs large-scale machine learning models; from the following Hadoop ecosystem components - MapReduce, HDFS, YARN, HBase, ZooKeeper, Pig, Hive, Mahout, Chukwa, Cassandra, Avro, Oozie, Flume, Sqoop - select any five and explain the role of each component in this system.**
+
+**Answer:** **Flume → HDFS → MapReduce/Spark → Hive/HBase → Mahout/MLlib: ingest, store, batch, query, recommend**
+
+**Explanation:**
+
+To build a scalable Big Data Analytics Pipeline for an E-commerce Platform, the following five Hadoop Ecosystem components can be selected:
+
+1. Flume – Real-time Data Ingestion
+
+Apache Flume collects and transfers real-time web logs, clickstream data, and application events from multiple servers into the Hadoop ecosystem. It provides reliable and scalable log ingestion.
+
+Role: Ingests real-time logs into HDFS.
+
+2. HDFS – Distributed Storage
+
+Hadoop Distributed File System (HDFS) stores petabyte-scale structured and unstructured data across multiple machines. It provides high fault tolerance and scalability by replicating data blocks.
+
+Role: Stores massive datasets reliably for analytics and machine learning.
+
+3. YARN – Resource Management
+
+YARN (Yet Another Resource Negotiator) manages cluster resources and schedules jobs submitted by different applications, ensuring efficient utilization of the Hadoop cluster.
+
+Role: Allocates CPU and memory resources for batch and stream processing jobs.
+
+4. MapReduce – Batch Processing
+
+MapReduce performs distributed parallel processing of very large datasets stored in HDFS. It divides tasks into Map and Reduce phases for efficient computation.
+
+Role: Executes large-scale batch analytics such as sales analysis, customer behavior analysis, and report generation.
+
+5. Mahout – Machine Learning
+
+Apache Mahout provides scalable machine learning algorithms such as clustering, classification, and recommendation systems on large datasets.
+
+Role: Builds recommendation engines and large-scale machine learning models for personalized product recommendations.
+
+**Related info:** Near-real-time recommendations pair nightly batch results with streaming scores (Spark Streaming) merged at serving time.
+
+**Exam tip:** Pick exactly five given components and map each to a pipeline stage — stage mapping is how the question is graded.
+
+---
+
+**Q39: Simplify the Boolean equation using K-map: F(A,B,C,D) = Σ(0,3,5,7,8,10,11,12,13,14,15).**
+
+**Answer:** **Group the 1s → F = AB + CD + A·D̄ + B̄·C̄·D̄ + B·C̄·D (three quads + two pairs)**
+
+**Explanation:**
+
+The function is 1 for the eleven minterms Σ(0,3,5,7,8,10,11,12,13,14,15); zeros sit at 1, 2, 4, 6, 9.
+
+| AB \ CD | 00 | 01 | 11 | 10 |
+| --- | --- | --- | --- | --- |
+| **00** | 1 | 0 | 1 | 0 |
+| **01** | 0 | 1 | 1 | 0 |
+| **11** | 1 | 1 | 1 | 1 |
+| **10** | 1 | 0 | 1 | 1 |
+
+Grouping the 1s (largest groups first):
+
+- **AB** — row AB = 11 → m12, m13, m14, m15 (quad)
+- **CD** — column CD = 11 → m3, m7, m11, m15 (quad)
+- **A·D̄** — rows 10, 11 × columns 00, 10 → m8, m10, m12, m14 (quad)
+- **B̄·C̄·D̄** — m0 and m8 (rows 00, 10 with CD = 00) (pair)
+- **B·C̄·D** — m5 and m13 (rows 01, 11 with CD = 01) (pair)
+
+**F = AB + CD + A·D̄ + B̄·C̄·D̄ + B·C̄·D**
+
+**Related info:** All 11 minterms are covered and none of the zeros (1, 2, 4, 6, 9) is included; each term is a prime implicant — none can be dropped.
+
+**Exam tip:** Fill the map first, circle the largest groups (quads before pairs), then read off one term per group — no algebra needed after the map.
+
+---
+
+**Q40: i. For securing a bank's sensitive customer data, what is the fundamental difference in the specific technologies used to protect "Data in Transit versus "Data at Rest? ii. What defines a "Zero-Day" vulnerability, and why do traditional signature-based antivirus solutions fail to protect a bank's servers against them?**
+
+**Answer:** **Transit: TLS/SSL/IPsec; at rest: AES/full-disk encryption; zero-day = unknown flaw → EDR/behaviour detection**
+
+**Explanation:**
+
+i. Difference Between Protecting Data in Transit and Data at Rest
+
+Answer:
+
+| Data in Transit | Data at Rest |
+| --- | --- |
+| Data that is moving between devices or across a network. | Data that is stored on hard disks, databases, servers, or cloud storage. |
+| Protected using Network Encryption Protocols such as TLS/SSL, HTTPS, and IPsec. | Protected using Encryption Algorithms such as AES, Full Disk Encryption, or Database Encryption. |
+| Prevents attackers from intercepting or eavesdropping on transmitted data. | Prevents unauthorized users from reading stored data if storage devices are lost or compromised. |
+
+Example
+
+When a customer logs into an online banking website, TLS/HTTPS protects the data while it travels over the Internet (Data in Transit). After the data is stored in the bank's database, AES Encryption protects it (Data at Rest).
+
+ii. Zero-Day Vulnerability and Why Signature-Based Antivirus Fails
+
+Answer:
+
+A Zero-Day Vulnerability is a newly discovered software or system vulnerability that is unknown to the software vendor or security community. Since no security patch or fix is available, attackers can exploit it before developers have "zero days" to respond.
+
+Why Signature-Based Antivirus Cannot Protect Against It
+
+• Signature-based Antivirus detects malware using known signatures stored in its database.
+
+• A Zero-Day Attack uses previously unknown malware or exploits, so no signature exists.
+
+• As a result, the antivirus cannot recognize or block the attack until new signatures are created and updated.
+
+• Protection against Zero-Day Attacks often requires Behavior-based Detection, Heuristic Analysis, Endpoint Detection and Response (EDR), and regular security updates.
+
+**Related info:** Transit protection is protocol-level (per connection), at-rest is volume/file/database-level; zero-days defeat signature AV because no signature exists yet.
+
+**Exam tip:** Build the transit/at-rest comparison as two columns, then define zero-day with *no signature exists yet* as the reason traditional AV fails.
+
+## Assistant Programmer
+
+**Q41: Compare BFS & DFS with examples**
+
+**Answer:** **BFS = queue, level-by-level (shortest unweighted path); DFS = stack/recursion, goes deep first**
+
+**Explanation:**
+
+Both BFS and DFS are graph traversal algorithms used to visit all nodes in a graph or tree. They differ in how they explore nodes and the order in which they visit them.
+
+1. BFS (Breadth-First Search)
+
+BFS explores a graph level by level. It starts from the root node, visits all its immediate neighbors first, then moves to the next level of neighbors. It uses a queue data structure to keep track of nodes.
+
+How it works:
+
+- Start at root: Visit the starting node.
+
+- Visit neighbors: Visit all adjacent nodes at the current depth.
+
+- Move to next level: Only after all nodes at the current level are visited, move to the next level.
+
+- Queue used: FIFO (First In First Out) order is followed.
+
+A
+/ \
+B C
+/ \
+D E
+
+Traversal order: A → B → C → D → E
+
+BFS visits A first, then all of A's children (B, C), then all of their children (D, E).
+
+Best used for: Finding the shortest path in an unweighted graph, searching nodes close to the root, and peer-to-peer networks.
+
+2. DFS (Depth-First Search)
+
+DFS explores a graph by going as deep as possible along each branch before backtracking. It starts from the root, follows one path to the end, then comes back to explore other paths. It uses a stack data structure (or recursion).
+
+How it works:
+
+- Start at root: Visit the starting node.
+
+- Go deep: Pick one neighbor and explore it fully before moving to the next neighbor.
+
+- Backtrack: When a dead end is reached, go back to the previous node and explore other paths.
+
+- Stack used: LIFO (Last In First Out) order is followed.
+
+A
+/ \
+B C
+/ \
+D E
+
+Traversal order: A → B → D → E → C
+
+DFS visits A, then goes deep into B, then D, then back to B, then E, then back to A, then C.
+
+Best used for: Solving puzzles with one solution path, detecting cycles, topological sorting, and maze solving.
+
+Comparison Table:
+
+| Point | BFS | DFS |
+| --- | --- | --- |
+| Full Form | Breadth-First Search | Depth-First Search |
+| Exploration | Level by level (wide) | Deep as possible (deep) |
+| Data Structure | Queue (FIFO) | Stack (LIFO) or Recursion |
+| Memory Use | More, stores all nodes at current level | Less, stores only the current path |
+| Shortest Path | Finds shortest path in unweighted graph | Does not guarantee shortest path |
+| Backtracking | No backtracking needed | Backtracking is used |
+| When to Use | Target is near the starting node | Target is deep in the graph |
+
+Example Scenario:
+
+Imagine searching for a friend in a social network:
+
+- BFS: Check yourself first, then all your direct friends, then their friends, layer by layer. Good if the person is likely a close connection.
+
+- DFS: Check yourself, then your first friend, then that friend's first friend, going as deep as possible. Good if the person is far down one specific chain.
+
+**Related info:** Both are O(V + E); BFS memory grows with graph width, DFS with depth. BFS finds cycles/levels in unweighted graphs; DFS suits topological sort and maze backtracking.
+
+**Exam tip:** Compare on four axes — structure, order, use case, complexity — and draw one small graph showing both traversal orders.
+
+---
+
+**Q42: Explain the time complexity of merge sort. Best Case, Average Case, Worst Case.**
+
+**Answer:** **Best = average = worst = O(n log n); space O(n)**
+
+**Explanation:**
+
+Time Complexity of Merge Sort
+
+Merge Sort is a sorting algorithm that uses the divide and conquer approach. It splits the array into two halves, sorts each half recursively, and then merges them back together in sorted order. Because it always divides the array in half and performs a full merge, its time complexity remains the same in all cases.
+
+How Merge Sort Works
+
+- Divide: Split the array into two equal halves until each sub-array has only one element.
+
+- Conquer: Sort each half by calling Merge Sort recursively.
+
+- Merge: Combine the sorted halves into a single sorted array.
+
+Time Complexity Analysis
+
+1. Best Case: O(n log n)
+
+Even when the array is already sorted, Merge Sort still divides the array into halves and merges them all. It does not check if the array is already sorted, so the number of operations stays the same.
+
+Example: Array [1, 2, 3, 4, 5] still goes through full splitting and merging.
+
+2. Average Case: O(n log n)
+
+For a randomly ordered array, Merge Sort consistently divides and merges. The work done at each level is proportional to n, and the number of levels is log n. So the total remains n log n.
+
+Example: Array [5, 2, 8, 1, 9] is split, sorted, and merged in the same structured way.
+
+3. Worst Case: O(n log n)
+
+When the array is in reverse order, Merge Sort still performs the same number of divisions and comparisons during merging. Unlike Quick Sort, its performance does not degrade for bad input.
+
+Example: Array [9, 8, 7, 6, 5] takes the same time as any other arrangement.
+
+Why All Cases Are O(n log n)
+
+- Fixed division: The array is always split exactly in half, regardless of input order.
+
+- Full merge: Every element is compared and placed during the merge step.
+
+- Tree depth: The recursion tree always has log n levels for n elements.
+
+- Linear work per level: Each level processes all n elements during merging.
+
+Space Complexity: O(n) extra space is needed for the temporary arrays during merging.
+
+**Related info:** log n split levels × linear merge per level gives n log n; merge sort is also stable — contrast quicksort's O(n²) worst case.
+
+**Exam tip:** Explain WHY (levels × work per level), don't just state the Big-O — the derivation carries the marks.
+
+---
+
+**Q43: Suppose your dataset has missing values and noise. How would you preprocess it?**
+
+**Answer:** **Missing: drop or impute (mean/median/KNN); noise: smoothing, binning, IQR outlier removal**
+
+**Explanation:**
+
+Data Preprocessing for Missing Values and Noise
+
+Data preprocessing is the step of cleaning and transforming raw data before feeding it into a model. Missing values and noise are two common problems that can reduce accuracy and mislead results. Below are the methods to handle them.
+
+1. Handling Missing Values
+
+Missing values occur when some data points are not recorded or are lost. They must be handled carefully to avoid biased results.
+
+- Deletion: Remove rows or columns that have too many missing values. This is simple but only works when the missing data is small and random.
+
+- Mean/Median/Mode Imputation: Fill missing numeric values with the average (mean), middle value (median), or most common value (mode) of that column.
+
+- Forward/Backward Fill: Use the previous or next available value to fill the gap, useful in time-series data.
+
+- Predictive Imputation: Use machine learning models like KNN or regression to predict and fill the missing values based on other columns.
+
+- Constant Value Fill: Replace missing values with a fixed number like 0 or a label like "Unknown" for categorical data.
+
+Example: In an age column, if 10% of entries are blank, you can fill them with the mean age of all other rows.
+
+2. Handling Noise
+
+Noise refers to random errors or unwanted variation in data that hides true patterns. It must be reduced to improve model performance.
+
+- Binning: Sort data into groups or bins and replace values with the bin average or median. This smooths out local fluctuations.
+
+- Regression: Fit a regression line to the data and use the predicted values to replace noisy points.
+
+- Outlier Detection: Identify extreme values using the Z-score or IQR method and remove or cap them.
+
+- Smoothing Filters: Use moving average or Gaussian filters to reduce random spikes in numerical data.
+
+- Clustering: Group similar data points together and remove points that do not belong to any major cluster.
+
+Example: In a temperature dataset, a sudden reading of 500°C is clearly noise. Using the IQR method, this outlier can be detected and replaced with the median.
+
+**Related info:** Then standardise/encode features; the impute choice depends on why values are missing (MCAR vs MAR), and heavy noise calls for outlier detection first.
+
+**Exam tip:** Answer per problem — missing values and noise get their own technique list — with one concrete example each (e.g. 500°C reading removed by IQR).
+
+---
+
+**Q44: A voice signal is band-limited to 4 kHz. Each sample is quantized using 256 discrete levels. Find the resulting bit rate in a Pulse Code Modulation (PCM) system.**
+
+**Answer:** **8 kHz sampling × 8 bits/sample (256 = 2⁸) = 64,000 bps = 64 kbps**
+
+**Explanation:**
+
+Given:
+
+- Bandwidth of voice signal = 4 kHz
+
+- Quantization levels = 256
+
+Step 1: Find the Sampling Rate
+
+According to the Nyquist theorem, the minimum sampling rate is twice the highest frequency.
+
+Sampling Rate = 2 × Bandwidth
+
+Sampling Rate = 2 × 4 kHz = 8 kHz = 8000 samples/second
+
+Step 2: Find Bits Per Sample
+
+Each sample is quantized into 256 levels. The number of bits needed is found using:
+
+Levels = 2ⁿ
+
+256 = 2ⁿ
+
+n = log₂(256) = 8 bits per sample
+
+Step 3: Calculate Bit Rate
+
+Bit Rate = Sampling Rate × Bits Per Sample
+
+Bit Rate = 8000 × 8 = 64,000 bits/second = 64 kbps
+
+**Related info:** Nyquist: sampling rate = 2 × 4 kHz; this is exactly G.711 digital voice — the 64 kbps ISDN channel.
+
+**Exam tip:** Show three labelled steps: Nyquist rate → bits per sample → multiplication. Units in bits/second earn the final mark.
+
+---
+
+**Q45: Two separate threads run concurrently on the exact same CounterSubsystem instance: `class CounterSubsystem implements Runnable { public int transactionCounter = 0; public void run() { for (int i = 0; i < 1000; i++) transactionCounter++; } }`. Is the final transactionCounter guaranteed to be exactly 2000? Name the specific multithreading hazard and explain the low-level mechanical steps that cause this behaviour.**
+
+**Answer:** **No — result can be 1000–2000: read-modify-write race; fix with a lock or AtomicInteger (volatile is not enough)**
+
+**Explanation:**
+
+Multithreading Analysis: CounterSubsystem
+
+Is the final value guaranteed to be 2000?
+
+No, the final value of transactionCounter is NOT guaranteed to be exactly 2000. The actual result could be any value between 1000 and 2000, but it will most likely be less than 2000.
+
+Specific Multithreading Hazard
+
+The hazard is a Race Condition, specifically a Data Race or Read-Modify-Write Race Condition. It occurs because multiple threads access and modify the same shared variable without synchronization.
+
+Low-Level Execution Steps
+
+The statement transactionCounter++ is not atomic. It breaks into three steps:
+
+- READ: Load value from memory into CPU register
+
+- MODIFY: Increment the value in the register
+
+- WRITE: Store updated value back to memory
+
+Because both threads execute these steps concurrently, their operations can interleave, causing lost updates.
+
+Lost Update Example:
+
+| Time Step | Thread 1 | Thread 2 | Memory Value |
+| --- | --- | --- | --- |
+| 1 | READ: 0 |  | 0 |
+| 2 |  | READ: 0 | 0 |
+| 3 | MODIFY: 1 |  | 0 |
+| 4 |  | MODIFY: 1 | 0 |
+| 5 | WRITE: 1 |  | 1 |
+| 6 |  | WRITE: 1 | 1 |
+
+Both threads overwrite each other’s updates, so increments are lost. Repeated many times, this reduces the final count below 2000.
+
+How to Fix It
+
+- synchronized: Protect increment using a lock to ensure mutual exclusion
+
+- AtomicInteger: Use incrementAndGet() for atomic updates
+
+- volatile: Not sufficient because it does not make compound operations atomic
+
+**Related info:** `counter++` compiles to load, add, store — interleavings lose increments. `volatile` guarantees visibility only, not atomicity of the compound operation.
+
+**Exam tip:** Name the hazard (race condition / data race) AND reject `volatile` explicitly — the rejection is usually a separate mark.
+
+---
+
+**Q46: In a B+ tree, each node can have a maximum of 4 child pointers (order m = 4).From height 0 to height 2 (where height 0 is the root), what is the maximum number of keys that can be stored across all nodes in the tree?**
+
+**Answer:** **3 keys/node × (1 + 4 + 16) nodes = 63 keys maximum**
+
+**Explanation:**
+
+Given:
+
+Order m = 4 (maximum 4 child pointers per node)
+
+Height range: 0 (root) to 2 (leaves)
+
+Key Property:
+
+In a B+ tree, if a node has a maximum of m child pointers, it can hold a maximum of m − 1 keys. Here, each node can hold up to 3 keys.
+
+Step-by-Step Calculation:
+
+Height 0 (Root):
+
+1 node × 3 keys = 3 keys
+
+This root has 4 children to maximize the tree.
+
+Height 1 (Internal Nodes):
+
+4 nodes × 3 keys = 12 keys
+
+Each of the 4 children of the root is full and has 4 children of its own.
+
+Height 2 (Leaf Nodes):
+
+16 nodes × 3 keys = 48 keys
+
+4 nodes at height 1 each have 4 children, giving 4 × 4 = 16 leaves.
+
+Total Maximum Keys:
+
+3 + 12 + 48 = 63 keys
+
+Formula Verification:
+
+Total keys = (m − 1) × (m⁰ + m¹ + m²)
+
+Total keys = 3 × (1 + 4 + 16) = 3 × 21 = 63
+
+**Related info:** Order m ⇒ max m − 1 keys per node; a full tree has 1, m, m² nodes per height — leaf pointer handling varies slightly by B+ tree variant.
+
+**Exam tip:** Compute per height (3, 12, 48) then sum; writing the (m − 1)(m⁰ + m¹ + m²) formula earns the method mark.
+
+---
+
+**Q47: Find the output of: `#include <stdio.h> int main() { int ledger[5] = {10, 20, 30, 40, 50}; int *ptr1 = (int *)(&ledger + 1); int *ptr2 = (int *)(ledger + 1); printf("%d, %d", *(ptr1 - 1), *(ptr2 + 2)); return 0; }`**
+
+**Answer:** **Output `50, 40`: &ledger+1 strides a whole array (−1 lands on 50); ledger+1 + 2 lands on 40**
+
+**Explanation:**
+
+Code:
+
+```c
+#include <stdio.h>
+```
+
+```c
+int main() {
+int ledger[5] = {10, 20, 30, 40, 50};
+```
+
+int *ptr1 = (int *)(&ledger + 1);
+int *ptr2 = (int *)(ledger + 1);
+
+```c
+printf("%d, %d", *(ptr1 - 1), *(ptr2 + 2));
+return 0;
+}
+```
+
+Output:
+
+50, 40
+
+Step-by-Step Explanation
+
+1. Array Layout in Memory
+
+2. ptr1 = (int *)(&ledger + 1)
+
+- &ledger is a pointer to the entire array, type int (*)[5].
+
+- &ledger + 1 moves forward by the size of the whole array (5 ints = 20 bytes), landing just after the array.
+
+- ptr1 now points to memory right after ledger[4].
+
+3. ptr2 = (int *)(ledger + 1)
+
+- ledger decays to pointer to first element (int *).
+
+- ledger + 1 moves to ledger[1], which contains 20.
+
+- ptr2 points to ledger[1].
+
+4. *(ptr1 - 1)
+
+- ptr1 is just past the array end.
+
+- ptr1 - 1 moves back to ledger[4].
+
+- Value = 50.
+
+5. *(ptr2 + 2)
+
+- ptr2 points to ledger[1].
+
+- ptr2 + 2 lands on ledger[3].
+
+- Value = 40.
+
+**Related info:** Array-to-pointer decay: `ledger` decays to an element pointer (stride 4 B) while `&ledger` points at the array object (stride 20 B) — the cast doesn't change the arithmetic, only the type.
+
+**Exam tip:** Sketch the five ints in memory and track each pointer's stride — pointer arithmetic questions are won on that diagram.
+
+---
+
+**Q48: A system utilizes a 32-bit logical address space and a page size of 2²⁰ bytes. If each entry (block) in the Translation Lookaside Buffer (TLB) requires 6 bytes, calculate the total memory required for the TLB to map the entire logical address space.**
+
+**Answer:** **2³² ÷ 2²⁰ = 4096 pages × 6 B = 24,576 B = 24 KB**
+
+**Explanation:**
+
+Given:
+
+- Logical address space = 32-bit
+
+- Page size = 2²⁰ bytes
+
+- TLB entry size = 6 bytes per entry
+
+Step 1: Calculate Total Logical Address Space
+
+A 32-bit address can reference 2³² unique bytes.
+
+Total logical address space = 2³² bytes
+
+Step 2: Calculate Number of Pages
+
+Number of pages = Total address space ÷ Page size
+
+Number of pages = 2³² ÷ 2²⁰ = 2¹² = 4096 pages
+
+Step 3: Calculate Total TLB Memory
+
+Each page requires one TLB entry to map the entire logical address space.
+
+Total TLB memory = Number of pages × Entry size
+
+Total TLB memory = 4096 × 6 = 24576 bytes
+
+In kilobytes: 24576 ÷ 1024 = 24 KB
+
+**Related info:** A TLB caches one entry per page (offset bits are not stored); real TLBs stay tiny because locality keeps the working set small.
+
+**Exam tip:** Write the exponents explicitly (2³² ÷ 2²⁰ = 2¹²), show 4096 × 6 = 24576, then convert to 24 KB.
+
+---
+
+**Q49: Consider a concurrent transaction schedule involving two data items, X and Y: Transaction 1 (T1): Read(X), Write(X), Read(Y), Write(Y) Transaction 2 (T2): Read(Y), Write(Y), Read(X), Write(X) Describe how the standard Two-Phase Locking (2PL) protocol treats these transactions if they execute concurrently, identifying the exact operational state (hazard) the system will enter. Contrast this outcome with how the Strict 2PL protocol alters the lock release timeline.**
+
+**Answer:** **Both need X-locks → clash in the growing phase (deadlock risk); Strict 2PL holds locks till commit**
+
+**Explanation:**
+
+Two-Phase Locking (2PL) Analysis for Concurrent Transactions
+
+Transaction Details:
+
+- T1: Read(X), Write(X), Read(Y), Write(Y)
+
+- T2: Read(Y), Write(Y), Read(X), Write(X)
+
+Standard 2PL Execution
+
+In standard 2PL, each transaction has a growing phase (only acquiring locks) and a shrinking phase (only releasing locks). Both transactions request exclusive locks because they intend to write.
+
+Step-by-Step Interleaving:
+
+| Step | T1 Action | T2 Action | Lock Status |
+| --- | --- | --- | --- |
+| 1 | Lock-X(X) granted |  | T1 holds X |
+| 2 | Read(X), Write(X) |  | T1 holds X |
+| 3 |  | Lock-X(Y) granted | T1 holds X, T2 holds Y |
+| 4 |  | Read(Y), Write(Y) | T1 holds X, T2 holds Y |
+| 5 | Lock-X(Y) requested → WAITS |  | T1 waits for Y |
+| 6 |  | Lock-X(X) requested → WAITS | T2 waits for X |
+
+Operational State Entered: DEADLOCK
+
+The system enters a deadlock (circular wait). T1 holds X and waits for Y, while T2 holds Y and waits for X. Neither transaction can proceed. The database must detect this using a wait-for graph or timeout and resolve it by aborting one transaction.
+
+Strict 2PL Protocol
+
+- Standard 2PL: Locks may be released after use in the shrinking phase, but here deadlock prevents progress.
+
+- Strict 2PL: All locks are held until commit or abort, preventing exposure of uncommitted data.
+
+Contrast Table:
+
+| Aspect | Standard 2PL | Strict 2PL |
+| --- | --- | --- |
+| Deadlock Risk | Yes | Yes |
+| Lock Release | After shrinking phase | Only at commit/abort |
+| Cascading Rollbacks | Possible | Prevented |
+| Schedule Type | Recoverable | Strict & recoverable |
+
+Key Takeaway: Strict 2PL does not remove deadlock in this schedule but ensures strict isolation by holding locks until termination.
+
+**Related info:** Basic 2PL is recoverable-ish but can deadlock (wait-die / wound-wait resolve it); Strict 2PL gives strictness and no cascading aborts at some concurrency cost.
+
+**Exam tip:** Walk the interleaved lock requests, name the deadlock possibility, then contrast basic vs strict 2PL as a small table.
+
+---
+
+**Q50: Compare TCP and UDP in terms of connection, reliability, and speed. Give one real-life use case of UDP.**
+
+**Answer:** **TCP: connection-oriented, reliable, slower; UDP: connectionless, best-effort, fast — DNS/gaming/VoIP use UDP**
+
+**Explanation:**
+
+TCP vs UDP
+
+TCP (Transmission Control Protocol) and UDP (User Datagram Protocol) are both transport layer protocols, but they serve different purposes based on application requirements.
+
+1. Connection
+
+- TCP: Connection-oriented. It establishes a connection using a 3-way handshake (SYN, SYN-ACK, ACK) before data transfer begins. The connection is closed gracefully after communication ends.
+
+- UDP: Connectionless. It sends data directly without any handshake or setup phase. No formal connection is established or terminated.
+
+2. Reliability
+
+- TCP: Highly reliable. It guarantees delivery through acknowledgments, retransmissions, and sequence numbers. Lost packets are resent and data arrives in correct order.
+
+- UDP: Unreliable. No guarantee of delivery, order, or duplicate protection. Packets may be lost or arrive out of order.
+
+3. Speed
+
+- TCP: Slower due to handshake, acknowledgments, congestion control, and flow control overhead.
+
+- UDP: Faster due to minimal overhead and no retransmission mechanism.
+
+Comparison Table:
+
+| Feature | TCP | UDP |
+| --- | --- | --- |
+| Connection | Connection-oriented (3-way handshake) | Connectionless |
+| Reliability | Guaranteed delivery with ACK | No delivery guarantee |
+| Speed | Slower | Faster |
+| Ordering | In-order delivery | No ordering guarantee |
+| Error Handling | Recovery supported | No recovery |
+| Use Case | Web, email, file transfer | Streaming, gaming, DNS |
+
+UDP Real-Life Use Case
+
+Video Streaming (YouTube Live, Netflix, Twitch)
+
+UDP is used because low latency is more important than perfect reliability. Dropped frames are skipped instead of retransmitted to maintain smooth playback.
+
+- Online Gaming: Real-time updates must be instant; delayed packets are useless.
+
+- DNS Queries: Simple request-response with minimal overhead.
+
+- VoIP: Voice calls prioritize continuity over perfect delivery.
+
+**Related info:** TCP pays for reliability with handshake, ordering and retransmission; UDP's ~8-byte header makes it lean — QUIC rebuilds reliability on top of UDP.
+
+**Exam tip:** The question names three axes (connection, reliability, speed) — answer them as a table, then one concrete UDP use case.
+
+---
+
+**Q51: Assume a banking application wants to add a fingerprint system for their app. Write one functional requirement and one security requirement.**
+
+**Answer:** **Functional: fingerprint login verified against the stored template within 2 s; Security: template never leaves the device**
+
+**Explanation:**
+
+Fingerprint System for Banking App
+
+1. Functional Requirement
+
+The app shall allow registered users to log in using their fingerprint as an alternative to the traditional username and password. The system must verify the fingerprint against the stored template and grant access to the user's account dashboard within 2 seconds if the match is successful.
+
+Example: A user opens the banking app, places their finger on the sensor, and the app unlocks directly to the home screen without typing a password.
+
+2. Security Requirement
+
+The app shall store all fingerprint biometric data in an encrypted format inside the device's secure hardware (Trusted Execution Environment or Secure Enclave) and never transmit raw fingerprint images or templates to the bank's server or any external database.
+
+Example: Even if the bank's main server is hacked, the attacker cannot steal any fingerprint data because the actual biometric information never leaves the user's phone.
+
+**Related info:** Requirements are written with 'shall' and must be testable; biometric templates are bound to the device (FIDO2/WebAuthn style) so a server breach cannot exfiltrate them.
+
+**Exam tip:** Functional = what the system does for the user; security = a confidentiality/integrity property — measurable numbers (2 seconds) strengthen both.
+
+## Assistant Database Administrator — collected questions
+
+**Q52: A bank plans to upgrade its storage system for transaction processing. The system must continue operating even if a single hard drive fails while efficiently utilizing available storage capacity. Which RAID level would you recommend, how does it work, and why is it suitable for this scenario?**
+
+**Answer:** **RAID 5 — striping with distributed parity: survives one drive failure with (N − 1) drives usable**
+
+**Explanation:**
+
+Recommendation: RAID 5
+
+For a bank’s transaction processing system that must survive a single drive failure while using storage efficiently, RAID 5 is the ideal choice. It balances fault tolerance, performance, and capacity utilization better than other levels for this specific need.
+
+How RAID 5 Works
+
+RAID 5 uses block-level striping with distributed parity. Data and parity information are spread across all drives in the array.
+
+- Striping: Data is split into blocks and written across multiple drives simultaneously, improving read and write speed.
+
+- Distributed parity: Parity (error-checking) data is calculated and stored across all drives, not on a single dedicated drive. If one drive fails, the missing data can be reconstructed from the remaining drives and parity.
+
+- Minimum drives: Requires at least 3 drives.
+
+Why RAID 5 is Suitable for Bank Transaction Processing
+
+| Requirement | RAID 5 Fulfillment |
+| --- | --- |
+| Survive single drive failure | Yes, parity allows full reconstruction |
+| Efficient storage use | Only 1 drive worth of space lost for parity |
+| Read performance | Fast, data striped across all drives |
+| Write performance | Good for transactional workloads |
+| Cost efficiency | Lower than RAID 1 or RAID 10 |
+
+Capacity Example:
+With 4 drives of 2 TB each in RAID 5:
+Total raw space = 8 TB
+Parity overhead = 2 TB (one drive)
+Usable space = 6 TB
+
+**Related info:** Four 2 TB drives → 6 TB usable; choose RAID 6 instead when rebuild windows on large drives make double-failure risk unacceptable.
+
+**Exam tip:** Mirror the question's three asks: recommend, explain how it works, justify suitability (fault tolerance vs capacity vs cost).
+
+---
+
+**Q53: A data center supporting 24/7 online banking services experiences occasional hardware failures and service interruptions. Explain how preventive maintenance and corrective maintenance differ, and discuss how each contributes to maintaining service availability.**
+
+**Answer:** **Preventive = scheduled proactive work (fans, UPS, patches); corrective = repair after failure; both needed for uptime**
+
+**Explanation:**
+
+A data center running 24/7 online banking services cannot afford downtime. Both preventive and corrective maintenance play essential but different roles in keeping systems running smoothly.
+1. Preventive Maintenance
+Preventive maintenance is scheduled, proactive work done to avoid failures before they happen. It aims to keep hardware and software in optimal condition.
+
+- Regular inspections: Checking server health, temperature, fan speed, and power supply status on a fixed schedule.
+
+- Component replacement: Swapping out aging hard drives, batteries, or cooling units before they fail.
+
+- Software updates: Applying security patches, firmware upgrades, and OS updates during planned windows.
+
+- Load testing: Simulating peak traffic to identify bottlenecks before real customers are affected.
+
+- Cleaning and cooling: Dust removal and HVAC checks to prevent overheating.
+
+Contribution to availability:
+By catching problems early, preventive maintenance reduces the frequency of unexpected outages. For a bank, this means customers can transfer money and check balances at any time without surprise service interruptions.
+
+2. Corrective Maintenance
+
+Corrective maintenance is reactive work done after a failure has already occurred. It restores the system to working condition.
+
+- Fault diagnosis: Identifying which server, disk, or network link has failed.
+
+- Component repair or replacement: Fixing or swapping the broken part.
+
+- Data recovery: Restoring lost or corrupted data from backups.
+
+- Bug fixes: Patching code defects that caused application crashes.
+
+- Incident response: Escalating and documenting the issue for future prevention.
+
+Contribution to availability:
+When preventive measures fail, corrective maintenance minimizes downtime. Fast response teams, spare parts inventory, and automated failover systems ensure that even after a hardware failure, banking services resume quickly.
+
+How Both Work Together for Banking Availability
+
+- Preventive maintenance lowers the chance of failures during high-traffic periods like salary days or holidays.
+
+- Corrective maintenance ensures that if a failure still happens, the Mean Time To Repair (MTTR) is as short as possible.
+
+- Combined strategy: A bank that invests heavily in prevention but also maintains a skilled on-call team and hot-swappable spare parts achieves the highest possible uptime for its 24/7 services.
+
+**Related info:** Even 99.9% uptime allows ~8.8 hours of downtime per year; hot spares and an on-call team shrink MTTR, preventive work raises MTBF.
+
+**Exam tip:** One concrete example per type, then tie both to availability metrics (MTBF/MTTR) — that elevates the answer above definitions.
+
+---
+
+**Q54: An ISP has been assigned the networks 192.168.0.0/24, 192.168.1.0/24, 192.168.2.0/24, and 192.168.3.0/24. To reduce routing table entries, the network engineer decides to use CIDR-based route aggregation. Determine the supernet address and explain how supernetting improves routing efficiency.**
+
+**Answer:** **Common 22-bit prefix → supernet 10.1.0.0/22 (10.1.0.0 – 10.1.3.255)**
+
+**Explanation:**
+
+Given Networks:
+
+- 192.168.0.0/24
+
+- 192.168.1.0/24
+
+- 192.168.2.0/24
+
+- 192.168.3.0/24
+
+Step 1: Convert to Binary
+
+| Network | Binary (last octet) |
+| --- | --- |
+| 192.168.0.0 | 0000 0000 |
+| 192.168.1.0 | 0000 0001 |
+| 192.168.2.0 | 0000 0010 |
+| 192.168.3.0 | 0000 0011 |
+
+Step 2: Find Common Prefix
+Looking at the last octet in binary:
+– 0 = 0000 0000
+– 1 = 0000 0001
+– 2 = 0000 0010
+– 3 = 0000 0011
+
+The first 22 bits are identical across all four networks. The last 2 bits vary (00, 01, 10, 11).
+
+Step 3: Determine Supernet Address
+
+Supernet address = 192.168.0.0/22
+
+Mask: 255.255.252.0
+Range: 192.168.0.0 to 192.168.3.255
+Total hosts: 1024 (4 × 256)
+
+How Supernetting Improves Routing Efficiency
+
+- Reduced table size: Instead of 4 separate /24 entries, the router stores 1 /22 entry. This saves memory and lookup time.
+
+- Faster lookups: Smaller routing tables mean faster longest-prefix-match searches, reducing packet forwarding delay.
+
+- Less update traffic: If one subnet changes, the aggregated route does not need to be re-advertised. BGP and OSPF updates are smaller.
+
+- Hierarchical routing: ISPs can advertise a single supernet to upstream providers instead of listing every customer subnet, keeping the global internet routing table manageable.
+
+**Related info:** Supernetting keeps global routing tables small; it requires contiguous, power-of-two blocks — ISPs advertise one summary route upstream instead of four.
+
+**Exam tip:** Show the binary of the last octets, count the common bits (32 − 10 = 22), then write the single summary route.
+
+---
+
+**Q55: A database contains a table named Hospital(HospitalID, HospitalName, Specialization, PatientCount). Write an SQL query to display the names of the five hospitals that specialize in accident treatment and have treated the highest number of patients.**
+
+**Answer:** **`WHERE Specialization = 'Accident Treatment' ORDER BY PatientCount DESC LIMIT 5`**
+
+**Explanation:**
+
+```sql
+SELECT HospitalName
+FROM Hospital
+WHERE Specialization = 'Accident Treatment'
+ORDER BY PatientCount DESC
+LIMIT 5;
+```
+
+Explanation:
+
+- WHERE filters hospitals specializing in accident treatment.
+
+- ORDER BY PatientCount DESC sorts hospitals from highest to lowest patient count.
+
+- LIMIT 5 returns the top five hospitals.
+
+**Related info:** Syntax varies by engine: LIMIT 5 (MySQL/PostgreSQL), TOP 5 (SQL Server), FETCH FIRST 5 ROWS ONLY (Oracle/standard SQL).
+
+**Exam tip:** Filter → sort → limit, in that order; quote the string literal with single quotes.
+
+---
+
+**Q56: A developer writes the SQL statement SELECT EmployeeName, Salary FROM Employees WHERE Salary > AVG(Salary);, but the query generates an error. Identify the problem and write a corrected SQL query.**
+
+**Answer:** **Aggregates cannot appear in WHERE → use a subquery: `WHERE Salary > (SELECT AVG(Salary) FROM Employees)`**
+
+**Explanation:**
+
+Problem Identification: The query is incorrect because AVG(Salary) is an aggregate function and cannot be used directly in the WHERE clause.
+Aggregate functions must be computed using a subquery.
+Incorrect Query:
+
+```sql
+SELECT EmployeeName, Salary
+FROM Employees
+WHERE Salary > AVG(Salary);
+```
+
+Why it fails:
+
+- WHERE clause is evaluated before aggregation.
+
+- AVG(Salary) requires grouped or subquery context.
+
+Correct Query:
+
+```sql
+SELECT EmployeeName, Salary
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+```
+
+Explanation:
+
+- The subquery calculates the average salary first.
+
+- Main query compares each employee salary with the computed average.
+
+**Related info:** SQL evaluates WHERE before aggregation; HAVING filters *groups* after aggregation but serves a different intent here.
+
+**Exam tip:** Name the cause (aggregate in WHERE) and then give the corrected query — problem and fix are graded separately.
+
+---
+
+**Q57: Given the relation Employee(EmployeeID, NationalID, Email, Name, Department), where EmployeeID, NationalID, and Email are unique, identify the super keys, candidate keys, and the most appropriate primary key with justification.**
+
+**Answer:** **Super keys: supersets of each unique attribute; candidates: EmployeeID, NationalID, Email; primary = EmployeeID**
+
+**Explanation:**
+
+Given Relation:
+Employee(EmployeeID, NationalID, Email, Name, Department)
+
+Functional Understanding:
+EmployeeID, NationalID, and Email are unique attributes (each can uniquely identify an employee).
+
+Candidate Keys:
+Minimal attributes that can uniquely identify a tuple.
+
+- EmployeeID
+
+- NationalID
+
+- Email
+
+Super Keys:
+Any combination of attributes that can uniquely identify a tuple (including candidate keys and their supersets). Examples include:
+
+- EmployeeID
+
+- NationalID
+
+- Email
+
+- (EmployeeID, Name)
+
+- (EmployeeID, Department)
+
+- (Email, Department)
+
+- (NationalID, Name, Department)
+
+- and any superset containing at least one candidate key
+
+Primary Key (Most Appropriate Choice):
+EmployeeID
+
+Justification:
+
+- It is unique for every employee.
+
+- It is stable (does not change over time).
+
+- It is short and efficient for indexing and joins.
+
+- Compared to NationalID or Email, it is less likely to change.
+
+**Related info:** Primary key choice criteria: immutable, short, always populated — NationalID and email can change (marriage, rename), which costs index rebuilds and breaks FKs.
+
+**Exam tip:** Define all three terms first, then justify the primary on uniqueness + stability + index size.
+
+---
+
+**Q58: A mobile banking application successfully connects to a server and attempts to upload a customer document, but the server rejects the request because the uploaded file format is not supported. Which HTTP status code should be returned and why?**
+
+**Answer:** **415 Unsupported Media Type — request understood, but the Content-Type is not accepted**
+
+**Explanation:**
+
+Correct Status Code: 415 Unsupported Media Type
+
+The server should return 415 Unsupported Media Type because the uploaded file format violates the server’s accepted content types.
+
+Why 415 is the Right Choice
+
+- Client error category: 4xx codes indicate the problem is on the client side. The request was understood but cannot be processed due to invalid content.
+
+- Specific to content type: 415 explicitly signals that the server refuses to accept the payload because its media type is not supported, unlike generic 400 which covers all bad requests.
+
+- Content-Type header mismatch: The client likely sent a Content-Type header (e.g., image/heic or application/x-bittorrent) that the server does not allow for document uploads.
+
+Response Example:
+
+```text
+HTTP/1.1 415 Unsupported Media Type
+Content-Type: application/json
+{
+“error”: “Unsupported file format”,
+“message”: “Only PDF, JPG, and PNG files are accepted”,
+“received”: “image/webp”,
+“allowed_types”: [“application/pdf”, “image/jpeg”, “image/png”]
+}
+```
+
+Why Not Other Codes?
+
+| Code | Why Incorrect |
+| --- | --- |
+| 400 Bad Request | Too generic; does not specifically identify the media type problem |
+| 403 Forbidden | Implies authentication or permission issue, not format rejection |
+| 406 Not Acceptable | Used when server cannot provide a response in client’s accepted format, not for uploaded content |
+| 500 Internal Server Error | Wrong category; the server is working correctly by rejecting the format |
+
+Client Action:
+The mobile app should read the 415 response, display the allowed formats to the user, and prompt them to select a supported file type before retrying the upload.
+
+**Related info:** 400 = malformed syntax, 415 = wrong media type, 406 = server cannot produce an acceptable type; all 4xx mean the fault is client-side.
+
+**Exam tip:** Justify the exact 4xx subclass — code plus one sentence on why not 400 or 403.
+
+---
+
+**Q59: A bank is considering replacing its relational database system with MongoDB for its core banking application. Discuss whether this is an appropriate decision and justify why an RDBMS or NoSQL database would be more suitable.**
+
+**Answer:** **No — core banking needs ACID; keep an RDBMS (Oracle/PostgreSQL), use MongoDB only for peripheral features**
+
+**Explanation:**
+
+Replacing a relational database with MongoDB for core banking is generally not an appropriate decision. Core banking applications have strict requirements that align better with RDBMS strengths than NoSQL flexibility.
+Why RDBMS is More Suitable for Core Banking
+
+- ACID compliance: Banking transactions require Atomicity, Consistency, Isolation, and Durability. RDBMS guarantees these natively. MongoDB supports multi-document ACID only from version 4.0, and it is less mature than decades-proven RDBMS implementations.
+
+- Complex joins and relationships: Accounts, customers, transactions, loans, and branches have deeply interconnected data. RDBMS handles complex joins efficiently. MongoDB’s document model forces denormalization or application-level joins, increasing complexity.
+
+- Data integrity constraints: Foreign keys, check constraints, and unique indexes ensure no orphaned records or invalid states. MongoDB lacks native foreign key enforcement.
+
+- Regulatory compliance: Banks must maintain audit trails, data lineage, and strict schema control. RDBMS schemas enforce structure. MongoDB’s schema-less design risks data inconsistency over time.
+
+- Mature tooling: RDBMS has decades of backup, replication, monitoring, and reporting tools designed for financial workloads.
+
+When MongoDB Could Be Appropriate
+
+MongoDB fits specific banking use cases but not core transactional systems:
+
+- Customer-facing mobile apps: Session data, preferences, and activity logs where flexibility and speed matter more than strict consistency.
+
+- Real-time analytics: Aggregating transaction patterns for fraud detection dashboards.
+
+- Document storage: KYC documents, scanned checks, and unstructured compliance paperwork.
+
+- Catalogs and product data: Bank product descriptions, interest rate tables, and marketing content.
+
+Recommended Architecture:
+Use RDBMS (Oracle, PostgreSQL, or DB2) for core banking transactions. Complement with MongoDB only for peripheral services like mobile app caching, document storage, or analytics where its strengths apply.
+
+**Related info:** MongoDB added multi-document ACID, but joins, reporting and mature constraints still favour RDBMS; the common pattern is polyglot persistence — RDBMS core + NoSQL caches/catalogues.
+
+**Exam tip:** Take a clear position, argue from ACID and reporting, then concede NoSQL's niche (sessions, content catalogues, analytics) for balance.
+
+---
+
+**Q60: A relation R(A, B, C) is decomposed into R1(A, B) and R2(B, C). Explain whether the decomposition is lossless and describe the conditions required for a lossless join decomposition.**
+
+**Answer:** **Lossless if the common attribute B determines a fragment: B → A or B → C, i.e. (R1 ∩ R2) → R1 or R2**
+
+**Explanation:**
+
+Given:
+Relation R(A, B, C) is decomposed into:
+R1(A, B) and R2(B, C)
+Is the decomposition lossless?
+
+Yes, this decomposition is lossless join if attribute B is a key (or common key condition holds).
+
+Explanation:
+The common attribute between R1 and R2 is B.
+When joining R1 and R2 on B, we can perfectly reconstruct the original relation R(A, B, C) without losing or adding extra tuples, provided B functionally determines either R1 or R2.
+
+Lossless Join Condition:
+A decomposition of R into R1 and R2 is lossless if:
+
+(R1 ∩ R2) → R1 OR (R1 ∩ R2) → R2
+
+For this case:
+R1 ∩ R2 = `{B}`
+
+So the condition becomes:
+
+- B → A (then lossless), OR
+
+- B → C (then lossless)
+
+**Related info:** Lossless-join plus dependency preservation are the two decomposition tests; the intersection of the fragments is exactly `{B}` here.
+
+**Exam tip:** Write the rule with the intersection formula, then apply it to B — that application step is the graded one.
+
+---
+
+**Q61: A bank hosts its online banking platform on a public cloud infrastructure. Due to a cloud service outage, customers are unable to access services for several hours. Discuss the technical and legal responsibilities of both the cloud service provider and the bank.**
+
+**Answer:** **Provider: SLA infrastructure uptime and redundancy; Bank: resilient architecture, compliance and customer communication**
+
+**Explanation:**
+
+When a cloud service outage disrupts online banking, both the cloud provider and the bank share responsibilities, but in different domains. Their obligations are typically defined in a Service Level Agreement (SLA).
+
+1. Cloud Service Provider Responsibilities
+
+Technical:
+
+Infrastructure uptime: Maintain data center power, cooling, networking, and hardware to meet SLA guarantees (often 99.9% to 99.99%).
+
+- Redundancy and failover: Provide multi-zone or multi-region replication so a single point of failure does not cause total outage.
+
+- Incident response: Detect failures quickly, communicate status transparently, and restore services within agreed Recovery Time Objective (RTO).
+
+- Backup integrity: Ensure customer data backups are consistent and recoverable.
+
+Legal:
+
+- SLA credits: Pay financial penalties or service credits if uptime falls below the guaranteed threshold.
+
+- Notification duty: Inform affected customers promptly about the outage cause, scope, and estimated resolution time.
+
+- Data protection: Comply with data residency and encryption standards even during failure events.
+
+- Liability cap: Most SLAs limit provider liability to monthly fees paid, excluding consequential damages like lost bank revenue.
+
+2. Bank Responsibilities
+
+Technical:
+
+- Architecture resilience: Design systems with multi-cloud or hybrid-cloud failover, not relying on a single provider or region.
+
+- Disaster recovery planning: Maintain active-active or warm standby systems that can switch over automatically.
+
+- Monitoring and alerting: Detect outages independently and trigger customer communication channels.
+
+- Data backups: Keep independent encrypted backups outside the primary cloud environment.
+
+Legal:
+
+- Regulatory compliance: Banking regulators hold the bank accountable for service availability, regardless of cloud provider failures.
+
+- Customer duty: The bank must compensate customers for failed transactions, unauthorized access during recovery, or missed payments.
+
+- Contract management: The bank is responsible for negotiating SLAs, understanding liability limits, and demanding higher availability tiers.
+
+- Transparency to customers: The bank must explain outages to customers and regulators, not shift blame to the cloud provider.
+
+**Related info:** The shared-responsibility model splits it: provider owns the cloud, bank owns configuration, data and disclosure; SLA remedies are usually service credits, not full liability.
+
+**Exam tip:** Split into technical and legal columns per party, and name the shared-responsibility model — regulators hold the bank accountable either way.
+
+---
+
+**Q62: A network administrator is replacing a hub-based LAN with a switch-based LAN. Explain the differences between half-duplex and full-duplex communication and discuss how the change affects network performance.**
+
+**Answer:** **Half-duplex = one direction at a time (collisions, CSMA/CD); full-duplex = both directions at once, collision-free**
+
+**Explanation:**
+
+Half-Duplex:
+In half-duplex communication, data can flow in both directions, but not at the same time.
+Devices must take turns sending and receiving data.
+
+Full-Duplex:
+In full-duplex communication, data can flow in both directions simultaneously.
+Devices can send and receive data at the same time.
+
+Key Differences:
+
+- Data Flow: Half-duplex = one direction at a time, Full-duplex = both directions simultaneously
+
+- Efficiency: Full-duplex is more efficient
+
+- Collisions: Half-duplex has collisions, full-duplex eliminates collisions
+
+- Performance: Full-duplex provides higher throughput
+
+Impact of Replacing Hub with Switch
+
+Hub-based LAN:
+– Operates in half-duplex mode
+– All devices share bandwidth
+– High collisions and congestion
+
+Switch-based LAN:
+– Supports full-duplex communication
+– Dedicated bandwidth per port
+– No collisions (due to separate collision domains)
+
+Performance Improvement:
+
+- Higher network speed and throughput
+
+- Reduced collisions and retransmissions
+
+- Better bandwidth utilization
+
+- Improved overall LAN efficiency
+
+Conclusion:
+Switching from hub to switch enables full-duplex communication, eliminates collisions, and significantly improves network performance and scalability.
+
+**Related info:** Switches give each port its own collision domain; auto-negotiation settles duplex, and full-duplex roughly doubles effective throughput versus a hub.
+
+**Exam tip:** Contrast table (flow, collisions, CSMA/CD, throughput), then explain why hub → switch upgrade removes collisions.
+
+---
+
+**Q63: A bank is migrating from a monolithic application to a microservices architecture and plans to deploy an API Gateway. Explain the role of an API Gateway and how it interacts with backend services in such an environment.**
+
+**Answer:** **Single entry point for clients: routing, authentication, rate limiting and TLS termination in front of the services**
+
+**Explanation:**
+
+When a bank migrates from a monolithic application to microservices, the system breaks into many small, independent services. An API Gateway acts as the single entry point for all client requests, managing how they reach the correct backend services.
+
+1. Core Role of the API Gateway
+
+- Single entry point: Instead of clients calling dozens of microservices directly, they send all requests to one gateway URL. The gateway routes each request to the right service.
+
+- Request routing: A request to /api/accounts goes to the account service, while /api/transactions goes to the transaction service.
+
+- Protocol translation: Converts external protocols (HTTPS/REST) to internal protocols (gRPC, message queues) that microservices use.
+
+- Load balancing: Distributes incoming traffic across multiple instances of the same microservice to prevent overload.
+
+2. How It Interacts with Backend Services
+
+| Step | Action |
+| --- | --- |
+| 1 | Client sends request to API Gateway |
+| 2 | Gateway authenticates and validates the request |
+| 3 | Gateway looks up routing rules for the endpoint |
+| 4 | Gateway forwards request to the correct microservice |
+| 5 | Microservice processes and returns response |
+| 6 | Gateway may transform response format before sending to client |
+
+3. Additional Responsibilities in Banking
+
+- Authentication and authorization: Verifies JWT tokens or API keys before any request reaches backend services, protecting sensitive banking data.
+
+- Rate limiting: Prevents DDoS attacks by capping requests per client, ensuring services stay available.
+
+- SSL termination: Handles encryption/decryption at the edge so microservices focus on business logic.
+
+- Request aggregation: A single client request (like “show dashboard”) may need data from 5 services. The gateway calls all 5 in parallel and returns one combined response.
+
+- Circuit breaker: If a microservice fails, the gateway stops sending requests to it and returns a fallback response, preventing cascade failures.
+
+4. Why Banks Need It After Monolith Migration
+
+In a monolith, one codebase handled everything. In microservices, there may be 50+ services. Without a gateway, clients would need to know every service address, handle failures themselves, and manage multiple authentication points. The API Gateway hides this complexity.
+
+**Related info:** It also does load balancing, request aggregation, caching and observability; a service mesh handles the east-west (service-to-service) traffic the gateway does not.
+
+**Exam tip:** List at least four gateway functions and distinguish north-south traffic (client → gateway) from east-west (service → service).
+
+---
+
+**Q64: A cloud service provider must choose between ARM-based processors and x86 processors for a new data center deployment. Compare the RISC and CISC architectures and recommend the most suitable option for large-scale cloud infrastructure.**
+
+**Answer:** **RISC/ARM wins on power-efficiency for scale-out; x86 wins on per-core performance and legacy compatibility**
+
+**Explanation:**
+
+Cloud providers must balance performance, power efficiency, cost, and scalability when choosing between ARM-based processors (RISC architecture) and x86 processors (CISC architecture) for data center deployment.
+
+1. RISC (ARM) Architecture
+
+RISC (Reduced Instruction Set Computer) uses a small, highly optimized set of simple instructions. Each instruction executes in one clock cycle. ARM processors are the dominant RISC implementation in mobile and increasingly in servers.
+
+- Simple instructions: Fewer instruction types, each completing in a single cycle.
+
+- More registers: ARM uses more general-purpose registers to reduce memory access.
+
+- Power efficiency: Lower power consumption per instruction, generating less heat.
+
+- Pipelining friendly: Uniform instruction size makes prediction and parallel execution easier.
+
+2. CISC (x86) Architecture
+
+CISC (Complex Instruction Set Computer) uses a large set of complex instructions. A single instruction can perform multi-step operations. Intel and AMD processors use x86, the dominant CISC architecture in desktops and traditional servers.
+
+- Complex instructions: One instruction can handle multiple low-level operations.
+
+- Fewer registers: More work is done through memory access and complex addressing modes.
+
+- Backward compatibility: Decades of software, especially legacy enterprise applications, are built for x86.
+
+- High single-thread performance: Complex instructions reduce instruction count for certain workloads.
+
+Recommendation for Large-Scale Cloud Infrastructure
+
+ARM-based processors are the most suitable choice for modern large-scale cloud deployments, with specific exceptions.
+
+Justification:
+
+- Power efficiency at scale: Data centers spend more on electricity and cooling than hardware. ARM cores deliver more performance per watt, directly reducing operational costs for thousands of servers.
+
+- High core density: ARM chips pack more cores per socket. Cloud workloads (microservices, containers, serverless functions) scale horizontally across many lightweight threads rather than relying on single-thread speed.
+
+- Cost per compute unit: ARM servers cost less to purchase and operate, improving margins for cloud providers who resell compute capacity.
+
+- Modern software alignment: Cloud-native stacks (Kubernetes, Docker, Linux, Python, Go, Java) are already ported to ARM. Legacy dependency is shrinking.
+
+- Real-world validation: AWS Graviton, Ampere Altra, and Apple Silicon have proven ARM’s viability in production cloud and edge environments.
+
+When x86 Remains Necessary: Legacy Windows Server or proprietary enterprise software with no ARM port.
+
+- High-frequency trading or scientific computing where single-thread performance dominates.
+
+- Workloads heavily optimized for x86-specific vector instructions (AVX-512).
+
+**Related info:** Hyperscalers deploy ARM instances for web tiers to cut cost per request; x86 remains required for AVX-512 workloads, licensed software and existing binaries.
+
+**Exam tip:** Compare the ISAs (instruction count per cycle, power, ecosystem), then recommend by workload — never a blanket winner.
+
+---
+
+**Q65: A government mobile application receives frequent user feedback that requires weekly feature updates, while strict regulatory policies demand extensive documentation, compliance checks, and security reviews. Which SDLC model would be most appropriate for this project and why?**
+
+**Answer:** **Hybrid Agile–Waterfall: sprint iterations for features, compliance gate per release**
+
+**Explanation:**
+
+For a government mobile app that needs frequent updates but also faces strict regulatory requirements, neither pure Agile nor pure Waterfall alone is sufficient. A hybrid model that combines Agile sprints for development with Waterfall gates for compliance is the best fit.
+Why Pure Models Fail Here
+
+| Model | Why It Fails |
+| --- | --- |
+| Pure Waterfall | Too rigid for weekly feature updates; cannot adapt to user feedback quickly |
+| Pure Agile | Lacks formal documentation and compliance checkpoints required by regulators |
+
+How the Hybrid Model Works
+
+- Agile sprints for development: Two-week sprints deliver working features based on user feedback. Daily standups, sprint reviews, and retrospectives keep the team responsive.
+
+- Waterfall gates for compliance: Before any release, the code must pass fixed checkpoints: security audit, documentation review, legal sign-off, and penetration testing.
+
+- Regulatory buffer sprint: Every fourth sprint is dedicated solely to compliance tasks — filling documentation gaps, updating security certificates, and preparing audit reports.
+
+- Versioned releases: Instead of continuous deployment, the team batches sprints into quarterly versioned releases that regulators can review as complete packages.
+
+Why This Model is Most Appropriate
+
+| Requirement | Hybrid Model Solution |
+| --- | --- |
+| Weekly feature updates | Short Agile sprints deliver incremental value |
+| Strict documentation | Waterfall gates enforce formal records before release |
+| Compliance checks | Dedicated compliance sprints and pre-release audits |
+| Security reviews | Mandatory security gate before every production push |
+| Regulatory audit trail | Versioned releases with complete change logs |
+
+Example Workflow:
+
+Week 1-2: Sprint 1 — Develop feedback feature (Agile)
+Week 3-4: Sprint 2 — Develop notification improvement (Agile)
+Week 5-6: Sprint 3 — Develop UI enhancement (Agile)
+Week 7-8: Sprint 4 — Compliance sprint — Document, audit, secure (Waterfall gate)
+Week 9: Release version 2.1 with full regulatory package
+
+**Related info:** The spiral model is the other fit for risk-heavy work; each gate produces the regulatory artefacts (test reports, security review, documentation).
+
+**Exam tip:** Reject both pure models explicitly, quoting the stem: weekly updates kill Waterfall, documentation gates kill pure Agile — the contrast is the marks.

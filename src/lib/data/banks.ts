@@ -50,6 +50,25 @@ export const bankPapers: BankPaper[] = [
     },
     questionCount: 15,
   },
+  {
+    slug: "combined-bank-ap-ame-so-it-o-it-2026-based-2023",
+    bank: "bank-it",
+    title: {
+      en: "Combined Bank AP/AME/SO-IT/O-IT 2026 — Full Solution",
+      bn: "কম্বাইন্ড ব্যাংক (এপি/এএমই/এসও-আইটি/ও-আইটি) ২০২৬ — সম্পূর্ণ সমাধান",
+    },
+    description: {
+      en: "All 65 technical questions across 5 posts (SO-IT, Officer, AME/AE, AP, DBA) with Answer → Explanation → Related info → Exam tip.",
+      bn: "৫টি পদের (এসও-আইটি, অফিসার, এএমই/এই, এপি, ডিবিএ) সব ৬৫টি টেকনিক্যাল প্রশ্ন — উত্তর → ব্যাখ্যা → সম্পর্কিত তথ্য → পরীক্ষার টিপ।",
+    },
+    year: 2026,
+    exam: "Combined Bank AP/AME/SO-IT/O-IT",
+    organization: {
+      en: "Combined Bank (based year 2023)",
+      bn: "কম্বাইন্ড ব্যাংক (বেসড বছর ২০২৩)",
+    },
+    questionCount: 65,
+  },
 ];
 
 export function getBankPaper(slug: string) {
