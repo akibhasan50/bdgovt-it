@@ -66,7 +66,7 @@
   "nav": {
     "home": "Home",
     "topics": "Topics",
-    "practice": "Practice",
+    "practice": "MCQ",
     "exams": "Exams",
     "banks": "Question Banks",
     "news": "News",
@@ -235,7 +235,9 @@
     "openPaper": "Open full paper",
     "topicPractice": "Topic-wise MCQ practice",
     "topicPracticeDesc": "Same archive, now as drills — pick a topic to start a topic-filtered MCQ practice from the practice bank.",
-    "mcqs": "MCQs"
+    "mcqs": "MCQs",
+    "tabPapers": "Full papers",
+    "tabPractice": "MCQ practice"
   },
   "news": {
     "title": "News & circulars",
