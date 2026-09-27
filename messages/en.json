@@ -232,7 +232,10 @@
     "answerStructure": "Answer → Explanation → Related info → Exam tip",
     "showAnswer": "Show answer",
     "hideAnswer": "Hide answer",
-    "openPaper": "Open full paper"
+    "openPaper": "Open full paper",
+    "topicPractice": "Topic-wise MCQ practice",
+    "topicPracticeDesc": "Same archive, now as drills — pick a topic to start a topic-filtered MCQ practice from the practice bank.",
+    "mcqs": "MCQs"
   },
   "news": {
     "title": "News & circulars",
