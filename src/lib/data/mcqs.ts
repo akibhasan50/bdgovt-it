@@ -1,4 +1,5 @@
 import type { MCQ } from "@/lib/types";
+import { paperMcqs } from "@/lib/data/paper-mcqs";
 
 export const mcqs: MCQ[] = [
   // ── Digital Logic Design ─────────────────────────────────────
@@ -2385,23 +2386,25 @@ export const mcqs: MCQ[] = [
   },
 ];
 
+export const allMcqs: MCQ[] = [...mcqs, ...paperMcqs];
+
 export function getMCQ(id: string) {
-  return mcqs.find((q) => q.id === id);
+  return allMcqs.find((q) => q.id === id);
 }
 
 export function getMCQsByTopic(topic: string) {
-  return mcqs.filter((q) => q.topic === topic);
+  return allMcqs.filter((q) => q.topic === topic);
 }
 
 export function getMCQsByIds(ids: string[]) {
-  const map = new Map(mcqs.map((q) => [q.id, q]));
+  const map = new Map(allMcqs.map((q) => [q.id, q]));
   return ids.map((id) => map.get(id)).filter((q): q is MCQ => Boolean(q));
 }
 
 export function getMCQTopics(topicSlugs: string[], limit?: number) {
   const pool = topicSlugs.length
-    ? mcqs.filter((q) => topicSlugs.includes(q.topic))
-    : mcqs.slice();
+    ? allMcqs.filter((q) => topicSlugs.includes(q.topic))
+    : allMcqs.slice();
   if (!limit) return pool;
   return shuffle(pool).slice(0, limit);
 }

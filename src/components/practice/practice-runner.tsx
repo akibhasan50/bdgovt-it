@@ -383,9 +383,11 @@ export function PracticeRunner() {
                   {q.options[q.answer]?.[locale]}
                 </span>
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {q.explanation[locale]}
-              </p>
+              {q.explanation[locale] ? (
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {q.explanation[locale]}
+                </p>
+              ) : null}
             </div>
           )}
 

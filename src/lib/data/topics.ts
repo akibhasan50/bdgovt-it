@@ -1,8 +1,8 @@
 import type { Topic } from "@/lib/types";
-import { mcqs } from "@/lib/data/mcqs";
+import { allMcqs } from "@/lib/data/mcqs";
 
 const mcqCountByTopic = new Map<string, number>();
-for (const q of mcqs) {
+for (const q of allMcqs) {
   mcqCountByTopic.set(q.topic, (mcqCountByTopic.get(q.topic) ?? 0) + 1);
 }
 
@@ -292,7 +292,7 @@ export function getMCQCountByTopic(slug: string) {
 }
 
 export function getTotalMCQCount() {
-  return mcqs.length;
+  return allMcqs.length;
 }
 
 export function getRelatedTopics(slug: string) {

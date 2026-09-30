@@ -130,6 +130,7 @@ export function ArchiveTable({ rows }: { rows: WrittenQA[] }) {
     () =>
       helper.columns([
         helper.accessor("question", {
+          enableGlobalFilter: true,
           header: ({ header }) => (
             <SortHeader
               label={t("questionCol")}
@@ -230,6 +231,15 @@ export function ArchiveTable({ rows }: { rows: WrittenQA[] }) {
     features,
     columns,
     data: rows,
+    globalFilterFn: (row, columnId, filterValue) => {
+      const needle = String(filterValue).toLowerCase();
+      const value = row.getValue(columnId);
+      if (value && typeof value === "object" && "en" in value) {
+        const loc = value as WrittenQA["question"];
+        return `${loc.en ?? ""} ${loc.bn ?? ""}`.toLowerCase().includes(needle);
+      }
+      return String(value ?? "").toLowerCase().includes(needle);
+    },
     state: { globalFilter, columnFilters, sorting, pagination },
     onGlobalFilterChange: setGlobalFilter,
     onColumnFiltersChange: setColumnFilters,
